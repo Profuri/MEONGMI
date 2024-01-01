@@ -7,15 +7,7 @@ using UnityEngine.AI;
 public class BaseEnemy : Entity
 {
     public NavMeshAgent NavMeshAgent { get; set; }
-    
-    public override void Awake()
-    {
-        base.Awake();
-        Transform visualTrm = transform.Find("Visual");
-        AnimatorCompo = visualTrm.GetComponent<Animator>();
-        CharacterControllerCompo = GetComponent<CharacterController>();
-    }
-    
+
     protected override void RegisterStates()
     {
         foreach (EEnemyState eEnemyState in Enum.GetValues(typeof(EEnemyState)))
