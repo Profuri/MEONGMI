@@ -23,5 +23,6 @@ public class GameManager : MonoSingleton<GameManager>
     public override void Init()
     {
         ResManager.Instance.Init();
+        UIManager.Instance.Init();
     }
 }
