@@ -4,9 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BaseEnemy : Entity
+public enum EnemyType
+{
+    Default = 0,
+    Assault = 1,
+}
+
+public abstract class BaseEnemy : Entity
 {
     public NavMeshAgent NavMeshAgent { get; set; }
+    public Transform Target { get; set; }
+    public EnemyType EnemyType;
     
     public override void Awake()
     {
@@ -14,6 +22,7 @@ public class BaseEnemy : Entity
         Transform visualTrm = transform.Find("Visual");
         AnimatorCompo = visualTrm.GetComponent<Animator>();
         CharacterControllerCompo = GetComponent<CharacterController>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
     }
     
     protected override void RegisterStates()

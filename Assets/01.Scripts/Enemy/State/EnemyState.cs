@@ -13,7 +13,7 @@ public class EnemyState : State
         {
             if (_baseEnemy == null)
             {
-                if (_baseEnemy is BaseEnemy baseEnemy)
+                if (_owner is BaseEnemy baseEnemy)
                 {
                     this._baseEnemy = baseEnemy;
                 }

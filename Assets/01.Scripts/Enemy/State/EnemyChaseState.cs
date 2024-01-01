@@ -6,16 +6,19 @@ using UnityEngine.AI;
 
 public class EnemyChaseState : EnemyState
 {
-    public Transform Target { get; set; }
-    
-
     public EnemyChaseState(StateMachine stateMachine, Entity owner, Enum type) : base(stateMachine, owner, type)
     {
         
     }
 
+    public override void EnterState()
+    {
+        Debug.Log("EnterChaseState");
+    }
     public override void UpdateState()
     {
-        BaseEnemy.NavMeshAgent.SetDestination(Target.position);
+        Debug.Log(BaseEnemy);
+        Debug.Log(BaseEnemy.Target);
+        BaseEnemy.NavMeshAgent.SetDestination(BaseEnemy.Target.position);
     }
 }
