@@ -2,9 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BaseEnemy : Entity
 {
+    public NavMeshAgent NavMeshAgent { get; set; }
+    
     public override void Awake()
     {
         base.Awake();
