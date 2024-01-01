@@ -5,15 +5,23 @@ using UnityEngine;
 
 public class BaseEnemy : Entity
 {
+    public override void Awake()
+    {
+        base.Awake();
+        Transform visualTrm = transform.Find("Visual");
+        AnimatorCompo = visualTrm.GetComponent<Animator>();
+        CharacterControllerCompo = GetComponent<CharacterController>();
+    }
+    
     protected override void RegisterStates()
     {
         foreach (EEnemyState eEnemyState in Enum.GetValues(typeof(EEnemyState)))
         {
-            string typeName = eEnemyState.ToString();
-            Type type = Type.GetType($"Enemy{typeName}State");
-            EnemyState state = Activator.CreateInstance(type,this,_stateMachine,typeName) as EnemyState;
-
-            _stateMachine.RegisterState(eEnemyState,state);
+            string typeName = $"Enemy{eEnemyState.ToString()}State";
+            Debug.Log($"TypeName: {typeName}");
+            Type type = Type.GetType(typeName);
+            EnemyState state = Activator.CreateInstance(type, _stateMachine, this, eEnemyState) as EnemyState;  
+            _stateMachine.RegisterState(eEnemyState, state);
         }
     }
 
