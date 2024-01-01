@@ -12,5 +12,6 @@ public class ResourceMono : MonoBehaviour
         {
             Debug.Log("Can't add more resource!! ");
         }
+        Destroy(this.gameObject);
     }
 }
