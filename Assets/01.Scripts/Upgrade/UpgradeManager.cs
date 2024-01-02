@@ -109,7 +109,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         {
             case EUpgradeType.BASE:
                 {
-                    TestUIManager.Instance.SetUpgradeElem(upgradeType, 0);
+                    TestUIManager.Instance.AddUpgradeElem(upgradeType, 0);
                 }
                 break;
             case EUpgradeType.PLAYER:
@@ -129,18 +129,19 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
                         }
                         pickedNums.Add(elemNum);
                         Debug.Log(elemNum);
-                        TestUIManager.Instance.SetUpgradeElem(upgradeType, elemNum);
+                        TestUIManager.Instance.AddUpgradeElem(upgradeType, elemNum);
                     }
                 }
                 break;
             case EUpgradeType.TRAIT: // ม฿บน x
                 {
+                    maxEclusive = (int)ETraitUpgradeElement.END;
                     ETraitUpgradeElement traitElem = curTraitElem;
                     while(traitElem == curTraitElem)
                     {
                         traitElem = (ETraitUpgradeElement)Random.Range(0, maxEclusive);
                     }
-                    TestUIManager.Instance.SetUpgradeElem(upgradeType, (int)traitElem);
+                    TestUIManager.Instance.AddUpgradeElem(upgradeType, (int)traitElem);
                 }
                 break;
         }
