@@ -6,22 +6,19 @@ using System.Linq;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public Transform PlayerTrm { get; set; }
+    public Transform BaseTrm { get; set; }
+    
     private void Awake()
     {
         GameManager.Instance.Init();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            List<ResourceMono> resourceList = FindObjectsOfType<ResourceMono>().ToList();
-            resourceList.ForEach(r => r.GetResource());
-        }
-    }
-
     public override void Init()
     {
+        PlayerTrm = GameObject.Find("Player").transform;
+        BaseTrm = GameObject.Find("Base").transform;
         ResManager.Instance.Init();
+        UIManager.Instance.Init();
     }
 }

@@ -40,6 +40,4 @@ public class ResManager : MonoSingleton<ResManager>
         }
         return false;
     }
-
- 
 }
