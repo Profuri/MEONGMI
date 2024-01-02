@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Editor;
+using UnityEngine.Serialization;
 
 public enum EnemyType
 {
@@ -17,13 +18,27 @@ public abstract class BaseEnemy : Entity
     [SerializeField] private EnemyAttackSO _enemyAttackSO;
     public EnemyAttackSO EnemyAttackSO => _enemyAttackSO;
 
-    [SerializeField] private EnemyStatSO _enemyStatSO;
-    public EnemyStatSO EnemyStatSO => _enemyStatSO;
-    
+    public EntityStatSO EntityStatSo => _entityStatSO;
+
     public LayerMask LayerMask;
     
     public NavMeshAgent NavMeshAgent { get; set; }
-    public Transform Target { get; set; }
+
+    private Transform _target;
+    public Transform Target
+    {
+        get
+        {
+            if (_target == null)
+            {
+                _target = GameManager.Instance.BaseTrm;
+            }
+
+            return _target;
+        }
+        set => _target = value;
+    }
+    
     public EnemyType EnemyType;
 
     public sealed override void Init() 
@@ -33,7 +48,7 @@ public abstract class BaseEnemy : Entity
         CharacterControllerCompo = GetComponent<CharacterController>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
 
-        NavMeshAgent.speed = EnemyStatSO.moveSpeed;
+        NavMeshAgent.speed = EntityStatSo.moveSpeed;
         EnemyType = EnemyAttackSO.enemyType;
     }
     

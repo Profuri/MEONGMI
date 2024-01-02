@@ -5,6 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class PlayerTestMono : MonoBehaviour,IDetectable,IDamageable
 {
+    [SerializeField] private EntityStatSO _entityStatSO;
+
+    private int _hp;
+
+    private void Awake()
+    {
+        _hp = _entityStatSO.hp;
+    }
     public Transform Detect()
     {
         return this.transform;
@@ -12,6 +20,11 @@ public class PlayerTestMono : MonoBehaviour,IDetectable,IDamageable
 
     public void Damaged(int damage)
     {
-        Debug.Log($"Damage: {damage}");
+        _hp -= damage;
+        if (_hp <= 0)
+        {
+            Debug.Log("OnDead");
+            Destroy(this.gameObject);
+        }
     }
 }

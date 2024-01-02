@@ -6,11 +6,17 @@ public abstract class EnemyAttack : MonoBehaviour
 {
     protected BaseEnemy _baseEnemy;
     protected float _lastAtkTime;
+    protected readonly int _attackHash = Animator.StringToHash("ATTACK");
+    
     public virtual void Init(BaseEnemy baseEnemy)
     {
         _baseEnemy = baseEnemy;
     }
-    public abstract void Attack();
+
+    public virtual void Attack()
+    {
+        _baseEnemy.AnimatorCompo.SetTrigger(_attackHash);
+    }
 
     public virtual bool CanAttack()
     {

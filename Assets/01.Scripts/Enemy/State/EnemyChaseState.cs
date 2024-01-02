@@ -7,6 +7,8 @@ using UnityEngine.AI;
 
 public class EnemyChaseState : EnemyState
 {
+    protected readonly int _speedHash = Animator.StringToHash("MOVESPEED");
+    
     public EnemyChaseState(StateMachine stateMachine, Entity owner, Enum type) : base(stateMachine, owner, type)
     {
         
@@ -20,17 +22,12 @@ public class EnemyChaseState : EnemyState
     
     public override void UpdateState()
     {
+        BaseEnemy.AnimatorCompo.SetFloat(_speedHash,1f);
         Vector3 originPos = BaseEnemy.transform.position;
         float range = BaseEnemy.EnemyAttackSO.detectRange;
         int layer = BaseEnemy.LayerMask;
             
         var cols = Physics.OverlapSphere(originPos,range,layer);
-        float distance = Vector3.Distance(BaseEnemy.transform.position, BaseEnemy.Target.position);
-        if (InAttackRange(distance))
-        {
-            _stateMachine.ChangeState(EEnemyState.Attack);
-            return;
-        }
         
         if (cols.Length > 0)
         {
@@ -41,15 +38,23 @@ public class EnemyChaseState : EnemyState
                     BaseEnemy.Target = detectable.Detect();
                     _stateMachine.ChangeState(EEnemyState.Chase);
                     Debug.Log($"CurrentTarget: {BaseEnemy.Target}");
-                    return;
                 }
             }
         }
+        
+        float distance = Vector3.Distance(BaseEnemy.transform.position, BaseEnemy.Target.position);
+        if (InAttackRange(distance))
+        {
+            _stateMachine.ChangeState(EEnemyState.Attack);
+            return;
+        }
         else
         {
-            BaseEnemy.Target = GameManager.Instance.BaseTrm;
+            if (Vector3.Distance(BaseEnemy.NavMeshAgent.destination, BaseEnemy.Target.position) > 0.1f)
+            {
+                BaseEnemy.NavMeshAgent.SetDestination(BaseEnemy.Target.position);
+            }
         }
-        
 
     }
 

@@ -64,28 +64,26 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         
         while (appearMaxEnemyCnt != _currentDeadCnt)
         {
-            bool isMax = appearMaxEnemyCnt <= _currentEnemyList.Count;
-            
-            if (isMax) continue;
-            randomAppearEnemyCnt = Random.Range(0,5);
-            Vector3 randomPos;
-            for (int i = 0; i < randomAppearEnemyCnt; i++)
+            if (appearMaxEnemyCnt > _currentEnemyList.Count)
             {
-                if (isMax) continue;
-                randomPos = Random.insideUnitCircle;
-                randomPos *= _spawnerRange;
-                randomPos.y = 0f;
+                randomAppearEnemyCnt = Random.Range(2,5);
+                Vector3 randomPos;
+                for (int i = 0; i < randomAppearEnemyCnt; i++)
+                {
+                    randomPos = Random.insideUnitCircle;
+                    randomPos *= _spawnerRange;
+                    randomPos.y = 0f;
                 
-                var prefab = enemyList.GetRandomEnemy();
-                Debug.Log($"PrefabName: {prefab.name}");
+                    var prefab = enemyList.GetRandomEnemy();
                 
-                BaseEnemy enemy = PoolManager.Instance.Pop(prefab.name) as BaseEnemy;
+                    BaseEnemy enemy = PoolManager.Instance.Pop(prefab.name) as BaseEnemy;
                 
-                enemy.Init();
-                enemy.gameObject.SetActive(true);
-                enemy.transform.position = randomPos;
-                _currentEnemyList.Add(enemy);
-                yield return null;
+                    enemy.Init();
+                    enemy.gameObject.SetActive(true);
+                    enemy.transform.position = randomPos;
+                    _currentEnemyList.Add(enemy);
+                    yield return null;
+                }
             }
             yield return new WaitForSeconds(appearDelay);
         }

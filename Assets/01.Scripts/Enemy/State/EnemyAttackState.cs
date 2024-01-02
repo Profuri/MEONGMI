@@ -23,6 +23,7 @@ public class EnemyAttackState : EnemyState
         if (_enemyAttack.CanAttack())
         {
             _enemyAttack?.Attack();
+            _stateMachine.ChangeState(EEnemyState.Chase);
         }
     }
     

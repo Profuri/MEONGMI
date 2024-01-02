@@ -6,6 +6,7 @@ public class EnemyMeleeAttack : EnemyAttack
 {
     public override void Attack()
     {
+        base.Attack();
         Debug.Log("Enemy Melee Attack");
         Vector3 originPos = transform.position - transform.forward;
         float radius = _baseEnemy.EnemyAttackSO.attackRange;

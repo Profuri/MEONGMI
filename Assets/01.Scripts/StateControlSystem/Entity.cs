@@ -1,17 +1,22 @@
 using UnityEngine;
-
-public abstract class Entity : PoolableMono
+using System;
+public abstract class Entity : PoolableMono, IDamageable
 {
     public Animator AnimatorCompo { get; protected set; }
     public CharacterController CharacterControllerCompo { get; protected set; }
 
+    [SerializeField] protected EntityStatSO _entityStatSO;
     protected StateMachine _stateMachine;
 
-
+    public int CurrentHP { get; protected set; }
+    public event Action OnDead;
+    
     public virtual void Awake()
     {
         _stateMachine = new StateMachine();
         RegisterStates();
+
+        CurrentHP = _entityStatSO.hp;
     }
 
     public virtual void Start()
@@ -26,4 +31,14 @@ public abstract class Entity : PoolableMono
 
     protected abstract void RegisterStates();
     protected abstract void SetInitState();
+    public virtual void Damaged(int damage)
+    {
+        CurrentHP -= damage;
+        CurrentHP = Mathf.Clamp(CurrentHP, 0,_entityStatSO.hp);
+        if (CurrentHP == 0)
+        {
+            OnDead?.Invoke();
+        }
+    }
+    
 }
