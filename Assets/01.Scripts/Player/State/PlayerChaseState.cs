@@ -19,6 +19,14 @@ public class PlayerChaseState : PlayerState
         var dir = (_player.Target.transform.position - _player.transform.position).normalized;
         var distance = Vector3.Distance(_player.Target.transform.position, _player.transform.position);
 
+        var input = _player.InputReader.movementInput;
+        if (input.sqrMagnitude > 0.5f)
+        {
+            _player.Target = null;
+            _stateMachine.ChangeState(PlayerStateType.Movement);
+            return;
+        }
+        
         if (distance <= _player.Target.InteractRadius)
         {
             _stateMachine.ChangeState(PlayerStateType.Idle);
