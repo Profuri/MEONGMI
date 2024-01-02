@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ResourceToBullet
   m_EditorClassIdentifier: 
   Description: "\uC790\uC6D0\uC744 \uCD1D\uC54C\uB85C \uC0AC\uC6A9\uD55C\uB2E4."
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 18515ac390cbc4107818796f723d8b1e, type: 3}
   Type: 0

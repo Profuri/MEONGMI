@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ChargeShot
   m_EditorClassIdentifier: 
   Description: "\uCC28\uC9C0 \uACF5\uACA9."
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 6954fcc6c1af94ea997cf56e45f095c2, type: 3}
   Type: 1

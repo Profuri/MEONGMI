@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FollowShot
   m_EditorClassIdentifier: 
   Description: "\uCD1D\uC54C\uC774 \uC801\uC744 \uB530\uB77C\uAC04\uB2E4. (\uC720\uB3C4\uD0C4)"
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: ddca4f6ebaef2452b9d028d56d798627, type: 3}
   Type: 3
