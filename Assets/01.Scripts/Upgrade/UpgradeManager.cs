@@ -20,7 +20,7 @@ public enum EBaseUpgradeElement
 public enum EPlayerUpgradeElement
 {
     NONE = -1,
-    BULLETCOUNT = 0, // 총알 수 증가.
+    BULLETCOUNTUP = 0, // 총알 수 증가.
     FIRESPEEDUP, // 연사 속도 증가.
     MOVESPEEDUP, // 이동 속도 증가.
     COLLECTSPEEDUP, // 수집 속도 증가.
@@ -48,11 +48,19 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 {
 
     [SerializeField] private int basicUpgradeNeedCnt;
+    [field:SerializeField]
     public int BaseUpgradeNeedResCnt { get; set; } 
+    [field:SerializeField]
     public int PlayerUpgradeNeedResCnt { get; set; }
+    [field:SerializeField]
     public int TraitUpgradeNeedResCnt { get; set; }
 
-    public ETraitUpgradeElement curTraitElem = ETraitUpgradeElement.NONE; 
+    public ETraitUpgradeElement curTraitElem = ETraitUpgradeElement.NONE;
+
+    private void Awake()
+    {
+        Init();
+    }
 
     public override void Init()
     {
@@ -106,7 +114,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
                     TestUIManager.Instance.SetUpgradeElem(upgradeType, elemNum);
                 }
                 break;
-            case EUpgradeType.TRAIT:
+            case EUpgradeType.TRAIT: // 중복 x
                 {
                     maxEclusive = (int)ETraitUpgradeElement.END;
                     ETraitUpgradeElement traitElem = curTraitElem;
