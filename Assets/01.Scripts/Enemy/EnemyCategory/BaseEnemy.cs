@@ -76,7 +76,7 @@ public abstract class BaseEnemy : Entity
         }
     }
 
-    public override void Damaged(int damage)
+    public override void Damaged(float damage)
     {
         base.Damaged(damage);
         StopImmediately(true);

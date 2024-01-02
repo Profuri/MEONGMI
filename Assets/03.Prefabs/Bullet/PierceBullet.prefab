@@ -9846,7 +9846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2304382824747954800}
   - component: {fileID: 8290088208195668337}
-  - component: {fileID: 4568001610105726893}
+  - component: {fileID: 6884614128403792222}
   m_Layer: 0
   m_Name: PierceBullet
   m_TagString: Untagged
@@ -9897,7 +9897,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4568001610105726893
+--- !u!114 &6884614128403792222
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9906,7 +9906,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7632098156975130996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82e2f9d8fec24f1483326cd49115cd01, type: 3}
+  m_Script: {fileID: 11500000, guid: e373d11057044eabbbad4fe2e411619d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _damagableMask:

@@ -8,6 +8,8 @@ public class Hammer : MonoBehaviour
 
     private Transform _shotPoint;
 
+    private PlayerController _playerController;
+
     private readonly int _shotTriggerHash = Animator.StringToHash("Shot");
     private readonly int _gatheringTriggerHash = Animator.StringToHash("Gathering");
     private readonly int _chargingToggleHash = Animator.StringToHash("Charging");
@@ -27,7 +29,12 @@ public class Hammer : MonoBehaviour
         particle.Play();
 
         var bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
-        bullet.Setting(type, _shotPoint.position, dir);
+        bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position, dir);
+    }
+
+    public void SetPlayerController(PlayerController playerController)
+    {
+        _playerController = playerController;
     }
 
     public void ChargingToggle(bool value)

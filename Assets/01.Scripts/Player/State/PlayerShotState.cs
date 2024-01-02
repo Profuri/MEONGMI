@@ -32,7 +32,7 @@ public class PlayerShotState : PlayerState
     {
         var groundPoint = GetGroundPoint();
         var dir = (groundPoint - _player.transform.position).normalized;
-        _player.PlayerHammer.Shot(BulletType.Material, dir);
+        _player.PlayerHammer.Shot(BulletType.Transition, dir);
     }
     
     private Vector3 GetGroundPoint()

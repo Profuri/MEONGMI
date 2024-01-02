@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2575377541384466054}
   - component: {fileID: 4991048486253003502}
-  - component: {fileID: 4652160603592410274}
+  - component: {fileID: 8435265431872750317}
   m_Layer: 0
   m_Name: TransitionBullet
   m_TagString: Untagged
@@ -61,7 +61,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4652160603592410274
+--- !u!114 &8435265431872750317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,15 +70,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5751904490396502906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82e2f9d8fec24f1483326cd49115cd01, type: 3}
+  m_Script: {fileID: 11500000, guid: d56a1b882e4e44cb9c5097546b060104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _damagableMask:
     serializedVersion: 2
     m_Bits: 1024
   _checkRadius: 1
-  _bulletSpeed: 8
+  _bulletSpeed: 8.5
   _bulletDestroyDelay: 3
+  _transitionRadius: 5
+  _transitionCnt: 10
 --- !u!1001 &6786264386749786996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -97,7 +99,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4623055400575438, guid: e7776336bc56a9b4caa1c90ea92ff765, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4623055400575438, guid: e7776336bc56a9b4caa1c90ea92ff765, type: 3}
       propertyPath: m_LocalPosition.z

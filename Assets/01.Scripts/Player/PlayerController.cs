@@ -30,6 +30,7 @@ public class PlayerController : Entity
         LineConnect = GetComponent<PlayerLineConnect>();
         _visualTrm = transform.Find("Visual");
         PlayerHammer = _visualTrm.GetComponentInChildren<Hammer>();
+        PlayerHammer.SetPlayerController(this);
         CharacterControllerCompo = GetComponent<CharacterController>();
         AnimatorCompo = _visualTrm.GetComponent<Animator>();
     }

@@ -6,5 +6,5 @@ using UnityEngine;
 public class EntityStatSO : ScriptableObject
 {
     public float moveSpeed;
-    public int hp;
+    public float maxHp;
 }
