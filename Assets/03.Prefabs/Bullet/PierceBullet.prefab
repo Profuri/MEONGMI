@@ -9912,4 +9912,6 @@ MonoBehaviour:
   _damagableMask:
     serializedVersion: 2
     m_Bits: 1024
-  _checkRadius: 0
+  _checkRadius: 2
+  _bulletSpeed: 15
+  _bulletDestroyDelay: 3

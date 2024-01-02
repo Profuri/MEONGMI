@@ -77,7 +77,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   _checkRadius: 2
-  _bulletSpeed: 0
+  _bulletSpeed: 15
+  _bulletDestroyDelay: 3
 --- !u!1 &4108336662608485445
 GameObject:
   m_ObjectHideFlags: 0

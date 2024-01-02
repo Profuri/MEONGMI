@@ -76,7 +76,9 @@ MonoBehaviour:
   _damagableMask:
     serializedVersion: 2
     m_Bits: 1024
-  _checkRadius: 0
+  _checkRadius: 2
+  _bulletSpeed: 8
+  _bulletDestroyDelay: 3
 --- !u!1001 &6786264386749786996
 PrefabInstance:
   m_ObjectHideFlags: 0
