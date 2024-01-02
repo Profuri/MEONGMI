@@ -14,9 +14,8 @@ public class GameManager : MonoSingleton<GameManager>
         {
             if (_playerController == null)
             {
-                _playerController = PlayerTrm.GetComponent<PlayerController>();
+                _playerController = FindObjectOfType<PlayerController>();
             }
-
             return _playerController;
         }
     }
@@ -43,8 +42,8 @@ public class GameManager : MonoSingleton<GameManager>
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
 
-        // EnemySpawner.Instance.Init();
-        // EnemySpawner.Instance.StartPhase(0);
+        EnemySpawner.Instance.Init();
+        EnemySpawner.Instance.StartPhase(0);
         
         ResManager.Instance.Init();
         //UIManager.Instance.Init();

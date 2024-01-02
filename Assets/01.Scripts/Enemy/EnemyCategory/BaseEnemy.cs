@@ -62,6 +62,8 @@ public abstract class BaseEnemy : Entity
         NavMeshAgent.enabled = true;
         ActionData.IsStopped = false;
         EnemyType = EnemyAttackSO.enemyType;
+
+
     }
     
     protected override void RegisterStates()

@@ -23,6 +23,9 @@ public class EnemyRangeAttack : EnemyAttack
         
         Bullet bullet = PoolManager.Instance.Pop(_bullet.gameObject.name) as Bullet;
         bullet.Init();
-        bullet.Setting(BulletType.Enemy,startPos,_baseEnemy.transform.forward);
+        bullet.Setting(BulletType.Enemy,_baseEnemy.EnemyAttackSO.damage,startPos,_baseEnemy.transform.forward);
+        //dd
+        
+        
     }
 }

@@ -75,6 +75,11 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
                 for (int i = 0; i < randomAppearEnemyCnt; i++)
                 {
                     randomPos = (Vector3)Random.insideUnitCircle * _maxDistance + defaultOffset;
+                    bool result = Physics.Raycast(randomPos,Vector3.down,out RaycastHit hitInfo, Mathf.Infinity, 1 << LayerMask.NameToLayer("Ground"));
+                    if (result)
+                    {
+                        randomPos.y = hitInfo.collider.transform.position.y;
+                    }
                     
                     Debug.Log($"RandomPos: {randomPos}");
                 
