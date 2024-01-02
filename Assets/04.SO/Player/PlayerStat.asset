@@ -33,6 +33,9 @@ MonoBehaviour:
   shotDelay:
     _baseValue: 0.5
     modifiers: []
+  shotSpeed:
+    _baseValue: 20
+    modifiers: []
   moveSpeed:
     _baseValue: 10
     modifiers: []
@@ -40,5 +43,5 @@ MonoBehaviour:
     _baseValue: 3
     modifiers: []
   gatheringSpeed:
-    _baseValue: 10
+    _baseValue: 1
     modifiers: []

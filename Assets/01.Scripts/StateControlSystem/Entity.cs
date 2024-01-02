@@ -6,6 +6,7 @@ public abstract class Entity : MonoBehaviour
     public CharacterController CharacterControllerCompo { get; private set; }
 
     protected StateMachine _stateMachine;
+    public StateMachine StateMachine => _stateMachine;
 
     public virtual void Awake()
     {
