@@ -5,12 +5,16 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using Random = UnityEngine.Random;
 
 public class PlayerFeatureChoicePanel : ChoicePanel
 {
     [SerializeField] private RectTransform _roulettTrm;
-    [SerializeField] private List<Sprite> _featureIconList;
+    [SerializeField] private List<TraitUpgradeElemSO> _featureDataList;
     [SerializeField] private Button _button;
+    [SerializeField] private TextMeshProUGUI _title;
+    [SerializeField] private TextMeshProUGUI _description;
     private List<Image> _images;
 
     private void Awake()
@@ -19,32 +23,48 @@ public class PlayerFeatureChoicePanel : ChoicePanel
         ResetRoulett();
     }
 
-    public void ResetRoulett()
+    public TraitUpgradeElemSO ResetRoulett()
     {
+        TraitUpgradeElemSO result = null;
         _roulettTrm.anchoredPosition = new Vector2(530f, 0f);
         int prev = -1;
         for (int i = 0; i < _images.Count; i++)
         {
             Image image = _images[i];
-            int rand = Random.Range(0, _featureIconList.Count - 1);
+            int rand = Random.Range(0, _featureDataList.Count - 1);
             if(rand == prev)
             {
                 i--;
                 continue;
             }
-            image.sprite = _featureIconList[rand];
+            image.sprite = _featureDataList[rand].Image;
+            if(i == 25)
+            {
+                result = _featureDataList[rand];
+            }
             prev = rand;
         }
+
+        return result;
     }
 
-    public void Rolling()
+    //Debug Function
+    public void OnRolling()
     {
-        ResetRoulett();
+        Rolling();
+    }
+
+    public TraitUpgradeElemSO Rolling(Action callback = null)
+    {
+        TraitUpgradeElemSO result = ResetRoulett();
         _button.interactable = false;
         _roulettTrm.DOAnchorPosX(-3225f, 4f).SetEase(Ease.OutQuad).OnComplete(() =>
         {
             _button.interactable = true;
-            Debug.Log(_images[25].sprite.name);
+            _title.SetText(result.name);
+            _description.SetText(result.Description);
         });
+
+        return result;
     }
 }
