@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2292568533629044602}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.3, y: 2.5615392, z: 0.28971556}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _muzzle: {fileID: 6584408868518970707}
-  _bulletSpeed: 0
+  _bulletSpeed: 5
   _bullet: {fileID: 3895285794537153345, guid: 265eee543a99be347aec020cad31d06e, type: 3}
 --- !u!1 &4362121302630865450
 GameObject:

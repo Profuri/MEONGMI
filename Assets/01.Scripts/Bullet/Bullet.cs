@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Bullet : PoolableMono
 {
-    [SerializeField] protected LayerMask _damagableMask;
-    [SerializeField] protected float _checkRadius;
+    [SerializeField] private LayerMask _damagableMask;
+    [SerializeField] private float _checkRadius;
     
-    protected Rigidbody _rigidbody;
-    protected BulletType _bulletType;
+    private Rigidbody _rigidbody;
+    private BulletType _bulletType;
     
     public void Setting(BulletType type, Vector3 pos, Vector3 dir, float speed)
     {
