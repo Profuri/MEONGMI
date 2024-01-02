@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeUI : MonoBehaviour
+public class UpgradeCard : MonoBehaviour
 {
     private TextMeshProUGUI description;
     private Image image;

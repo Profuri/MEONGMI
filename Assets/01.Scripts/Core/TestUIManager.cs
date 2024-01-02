@@ -17,8 +17,6 @@ public class TestUIManager : MonoSingleton<TestUIManager>
     List<PlayerUpgradeElemSO> playerElemInfos;
     List<TraitUpgradeElemSO> traitElemInfos;
 
-    
-
     public override void Init()
     {
     }
@@ -92,7 +90,7 @@ public class TestUIManager : MonoSingleton<TestUIManager>
             for(int i = 0; i < baseElemInfos.Count; i++)
             {
                 GameObject upgradeObj = Instantiate(templateItem, container.transform);
-                UpgradeUI upgradeUI = upgradeObj.GetComponent<UpgradeUI>();
+                UpgradeCard upgradeUI = upgradeObj.GetComponent<UpgradeCard>();
                 BaseUpgradeElemSO upgradeElem = baseElemInfos[i];
                 upgradeUI.Setting(upgradeElem);
             }
@@ -100,7 +98,7 @@ public class TestUIManager : MonoSingleton<TestUIManager>
         else
         {
             GameObject upgradeObj = Instantiate(templateItem, container.transform);
-            UpgradeUI upgradeUI = upgradeObj.GetComponent<UpgradeUI>();
+            UpgradeCard upgradeUI = upgradeObj.GetComponent<UpgradeCard>();
             if(type == EUpgradeType.PLAYER)
             {
                 EPlayerUpgradeElement etype = (EPlayerUpgradeElement)elemNum;

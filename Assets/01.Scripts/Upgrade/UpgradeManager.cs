@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -57,6 +58,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     public ETraitUpgradeElement curTraitElem = ETraitUpgradeElement.NONE;
 
+    private int randomCardCount = 3;  
     private void Awake()
     {
         Init();
@@ -100,6 +102,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     private void RandomUpgrade(EUpgradeType upgradeType)
     {
         int maxEclusive = 0;
+        List<int> pickedNums = new();
         switch(upgradeType)
         {
             case EUpgradeType.BASE:
@@ -110,13 +113,26 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             case EUpgradeType.PLAYER:
                 {
                     maxEclusive = (int)EPlayerUpgradeElement.END;
-                    int elemNum = Random.Range(0, maxEclusive);
-                    TestUIManager.Instance.SetUpgradeElem(upgradeType, elemNum);
+                    for(int i = 0; i < randomCardCount; i++)
+                    {
+                        int elemNum = Random.Range(0, maxEclusive);
+                        while(true)
+                        {
+                            if (pickedNums.Contains(elemNum))
+                            {
+                                elemNum = Random.Range(0, maxEclusive);
+                            }
+                            else
+                                break;
+                        }
+                        pickedNums.Add(elemNum);
+                        Debug.Log(elemNum);
+                        TestUIManager.Instance.SetUpgradeElem(upgradeType, elemNum);
+                    }
                 }
                 break;
             case EUpgradeType.TRAIT: // ม฿บน x
                 {
-                    maxEclusive = (int)ETraitUpgradeElement.END;
                     ETraitUpgradeElement traitElem = curTraitElem;
                     while(traitElem == curTraitElem)
                     {
