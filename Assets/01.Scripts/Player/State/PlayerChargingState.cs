@@ -9,9 +9,9 @@ public class PlayerChargingState : PlayerState
 
     public override void EnterState()
     {
-        base.EnterState();
         _player.InputReader.OnMouseLeftClickEvent += ShotHandle;
         _player.InputReader.OnMouseRightClickEvent += ChargingHandle;
+        _player.PlayerHammer.ChargingToggle(true);
     }
 
     public override void UpdateState()
@@ -34,7 +34,6 @@ public class PlayerChargingState : PlayerState
 
     public override void ExitState()
     {
-        base.ExitState();
         _player.InputReader.OnMouseLeftClickEvent -= ShotHandle;
         _player.InputReader.OnMouseRightClickEvent -= ChargingHandle;
     }
@@ -49,7 +48,8 @@ public class PlayerChargingState : PlayerState
 
     private void ChargingHandle()
     {
-        _stateMachine.ChangeState(PlayerStateType.Idle);
+        // _stateMachine.ChangeState(PlayerStateType.Idle);
+        // _player.PlayerHammer.ChargingToggle(false);
     }
 
     private void ShotHandle()

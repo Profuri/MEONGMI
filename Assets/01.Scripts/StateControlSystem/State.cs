@@ -5,7 +5,7 @@ public class State : IState
 {
     protected StateMachine _stateMachine;
 
-    private readonly int _animToggleHash;
+    protected int _animToggleHash;
 
     protected bool _animFinishTriggerCalled;
     protected Entity _owner;

@@ -11,6 +11,8 @@ public class PlayerMovementState : PlayerState
     {
         base.EnterState();
         _player.InputReader.OnMouseRightClickEvent += ChargingHandle;
+        _player.InputReader.OnMouseLeftClickEvent += ClickHandle;
+        _player.SetAnimationSpeed(_player.PlayerStat.moveSpeed.GetValue() / 10f);
     }
     
     public override void UpdateState()
@@ -32,10 +34,31 @@ public class PlayerMovementState : PlayerState
     {
         base.ExitState();
         _player.InputReader.OnMouseRightClickEvent -= ChargingHandle;
+        _player.InputReader.OnMouseLeftClickEvent -= ClickHandle;
+        _player.ResetAnimationSpeed();
     }
 
     private void ChargingHandle()
     {
         _stateMachine.ChangeState(PlayerStateType.Charging);    
+    }
+
+    private void ClickHandle()
+    {
+        var target = GetInteractObject();
+
+        if (target != null)
+        {
+            _player.Target = target;
+            _stateMachine.ChangeState(PlayerStateType.Chase);
+        }
+    }
+    
+    private Interactable GetInteractObject()
+    {
+        var mouseScreenPos = _player.InputReader.mouseScreenPos;
+        var ray = GameManager.Instance.MainCam.ScreenPointToRay(mouseScreenPos);
+        var isHit = Physics.Raycast(ray, out var hit, Mathf.Infinity, _player.InteractableMask);
+        return isHit ? hit.transform.GetComponent<Interactable>() : null;
     }
 }
