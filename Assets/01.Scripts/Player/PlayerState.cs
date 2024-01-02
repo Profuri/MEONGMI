@@ -12,12 +12,12 @@ public class PlayerState : State
 
     public override void UpdateState()
     {
-        var groundPoint = GetGroundPoint();
-        if (groundPoint != -Vector3.one)
-        {
-            var lookDir = (groundPoint - _player.transform.position).normalized;
-            _player.Rotate(lookDir);
-        }
+        // var groundPoint = GetGroundPoint();
+        // if (groundPoint != -Vector3.one)
+        // {
+        //     var lookDir = (groundPoint - _player.transform.position).normalized;
+        //     _player.Rotate(lookDir);
+        // }
     }
 
     private Vector3 GetGroundPoint()

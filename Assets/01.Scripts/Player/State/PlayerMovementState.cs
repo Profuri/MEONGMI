@@ -16,9 +16,11 @@ public class PlayerMovementState : PlayerState
         if (movementInput.sqrMagnitude < 0.05f)
         {
             _stateMachine.ChangeState(PlayerStateType.Idle);
+            return;
         }
 
         var movementSpeed = _player.PlayerStat.moveSpeed.GetValue() * Time.deltaTime;
         _player.SetVelocity(movementInput * movementSpeed);
+        _player.Rotate(movementInput);
     }
 }
