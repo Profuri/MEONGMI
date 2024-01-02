@@ -40,4 +40,10 @@ public class ResManager : MonoSingleton<ResManager>
         }
         return false;
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+            ResourceCnt += 10000;
+    }
 }

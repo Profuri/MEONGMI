@@ -12,12 +12,12 @@ public class TestUIManager : MonoSingleton<TestUIManager>
     [SerializeField] GameObject templateItem;
     [SerializeField] GameObject upgradeFailPanel;
 
+    [SerializeField] GameObject _BaseUpgradePanel;
+    [SerializeField] GameObject _PlayerUpgradePanel;
 
     List<BaseUpgradeElemSO> baseElemInfos;
     List<PlayerUpgradeElemSO> playerElemInfos;
     List<TraitUpgradeElemSO> traitElemInfos;
-
-    
 
     public override void Init()
     {
@@ -77,7 +77,9 @@ public class TestUIManager : MonoSingleton<TestUIManager>
     public void UpgradeBase() => UpgradeManager.Instance.Upgrade(EUpgradeType.BASE);
     public void UpgradePlayer() => UpgradeManager.Instance.Upgrade(EUpgradeType.PLAYER);
     public void UpgradeTrait() => UpgradeManager.Instance.Upgrade(EUpgradeType.TRAIT);
-    
+
+    public void BaseUpgradePanel() => _BaseUpgradePanel.SetActive(true);
+    public void PlayerUpgradePanel() => _PlayerUpgradePanel.SetActive(true);   
     public void UpgradeFail()
     {
         // 자원이 부족합니다 UI띄어줘야 함.
@@ -86,13 +88,14 @@ public class TestUIManager : MonoSingleton<TestUIManager>
 
     public void SetUpgradeElem(EUpgradeType type, int elemNum) // 3개 띄워줘야 함
     {
+        container.SetActive(true);
         if(type == EUpgradeType.BASE)
         {
             //base 3개 띄움
             for(int i = 0; i < baseElemInfos.Count; i++)
             {
                 GameObject upgradeObj = Instantiate(templateItem, container.transform);
-                UpgradeUI upgradeUI = upgradeObj.GetComponent<UpgradeUI>();
+                UpgradeCard upgradeUI = upgradeObj.GetComponent<UpgradeCard>();
                 BaseUpgradeElemSO upgradeElem = baseElemInfos[i];
                 upgradeUI.Setting(upgradeElem);
             }
@@ -100,7 +103,7 @@ public class TestUIManager : MonoSingleton<TestUIManager>
         else
         {
             GameObject upgradeObj = Instantiate(templateItem, container.transform);
-            UpgradeUI upgradeUI = upgradeObj.GetComponent<UpgradeUI>();
+            UpgradeCard upgradeUI = upgradeObj.GetComponent<UpgradeCard>();
             if(type == EUpgradeType.PLAYER)
             {
                 EPlayerUpgradeElement etype = (EPlayerUpgradeElement)elemNum;
@@ -121,7 +124,6 @@ public class TestUIManager : MonoSingleton<TestUIManager>
                     Debug.LogError("1");
             }
 
-            //UpgradeElemInfoSO elemInfo = elemInfos.Find()
             //각 타입의 elemNum의 upgrade 를 띄움
         }
     }
