@@ -6,10 +6,12 @@ using System.Linq;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [SerializeField] private PoolingListSO _poolingListSO;
+    public Transform PlayerTrm { get; private set; }
+    public Transform BaseTrm { get; private set; }
     
-    public Transform PlayerTrm { get; set; }
-    public Transform BaseTrm { get; set; }
+    public Camera MainCam { get; private set; }
+
+    [SerializeField] private PoolingListSO _poolingList;
     
     private void Awake()
     {
@@ -18,20 +20,17 @@ public class GameManager : MonoSingleton<GameManager>
 
     public override void Init()
     {
-        PlayerTrm = GameObject.Find("Player").transform;
-        BaseTrm = GameObject.Find("Base").transform;
+        MainCam = Camera.main;
+        PlayerTrm = GameObject.Find("Player")?.transform;
+        BaseTrm = GameObject.Find("Base")?.transform;
         
-        PoolManager.Instance = new PoolManager(this.transform);
-        foreach (var pair in _poolingListSO.pairs)
+        PoolManager.Instance = new PoolManager(transform);
+        foreach (var pair in _poolingList.pairs)
         {
-            PoolManager.Instance.CreatePool(pair.prefab,pair.count);
+            PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
         
-        
         ResManager.Instance.Init();
-        EnemySpawner.Instance.Init();
-        EnemySpawner.Instance.StartPhase(0);
-
-
+        UIManager.Instance.Init();
     }
 }

@@ -5,8 +5,7 @@ public class State : IState
 {
     protected StateMachine _stateMachine;
 
-    private readonly int _animToggleHash;
-    private readonly int _velocityYHash;
+    protected int _animToggleHash;
 
     protected bool _animFinishTriggerCalled;
     protected Entity _owner;
@@ -16,7 +15,6 @@ public class State : IState
         _stateMachine = stateMachine;
         _owner = owner;
         _animToggleHash = Animator.StringToHash(type.ToString());
-        _velocityYHash = Animator.StringToHash("velocity_y");
     }
 
     public virtual void EnterState()
@@ -26,7 +24,6 @@ public class State : IState
 
     public virtual void UpdateState()
     {
-        _owner.AnimatorCompo.SetFloat(_velocityYHash, _owner.CharacterControllerCompo.velocity.y);
     }
 
     public virtual void ExitState()
