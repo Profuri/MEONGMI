@@ -5013,7 +5013,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.43, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3328193271906505463}
@@ -5061,6 +5061,6 @@ MonoBehaviour:
   _damagableMask:
     serializedVersion: 2
     m_Bits: 1024
-  _checkRadius: 2
+  _checkRadius: 1
   _bulletSpeed: 5
   _bulletDestroyDelay: 3
