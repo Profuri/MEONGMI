@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RecoveryUp
   m_EditorClassIdentifier: 
   Description: "\uD50C\uB808\uC774\uC5B4 \uCD08\uB2F9 \uD68C\uBCF5\uB7C9\uC774 \uC99D\uAC00\uD55C\uB2E4."
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: a6c4f2a61e6ba4778a0d15c930d76b69, type: 3}
   Type: 5

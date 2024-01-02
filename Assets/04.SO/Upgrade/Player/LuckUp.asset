@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: LuckUp
   m_EditorClassIdentifier: 
   Description: "\uD589\uC6B4\uC774 \uC99D\uAC00\uD55C\uB2E4."
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 72a06291c494f4cceab7d40cce1c7b5a, type: 3}
   Type: 6

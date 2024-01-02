@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bf59933e8198147ab1bf10bce5302e, type: 3}
   m_Name: Slow
   m_EditorClassIdentifier: 
-  Description: "\uC801\uC911 \uC2DC \uC801\uC5D0\uAC8C \uB454\uD654 \uD6A8\uACFC"
+  Description: "\uC801\uC911 \uC2DC \uC801\uC5D0\uAC8C \uC2AC\uB85C\uC6B0"
   Image: {fileID: 21300000, guid: c3189121f7e3342a3b2fcc2f495c9e31, type: 3}
   Type: 1

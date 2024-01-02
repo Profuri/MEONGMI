@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerStatChoicePanel : ChoicePanel
 {
     [SerializeField] private RectTransform _imageListTrm;
-    [SerializeField] private List<Sprite> _statIconImages;
+    [SerializeField] private List<PlayerUpgradeElemSO> _statIconImages;
     [SerializeField] private TextMeshProUGUI _title;
 
     private bool _isRolling = false;
@@ -29,6 +29,8 @@ public class PlayerStatChoicePanel : ChoicePanel
 
     public void RollImage()
     {
+        PlayerUpgradeElemSO result = null;
+
         if (_isRolling) return;
         _isRolling = true;
 
@@ -37,7 +39,11 @@ public class PlayerStatChoicePanel : ChoicePanel
         {
             Image img = imageList[i];
             int rand = Random.Range(0, _statIconImages.Count - 1);
-            img.sprite = _statIconImages[rand];
+            img.sprite = _statIconImages[rand].Image;
+            if(i == _imageListTrm.childCount - 1)
+            {
+                result = _statIconImages[rand];
+            }
         }
 
         _imageListTrm.DOAnchorPosY((_imageListTrm.childCount - 1) * 235f, 1.5f)
@@ -45,7 +51,7 @@ public class PlayerStatChoicePanel : ChoicePanel
         {
             imageList[0].sprite = imageList[imageList.Length - 1].sprite;
             _imageListTrm.anchoredPosition = Vector2.zero;
-            _title.SetText(imageList[0].sprite.name);
+            _title.SetText(result.name);
 
             _isRolling = false;
         });

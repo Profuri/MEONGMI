@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd14fe1d5696ba458f299d9c65fcd43, type: 3}
   m_Name: FireSpeedUp
   m_EditorClassIdentifier: 
-  UpgradeType: 2
-  canDuplication: 1
   Description: "\uD50C\uB808\uC774\uC5B4 \uC5F0\uC0AC \uC18D\uB3C4 \uC99D\uAC00."
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: f8b5eb2780d824a2b80c925269d8d769, type: 3}
   Type: 1
