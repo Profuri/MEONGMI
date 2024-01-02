@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd14fe1d5696ba458f299d9c65fcd43, type: 3}
   m_Name: BulletCountUp
   m_EditorClassIdentifier: 
-  UpgradeType: 2
-  canDuplication: 1
+  name: "\uCD1D\uC54C \uC218 \uC99D\uAC00"
   Description: "\uD50C\uB808\uC774\uC5B4 \uCD1D\uC54C \uC218\uAC00 \uC99D\uAC00\uD55C\uB2E4."
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 2093d85af42774d7ebc1c1eb6feb05c9, type: 3}
   Type: 0

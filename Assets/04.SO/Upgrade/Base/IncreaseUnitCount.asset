@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e171e8bb44d2e744995e6123127c5b3a, type: 3}
   m_Name: IncreaseUnitCount
   m_EditorClassIdentifier: 
-  UpgradeType: 1
-  canDuplication: 1
+  name: "\uC720\uB2DB \uC218"
   Description: "\uC720\uB2DB \uC218 \uC99D\uAC00"
   Image: {fileID: 0}
   Type: 0
