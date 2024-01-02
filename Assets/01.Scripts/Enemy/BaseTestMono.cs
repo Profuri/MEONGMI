@@ -6,13 +6,13 @@ using UnityEngine.VFX;
 public class BaseTestMono : MonoBehaviour,IDamageable
 {
     [SerializeField] private EntityStatSO _entityStatSO;
-    private int _hp;
+    private float _hp;
 
     private void Awake()
     {
-        _hp = _entityStatSO.hp;
+        _hp = _entityStatSO.maxHp;
     }
-    public void Damaged(int damage)
+    public void Damaged(float damage)
     {
         VFXPlayer vfxPlayer = PoolManager.Instance.Pop("ResHitParticle") as VFXPlayer;
         Vector3 offset = Vector3.up * 1.5f;

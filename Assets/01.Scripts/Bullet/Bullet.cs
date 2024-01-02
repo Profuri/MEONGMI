@@ -1,27 +1,27 @@
-using System;
 using UnityEngine;
 
 public class Bullet : PoolableMono
 {
-    [SerializeField] private LayerMask _damagableMask;
-    [SerializeField] private float _checkRadius;
-    [SerializeField] private float _bulletSpeed;
-    [SerializeField] private float _bulletDestroyDelay = 3f;
+    [SerializeField] protected LayerMask _damagableMask;
+    [SerializeField] protected float _checkRadius;
+    [SerializeField] protected float _bulletSpeed;
+    [SerializeField] protected float _bulletDestroyDelay = 3f;
     
-    private Rigidbody _rigidbody;
-    private BulletType _bulletType;
-    
-    
+    protected Rigidbody _rigidbody;
+    protected BulletType _bulletType;
 
-    private Vector3 _dir;
-    private float _currentTime;
+    protected Vector3 _dir;
+    protected float _currentTime;
 
-    public void Setting(BulletType type, Vector3 pos, Vector3 dir)
+    protected float _damage;
+
+    public void Setting(BulletType type, float damage, Vector3 pos, Vector3 dir)
     {
         _bulletType = type;
+        _damage = damage;
         _dir = dir;
         transform.position = pos;
-        _rigidbody.velocity = dir * _bulletSpeed;
+        transform.rotation = Quaternion.LookRotation(dir);
         _currentTime = 0f;
     }
     
@@ -33,21 +33,22 @@ public class Bullet : PoolableMono
         }
     }
 
-    private void Update()
+    public virtual void Update()
     {
-        transform.rotation = Quaternion.LookRotation(_dir);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_dir), 0.1f);
+        _rigidbody.velocity = transform.forward * _bulletSpeed;
 
         if (DamageCheck(out var cols, out var cnt))
         {
             for (var i = 0; i < cnt; i++)
             {
-                // damage logic    
+                if (cols[i].TryGetComponent<Entity>(out var entity))
+                {
+                    entity.Damaged(_damage);
+                }    
             }
 
-            if (_bulletType != BulletType.Pierce)
-            {
-                ExplosionBullet();
-            }
+            ExplosionBullet();
         }
         
         _currentTime += Time.deltaTime;
@@ -57,7 +58,7 @@ public class Bullet : PoolableMono
         }
     }
 
-    private void ExplosionBullet()
+    protected virtual void ExplosionBullet()
     {
         var particle = PoolManager.Instance.Pop($"{_bulletType.ToString()}Hit") as PoolableParticle;
         particle.SetPositionAndRotation(transform.position);
@@ -66,7 +67,7 @@ public class Bullet : PoolableMono
         PoolManager.Instance.Push(this);
     }
 
-    private bool DamageCheck(out Collider[] cols, out int cnt)
+    protected bool DamageCheck(out Collider[] cols, out int cnt)
     {
         cols = new Collider[10];
         cnt = Physics.OverlapSphereNonAlloc(transform.position, _checkRadius, cols, _damagableMask);

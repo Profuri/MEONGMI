@@ -7,18 +7,18 @@ public class PlayerTestMono : MonoBehaviour,IDetectable,IDamageable
 {
     [SerializeField] private EntityStatSO _entityStatSO;
 
-    private int _hp;
+    private float _hp;
 
     private void Awake()
     {
-        _hp = _entityStatSO.hp;
+        _hp = _entityStatSO.maxHp;
     }
     public Transform Detect()
     {
         return this.transform;
     }
 
-    public void Damaged(int damage)
+    public void Damaged(float damage)
     {
         _hp -= damage;
         if (_hp <= 0)

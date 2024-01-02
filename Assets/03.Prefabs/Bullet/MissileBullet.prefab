@@ -4995,7 +4995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1266818510649367035}
   - component: {fileID: 4094165925372016906}
-  - component: {fileID: 1534444300043245925}
+  - component: {fileID: -4964670686029674656}
   m_Layer: 0
   m_Name: MissileBullet
   m_TagString: Untagged
@@ -5013,7 +5013,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.43, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3328193271906505463}
@@ -5046,7 +5046,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1534444300043245925
+--- !u!114 &-4964670686029674656
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5055,12 +5055,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3965065455222200057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82e2f9d8fec24f1483326cd49115cd01, type: 3}
+  m_Script: {fileID: 11500000, guid: 909efff86f8d4701a31aa70db4de0c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _damagableMask:
     serializedVersion: 2
     m_Bits: 1024
-  _checkRadius: 2
-  _bulletSpeed: 5
+  _checkRadius: 1
+  _bulletSpeed: 12
   _bulletDestroyDelay: 3
+  _missileDetectRadius: 6

@@ -43,8 +43,8 @@ public class GameManager : MonoSingleton<GameManager>
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
 
-        EnemySpawner.Instance.Init();
-        EnemySpawner.Instance.StartPhase(0);
+        // EnemySpawner.Instance.Init();
+        // EnemySpawner.Instance.StartPhase(0);
         
         ResManager.Instance.Init();
         //UIManager.Instance.Init();
