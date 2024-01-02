@@ -14,9 +14,10 @@ public class PlayerStatChoicePanel : ChoicePanel
     //[SerializeField] private List<InfoImage> _statIconImages;
     [SerializeField] private TextMeshProUGUI _title;
     [SerializeField] private EUpgradeType _upgradeType;
+    [SerializeField] private GameObject _backglow;
+    [SerializeField] private Button _button;
 
     private UpgradeCard _upgradeCard;
-    private UpgradeElemInfoSO info;
     private bool _isRolling = false;
 
     private void Awake()
@@ -28,12 +29,13 @@ public class PlayerStatChoicePanel : ChoicePanel
     private void Init()
     {
         _upgradeCard = transform.GetComponent<UpgradeCard>();
-        info = _upgradeCard.Info;
+        _backglow.SetActive(false);
+        _button.enabled = false;
     }
 
     public void RollImage()
     {
-        if (_isRolling || info == null) return;
+        if (_isRolling) return;
         _isRolling = true;
 
         Image[] imageList = ShuffleArray(_imageListTrm.GetComponentsInChildren<Image>());
@@ -41,12 +43,18 @@ public class PlayerStatChoicePanel : ChoicePanel
         _imageListTrm.DOAnchorPosY((_imageListTrm.childCount - 1) * 235f, 1.5f)
         .OnComplete(() =>
         {
-            imageList[0].sprite = info.Image;
-            _imageListTrm.anchoredPosition = Vector2.zero;
-            _title.SetText(info.Description);
-
-            _isRolling = false;
+            EndRolling(imageList[0]);
         });
+    }
+
+    private void EndRolling(Image imageContainer)
+    {
+        imageContainer.sprite = _upgradeCard.Info.Image;
+        _imageListTrm.anchoredPosition = Vector2.zero;
+        _title.SetText(_upgradeCard.Info.Description);
+        _button.enabled = true;
+        _backglow.SetActive(true);
+        _isRolling = false;
     }
 
     private T[] ShuffleArray<T>(T[] array)

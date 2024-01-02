@@ -656,6 +656,8 @@ MonoBehaviour:
   _upgradeContainer: {fileID: 0}
   _title: {fileID: 4979587173274423289}
   _upgradeType: 0
+  _backglow: {fileID: 0}
+  _button: {fileID: 0}
 --- !u!114 &6821650357010779775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1499,7 +1501,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7f930c95fb03541c696364cf3ea33fc3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da7876965f33f4b18991f0267b930463, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
