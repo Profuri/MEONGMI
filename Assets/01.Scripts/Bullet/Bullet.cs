@@ -10,6 +10,8 @@ public class Bullet : PoolableMono
     
     private Rigidbody _rigidbody;
     private BulletType _bulletType;
+    
+    
 
     private Vector3 _dir;
     private float _currentTime;

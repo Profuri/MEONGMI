@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e361c38a767c34b4f8c088c732523aa9, type: 3}
-  m_Name: Phase1
+  m_Script: {fileID: 11500000, guid: 4b03541fb3c85a347a41202e0feba50d, type: 3}
+  m_Name: RangeEnemyAttackSO
   m_EditorClassIdentifier: 
-  enemyList:
-  - {fileID: 5347434663355265045, guid: 720e9c5bad004434daa745e5c9e6135a, type: 3}
-  - {fileID: 7104032267645828274, guid: d325e6779f172dd4e808db3da1efc6cf, type: 3}
+  enemyType: 0
+  damage: 10
+  attackDelay: 0.8
+  detectRange: 10
+  attackRange: 12

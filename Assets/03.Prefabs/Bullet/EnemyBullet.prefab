@@ -10032,7 +10032,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.3340157, g: 0.38335207, b: 0.509434, a: 1}
+      maxColor: {r: 1, g: 0.20258228, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14842,6 +14842,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   _checkRadius: 1
+  _bulletSpeed: 5
+  _bulletDestroyDelay: 3
 --- !u!54 &-5448519065081392893
 Rigidbody:
   m_ObjectHideFlags: 0

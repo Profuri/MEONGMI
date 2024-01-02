@@ -76,3 +76,15 @@ MonoBehaviour:
   - prefab: {fileID: -6743915047592179276, guid: e46e60dfd73d7ed4fa8a4ef323af2e69,
       type: 3}
     count: 10
+  - prefab: {fileID: 7104032267645828274, guid: d325e6779f172dd4e808db3da1efc6cf,
+      type: 3}
+    count: 30
+  - prefab: {fileID: 5347434663355265045, guid: 720e9c5bad004434daa745e5c9e6135a,
+      type: 3}
+    count: 30
+  - prefab: {fileID: 3895285794537153345, guid: 265eee543a99be347aec020cad31d06e,
+      type: 3}
+    count: 30
+  - prefab: {fileID: -2409385459419858063, guid: 61bbabf468ae17c4695d7cb9a6c5ecd1,
+      type: 3}
+    count: 30

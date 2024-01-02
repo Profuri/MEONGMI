@@ -49,5 +49,4 @@ public abstract class Entity : PoolableMono, IDamageable
             OnDead?.Invoke();
         }
     }
-    
 }
