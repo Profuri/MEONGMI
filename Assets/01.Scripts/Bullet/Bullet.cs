@@ -26,19 +26,19 @@ public class Bullet : PoolableMono
 
     private void Update()
     {
-        // if (DamageCheck(out var cols, out var cnt))
-        // {
-        //     for (var i = 0; i < cnt; i++)
-        //     {
-        //         // damage logic    
-        //     }
-        //
-        //     var particle = PoolManager.Instance.Pop($"{_bulletType.ToString()}BulletHit") as PoolableParticle;
-        //     particle.SetPositionAndRotation(transform.position);
-        //     particle.Play();
-        //     
-        //     PoolManager.Instance.Push(this);
-        // }
+        if (DamageCheck(out var cols, out var cnt))
+        {
+            for (var i = 0; i < cnt; i++)
+            {
+                // damage logic    
+            }
+        
+            var particle = PoolManager.Instance.Pop($"{_bulletType.ToString()}BulletHit") as PoolableParticle;
+            particle.SetPositionAndRotation(transform.position);
+            particle.Play();
+            
+            PoolManager.Instance.Push(this);
+        }
     }
 
     private bool DamageCheck(out Collider[] cols, out int cnt)
