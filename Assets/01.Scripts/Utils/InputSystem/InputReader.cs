@@ -10,12 +10,14 @@ namespace InputControl
         public delegate void InputEventListener();
         public delegate void InputEventListener<in T>(T value);
         
-        public event InputEventListener<Vector2> OnMovementEvent = null;
-        public event InputEventListener<Vector2> OnMouseEvent = null;
-
-
+        public event InputEventListener OnMouseLeftClickEvent = null;
+        public event InputEventListener OnMouseRightClickEvent = null;
 
         private InputControls _inputControls;
+
+        [HideInInspector] 
+        public Vector3 movementInput;
+        public Vector2 mouseScreenPos;
 
         private void OnEnable()
         {
@@ -30,16 +32,28 @@ namespace InputControl
 
         public void OnMovement(InputAction.CallbackContext context)
         {
-            Vector2 value = context.ReadValue<Vector2>();
-            OnMovementEvent?.Invoke(value);
+            var input = context.ReadValue<Vector2>(); 
+            movementInput = new Vector3(input.x, 0, input.y);
         }
 
-        public void OnMouse(InputAction.CallbackContext context)
+        public void OnClick(InputAction.CallbackContext context)
         {
             if (context.performed)
             {
-                Vector2 value = context.ReadValue<Vector2>();
-                OnMouseEvent?.Invoke(value);
+                OnMouseLeftClickEvent?.Invoke();
+            }
+        }
+
+        public void OnMousePos(InputAction.CallbackContext context)
+        {
+            mouseScreenPos = context.ReadValue<Vector2>();
+        }
+
+        public void OnCharging(InputAction.CallbackContext context)
+        {
+            if (context.started || context.canceled)
+            {
+                OnMouseRightClickEvent?.Invoke();
             }
         }
     }
