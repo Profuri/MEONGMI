@@ -9,14 +9,10 @@ public class UpgradeCard : MonoBehaviour
 {
     private TextMeshProUGUI description;
     private Image image;
+    private UpgradeElemInfoSO myInfo;
+    public UpgradeElemInfoSO Info => myInfo;
 
     private Action ReleaseAct;
-
-    private void Awake()
-    {
-        description = transform.Find("Description").GetComponent<TextMeshProUGUI>();
-        image = transform.Find("Background/Image").GetComponent<Image>();
-    }
 
     public void Setting(UpgradeElemInfoSO so, Action releaseAct)
     {

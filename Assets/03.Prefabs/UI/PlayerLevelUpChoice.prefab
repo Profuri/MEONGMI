@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 4327880712675837}
   - component: {fileID: 3100937534734529601}
   - component: {fileID: 8597606087112845342}
+  - component: {fileID: 6821650357010779775}
   m_Layer: 5
   m_Name: PlayerLevelUpChoice
   m_TagString: Untagged
@@ -651,17 +652,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _imageListTrm: {fileID: 5570055593184870630}
-  _statIconImages:
-  - {fileID: 21300000, guid: 7f930c95fb03541c696364cf3ea33fc3, type: 3}
-  - {fileID: 21300000, guid: c00de87e1e1c14f21831172ff50c2e4e, type: 3}
-  - {fileID: 21300000, guid: 799f9b8cc0dd74f2d8491adc6ed7d4b2, type: 3}
-  - {fileID: 21300000, guid: 2770b8aa364374c2eaed6f1dfe5f3374, type: 3}
-  - {fileID: 21300000, guid: 9c9fc87521106447e8fbd8db609514a5, type: 3}
-  - {fileID: 21300000, guid: d90661f73b9d747a3b582bfe216131ed, type: 3}
-  - {fileID: 21300000, guid: 32d5d14c49aae4361a9246d4aa08d36d, type: 3}
-  - {fileID: 21300000, guid: 1f15a289b07844c889d62041fbaf21ed, type: 3}
-  - {fileID: 21300000, guid: e857d884661024bd39af20f2edea6a57, type: 3}
+  _upgradeContainer: {fileID: 0}
   _title: {fileID: 4979587173274423289}
+  _upgradeType: 0
+--- !u!114 &6821650357010779775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4208071136110261279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 409dd73d34f14374ab174e4da8ab552d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4771319431319190182
 GameObject:
   m_ObjectHideFlags: 0

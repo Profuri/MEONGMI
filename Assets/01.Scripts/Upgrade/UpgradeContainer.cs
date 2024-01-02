@@ -7,64 +7,14 @@ public class UpgradeContainer : MonoBehaviour
 {
     public List<GameObject> UpgradeCards;
 
-    private List<BaseUpgradeElemSO> baseElemInfos;
-    private List<PlayerUpgradeElemSO> playerElemInfos;
-    private List<TraitUpgradeElemSO> traitElemInfos;
-
-    public void Awake()
-    {
-        LoadUpdateInfos();
-    }
-
-    private void LoadUpdateInfos()
-    {
-        baseElemInfos = new();
-        playerElemInfos = new();
-        traitElemInfos = new();
-
-        string[] baseAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Base" });
-
-        foreach (string assetName in baseAssetNames)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID를 기반으로 경로
-            BaseUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<BaseUpgradeElemSO>(assetPath);
-            if (itemData != null)
-            {
-                baseElemInfos.Add(itemData);
-                Debug.Log(itemData.name);
-            }
-        }
-
-        string[] playerAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Player" });
-
-        foreach (string assetName in playerAssetNames)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID를 기반으로 경로
-            PlayerUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<PlayerUpgradeElemSO>(assetPath);
-            if (itemData != null)
-            {
-                playerElemInfos.Add(itemData);
-                Debug.Log(itemData.name);
-            }
-        }
-
-        string[] traitAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Trait" });
-
-        foreach (string assetName in traitAssetNames)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID를 기반으로 경로
-            TraitUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<TraitUpgradeElemSO>(assetPath);
-            if (itemData != null)
-            {
-                traitElemInfos.Add(itemData);
-                Debug.Log(itemData.name);
-            }
-        }
-    }
-
     public void SetUpgrade(GameObject templateItem, EUpgradeType type, int elemNum)
     {
         this.gameObject.SetActive(true);
+
+        List<BaseUpgradeElemSO> baseElemInfos = UpgradeManager.Instance.BaseElemInfos;
+        List<PlayerUpgradeElemSO> playerElemInfos = UpgradeManager.Instance.PlayerElemInfos;
+        List<TraitUpgradeElemSO> traitElemInfos = UpgradeManager.Instance.TraitElemInfos;
+     
         if (type == EUpgradeType.BASE)
         {
             //base 3개 띄움

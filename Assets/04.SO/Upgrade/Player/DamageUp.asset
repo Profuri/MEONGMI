@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd14fe1d5696ba458f299d9c65fcd43, type: 3}
   m_Name: DamageUp
   m_EditorClassIdentifier: 
+  Info: "\uACF5\uACA9\uB825 \uC99D\uAC00"
   Description: "\uD50C\uB808\uC774\uC5B4 \uACF5\uACA9\uB825\uC774 \uC99D\uAC00\uD55C\uB2E4."
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: a96b4427387be48d69403507f8467e7a, type: 3}
   Type: 4

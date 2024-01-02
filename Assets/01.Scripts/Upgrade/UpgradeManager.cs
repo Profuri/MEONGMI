@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -58,7 +59,16 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     public ETraitUpgradeElement curTraitElem = ETraitUpgradeElement.NONE;
 
-    private int randomCardCount = 3;  
+    private int randomCardCount = 3;
+
+    private List<BaseUpgradeElemSO> baseElemInfos;
+    private List<PlayerUpgradeElemSO> playerElemInfos;
+    private List<TraitUpgradeElemSO> traitElemInfos;
+
+    public List<BaseUpgradeElemSO> BaseElemInfos => baseElemInfos;
+    public List<PlayerUpgradeElemSO> PlayerElemInfos => playerElemInfos;
+    public List<TraitUpgradeElemSO> TraitElemInfos => traitElemInfos;
+
     private void Awake()
     {
         Init();
@@ -67,6 +77,53 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     public override void Init()
     {
         BaseUpgradeNeedResCnt = PlayerUpgradeNeedResCnt = TraitUpgradeNeedResCnt = basicUpgradeNeedCnt;
+        LoadUpdateInfos();
+    }
+
+    private void LoadUpdateInfos()
+    {
+        baseElemInfos = new();
+        playerElemInfos = new();
+        traitElemInfos = new();
+
+        string[] baseAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Base" });
+
+        foreach (string assetName in baseAssetNames)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID를 기반으로 경로
+            BaseUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<BaseUpgradeElemSO>(assetPath);
+            if (itemData != null)
+            {
+                baseElemInfos.Add(itemData);
+                Debug.Log(itemData.name);
+            }
+        }
+
+        string[] playerAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Player" });
+
+        foreach (string assetName in playerAssetNames)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID를 기반으로 경로
+            PlayerUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<PlayerUpgradeElemSO>(assetPath);
+            if (itemData != null)
+            {
+                playerElemInfos.Add(itemData);
+                Debug.Log(itemData.name);
+            }
+        }
+
+        string[] traitAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Trait" });
+
+        foreach (string assetName in traitAssetNames)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID를 기반으로 경로
+            TraitUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<TraitUpgradeElemSO>(assetPath);
+            if (itemData != null)
+            {
+                traitElemInfos.Add(itemData);
+                Debug.Log(itemData.name);
+            }
+        }
     }
 
     public void Upgrade(EUpgradeType upgradeType)

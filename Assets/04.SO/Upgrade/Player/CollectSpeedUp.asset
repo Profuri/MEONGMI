@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd14fe1d5696ba458f299d9c65fcd43, type: 3}
   m_Name: CollectSpeedUp
   m_EditorClassIdentifier: 
+  Info: "\uC218\uC9D1 \uC18D\uB3C4 \uC99D\uAC00"
   Description: "\uD50C\uB808\uC774\uC5B4 \uC790\uC6D0 \uC218\uC9D1 \uC18D\uB3C4\uAC00
     \uC99D\uAC00\uD55C\uB2E4."
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: c8dc8d1f8ab2b435c95cad294954c32e, type: 3}
   Type: 3
