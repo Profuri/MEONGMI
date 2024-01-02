@@ -14,13 +14,13 @@ public abstract class Entity : PoolableMono, IDamageable
     protected readonly int _deadHash = Animator.StringToHash("DEAD");
 
     public int CurrentHP { get; protected set; }
+    public bool Dead => CurrentHP <= 0;
     public event Action OnDead;
     
     public virtual void Awake()
     {
         _stateMachine = new StateMachine();
         RegisterStates();
-
         CurrentHP = _entityStatSO.hp;
     }
 
