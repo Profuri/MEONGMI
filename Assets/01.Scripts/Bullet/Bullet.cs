@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Bullet : PoolableMono
@@ -22,7 +21,7 @@ public class Bullet : PoolableMono
         _damage = damage;
         _dir = dir;
         transform.position = pos;
-        _rigidbody.velocity = dir * _bulletSpeed;
+        transform.rotation = Quaternion.LookRotation(dir);
         _currentTime = 0f;
     }
     
@@ -36,7 +35,8 @@ public class Bullet : PoolableMono
 
     public virtual void Update()
     {
-        transform.rotation = Quaternion.LookRotation(_dir);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_dir), 0.1f);
+        _rigidbody.velocity = transform.forward * _bulletSpeed;
 
         if (DamageCheck(out var cols, out var cnt))
         {

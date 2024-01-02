@@ -5062,6 +5062,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   _checkRadius: 1
-  _bulletSpeed: 6
+  _bulletSpeed: 12
   _bulletDestroyDelay: 3
-  _missileDetectRadius: 5
+  _missileDetectRadius: 6
