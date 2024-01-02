@@ -13,7 +13,6 @@ public enum PlayerStatType
     luck,
     shotCnt,
     shotDelay,
-    shotSpeed,
     moveSpeed,
     chargingSpeed,
     gatheringSpeed,
@@ -29,7 +28,6 @@ public class PlayerStat : ScriptableObject
     public Stat luck;
     public Stat shotCnt;
     public Stat shotDelay;
-    public Stat shotSpeed;
     public Stat moveSpeed;
     public Stat chargingSpeed;
     public Stat gatheringSpeed;
