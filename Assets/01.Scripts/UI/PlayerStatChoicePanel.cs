@@ -10,20 +10,32 @@ using Random = UnityEngine.Random;
 public class PlayerStatChoicePanel : ChoicePanel
 {
     [SerializeField] private RectTransform _imageListTrm;
-    [SerializeField] private UpgradeContainer _upgradeContainer;
-    //[SerializeField] private List<InfoImage> _statIconImages;
+    //[SerializeField] private UpgradeContainer _upgradeContainer;
+    [SerializeField] private Sprite[] _statIconImages;
     [SerializeField] private TextMeshProUGUI _title;
-    [SerializeField] private EUpgradeType _upgradeType;
+    [SerializeField] private TextMeshProUGUI _description;
+    //[SerializeField] private EUpgradeType _upgradeType;
     [SerializeField] private GameObject _backglow;
+    [SerializeField] private Image Frame_Focus;
+
     [SerializeField] private Button _button;
 
-    private UpgradeCard _upgradeCard;
+    [SerializeField] private UpgradeCard _upgradeCard;
     private bool _isRolling = false;
 
     private void Awake()
     {
         _title.SetText(string.Empty);
+        _description.SetText(string.Empty);
         Init();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.K) && _isRolling == false)
+        {
+            RollImage();
+        }
     }
 
     private void Init()
@@ -38,20 +50,30 @@ public class PlayerStatChoicePanel : ChoicePanel
         if (_isRolling) return;
         _isRolling = true;
 
-        Image[] imageList = ShuffleArray(_imageListTrm.GetComponentsInChildren<Image>());
+        Image[] imageList = _imageListTrm.GetComponentsInChildren<Image>();
+        _statIconImages = ShuffleArray(_statIconImages);
+        //imageList = ShuffleArray(imageList);
+        for (int i = 0; i < imageList.Length; i++)
+        {
+            Image img = imageList[i];
+            img.sprite = _statIconImages[i];
+        }
+        imageList[imageList.Length - 1].sprite = _upgradeCard.Info.Image;
 
-        _imageListTrm.DOAnchorPosY((_imageListTrm.childCount - 1) * 235f, 1.5f)
+        _imageListTrm.DOAnchorPosY((imageList.Length - 1) * 235f, 1.5f)
         .OnComplete(() =>
         {
+            imageList[0].sprite = imageList[imageList.Length - 1].sprite;
             EndRolling(imageList[0]);
         });
     }
 
     private void EndRolling(Image imageContainer)
     {
-        imageContainer.sprite = _upgradeCard.Info.Image;
+        //imageContainer.sprite = _upgradeCard.Info.Image;
         _imageListTrm.anchoredPosition = Vector2.zero;
-        _title.SetText(_upgradeCard.Info.Description);
+        _title.SetText(_upgradeCard.Info.name);
+        _description.SetText(_upgradeCard.Info.Description);
         _button.enabled = true;
         _backglow.SetActive(true);
         _isRolling = false;
