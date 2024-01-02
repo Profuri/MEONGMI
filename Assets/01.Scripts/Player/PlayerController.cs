@@ -74,4 +74,9 @@ public class PlayerController : Entity
     {
         AnimatorCompo.speed = 1f;
     }
+
+    public override void Init()
+    {
+        
+    }
 }

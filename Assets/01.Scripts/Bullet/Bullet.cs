@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Bullet : PoolableMono
 {
-    [SerializeField] private LayerMask _damagableMask;
-    [SerializeField] private float _checkRadius;
+    [SerializeField] protected LayerMask _damagableMask;
+    [SerializeField] protected float _checkRadius;
     
-    private Rigidbody _rigidbody;
-    private BulletType _bulletType;
+    protected Rigidbody _rigidbody;
+    protected BulletType _bulletType;
     
     public void Setting(BulletType type, Vector3 pos, Vector3 dir, float speed)
     {
@@ -32,10 +32,10 @@ public class Bullet : PoolableMono
             {
                 // damage logic    
             }
-        
-            var particle = PoolManager.Instance.Pop($"{_bulletType.ToString()}BulletHit") as PoolableParticle;
-            particle.SetPositionAndRotation(transform.position);
-            particle.Play();
+                    
+            //var particle = PoolManager.Instance.Pop($"{_bulletType.ToString()}BulletHit") as PoolableParticle;
+            //particle.SetPositionAndRotation(transform.position);
+            //particle.Play();
             
             PoolManager.Instance.Push(this);
         }

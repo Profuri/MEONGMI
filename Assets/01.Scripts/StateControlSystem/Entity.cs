@@ -8,6 +8,7 @@ public abstract class Entity : PoolableMono, IDamageable
 
     [SerializeField] protected EntityStatSO _entityStatSO;
     protected StateMachine _stateMachine;
+    public StateMachine StateMachine => _stateMachine;
     
     protected readonly int _hitHash = Animator.StringToHash("HIT");
     protected readonly int _deadHash = Animator.StringToHash("DEAD");

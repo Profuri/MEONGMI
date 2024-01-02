@@ -28,6 +28,6 @@ public class EnemyState : State
     
     public EnemyState(StateMachine stateMachine, Entity owner, Enum type) : base(stateMachine, owner, type)
     {
-
+        
     }
 }

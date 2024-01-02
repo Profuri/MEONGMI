@@ -6,5 +6,6 @@ public enum BulletType
     Poison,
     Missile,
     Transition,
-    Material
+    Material,
+    Enemy
 }

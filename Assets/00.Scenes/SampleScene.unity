@@ -994,7 +994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ba540b9a4d2e54992a248f0dd5120c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolingListSO: {fileID: 11400000, guid: b9b664e83f72d064989a60ded7f889d5, type: 2}
+  _poolingList: {fileID: 11400000, guid: b9b664e83f72d064989a60ded7f889d5, type: 2}
 --- !u!4 &1885590800
 Transform:
   m_ObjectHideFlags: 0

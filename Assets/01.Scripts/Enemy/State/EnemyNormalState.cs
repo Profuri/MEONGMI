@@ -7,7 +7,7 @@ public class EnemyNormalState : EnemyState
 {
     public EnemyNormalState(StateMachine stateMachine, Entity owner, Enum type) : base(stateMachine, owner, type)
     {
-
+        
     }
 
     public override void EnterState()

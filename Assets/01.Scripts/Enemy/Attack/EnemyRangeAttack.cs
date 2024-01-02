@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyRangeAttack : EnemyAttack
 {
     [SerializeField] private Transform _muzzle;
+    [SerializeField] private float _bulletSpeed;
+    [SerializeField] private Bullet _bullet;
     
     public override void AttackHandle()
     {
@@ -17,7 +19,9 @@ public class EnemyRangeAttack : EnemyAttack
     {
         base.Attack();
         
-        
-        
+        Vector3 startPos = _muzzle.position;
+        Bullet bullet = PoolManager.Instance.Pop(_bullet.gameObject.name) as Bullet;
+        bullet.Init();
+        bullet.Setting(BulletType.Enemy,startPos,transform.forward,_bulletSpeed);
     }
 }
