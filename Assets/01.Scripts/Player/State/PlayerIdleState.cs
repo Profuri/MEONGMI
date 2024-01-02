@@ -14,6 +14,7 @@ public class PlayerIdleState : PlayerState
 
     public override void UpdateState()
     {
+        base.UpdateState();
         var movementInput = _player.InputReader.movementInput;
         if (movementInput.sqrMagnitude > 0.05f)
         {

@@ -9,14 +9,16 @@ public class PlayerMovementState : PlayerState
     
     public override void UpdateState()
     {
-        var movementInput = _player.InputReader.movementInput;
+        base.UpdateState();
+
+        var movementInput = Quaternion.Euler(0, 45, 0) * _player.InputReader.movementInput;
 
         if (movementInput.sqrMagnitude < 0.05f)
         {
             _stateMachine.ChangeState(PlayerStateType.Idle);
         }
 
-        var movementSpeed = _player.PlayerStat.moveSpeed.GetValue();
-        _player.SetVelocity(new Vector3(movementInput.x, 0, movementInput.y) * movementSpeed);
+        var movementSpeed = _player.PlayerStat.moveSpeed.GetValue() * Time.deltaTime;
+        _player.SetVelocity(movementInput * movementSpeed);
     }
 }

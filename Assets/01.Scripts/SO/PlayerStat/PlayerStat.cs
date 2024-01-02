@@ -38,12 +38,12 @@ public class PlayerStat : ScriptableObject
         _owner = owner;
     }
 
-    private void IncreaseStatBy(int modifyValue, float duration, PlayerStatType type)
+    private void IncreaseStatBy(float modifyValue, float duration, PlayerStatType type)
     {
         _owner.StartCoroutine(StatModifyRoutine(modifyValue, duration, type));
     }
 
-    private IEnumerator StatModifyRoutine(int modifyValue, float duration, PlayerStatType type)
+    private IEnumerator StatModifyRoutine(float modifyValue, float duration, PlayerStatType type)
     {
         var stat = GetStatByType(type);
         stat.AddModifier(modifyValue);
