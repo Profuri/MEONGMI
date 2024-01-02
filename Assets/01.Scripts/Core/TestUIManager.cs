@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class TestUIManager : MonoSingleton<TestUIManager>
 {
+    [SerializeField] GameObject UpgradeUIPanel;
+
     [SerializeField] GameObject container;
     [SerializeField] GameObject templateItem;
-
     [SerializeField] GameObject upgradeFailPanel;
+
 
     List<BaseUpgradeElemSO> baseElemInfos;
     List<PlayerUpgradeElemSO> playerElemInfos;
