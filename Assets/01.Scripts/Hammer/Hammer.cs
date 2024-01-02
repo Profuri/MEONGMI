@@ -20,14 +20,14 @@ public class Hammer : MonoBehaviour
         _eventTrigger = visualTrm.GetComponent<HammerAnimationEndEventTrigger>();
     }
 
-    public void Shot(BulletType type, Vector3 dir, float speed)
+    public void Shot(BulletType type, Vector3 dir)
     {
-        var particle = PoolManager.Instance.Pop($"{type.ToString()}BulletFlash") as PoolableParticle;
+        var particle = PoolManager.Instance.Pop($"{type.ToString()}Flash") as PoolableParticle;
         particle.SetPositionAndRotation(_shotPoint.position, Quaternion.LookRotation(dir));
         particle.Play();
 
         var bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
-        bullet.Setting(type, _shotPoint.position, dir, speed);
+        bullet.Setting(type, _shotPoint.position, dir);
     }
 
     public void ChargingToggle(bool value)

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: "\uC801\uC5D0\uAC8C \uD53C\uD574\uB97C \uC785\uD788\uBA74 \uACF5\uACA9\uC774
     \uC804\uC774\uB41C\uB2E4."
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 0b5f00744f83442ccb3dd97b39b50ca6, type: 3}
   Type: 5

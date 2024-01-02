@@ -5,15 +5,22 @@ public class Bullet : PoolableMono
 {
     [SerializeField] private LayerMask _damagableMask;
     [SerializeField] private float _checkRadius;
+    [SerializeField] private float _bulletSpeed;
+    [SerializeField] private float _bulletDestroyDelay = 3f;
     
     private Rigidbody _rigidbody;
     private BulletType _bulletType;
-    
-    public void Setting(BulletType type, Vector3 pos, Vector3 dir, float speed)
+
+    private Vector3 _dir;
+    private float _currentTime;
+
+    public void Setting(BulletType type, Vector3 pos, Vector3 dir)
     {
         _bulletType = type;
+        _dir = dir;
         transform.position = pos;
-        _rigidbody.velocity = dir * speed;
+        _rigidbody.velocity = dir * _bulletSpeed;
+        _currentTime = 0f;
     }
     
     public override void Init()
@@ -26,19 +33,35 @@ public class Bullet : PoolableMono
 
     private void Update()
     {
+        transform.rotation = Quaternion.LookRotation(_dir);
+
         if (DamageCheck(out var cols, out var cnt))
         {
             for (var i = 0; i < cnt; i++)
             {
                 // damage logic    
             }
-                    
-            //var particle = PoolManager.Instance.Pop($"{_bulletType.ToString()}BulletHit") as PoolableParticle;
-            //particle.SetPositionAndRotation(transform.position);
-            //particle.Play();
-            
-            PoolManager.Instance.Push(this);
+
+            if (_bulletType != BulletType.Pierce)
+            {
+                ExplosionBullet();
+            }
         }
+        
+        _currentTime += Time.deltaTime;
+        if (_currentTime >= _bulletDestroyDelay)
+        {
+            ExplosionBullet();
+        }
+    }
+
+    private void ExplosionBullet()
+    {
+        var particle = PoolManager.Instance.Pop($"{_bulletType.ToString()}Hit") as PoolableParticle;
+        particle.SetPositionAndRotation(transform.position);
+        particle.Play();
+        
+        PoolManager.Instance.Push(this);
     }
 
     private bool DamageCheck(out Collider[] cols, out int cnt)

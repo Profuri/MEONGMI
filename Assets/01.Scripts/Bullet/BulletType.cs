@@ -1,7 +1,7 @@
 public enum BulletType
 {
     Normal,
-    Charging,
+    Slow,
     Pierce,
     Poison,
     Missile,

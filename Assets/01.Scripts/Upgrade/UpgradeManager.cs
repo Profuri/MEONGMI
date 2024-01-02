@@ -37,7 +37,7 @@ public enum ETraitUpgradeElement
 {
     NONE = -1,
     RESTOBULLET = 0, // 자원 총알로.
-    CHARGE, // 차지샷.
+    SLOW, // 차지샷.
     PENETRATE, // 관통.
     FOLLOW, // 유도.
     DOTDAMAGE, // 도트 뎀(독뎀).

@@ -13,30 +13,66 @@ MonoBehaviour:
   m_Name: PoolingList
   m_EditorClassIdentifier: 
   pairs:
-  - prefab: {fileID: 2327648150561147126, guid: 6f52f385bbdb15740b92dc521858e1e0,
-      type: 3}
-    count: 50
-  - prefab: {fileID: 3909454726733665303, guid: e64cba6da66f6784db476c0acb9e7c44,
-      type: 3}
-    count: 50
-  - prefab: {fileID: 2327648150561147126, guid: 1be81daff5fa4184d987ad6304f93ab0,
-      type: 3}
-    count: 30
-  - prefab: {fileID: 8577249735010717484, guid: 772b7b1d48ec3524f982ff362e821dc0,
-      type: 3}
-    count: 30
-  - prefab: {fileID: 4488661864551697435, guid: 200cf59823078064a81317a66926ae9a,
-      type: 3}
-    count: 30
-  - prefab: {fileID: 2788855369873940019, guid: c3e09d6d34e7c9c4f9838b89043e9d2b,
-      type: 3}
-    count: 30
-  - prefab: {fileID: 3895285794537153345, guid: 265eee543a99be347aec020cad31d06e,
-      type: 3}
-    count: 30
   - prefab: {fileID: 6368790145369638416, guid: 489b3a2ec3e7cf949925d1b34247d1a9,
       type: 3}
-    count: 30
-  - prefab: {fileID: 5347434663355265045, guid: 720e9c5bad004434daa745e5c9e6135a,
+    count: 10
+  - prefab: {fileID: -7072578326092383688, guid: 7957eef9b870bcb4e8ba10f7bc4fcad0,
       type: 3}
-    count: 30
+    count: 10
+  - prefab: {fileID: -2409385459419858063, guid: 9a7c6bfff5ad87d409e200fe3a0d5036,
+      type: 3}
+    count: 10
+  - prefab: {fileID: 5348043730827119182, guid: b173afe5b6d884559b88eb4f3c9cd1eb,
+      type: 3}
+    count: 10
+  - prefab: {fileID: -795850319525734770, guid: 617f36d624d400a4b835a1309da53fb3,
+      type: 3}
+    count: 10
+  - prefab: {fileID: 1240688578971609091, guid: cb85294eca648b846832694cc9d836cc,
+      type: 3}
+    count: 10
+  - prefab: {fileID: 1534444300043245925, guid: a316cc26d6f0a489dba00ccb4b5711b8,
+      type: 3}
+    count: 10
+  - prefab: {fileID: 6772324002722111465, guid: 7658ae01d0a0655468898c47617f4de6,
+      type: 3}
+    count: 10
+  - prefab: {fileID: -4251371898235187507, guid: 6e4b9c1925f0d3f4d8446e551a2e20d3,
+      type: 3}
+    count: 10
+  - prefab: {fileID: 4568001610105726893, guid: 71121423c4ab740bca329d816fdb741e,
+      type: 3}
+    count: 10
+  - prefab: {fileID: 8667494333556021640, guid: 7ed96e7cdfb30cb4f87fa9c623b4110c,
+      type: 3}
+    count: 10
+  - prefab: {fileID: 2359101470171638336, guid: 5848d6535d700e348932df2c9eeefaf0,
+      type: 3}
+    count: 10
+  - prefab: {fileID: 6752146986798034926, guid: e1e650ddeb9a8478e99c0018d22470f1,
+      type: 3}
+    count: 10
+  - prefab: {fileID: 7271528381262991248, guid: b91d14ed154808d469c7e3b8f11f2bf8,
+      type: 3}
+    count: 10
+  - prefab: {fileID: -7322543613778321126, guid: 8c07f41bda85c0e41abde22f9f27ed83,
+      type: 3}
+    count: 10
+  - prefab: {fileID: 8540718488925296995, guid: c1e37637ea0274734a23beff270f39f5,
+      type: 3}
+    count: 10
+  - prefab: {fileID: -8160203190507344787, guid: 8880d66cdaa076b43be75853c26e44ea,
+      type: 3}
+    count: 10
+  - prefab: {fileID: -4845855328889679436, guid: 5714d19e671d00e4baccfc932c639de4,
+      type: 3}
+    count: 10
+  - prefab: {fileID: 4652160603592410274, guid: 4c81693e363494aa482931dccce2dae3,
+      type: 3}
+    count: 10
+  - prefab: {fileID: -6207933465094210627, guid: 63baf4956cfa45d4aa5cd12cbc8b7689,
+      type: 3}
+    count: 10
+  - prefab: {fileID: -6743915047592179276, guid: e46e60dfd73d7ed4fa8a4ef323af2e69,
+      type: 3}
+    count: 10
