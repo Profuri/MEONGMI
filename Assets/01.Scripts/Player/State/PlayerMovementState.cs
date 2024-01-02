@@ -7,10 +7,14 @@ public class PlayerMovementState : PlayerState
     {
     }
     
+    public override void EnterState()
+    {
+        base.EnterState();
+        _player.InputReader.OnMouseRightClickEvent += ChargingHandle;
+    }
+    
     public override void UpdateState()
     {
-        base.UpdateState();
-
         var movementInput = Quaternion.Euler(0, 45, 0) * _player.InputReader.movementInput;
 
         if (movementInput.sqrMagnitude < 0.05f)
@@ -22,5 +26,16 @@ public class PlayerMovementState : PlayerState
         var movementSpeed = _player.PlayerStat.moveSpeed.GetValue() * Time.deltaTime;
         _player.SetVelocity(movementInput * movementSpeed);
         _player.Rotate(movementInput);
+    }
+    
+    public override void ExitState()
+    {
+        base.ExitState();
+        _player.InputReader.OnMouseRightClickEvent -= ChargingHandle;
+    }
+
+    private void ChargingHandle()
+    {
+        _stateMachine.ChangeState(PlayerStateType.Charging);    
     }
 }

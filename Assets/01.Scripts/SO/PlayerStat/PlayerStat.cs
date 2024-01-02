@@ -12,8 +12,9 @@ public enum PlayerStatType
     recovery,
     luck,
     shotCnt,
-    shotSpeed,
+    shotDelay,
     moveSpeed,
+    chargingSpeed,
     gatheringSpeed,
 }
 
@@ -26,8 +27,9 @@ public class PlayerStat : ScriptableObject
     public Stat recovery;
     public Stat luck;
     public Stat shotCnt;
-    public Stat shotSpeed;
+    public Stat shotDelay;
     public Stat moveSpeed;
+    public Stat chargingSpeed;
     public Stat gatheringSpeed;
 
     private Dictionary<PlayerStatType, FieldInfo> _fieldInfoDictionary;

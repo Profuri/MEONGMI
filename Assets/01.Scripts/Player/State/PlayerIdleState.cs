@@ -9,12 +9,12 @@ public class PlayerIdleState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        _player.InputReader.OnMouseRightClickEvent += ChargingHandle;
         _player.StopImmediately();
     }
 
     public override void UpdateState()
     {
-        base.UpdateState();
         var movementInput = _player.InputReader.movementInput;
         if (movementInput.sqrMagnitude > 0.05f)
         {
@@ -25,5 +25,11 @@ public class PlayerIdleState : PlayerState
     public override void ExitState()
     {
         base.ExitState();
+        _player.InputReader.OnMouseRightClickEvent -= ChargingHandle;
+    }
+    
+    private void ChargingHandle()
+    {
+        _stateMachine.ChangeState(PlayerStateType.Charging);    
     }
 }

@@ -10,7 +10,8 @@ namespace InputControl
         public delegate void InputEventListener();
         public delegate void InputEventListener<in T>(T value);
         
-        public event InputEventListener OnMouseClickEvent = null;
+        public event InputEventListener OnMouseLeftClickEvent = null;
+        public event InputEventListener OnMouseRightClickEvent = null;
 
         private InputControls _inputControls;
 
@@ -39,13 +40,21 @@ namespace InputControl
         {
             if (context.performed)
             {
-                OnMouseClickEvent?.Invoke();
+                OnMouseLeftClickEvent?.Invoke();
             }
         }
 
         public void OnMousePos(InputAction.CallbackContext context)
         {
             mouseScreenPos = context.ReadValue<Vector2>();
+        }
+
+        public void OnCharging(InputAction.CallbackContext context)
+        {
+            if (context.started || context.canceled)
+            {
+                OnMouseRightClickEvent?.Invoke();
+            }
         }
     }
 }
