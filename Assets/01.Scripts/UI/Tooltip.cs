@@ -1,12 +1,15 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tooltip : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private Image _image;
     private RectTransform _rectTransform;
 
     public void SetText(string text) => _text.SetText(text);
@@ -36,13 +39,18 @@ public class Tooltip : MonoBehaviour
 
     public void SetActive(bool value, Vector3 position = default)
     {
-        gameObject.SetActive(value);
         if(value)
         {
-            if(position != default)
+            gameObject.SetActive(true);
+            _image.DOFade(1f, 0.2f);
+            if (position != default)
             {
                 _rectTransform.position = position;
             }
+        }
+        else
+        {
+            _image.DOFade(0f, 0.05f).OnComplete(() => gameObject.SetActive(false));
         }
     }
 }

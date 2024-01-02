@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +12,7 @@ public class FeatureInfoPanel : InfoPanel
     protected override void OnValidate()
     {
         base.OnValidate();
-        Color newColor = _icon.color;
-        newColor.a = _isActive ? 1f : 0.3f;
-        _icon.color = newColor;
+        _icon.DOFade(_isActive ? 1f : 0.3f, 0.2f);
     }
 #endif
 }
