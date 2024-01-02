@@ -20,6 +20,7 @@ public class EnemyRangeAttack : EnemyAttack
         base.Attack();
         
         Vector3 startPos = _muzzle.position;
+        
         Debug.Log($"StartPos: {startPos}");
         Bullet bullet = PoolManager.Instance.Pop(_bullet.gameObject.name) as Bullet;
         bullet.Init();
