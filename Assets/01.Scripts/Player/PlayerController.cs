@@ -18,6 +18,7 @@ public class PlayerController : Entity
     [SerializeField] private LayerMask _interactableMask;
     public LayerMask InteractableMask => _interactableMask;
 
+    public PlayerLineConnect LineConnect { get; private set; }
     public Hammer PlayerHammer { get; private set; }
     public Interactable Target { get; set; }
     
@@ -26,6 +27,7 @@ public class PlayerController : Entity
     public override void Awake()
     {
         base.Awake();
+        LineConnect = GetComponent<PlayerLineConnect>();
         _visualTrm = transform.Find("Visual");
         PlayerHammer = _visualTrm.GetComponentInChildren<Hammer>();
     }
