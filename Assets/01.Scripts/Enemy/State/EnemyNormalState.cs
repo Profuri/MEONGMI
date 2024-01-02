@@ -12,21 +12,22 @@ public class EnemyNormalState : EnemyState
 
     public override void EnterState()
     {
-        BaseEnemy.Target = GameManager.Instance.PlayerTrm;
+        BaseEnemy.Target = GameManager.Instance.BaseTrm;
+        _stateMachine.ChangeState(EEnemyState.Chase);
     }
     
     public override void UpdateState()
     {
-        float range = 3f;
-        Vector3 originPos = _owner.transform.position;
-        int layer = 1 << LayerMask.NameToLayer("Player"); 
-        Collider[] cols = Physics.OverlapSphere(originPos,range,layer);
-        if (cols.Length > 0)
-        {
-            foreach (Collider col in cols)
-            {
-                _stateMachine.ChangeState(EEnemyState.Chase);
-            }
-        }
+        // float range = 3f;
+        // Vector3 originPos = _owner.transform.position;
+        // int layer = 1 << LayerMask.NameToLayer("Player"); 
+        // Collider[] cols = Physics.OverlapSphere(originPos,range,layer);
+        // if (cols.Length > 0)
+        // {
+        //     foreach (Collider col in cols)
+        //     {
+        //         _stateMachine.ChangeState(EEnemyState.Chase);
+        //     }
+        // }
     }
 }

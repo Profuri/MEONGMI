@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EEnemyState
+public interface IDetectable
 {
-    Normal = 0,
-    Chase = 1,
-    Attack = 2,
+    public Transform Detect();
 }

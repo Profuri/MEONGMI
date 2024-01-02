@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Entity : MonoBehaviour
+public abstract class Entity : PoolableMono
 {
     public Animator AnimatorCompo { get; protected set; }
     public CharacterController CharacterControllerCompo { get; protected set; }

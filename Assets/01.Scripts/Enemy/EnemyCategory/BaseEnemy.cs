@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Editor;
 
 public enum EnemyType
 {
@@ -12,17 +14,27 @@ public enum EnemyType
 
 public abstract class BaseEnemy : Entity
 {
+    [SerializeField] private EnemyAttackSO _enemyAttackSO;
+    public EnemyAttackSO EnemyAttackSO => _enemyAttackSO;
+
+    [SerializeField] private EnemyStatSO _enemyStatSO;
+    public EnemyStatSO EnemyStatSO => _enemyStatSO;
+    
+    public LayerMask LayerMask;
+    
     public NavMeshAgent NavMeshAgent { get; set; }
     public Transform Target { get; set; }
     public EnemyType EnemyType;
-    
-    public override void Awake()
+
+    public sealed override void Init() 
     {
-        base.Awake();
         Transform visualTrm = transform.Find("Visual");
         AnimatorCompo = visualTrm.GetComponent<Animator>();
         CharacterControllerCompo = GetComponent<CharacterController>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
+
+        NavMeshAgent.speed = EnemyStatSO.moveSpeed;
+        EnemyType = EnemyAttackSO.enemyType;
     }
     
     protected override void RegisterStates()
@@ -40,5 +52,10 @@ public abstract class BaseEnemy : Entity
     protected override void SetInitState()
     {
         _stateMachine.Initialize(this,EEnemyState.Normal);
+    }
+
+    public void StopImmediately()
+    {
+        NavMeshAgent?.SetDestination(transform.position);
     }
 }
