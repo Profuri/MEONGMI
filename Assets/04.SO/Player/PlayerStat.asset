@@ -40,5 +40,5 @@ MonoBehaviour:
     _baseValue: 3
     modifiers: []
   gatheringSpeed:
-    _baseValue: 10
+    _baseValue: 1
     modifiers: []

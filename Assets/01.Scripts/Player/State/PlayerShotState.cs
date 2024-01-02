@@ -17,11 +17,15 @@ public class PlayerShotState : PlayerState
             return;
         }
         
-        base.EnterState();
+        _player.PlayerHammer.ShotTrigger();
         Shot();
         
         _lastShotTime = Time.time;
         _stateMachine.ChangeState(PlayerStateType.Charging);
+    }
+
+    public override void ExitState()
+    {
     }
 
     private void Shot()

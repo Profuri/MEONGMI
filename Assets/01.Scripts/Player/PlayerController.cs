@@ -15,12 +15,19 @@ public class PlayerController : Entity
     [SerializeField] private LayerMask _groundMask;
     public LayerMask GroundMask => _groundMask;
 
+    [SerializeField] private LayerMask _interactableMask;
+    public LayerMask InteractableMask => _interactableMask;
+
+    public Hammer PlayerHammer { get; private set; }
+    public Interactable Target { get; set; }
+    
     private Transform _visualTrm;
 
     public override void Awake()
     {
         base.Awake();
         _visualTrm = transform.Find("Visual");
+        PlayerHammer = _visualTrm.GetComponentInChildren<Hammer>();
     }
 
     public void SetVelocity(Vector3 dir)
@@ -54,5 +61,15 @@ public class PlayerController : Entity
     protected override void SetInitState()
     {
         _stateMachine.Initialize(this, PlayerStateType.Idle);
+    }
+    
+    public void SetAnimationSpeed(float speed)
+    {
+        AnimatorCompo.speed = speed;
+    }
+
+    public void ResetAnimationSpeed()
+    {
+        AnimatorCompo.speed = 1f;
     }
 }
