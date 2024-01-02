@@ -11,6 +11,7 @@ public enum EnemyType
 {
     Default = 0,
     Assault = 1,
+    Range = 2,
 }
 
 public abstract class BaseEnemy : Entity
@@ -19,10 +20,14 @@ public abstract class BaseEnemy : Entity
     public EnemyAttackSO EnemyAttackSO => _enemyAttackSO;
 
     public EntityStatSO EntityStatSo => _entityStatSO;
+    public EnemyActionData ActionData { get; private set; }
 
+    public EnemyAnimator EnemyAnimator { get; set; }
     public LayerMask LayerMask;
     
     public NavMeshAgent NavMeshAgent { get; set; }
+
+    protected Coroutine _stopCoroutine;
 
     private Transform _target;
     public Transform Target
@@ -44,11 +49,18 @@ public abstract class BaseEnemy : Entity
     public sealed override void Init() 
     {
         Transform visualTrm = transform.Find("Visual");
+        Transform actionDataTrm = transform.Find("ActionData");
+
+        ActionData = actionDataTrm.GetComponent<EnemyActionData>();
         AnimatorCompo = visualTrm.GetComponent<Animator>();
+        EnemyAnimator = visualTrm.GetComponent<EnemyAnimator>();
         CharacterControllerCompo = GetComponent<CharacterController>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
 
+        EnemyAnimator.Init(this,AnimatorCompo);
         NavMeshAgent.speed = EntityStatSo.moveSpeed;
+        NavMeshAgent.enabled = true;
+        ActionData.IsStopped = false;
         EnemyType = EnemyAttackSO.enemyType;
     }
     
@@ -57,20 +69,42 @@ public abstract class BaseEnemy : Entity
         foreach (EEnemyState eEnemyState in Enum.GetValues(typeof(EEnemyState)))
         {
             string typeName = $"Enemy{eEnemyState.ToString()}State";
-            Debug.Log($"TypeName: {typeName}");
+            //Debug.Log($"TypeName: {typeName}");
             Type type = Type.GetType(typeName);
             EnemyState state = Activator.CreateInstance(type, _stateMachine, this, eEnemyState) as EnemyState;  
             _stateMachine.RegisterState(eEnemyState, state);
         }
     }
 
+    public override void Damaged(int damage)
+    {
+        base.Damaged(damage);
+        StopImmediately(true);
+    }
+    
+    public void StopImmediately()
+    {
+        NavMeshAgent.SetDestination(transform.position);
+    }
+    
+    public void StopImmediately(bool isStopped)
+    {
+        ActionData.IsStopped = isStopped;
+        NavMeshAgent.isStopped = isStopped;
+    }
+    
     protected override void SetInitState()
     {
         _stateMachine.Initialize(this,EEnemyState.Normal);
     }
 
-    public void StopImmediately()
+    public void StartDelayCallBack(float time, Action Callback)
     {
-        NavMeshAgent?.SetDestination(transform.position);
+        IEnumerator DelayCor(float time,Action Callback)
+        {
+            yield return new WaitForSeconds(time);
+            Callback?.Invoke();
+        }
+        StartCoroutine(DelayCor(time, Callback));
     }
 }

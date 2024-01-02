@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class EnemyMeleeAttack : EnemyAttack
 {
-    public override void Attack()
+    protected override void Attack()
     {
         base.Attack();
-        Debug.Log("Enemy Melee Attack");
-        Vector3 originPos = transform.position - transform.forward;
-        float radius = _baseEnemy.EnemyAttackSO.attackRange;
 
-        Ray ray = new Ray(originPos,transform.forward);
-        bool result = Physics.SphereCast(ray,radius,out RaycastHit hitInfo,_baseEnemy.LayerMask);
+        Vector3 lookPos = _baseEnemy.Target.position - _baseEnemy.transform.position;
+        lookPos.y = 0f;
+        _baseEnemy.transform.rotation = Quaternion.LookRotation(lookPos);
         
-        if (result)
+        Debug.Log("Enemy Melee Attack");
+        
+        Vector3 originPos = _baseEnemy.transform.position;
+        float radius = _baseEnemy.EnemyAttackSO.attackRange;
+        int layer = _baseEnemy.LayerMask;
+
+        Collider[] cols = Physics.OverlapSphere(originPos,radius,layer);
+        
+        if (cols.Length > 0)
         {
-            if (hitInfo.collider.TryGetComponent(out IDamageable damageable))
+            foreach (Collider col in cols)
             {
-                damageable.Damaged(_baseEnemy.EnemyAttackSO.damage);
+                if (col.TryGetComponent(out IDamageable damageable))
+                {
+                    damageable.Damaged(_baseEnemy.EnemyAttackSO.damage);
+                    break;
+                }
             }
         }
         _lastAtkTime = Time.time;

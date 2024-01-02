@@ -16,4 +16,4 @@ MonoBehaviour:
   damage: 10
   attackDelay: 1.5
   detectRange: 10
-  attackRange: 1
+  attackRange: 3

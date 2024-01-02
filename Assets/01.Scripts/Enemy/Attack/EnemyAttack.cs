@@ -13,11 +13,17 @@ public abstract class EnemyAttack : MonoBehaviour
         _baseEnemy = baseEnemy;
     }
 
-    public virtual void Attack()
+    public virtual void AttackHandle()
     {
         _baseEnemy.AnimatorCompo.SetTrigger(_attackHash);
+        _baseEnemy.EnemyAnimator.OnAttackEndEvent -= Attack;
+        _baseEnemy.EnemyAnimator.OnAttackEndEvent += Attack;
     }
 
+    protected virtual void Attack()
+    {
+        transform.rotation = Quaternion.LookRotation(_baseEnemy.Target.position);
+    }
     public virtual bool CanAttack()
     {
         return _lastAtkTime + _baseEnemy.EnemyAttackSO.attackDelay <= Time.time;

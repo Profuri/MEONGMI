@@ -35,7 +35,8 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
             foreach (var enemy in _currentEnemyList)
             {
                 Debug.Log("dd");
-                EnemySpawner.Instance.DeadEnemy(enemy);
+                enemy.Damaged(10);
+                //EnemySpawner.Instance.DeadEnemy(enemy);
             }
         }
     }
@@ -66,7 +67,8 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         {
             if (appearMaxEnemyCnt > _currentEnemyList.Count)
             {
-                randomAppearEnemyCnt = Random.Range(2,5);
+                //이거 수정해줘야됨.
+                randomAppearEnemyCnt = Random.Range(1,1);
                 Vector3 randomPos;
                 for (int i = 0; i < randomAppearEnemyCnt; i++)
                 {

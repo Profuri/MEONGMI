@@ -12,7 +12,6 @@ public class EnemyNormalState : EnemyState
 
     public override void EnterState()
     {
-        BaseEnemy.Target = GameManager.Instance.BaseTrm;
         _stateMachine.ChangeState(EEnemyState.Chase);
     }
 }

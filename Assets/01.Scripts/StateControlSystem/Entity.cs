@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+
 public abstract class Entity : PoolableMono, IDamageable
 {
     public Animator AnimatorCompo { get; protected set; }
@@ -7,6 +8,9 @@ public abstract class Entity : PoolableMono, IDamageable
 
     [SerializeField] protected EntityStatSO _entityStatSO;
     protected StateMachine _stateMachine;
+    
+    protected readonly int _hitHash = Animator.StringToHash("HIT");
+    protected readonly int _deadHash = Animator.StringToHash("DEAD");
 
     public int CurrentHP { get; protected set; }
     public event Action OnDead;
@@ -31,12 +35,16 @@ public abstract class Entity : PoolableMono, IDamageable
 
     protected abstract void RegisterStates();
     protected abstract void SetInitState();
+    
     public virtual void Damaged(int damage)
     {
         CurrentHP -= damage;
+        AnimatorCompo.SetTrigger(_hitHash);
+        
         CurrentHP = Mathf.Clamp(CurrentHP, 0,_entityStatSO.hp);
         if (CurrentHP == 0)
         {
+            AnimatorCompo.SetTrigger(_deadHash);
             OnDead?.Invoke();
         }
     }

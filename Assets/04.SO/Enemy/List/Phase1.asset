@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Phase1
   m_EditorClassIdentifier: 
   enemyList:
-  - {fileID: 2327648150561147126, guid: 6f52f385bbdb15740b92dc521858e1e0, type: 3}
   - {fileID: 3909454726733665303, guid: e64cba6da66f6784db476c0acb9e7c44, type: 3}

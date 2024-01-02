@@ -22,10 +22,8 @@ public class EnemyAttackState : EnemyState
     {
         if (_enemyAttack.CanAttack())
         {
-            _enemyAttack?.Attack();
+            _enemyAttack?.AttackHandle();
             _stateMachine.ChangeState(EEnemyState.Chase);
         }
     }
-    
-    
 }

@@ -16,17 +16,24 @@ public class EnemyChaseState : EnemyState
 
     public override void EnterState()
     {
+        if (BaseEnemy.ActionData.IsStopped) return;
+        
+        BaseEnemy.StopImmediately();
         Debug.Log("EnterChaseState");
-        BaseEnemy.NavMeshAgent.SetDestination(BaseEnemy.Target.position);
+        Vector3 lookPos = BaseEnemy.Target.position - BaseEnemy.transform.position;
+        lookPos.y = 0f;
+        BaseEnemy.transform.rotation = Quaternion.LookRotation(lookPos);
     }
+    
     
     public override void UpdateState()
     {
-        BaseEnemy.AnimatorCompo.SetFloat(_speedHash,1f);
+        BaseEnemy.AnimatorCompo.SetFloat(_speedHash,BaseEnemy.NavMeshAgent.velocity.magnitude);
+        
         Vector3 originPos = BaseEnemy.transform.position;
         float range = BaseEnemy.EnemyAttackSO.detectRange;
         int layer = BaseEnemy.LayerMask;
-            
+                
         var cols = Physics.OverlapSphere(originPos,range,layer);
         
         if (cols.Length > 0)
@@ -36,7 +43,7 @@ public class EnemyChaseState : EnemyState
                 if (col.TryGetComponent(out IDetectable detectable))
                 {
                     BaseEnemy.Target = detectable.Detect();
-                    _stateMachine.ChangeState(EEnemyState.Chase);
+                    BaseEnemy.NavMeshAgent.SetDestination(BaseEnemy.Target.position);
                     Debug.Log($"CurrentTarget: {BaseEnemy.Target}");
                 }
             }
@@ -46,7 +53,6 @@ public class EnemyChaseState : EnemyState
         if (InAttackRange(distance))
         {
             _stateMachine.ChangeState(EEnemyState.Attack);
-            return;
         }
         else
         {
