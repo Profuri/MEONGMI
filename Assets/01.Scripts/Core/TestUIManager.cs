@@ -12,6 +12,8 @@ public class TestUIManager : MonoSingleton<TestUIManager>
     [SerializeField] GameObject templateItem;
     [SerializeField] GameObject upgradeFailPanel;
 
+    [SerializeField] GameObject _BaseUpgradePanel;
+    [SerializeField] GameObject _PlayerUpgradePanel;
 
     List<BaseUpgradeElemSO> baseElemInfos;
     List<PlayerUpgradeElemSO> playerElemInfos;
@@ -75,7 +77,9 @@ public class TestUIManager : MonoSingleton<TestUIManager>
     public void UpgradeBase() => UpgradeManager.Instance.Upgrade(EUpgradeType.BASE);
     public void UpgradePlayer() => UpgradeManager.Instance.Upgrade(EUpgradeType.PLAYER);
     public void UpgradeTrait() => UpgradeManager.Instance.Upgrade(EUpgradeType.TRAIT);
-    
+
+    public void BaseUpgradePanel() => _BaseUpgradePanel.SetActive(true);
+    public void PlayerUpgradePanel() => _PlayerUpgradePanel.SetActive(true);   
     public void UpgradeFail()
     {
         // 자원이 부족합니다 UI띄어줘야 함.

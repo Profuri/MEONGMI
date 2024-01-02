@@ -71,6 +71,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     public void Upgrade(EUpgradeType upgradeType)
     {
+        //Debug.Log("Upgrade준비");
         int upgradeCnt = 0;
         switch(upgradeType)
         {
@@ -90,6 +91,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
         if(ResManager.Instance.UseResource(upgradeCnt))
         {
+            Debug.Log("Upgrade준비");
             RandomUpgrade(upgradeType);
             UpdateResNeed(upgradeType);
         }
@@ -102,7 +104,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     private void RandomUpgrade(EUpgradeType upgradeType)
     {
         int maxEclusive = 0;
-        List<int> pickedNums = new();
+        List<int> pickedNums = new() { -1 };
         switch(upgradeType)
         {
             case EUpgradeType.BASE:

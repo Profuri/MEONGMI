@@ -12,11 +12,12 @@ public class UpgradeCard : MonoBehaviour
     private void Awake()
     {
         description = transform.Find("Description").GetComponent<TextMeshProUGUI>();
-        image = transform.Find("Image").GetComponent<Image>();
+        image = transform.Find("Background/Image").GetComponent<Image>();
     }
 
     public void Setting(UpgradeElemInfoSO so)
     {
+        Debug.Log(so.name);
         description.text = so.Description;
         image.sprite = so.Image;
         gameObject.name = so.name;
