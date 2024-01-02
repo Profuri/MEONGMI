@@ -88,6 +88,7 @@ public class TestUIManager : MonoSingleton<TestUIManager>
 
     public void SetUpgradeElem(EUpgradeType type, int elemNum) // 3°³ ¶ç¿öÁà¾ß ÇÔ
     {
+        container.SetActive(true);
         if(type == EUpgradeType.BASE)
         {
             //base 3°³ ¶ç¿ò
@@ -123,7 +124,6 @@ public class TestUIManager : MonoSingleton<TestUIManager>
                     Debug.LogError("1");
             }
 
-            //UpgradeElemInfoSO elemInfo = elemInfos.Find()
             //°¢ Å¸ÀÔÀÇ elemNumÀÇ upgrade ¸¦ ¶ç¿ò
         }
     }
