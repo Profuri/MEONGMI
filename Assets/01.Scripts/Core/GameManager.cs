@@ -7,6 +7,19 @@ using System.Linq;
 public class GameManager : MonoSingleton<GameManager>
 {
     public Transform PlayerTrm { get; private set; }
+    private PlayerController _playerController;
+    public PlayerController PlayerController
+    {
+        get
+        {
+            if (_playerController == null)
+            {
+                _playerController = PlayerTrm.GetComponent<PlayerController>();
+            }
+
+            return _playerController;
+        }
+    }
     public Transform BaseTrm { get; private set; }
     
     public Camera MainCam { get; private set; }

@@ -81,7 +81,13 @@ public abstract class BaseEnemy : Entity
         base.Damaged(damage);
         StopImmediately(true);
     }
-    
+
+    public void SetPosition(Vector3 pos)
+    {
+        NavMeshAgent.enabled = false;
+        transform.position = pos;
+        NavMeshAgent.enabled = true;
+    }
     public void StopImmediately()
     {
         NavMeshAgent.SetDestination(transform.position);

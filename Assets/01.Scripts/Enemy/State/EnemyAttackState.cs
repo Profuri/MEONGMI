@@ -14,7 +14,6 @@ public class EnemyAttackState : EnemyState
 
     public override void EnterState()
     {
-        Debug.Log("OnEnterEnemyAttackState");
         BaseEnemy.StopImmediately();
     }
 
