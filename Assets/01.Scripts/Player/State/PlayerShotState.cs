@@ -31,7 +31,8 @@ public class PlayerShotState : PlayerState
     private void Shot()
     {
         var groundPoint = GetGroundPoint();
-        Debug.Log("shot!");
+        var dir = (groundPoint - _player.transform.position).normalized;
+        _player.PlayerHammer.Shot(BulletType.Normal, dir, _player.PlayerStat.shotSpeed.GetValue());
     }
     
     private Vector3 GetGroundPoint()

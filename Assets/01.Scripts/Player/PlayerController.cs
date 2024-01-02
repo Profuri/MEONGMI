@@ -31,7 +31,7 @@ public class PlayerController : Entity
         _visualTrm = transform.Find("Visual");
         PlayerHammer = _visualTrm.GetComponentInChildren<Hammer>();
     }
-
+    
     public void SetVelocity(Vector3 dir)
     {
         CharacterControllerCompo.Move(dir);
