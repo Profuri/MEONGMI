@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e361c38a767c34b4f8c088c732523aa9, type: 3}
-  m_Name: Phase1
+  m_Script: {fileID: 11500000, guid: d2e2835878582dc4f8a45513b761c6c4, type: 3}
+  m_Name: PhaseInfo3
   m_EditorClassIdentifier: 
-  enemyList:
-  - {fileID: 5347434663355265045, guid: 720e9c5bad004434daa745e5c9e6135a, type: 3}
-  - {fileID: 7104032267645828274, guid: d325e6779f172dd4e808db3da1efc6cf, type: 3}
+  enemyListSO: {fileID: 11400000, guid: c41f37a5735cf63438bbe18d7d67034f, type: 2}
+  appearMaxEnemyCnt: 30
+  appearOnceMinEnemyCnt: 3
+  appearOnceMaxEnemyCnt: 5
+  appearDelay: 3

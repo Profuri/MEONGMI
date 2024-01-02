@@ -7,11 +7,11 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+
+
 public class EnemySpawner : MonoSingleton<EnemySpawner>
 {
-    [SerializeField] private List<EnemyListSO> _enemyListSOList;
-    [SerializeField] private List<int> _appearMaxEnemyList;
-    [SerializeField] private List<int> _appearDelayList;
+    [SerializeField] private List<PhaseInfoSO> _phaseInfoList = new List<PhaseInfoSO>();
     
     [SerializeField] private float _spawnerRange;
     
@@ -55,9 +55,11 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     {
         _currentDeadCnt = 0;
         
-        EnemyListSO enemyList = _enemyListSOList[phase];
-        int appearMaxEnemyCnt = _appearMaxEnemyList[phase];
-        int appearDelay = _appearDelayList[phase];
+        EnemyListSO enemyList = _phaseInfoList[phase].enemyListSO;
+        int appearMaxEnemyCnt = _phaseInfoList[phase].appearMaxEnemyCnt;
+        int appearDelay = _phaseInfoList[phase].appearDelay;
+        int appearMaxOnceEnemyCnt = _phaseInfoList[phase].appearOnceMaxEnemyCnt;
+        int appearMinOnceEnemyCnt = _phaseInfoList[phase].appearOnceMinEnemyCnt;
         int randomAppearEnemyCnt;
         
         _currentEnemyList.Clear();
@@ -68,7 +70,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
             if (appearMaxEnemyCnt > _currentEnemyList.Count)
             {
                 //이거 수정해줘야됨.
-                randomAppearEnemyCnt = Random.Range(1,1);
+                randomAppearEnemyCnt = Random.Range(appearMinOnceEnemyCnt,appearMaxOnceEnemyCnt);
                 Vector3 randomPos;
                 for (int i = 0; i < randomAppearEnemyCnt; i++)
                 {

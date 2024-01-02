@@ -825,10 +825,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5589f4cb3263945bc3dff07c8cebd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyListSOList:
-  - {fileID: 11400000, guid: c41f37a5735cf63438bbe18d7d67034f, type: 2}
-  _appearMaxEnemyList: 1e000000
-  _appearDelayList: 05000000
+  _phaseInfoList:
+  - {fileID: 11400000, guid: 43b91bf0a3fdd9e44b9e886701f7408e, type: 2}
+  - {fileID: 11400000, guid: ed831fe7ae628254fbfa65688c194aed, type: 2}
+  - {fileID: 11400000, guid: efe6f1829016c2a4385007ba5b0f9d70, type: 2}
   _spawnerRange: 30
 --- !u!4 &1679696469
 Transform:
@@ -839,7 +839,7 @@ Transform:
   m_GameObject: {fileID: 1679696467}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8556156, y: 2.8426476, z: 2.4075618}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
