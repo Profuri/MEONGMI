@@ -7,14 +7,15 @@ using UnityEngine.UI;
 public class InfoPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Tooltip")]
-    [SerializeField] private Tooltip _tooltip;
-    [SerializeField] private string _tooltipText = "tooltip";
-    [SerializeField] private float _tooltipWidth = 75f;
-    [SerializeField] private float _tooltipYPos = 10f;
+    [SerializeField] protected Tooltip _tooltip;
+    [SerializeField] protected string _tooltipText = "tooltip";
+    [SerializeField] protected float _tooltipWidth = 75f;
+    [SerializeField] protected float _tooltipYPos = 10f;
+    [SerializeField] protected bool _tooltipPosChange = true;
      
     [Header("Icon")]
-    [SerializeField] private Sprite _iconSprite;
-    [SerializeField] private Image _icon;
+    [SerializeField] protected Sprite _iconSprite;
+    [SerializeField] protected Image _icon;
 
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class InfoPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _tooltip.SetActive(true, eventData.position);
+        _tooltip.SetActive(true, _tooltipPosChange ? eventData.position : default);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -32,7 +33,7 @@ public class InfoPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
 
 #if UNITY_EDITOR
-    private void OnValidate()
+    protected virtual void OnValidate()
     {
         if(_iconSprite != null && _icon != null)
         {

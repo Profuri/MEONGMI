@@ -39,7 +39,10 @@ public class Tooltip : MonoBehaviour
         gameObject.SetActive(value);
         if(value)
         {
-            _rectTransform.position = position;
+            if(position != default)
+            {
+                _rectTransform.position = position;
+            }
         }
     }
 }
