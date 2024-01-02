@@ -38,7 +38,7 @@ public enum ETraitUpgradeElement
 {
     NONE = -1,
     RESTOBULLET = 0, // 자원 총알로.
-    CHARGE, // 차지샷.
+    SLOW, // 차지샷.
     PENETRATE, // 관통.
     FOLLOW, // 유도.
     DOTDAMAGE, // 도트 뎀(독뎀).
@@ -151,10 +151,24 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             Debug.Log("Upgrade준비");
             RandomUpgrade(upgradeType);
             UpdateResNeed(upgradeType);
+            UpgradePanelOn(upgradeType);
         }
         else
         {
             TestUIManager.Instance.UpgradeFail();
+        }
+    }
+
+    private void UpgradePanelOn(EUpgradeType upgradeType)
+    {
+        switch (upgradeType)
+        {
+            case EUpgradeType.TRAIT:
+                TestUIManager.Instance.TraitUpgradePanel();
+                break;
+            case EUpgradeType.PLAYER:
+                TestUIManager.Instance.PlayerUpgradePanel();
+                break;
         }
     }
 

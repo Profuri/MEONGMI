@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UpgradeSelectUI : MonoBehaviour
 {
-    [SerializeField] public GameObject ActivePanel;
-    public void Active()
+    private TextMeshProUGUI needMoneyText;
+
+    public void ShowMoneyText(int money)
     {
-        ActivePanel.SetActive(true);
-        gameObject.SetActive(false);
+        needMoneyText.text = money.ToString();
     }
+
+    
+    
+        
 }
     

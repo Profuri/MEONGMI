@@ -625,6 +625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeCards: []
+  mainTrm: {fileID: 1057978670}
 --- !u!1 &298241346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,7 +1601,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1308594944}
         m_TargetAssemblyTypeName: TestUIManager, Assembly-CSharp
-        m_MethodName: BaseUpgradePanel
+        m_MethodName: PlayerAndTraitPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2727,6 +2728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeCards: []
+  mainTrm: {fileID: 0}
 --- !u!1 &926057765
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,6 +3663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeCards: []
+  mainTrm: {fileID: 0}
 --- !u!1 &1119134118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3919,7 +3922,7 @@ GameObject:
   - component: {fileID: 1143490879}
   - component: {fileID: 1143490878}
   m_Layer: 5
-  m_Name: PlayerUpgradePanel
+  m_Name: PlayerAndTraitPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4325,7 +4328,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1308594944}
         m_TargetAssemblyTypeName: TestUIManager, Assembly-CSharp
-        m_MethodName: PlayerUpgradePanel
+        m_MethodName: BaseUpgradePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5189,12 +5192,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeUIPanel: {fileID: 1457154003}
-  container: {fileID: 239509285}
-  templateUpgradeCard: {fileID: 4208071136110261279, guid: 5a1c2afdc340d834195a5bb707620e66,
+  _PlayerAndTraitPanel: {fileID: 1143490876}
+  playerUpgradeContainer: {fileID: 239509285}
+  baseUpgradeContainer: {fileID: 0}
+  traitUpgradeContainer: {fileID: 0}
+  baseCardTemplate: {fileID: 7799105057000745512, guid: 1a6980b18bb8bf342a5b27631d716f46,
     type: 3}
+  playerCardTemplate: {fileID: 4208071136110261279, guid: 5a1c2afdc340d834195a5bb707620e66,
+    type: 3}
+  traitCardTemplate: {fileID: 0}
   upgradeFailPanel: {fileID: 834792032}
-  _BaseUpgradePanel: {fileID: 58637744}
-  _PlayerUpgradePanel: {fileID: 1143490876}
+  _BaseUpgradePanel: {fileID: 1437867927}
+  _PlayerUpgradePanel: {fileID: 1057978669}
+  _TraitUpgradePanel: {fileID: 0}
 --- !u!4 &1308594945
 Transform:
   m_ObjectHideFlags: 0
@@ -5488,6 +5498,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394987672}
   m_CullTransparentMesh: 1
+--- !u!1 &1437867927 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2328937436918483557, guid: 96278e12dbc105743a027ff0cfa723f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 949026568}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1457154003
 GameObject:
   m_ObjectHideFlags: 0

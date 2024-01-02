@@ -6,6 +6,7 @@ using UnityEngine;
 public class UpgradeContainer : MonoBehaviour
 {
     public List<GameObject> UpgradeCards;
+    public Transform mainTrm;
 
     public void SetUpgrade(GameObject templateItem, EUpgradeType type, int elemNum)
     {
@@ -63,7 +64,7 @@ public class UpgradeContainer : MonoBehaviour
             Destroy(item);
         });
         UpgradeCards.Clear();
-        gameObject.SetActive(false);
+        mainTrm.gameObject.SetActive(false);
     }
 
     public void OnDisable()
