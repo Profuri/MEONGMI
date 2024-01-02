@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bf59933e8198147ab1bf10bce5302e, type: 3}
+  m_Name: DotBullet
+  m_EditorClassIdentifier: 
+  Description: "\uCD1D\uC54C\uC774 \uC801\uC5D0\uAC8C \uB3C5 \uB370\uBBF8\uC9C0\uB97C
+    \uC785\uD78C\uB2E4."
+  Image: {fileID: 0}
+  Type: 4
