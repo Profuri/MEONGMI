@@ -14,7 +14,7 @@ public class UpgradeCard : MonoBehaviour
 
     public virtual void Setting(UpgradeElemInfoSO so, Action releaseAct)
     {
-        Debug.Log(so.Name);
+        //Debug.Log(so.Name);
         //description.text = so.Description;
         //image.sprite = so.Image;
         myInfo = so;

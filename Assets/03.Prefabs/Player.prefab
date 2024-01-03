@@ -408,10 +408,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerRoot: {fileID: 556258293054521834}
+  _playerConnectHolder: {fileID: 0}
   _playerConnectHole: {fileID: 5165793240515386826}
   _baseConnectHole: {fileID: 0}
   _line: {fileID: 0}
   _lineLength: 0
+  _lineConnectToggleTime: 0
+  _lineControlCancelTime: 0
 --- !u!1 &7858359627268066847
 GameObject:
   m_ObjectHideFlags: 0
