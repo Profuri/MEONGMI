@@ -18,6 +18,9 @@ public class PlayerController : Entity, IDetectable
     [SerializeField] private LayerMask _interactableMask;
     public LayerMask InteractableMask => _interactableMask;
 
+    [SerializeField] private BulletType _bulletType;
+    public BulletType BulletType => _bulletType;
+
     private PlayerLineConnect _lineConnect;
 
     public PlayerLineConnect LineConnect

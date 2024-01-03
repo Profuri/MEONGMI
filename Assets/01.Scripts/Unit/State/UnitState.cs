@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UnitState : State
 {
-    protected BaseTestMono BaseArea;
+    protected Base BaseArea;
     protected BaseUnit BaseUnit;
 
     public UnitState(StateMachine stateMachine, Entity owner, Enum type) : base(stateMachine, owner, type)
