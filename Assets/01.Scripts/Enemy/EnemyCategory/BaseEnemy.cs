@@ -62,6 +62,8 @@ public abstract class BaseEnemy : Entity
         NavMeshAgent.enabled = true;
         ActionData.IsStopped = false;
         EnemyType = EnemyAttackSO.enemyType;
+
+
     }
     
     protected override void RegisterStates()
@@ -76,12 +78,18 @@ public abstract class BaseEnemy : Entity
         }
     }
 
-    public override void Damaged(int damage)
+    public override void Damaged(float damage)
     {
         base.Damaged(damage);
         StopImmediately(true);
     }
-    
+
+    public void SetPosition(Vector3 pos)
+    {
+        NavMeshAgent.enabled = false;
+        transform.position = pos;
+        NavMeshAgent.enabled = true;
+    }
     public void StopImmediately()
     {
         NavMeshAgent.SetDestination(transform.position);

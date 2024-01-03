@@ -19,7 +19,6 @@ public class EnemyChaseState : EnemyState
         if (BaseEnemy.ActionData.IsStopped) return;
         
         BaseEnemy.StopImmediately();
-        Debug.Log("EnterChaseState");
         Vector3 lookPos = BaseEnemy.Target.position - BaseEnemy.transform.position;
         lookPos.y = 0f;
         BaseEnemy.transform.rotation = Quaternion.LookRotation(lookPos);
@@ -44,7 +43,6 @@ public class EnemyChaseState : EnemyState
                 {
                     BaseEnemy.Target = detectable.Detect();
                     BaseEnemy.NavMeshAgent.SetDestination(BaseEnemy.Target.position);
-                    Debug.Log($"CurrentTarget: {BaseEnemy.Target}");
                 }
             }
         }

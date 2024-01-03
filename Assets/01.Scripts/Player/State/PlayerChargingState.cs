@@ -48,8 +48,8 @@ public class PlayerChargingState : PlayerState
 
     private void ChargingHandle()
     {
-        // _stateMachine.ChangeState(PlayerStateType.Idle);
-        // _player.PlayerHammer.ChargingToggle(false);
+        _stateMachine.ChangeState(PlayerStateType.Idle);
+        _player.PlayerHammer.ChargingToggle(false);
     }
 
     private void ShotHandle()

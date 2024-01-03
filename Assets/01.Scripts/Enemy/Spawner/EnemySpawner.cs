@@ -12,9 +12,8 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoSingleton<EnemySpawner>
 {
     [SerializeField] private List<PhaseInfoSO> _phaseInfoList = new List<PhaseInfoSO>();
-    
-    [SerializeField] private float _spawnerRange;
-    
+
+    [SerializeField] private float _maxDistance;
     private List<BaseEnemy> _currentEnemyList;
     private int _currentDeadCnt;
 
@@ -36,7 +35,6 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
             {
                 Debug.Log("dd");
                 enemy.Damaged(10);
-                //EnemySpawner.Instance.DeadEnemy(enemy);
             }
         }
     }
@@ -72,11 +70,18 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
                 //이거 수정해줘야됨.
                 randomAppearEnemyCnt = Random.Range(appearMinOnceEnemyCnt,appearMaxOnceEnemyCnt);
                 Vector3 randomPos;
+                float lineLength = GameManager.Instance.PlayerController.LineConnect.LineLength;
+                Vector3 defaultOffset = new Vector3(1, 0, 1) * lineLength;
                 for (int i = 0; i < randomAppearEnemyCnt; i++)
                 {
-                    randomPos = Random.insideUnitCircle;
-                    randomPos *= _spawnerRange;
-                    randomPos.y = 0f;
+                    randomPos = (Vector3)Random.insideUnitCircle * _maxDistance + defaultOffset;
+                    bool result = Physics.Raycast(randomPos,Vector3.down,out RaycastHit hitInfo, Mathf.Infinity, 1 << LayerMask.NameToLayer("Ground"));
+                    if (result)
+                    {
+                        randomPos.y = hitInfo.collider.transform.position.y;
+                    }
+                    
+                    Debug.Log($"RandomPos: {randomPos}");
                 
                     var prefab = enemyList.GetRandomEnemy();
                 
@@ -84,8 +89,11 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
                 
                     enemy.Init();
                     enemy.gameObject.SetActive(true);
-                    enemy.transform.position = randomPos;
+                    enemy.SetPosition(randomPos);
                     _currentEnemyList.Add(enemy);
+                    
+                    Debug.Log($"EnemyPos: {enemy.transform.position}");
+
                     yield return null;
                 }
             }
