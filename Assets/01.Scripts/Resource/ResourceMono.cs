@@ -16,7 +16,9 @@ public class ResourceMono : Orb
     private MeshRenderer _meshRenderer;
 
     private Coroutine _dissolveCoroutine;
+    
     private PlayerController _playerController;
+    private MinerUnit _miner;
     
     private readonly int _dissolveHash = Shader.PropertyToID("_Dissolve");
     
@@ -33,45 +35,32 @@ public class ResourceMono : Orb
     {
         base.OnInteract(entity);
 
-        if (_playerController is null)
+        if (entity is PlayerController controller)
         {
-            _playerController = entity as PlayerController;
+            _playerController = controller;
             _playerController.OnHammerDownEvent += Gather;
+        }
+        else if (entity is MinerUnit miner)
+        {
+            _miner = miner;
+            _miner.EndGather += Gather;
         }
     }
 
     private void Remove()
     {
-        _playerController.OnHammerDownEvent -= Gather;
-        _playerController = null;
+        if (_playerController is not null)
+        {
+            _playerController.OnHammerDownEvent -= Gather;
+        }
+
+        if (_miner is not null)
+        {
+            _miner.EndGather -= Gather;
+        }
+        
         IsInteractive = true;
-        PlayerController player = entity as PlayerController;
-        if(player != null)
-        {
-            player.OnHammerDownEvent += Remove;
-        }
-
-        MinerUnit miner = entity as MinerUnit;
-        if (miner != null)
-        {
-            miner.EndGather += Remove;
-        }
-    }
-
-    private void Remove(Entity entity)
-    {
-        PlayerController player = entity as PlayerController;
-        if (player != null)
-        {
-            player.OnHammerDownEvent -= Remove;
-        }
-
-        MinerUnit miner = entity as MinerUnit;
-        if (miner != null)
-        {
-            miner.EndGather -= Remove;
-        }
-
+        
         if (_isOn)
         {
             GetResource();
@@ -84,6 +73,8 @@ public class ResourceMono : Orb
         base.Init();
         IsInteractive = false;
         Invalid = false;
+        _playerController = null;
+        _miner = null;
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
 
         StartDissolveCor(1f,0f,3f,() => _isOn = true);
