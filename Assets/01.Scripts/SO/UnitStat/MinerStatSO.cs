@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Unit/Miner Stat")]
 public class MinerStatSO : UnitStatSO
 {
-    public float gatherSpeed;
+    public float gatherDuration;
     public int maxResCount;
 }

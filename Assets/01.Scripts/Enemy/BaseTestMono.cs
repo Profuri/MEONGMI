@@ -29,15 +29,7 @@ public class BaseTestMono : MonoBehaviour
         unit.transform.SetParent(transform);
         Vector3 playerPos = GameManager.Instance.PlayerTrm.position;
         unit.SetPosition(new Vector3(-playerPos.x, playerPos.y, -playerPos.z));
-        if(type == UnitType.Attacker)
-        {
-            AttackerUnit atk = unit as AttackerUnit;
-            atk.HoldPosition = new Vector3(-playerPos.x, playerPos.y, -playerPos.z);
-        }
-        else if(type == UnitType.Miner)
-        {
-            MinerUnit miner = unit as MinerUnit;
-        }
+        unit.HoldPosition = new Vector3(-playerPos.x, playerPos.y, -playerPos.z);
         unit.LineConnect.SetLine(CreateLine());
         unit.LineConnect.SetBaseConnectHole(transform.Find("Arc"));
         unit.LineConnect.SetLenght(unit.UnitStatSO.holdRange);
@@ -54,7 +46,7 @@ public class BaseTestMono : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            CreateUnit(UnitType.Attacker);
+            CreateUnit(UnitType.Miner);
         }
     }
 }

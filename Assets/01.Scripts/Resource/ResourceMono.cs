@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static UnityEngine.EventSystems.EventTrigger;
 
 [RequireComponent(typeof(Collider))]
 public class ResourceMono : Orb
 {
     private int _curResCnt;
     private bool _isOn = false;
+    public bool IsInteractive = false;
+    public bool Invalid = false;
     private MeshRenderer _meshRenderer;
 
     private Coroutine _dissolveCoroutine;
-    
     private readonly int _dissolveHash = Shader.PropertyToID("_Dissolve");
     public void GetResource()
     {
@@ -25,13 +27,34 @@ public class ResourceMono : Orb
     public override void OnInteract(Entity entity)
     {
         base.OnInteract(entity);
+        IsInteractive = true;
         PlayerController player = entity as PlayerController;
-        player.OnHammerDownEvent += Remove;
+        if(player != null)
+        {
+            player.OnHammerDownEvent += Remove;
+        }
+
+        MinerUnit miner = entity as MinerUnit;
+        if (miner != null)
+        {
+            miner.EndGather += Remove;
+        }
     }
 
-    private void Remove(PlayerController controller)
+    private void Remove(Entity entity)
     {
-        controller.OnHammerDownEvent -= Remove;
+        PlayerController player = entity as PlayerController;
+        if (player != null)
+        {
+            player.OnHammerDownEvent -= Remove;
+        }
+
+        MinerUnit miner = entity as MinerUnit;
+        if (miner != null)
+        {
+            miner.EndGather -= Remove;
+        }
+
         if (_isOn)
         {
             GetResource();
@@ -42,6 +65,8 @@ public class ResourceMono : Orb
     public override void Init()
     {
         base.Init();
+        IsInteractive = false;
+        Invalid = false;
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
 
         StartDissolveCor(1f,0f,3f,() => _isOn = true);
