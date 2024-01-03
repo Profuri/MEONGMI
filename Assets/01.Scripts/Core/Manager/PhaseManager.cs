@@ -50,6 +50,7 @@ public class PhaseManager : MonoSingleton<PhaseManager>
             _currentTime += Time.deltaTime;
             Debug.Log($"CurrentTime: {_currentTime} RestPhaseTime: {_restPhaseTime}");
             OnRestTimeEvent?.Invoke(_currentTime,_restPhaseTime);
+            
             if (_currentTime >= _restPhaseTime)
             {
                 ChangePhase(PhaseType.Raid);
