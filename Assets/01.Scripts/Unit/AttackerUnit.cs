@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class AttackerUnit : BaseUnit
 {
-    protected Vector3 _holdPosition;
-    public Vector3 HoldPosition { get => _holdPosition; set => _holdPosition = value; }
-
     public override void Init()
     {
         _unitType = UnitType.Attacker;

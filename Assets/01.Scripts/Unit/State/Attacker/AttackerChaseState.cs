@@ -37,6 +37,7 @@ public class AttackerChaseState : AttackerState
             {
                 if (col.TryGetComponent(out BaseEnemy enemy))
                 {
+                    if (enemy.Dead) continue;
                     BaseUnit.NavMesh.SetDestination(enemy.transform.position);
                     if(BaseUnit.NavMesh.path.status != NavMeshPathStatus.PathInvalid)
                     {

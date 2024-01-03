@@ -4,6 +4,10 @@ public class Orb : Interactable
 {
     public override void OnInteract(Entity entity)
     {
-        entity.StateMachine.ChangeState(PlayerStateType.Gather);
+        PlayerController player = entity as PlayerController;
+        if(player != null)
+        {
+            entity.StateMachine.ChangeState(PlayerStateType.Gather);
+        }
     }
 }

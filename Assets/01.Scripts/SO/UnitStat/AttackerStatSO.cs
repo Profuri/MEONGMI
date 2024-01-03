@@ -8,6 +8,5 @@ public class AttackerStatSO : UnitStatSO
     public float attackDuration;
     public float damage;
     public float findArea;
-    public LayerMask targetLayer;
     public float attackRange;
 }

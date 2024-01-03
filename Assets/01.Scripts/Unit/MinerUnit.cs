@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class MinerUnit : BaseUnit
 {
+    public event Action<Entity> EndGather;
+
+    public ResourceMono TargetRes;
+
     public override void Init()
     {
         _unitType = UnitType.Miner;
@@ -23,6 +27,18 @@ public class MinerUnit : BaseUnit
 
     protected override void SetInitState()
     {
-        _stateMachine.ChangeState(MinerUnitStateType.Idle);
+        _stateMachine.Initialize(this, MinerUnitStateType.Idle);
+    }
+
+    public void SendEndGather()
+    {
+        EndGather?.Invoke(this);
+    }
+
+    public void SetTarget(ResourceMono res)
+    {
+        TargetRes = res;
+        if(res != null)
+        base.SetTarget(res.transform);
     }
 }
