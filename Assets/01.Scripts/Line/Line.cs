@@ -11,13 +11,9 @@ public class Line : PoolableMono
     private Transform _startHole;
     private Transform _endHole;
 
-    private ParticleSystem _startPointParticle;
-    private ParticleSystem _endPointParticle;
-
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
-        _startPointParticle = transform.Find("StartParticle").GetComponent<ParticleSystem>();
     }
 
     public override void Init()
@@ -50,7 +46,6 @@ public class Line : PoolableMono
 
     public void SetStartHole(Transform startHole)
     {
-        _startPointParticle.transform.position = startHole.position;
         _startHole = startHole;
     }
 
