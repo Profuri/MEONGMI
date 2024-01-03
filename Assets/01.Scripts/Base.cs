@@ -23,6 +23,8 @@ public class Base : MonoBehaviour,IDamageable
         vfxPlayer.transform.position = _arc.transform.position + offset;
         vfxPlayer.PlayEffect();
         _arc.ShakePosition();
+        
+        CameraManager.Instance.ImpulseCam(1, 0.1f, new Vector3(0, -1, 0));
         ResManager.Instance.UseResource((int)damage);
     }
 }
