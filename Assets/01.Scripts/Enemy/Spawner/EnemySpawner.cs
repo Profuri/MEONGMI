@@ -68,19 +68,12 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         {
             if (appearMaxEnemyCnt > _currentEnemyList.Count)
             {
-                //이거 수정해줘야됨.
                 randomAppearEnemyCnt = Random.Range(appearMinOnceEnemyCnt,appearMaxOnceEnemyCnt);
                 Vector3 randomPos;
                 float lineLength = GameManager.Instance.PlayerController.LineConnect.LineLength;
                 
                 for (int i = 0; i < randomAppearEnemyCnt; i++)
                 {
-                    // Vector3 unitSphere = Random.insideUnitSphere * _maxDistance;
-                    // unitSphere = new Vector3(clampValue(unitSphere.x),clampValue(unitSphere.y),clampValue(unitSphere.z));
-                    //
-                    // randomPos = unitSphere + GameManager.Instance.BaseTrm.position;
-                    // randomPos.y = 100f;
-
                     var spherePoint = Random.insideUnitSphere;
                     spherePoint.y = 0;
                     var dir = spherePoint.normalized;
@@ -94,10 +87,6 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
                     {
                         unitPoint.y = hitInfo.point.y;
                     }
-                    else
-                    {
-                        Debug.LogError("DDDDDDDDDDDDDDD");
-                    }
                                         
                     var prefab = enemyList.GetRandomEnemy();
                 
@@ -108,7 +97,6 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
                     enemy.SetPosition(unitPoint);
                     _currentEnemyList.Add(enemy);
                     
-                    Debug.Log($"EnemyPos: {enemy.transform.position}");
 
                     yield return null;
                 }

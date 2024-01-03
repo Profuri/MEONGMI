@@ -7,4 +7,5 @@ public enum EEnemyState
     Normal = 0,
     Chase = 1,
     Attack = 2,
+    Dead = 3,
 }

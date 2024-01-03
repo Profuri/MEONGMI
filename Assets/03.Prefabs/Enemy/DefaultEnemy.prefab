@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790ad41d482ad8940a54dca8ed9d5668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityStatSO: {fileID: 11400000, guid: 2f47ea65d9c8b654781671aeb366568e, type: 2}
+  _entityStatSO: {fileID: 11400000, guid: 550b833c1fd6f354589940e99f179e61, type: 2}
   _enemyAttackSO: {fileID: 11400000, guid: f15bea1f336d7c84a86cdfb2e7b38a83, type: 2}
   LayerMask:
     serializedVersion: 2

@@ -2,7 +2,7 @@ using System;
 using InputControl;
 using UnityEngine;
 
-public class PlayerController : Entity
+public class PlayerController : Entity, IDetectable
 {
     [Range(0.1f, 1f)][SerializeField] private float _rotateSpeed;
     
@@ -18,7 +18,20 @@ public class PlayerController : Entity
     [SerializeField] private LayerMask _interactableMask;
     public LayerMask InteractableMask => _interactableMask;
 
-    public PlayerLineConnect LineConnect { get; private set; }
+    private PlayerLineConnect _lineConnect;
+
+    public PlayerLineConnect LineConnect
+    {
+        get
+        {
+            if (_lineConnect == null)
+            {
+                _lineConnect = GetComponent<PlayerLineConnect>();
+            }
+
+            return _lineConnect;
+        }
+    }
     public Hammer PlayerHammer { get; private set; }
     public Interactable Target { get; set; }
     
@@ -27,7 +40,7 @@ public class PlayerController : Entity
     public override void Awake()
     {
         base.Awake();
-        LineConnect = GetComponent<PlayerLineConnect>();
+        _lineConnect = GetComponent<PlayerLineConnect>();
         _visualTrm = transform.Find("Visual");
         PlayerHammer = _visualTrm.GetComponentInChildren<Hammer>();
         PlayerHammer.SetPlayerController(this);
@@ -82,4 +95,6 @@ public class PlayerController : Entity
     {
         
     }
+
+    public Transform Detect() => this.transform;
 }

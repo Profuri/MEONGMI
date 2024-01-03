@@ -40,7 +40,7 @@ public abstract class Entity : PoolableMono, IDamageable
     public virtual void Damaged(float damage)
     {
         CurrentHP -= damage;
-        AnimatorCompo.SetTrigger(_hitHash);
+       // AnimatorCompo.SetTrigger(_hitHash);
         
         CurrentHP = Mathf.Clamp(CurrentHP, 0,_entityStatSO.maxHp);
         if (CurrentHP == 0)
