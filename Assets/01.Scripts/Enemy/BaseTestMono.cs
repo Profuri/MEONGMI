@@ -20,5 +20,7 @@ public class BaseTestMono : MonoBehaviour,IDamageable
         vfxPlayer.PlayEffect();
         
         _hp -= damage;
+        
+        CameraManager.Instance.ImpulseCam(1, 0.1f, new Vector3(0, -1, 0));
     }
 }

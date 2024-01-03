@@ -31,13 +31,13 @@ MonoBehaviour:
     _baseValue: 1
     modifiers: []
   shotDelay:
-    _baseValue: 0.5
+    _baseValue: 0.1
     modifiers: []
   moveSpeed:
     _baseValue: 10
     modifiers: []
   chargingSpeed:
-    _baseValue: 3
+    _baseValue: 5
     modifiers: []
   gatheringSpeed:
     _baseValue: 1

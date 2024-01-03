@@ -30,6 +30,8 @@ public class Hammer : MonoBehaviour
 
         var bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
         bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position, dir);
+        
+        CameraManager.Instance.ImpulseCam(0.25f, 0.15f, new Vector3(1, 1, 0));
     }
 
     public void SetPlayerController(PlayerController playerController)
