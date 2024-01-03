@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LuckUp
   m_EditorClassIdentifier: 
   UpgradeType: 2
-  name: "\uD589\uC6B4 \uC99D\uAC00"
+  Name: "\uD589\uC6B4 \uC99D\uAC00"
   Description: "\uD589\uC6B4\uC774 \uC99D\uAC00\uD55C\uB2E4."
   Image: {fileID: 21300000, guid: ad58e2eb60fbb4e26ad97e185ccc15b4, type: 3}
   Type: 6
