@@ -14,11 +14,11 @@ public class UpgradeCard : MonoBehaviour
 
     public virtual void Setting(UpgradeElemInfoSO so, Action releaseAct)
     {
-        Debug.Log(so.name);
+        Debug.Log(so.Name);
         //description.text = so.Description;
         //image.sprite = so.Image;
         myInfo = so;
-        gameObject.name = so.name;
+        gameObject.name = so.Name;
         ReleaseAct = releaseAct;
     }
 

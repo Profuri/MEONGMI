@@ -72,7 +72,7 @@ public class PlayerStatChoicePanel : ChoicePanel
     {
         //imageContainer.sprite = _upgradeCard.Info.Image;
         _imageListTrm.anchoredPosition = Vector2.zero;
-        _title.SetText(_upgradeCard.Info.name);
+        _title.SetText(_upgradeCard.Info.Name);
         _description.SetText(_upgradeCard.Info.Description);
         _button.enabled = true;
         _backglow.SetActive(true);
