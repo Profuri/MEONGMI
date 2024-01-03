@@ -27,7 +27,7 @@ public class Hammer : MonoBehaviour
     private readonly int _chargingToggleHash = Animator.StringToHash("Charging");
 
     [SerializeField] private List<ColorType> _colorTypeList = new List<ColorType>();
-    private readonly int _emission = Shader.PropertyToID("_EmissionColor");
+    //private readonly int _emission = Shader.PropertyToID("_EmissionColor");
 
     public Color GetColorByBulletType(BulletType type)
     {
@@ -38,7 +38,7 @@ public class Hammer : MonoBehaviour
                 return ct.color;
             }
         }
-
+        Debug.LogError("Can't Find Color");
         return Color.blue;
     }
 
@@ -46,7 +46,8 @@ public class Hammer : MonoBehaviour
     {
         MaterialPropertyBlock matblock = new MaterialPropertyBlock();
         _meshRenderer.GetPropertyBlock(matblock);
-        matblock.SetColor(_emission,GetColorByBulletType(type));
+        //matblock.SetColor();
+        matblock.SetColor("_EmissionColor",GetColorByBulletType(type));
         _meshRenderer.SetPropertyBlock(matblock);
     }
     private void Awake()
@@ -106,6 +107,7 @@ public class Hammer : MonoBehaviour
     public void SetPlayerController(PlayerController playerController)
     {
         _playerController = playerController;
+        _playerController.OnBulletTypeChanged += SetEmissionColor;
     }
 
     public void ChargingToggle(bool value)

@@ -19,7 +19,16 @@ public class PlayerController : Entity, IDetectable
     public LayerMask InteractableMask => _interactableMask;
 
     [SerializeField] private BulletType _bulletType;
-    public BulletType BulletType => _bulletType;
+    public event Action<BulletType> OnBulletTypeChanged;
+    public BulletType BulletType
+    {
+        get => _bulletType;
+        set
+        {
+            _bulletType = value;
+            OnBulletTypeChanged?.Invoke(_bulletType);
+        }
+    }
 
     private PlayerLineConnect _lineConnect;
 

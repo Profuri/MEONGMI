@@ -284,20 +284,20 @@ MonoBehaviour:
   _distanceInterval: 0
   _angleInterval: 0
   _colorTypeList:
-  - color: {r: 0, g: 0.8857479, b: 1, a: 0}
+  - color: {r: 4.237095, g: 4.237095, b: 4.237095, a: 0}
     type: 0
-  - color: {r: 0, g: 0, b: 0, a: 0}
-    type: 0
-  - color: {r: 0, g: 0, b: 0, a: 0}
-    type: 0
-  - color: {r: 0, g: 0, b: 0, a: 0}
-    type: 0
-  - color: {r: 0, g: 0, b: 0, a: 0}
-    type: 0
-  - color: {r: 0, g: 0, b: 0, a: 0}
-    type: 0
-  - color: {r: 0, g: 0, b: 0, a: 0}
-    type: 0
+  - color: {r: 0, g: 3.3242188, b: 7.9999995, a: 0}
+    type: 1
+  - color: {r: 8.47419, g: 0.49845144, b: 0, a: 0}
+    type: 2
+  - color: {r: 0.3727833, g: 4.237095, b: 0, a: 0}
+    type: 3
+  - color: {r: 3.832332, g: 0, b: 5.7635875, a: 0}
+    type: 4
+  - color: {r: 4.237095, g: 0.8594108, b: 3.5576549, a: 0}
+    type: 5
+  - color: {r: 0.53963006, g: 4.237095, b: 3.6454432, a: 0}
+    type: 6
 --- !u!1 &5769561658851570883
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,13 +402,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d8febcaed94296a4ea9311f17469d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityStatSO: {fileID: 0}
+  _entityStatSO: {fileID: 11400000, guid: ddf6151547225d040be1aa1c5940de5f, type: 2}
   _rotateSpeed: 0.3
   _playerStat: {fileID: 11400000, guid: a14962090fa7444fda860ff451706e81, type: 2}
   _inputReader: {fileID: 11400000, guid: 0b2ddb7c40369994293d5e03cee5f8a1, type: 2}
   _groundMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8
   _interactableMask:
     serializedVersion: 2
     m_Bits: 512

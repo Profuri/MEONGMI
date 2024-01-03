@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraManager : MonoSingleton<CameraManager>
 {
-    [SerializeField] private CinemachineVirtualCamera _playerFollowCam;
+    private CinemachineVirtualCamera _playerFollowCam;
 
     private CinemachineImpulseSource _impulseSource;
     private Camera _mainCam;
@@ -14,6 +14,7 @@ public class CameraManager : MonoSingleton<CameraManager>
     
     public override void Init()
     {
+        _playerFollowCam = FindObjectOfType<CinemachineVirtualCamera>();
         _mainCam = Camera.main;
         _impulseSource = _playerFollowCam.GetComponent<CinemachineImpulseSource>();
     }

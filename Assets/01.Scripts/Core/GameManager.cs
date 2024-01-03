@@ -29,7 +29,19 @@ public class GameManager : MonoSingleton<GameManager>
             return _base;
         }
     }
-    public Camera MainCam { get; private set; }
+
+    private Camera _mainCam;
+    public Camera MainCam
+    {
+        get
+        {
+            if (_mainCam == null) ;
+            {
+                _mainCam = Camera.main;
+            }
+            return _mainCam;
+        }
+    }
 
     [SerializeField] private PoolingListSO _poolingList;
     [SerializeField] 
@@ -44,7 +56,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public override void Init()
     {
-        MainCam = Camera.main;
 
         SceneManagement.Instance.Init();
         PoolManager.Instance = new PoolManager(transform);
