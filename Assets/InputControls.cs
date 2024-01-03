@@ -62,6 +62,15 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LineConnect"",
+                    ""type"": ""Button"",
+                    ""id"": ""75a1d152-cdbb-40a5-aa31-561246e31e20"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""action"": ""Charging"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5fa402f-ddeb-45f0-ae43-db769a04ec93"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LineConnect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
         m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         m_Player_Charging = m_Player.FindAction("Charging", throwIfNotFound: true);
+        m_Player_LineConnect = m_Player.FindAction("LineConnect", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +250,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Click;
     private readonly InputAction m_Player_MousePos;
     private readonly InputAction m_Player_Charging;
+    private readonly InputAction m_Player_LineConnect;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -237,6 +259,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         public InputAction @Click => m_Wrapper.m_Player_Click;
         public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
         public InputAction @Charging => m_Wrapper.m_Player_Charging;
+        public InputAction @LineConnect => m_Wrapper.m_Player_LineConnect;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +281,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @Charging.started += instance.OnCharging;
             @Charging.performed += instance.OnCharging;
             @Charging.canceled += instance.OnCharging;
+            @LineConnect.started += instance.OnLineConnect;
+            @LineConnect.performed += instance.OnLineConnect;
+            @LineConnect.canceled += instance.OnLineConnect;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -274,6 +300,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @Charging.started -= instance.OnCharging;
             @Charging.performed -= instance.OnCharging;
             @Charging.canceled -= instance.OnCharging;
+            @LineConnect.started -= instance.OnLineConnect;
+            @LineConnect.performed -= instance.OnLineConnect;
+            @LineConnect.canceled -= instance.OnLineConnect;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -297,5 +326,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         void OnClick(InputAction.CallbackContext context);
         void OnMousePos(InputAction.CallbackContext context);
         void OnCharging(InputAction.CallbackContext context);
+        void OnLineConnect(InputAction.CallbackContext context);
     }
 }
