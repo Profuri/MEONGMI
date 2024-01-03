@@ -77,6 +77,12 @@ public class PlayerFeatureChoicePanel : ChoicePanel
             
             if (i == 25)
             {
+                if (UpgradeManager.Instance.curTraitElem == _featureDataList[rand].Type) //중복 방지
+                {
+                    i--;
+                    continue;
+                }
+                UpgradeManager.Instance.SetCurTraitElem(_featureDataList[rand].Type);
                 result = _featureDataList[rand];
             }
             prev = rand;

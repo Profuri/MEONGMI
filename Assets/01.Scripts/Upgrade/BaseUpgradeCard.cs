@@ -11,12 +11,15 @@ public class BaseUpgradeCard : UpgradeCard
     private TextMeshProUGUI value;
     private TextMeshProUGUI addValue;
     private TextMeshProUGUI moneyTxt;
+    private TextMeshProUGUI levelTxt;
     
     private Image upgradeImg;
     private Image resourceImg;
 
+    
     BaseUpgradeElemSO info;
     int curCost;
+    int curLevel;
 
     public override void Setting(UpgradeElemInfoSO so, Action releaseAct)
     {
@@ -26,6 +29,7 @@ public class BaseUpgradeCard : UpgradeCard
         value = transform.Find("Value").GetComponent<TextMeshProUGUI>();
         addValue = transform.Find("AddValue").GetComponent<TextMeshProUGUI>();
         moneyTxt = transform.Find("Button/Group/MoneyTxt").GetComponent<TextMeshProUGUI>();
+        levelTxt = transform.Find("Level/Text").GetComponent<TextMeshProUGUI>();
 
         resourceImg = transform.Find("Button/Group/Resource").GetComponent<Image>();
         upgradeImg = transform.Find("Image").GetComponent<Image>();
@@ -37,6 +41,8 @@ public class BaseUpgradeCard : UpgradeCard
         addValue.text = info.AddValue.ToString();
         upgradeImg.sprite = info.Image;
         resourceImg.sprite = info.NeedResource;
+        curLevel = 1;
+        levelTxt.text = curLevel.ToString();
         
         curCost = info.BaseNeedCost;
         moneyTxt.text = curCost.ToString();
@@ -46,8 +52,9 @@ public class BaseUpgradeCard : UpgradeCard
     {
         if (UpgradeManager.Instance.BaseUpgrade(info.Type, curCost))
         {
-            Debug.Log("Gang");
             UpdateUI();
+            UpgradeManager.Instance.ApplyUpgradeBase(info.Type);
+            Debug.Log(info.Type.ToString());
         }else
            TestUIManager.Instance.UpgradeFail();
     }
@@ -56,6 +63,9 @@ public class BaseUpgradeCard : UpgradeCard
     {
         Debug.Log($"{gameObject.name} : {curCost}");
         curCost = UpgradeManager.Instance.GetBaseUpgradeMoney(info.Type);
+        curLevel += 1;
+        levelTxt.text = curLevel.ToString();
         moneyTxt.text = curCost.ToString();
+
     }
 }

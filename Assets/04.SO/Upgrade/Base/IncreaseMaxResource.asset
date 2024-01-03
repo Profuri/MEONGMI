@@ -17,7 +17,7 @@ MonoBehaviour:
   Description: "\uCD5C\uB300 \uC790\uC6D0 \uC99D\uAC00"
   Image: {fileID: 21300000, guid: 61725b696bb9b4c73bb7f577825b65b2, type: 3}
   Type: 2
-  NeedResource: {fileID: 21300000, guid: 3fb23bf6552b44aafb168ed0584e1641, type: 3}
+  NeedResource: {fileID: 21300000, guid: 33effd6735e414dc7b70ded5e8bb47f8, type: 3}
   BaseNeedCost: 10
   AddCost: 10
   BaseValue: 10

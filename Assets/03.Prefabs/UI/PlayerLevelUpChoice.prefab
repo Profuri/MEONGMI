@@ -357,8 +357,8 @@ GameObject:
   - component: {fileID: 4327880712675837}
   - component: {fileID: 3100937534734529601}
   - component: {fileID: 8597606087112845342}
-  - component: {fileID: 6821650357010779775}
   - component: {fileID: 4801549335873546438}
+  - component: {fileID: 5025932664215312809}
   m_Layer: 5
   m_Name: PlayerLevelUpChoice
   m_TagString: Untagged
@@ -457,19 +457,7 @@ MonoBehaviour:
   _backglow: {fileID: 6914123728665045356}
   Frame_Focus: {fileID: 0}
   _button: {fileID: 4801549335873546438}
-  _upgradeCard: {fileID: 6821650357010779775}
---- !u!114 &6821650357010779775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4208071136110261279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409dd73d34f14374ab174e4da8ab552d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _upgradeCard: {fileID: 0}
 --- !u!114 &4801549335873546438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,8 +502,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6821650357010779775}
-        m_TargetAssemblyTypeName: UpgradeCard, Assembly-CSharp
+      - m_Target: {fileID: 5025932664215312809}
+        m_TargetAssemblyTypeName: PlayerUpgradeCard, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -526,6 +514,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5025932664215312809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4208071136110261279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c94a0de888fa1b4db1cd4cd5614d100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5576586644436530360
 GameObject:
   m_ObjectHideFlags: 0

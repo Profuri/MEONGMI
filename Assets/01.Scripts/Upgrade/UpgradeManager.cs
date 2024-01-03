@@ -66,8 +66,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     public List<PlayerUpgradeElemSO> PlayerElemInfos => playerElemInfos;
     public List<TraitUpgradeElemSO> TraitElemInfos => traitElemInfos;
 
-    
-
     private void Awake()
     {
         Init();
@@ -83,7 +81,16 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             BaseUpgradeNeedResCntDic.Add(elem.Type, elem.BaseNeedCost);
         }
         PlayerUpgradeNeedResCnt = TraitUpgradeNeedResCnt = basicUpgradeNeedCnt;
+
     }
+
+    private void Start()
+    {
+        TestUIManager.Instance.SetPlayerCostTxt(PlayerUpgradeNeedResCnt);
+        TestUIManager.Instance.SetTraitCostTxt(TraitUpgradeNeedResCnt);
+    }
+
+
     private void LoadUpdateInfos()
     {
         baseElemInfos = new();
@@ -131,7 +138,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     }
 
     public int GetBaseUpgradeMoney(EBaseUpgradeElement elem) => BaseUpgradeNeedResCntDic[elem];
-    private void SetBaseCost(EBaseUpgradeElement elem, int value) => BaseUpgradeNeedResCntDic[elem] = value;
+    private void SetBaseCost(EBaseUpgradeElement elem, int value) => BaseUpgradeNeedResCntDic[elem] += value;
 
     //나중에 리팩토링
     public bool BaseUpgrade(EBaseUpgradeElement type, int curCost)
@@ -228,18 +235,23 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
                 break;
             case EUpgradeType.TRAIT: // 중복 x
                 {
-                    maxEclusive = (int)ETraitUpgradeElement.END;
-                    ETraitUpgradeElement traitElem = curTraitElem;
-                    while(traitElem == curTraitElem)
-                    {
-                        traitElem = (ETraitUpgradeElement)Random.Range(0, maxEclusive);
-                    }
-                    TestUIManager.Instance.AddUpgradeElem(upgradeType, (int)traitElem);
+                    //maxEclusive = (int)ETraitUpgradeElement.END;
+                    //ETraitUpgradeElement traitElem = curTraitElem;
+                    //while(traitElem == curTraitElem)
+                    //{
+                    //    traitElem = (ETraitUpgradeElement)Random.Range(0, maxEclusive);
+                    //}
+                    //TestUIManager.Instance.AddUpgradeElem(upgradeType, (int)traitElem);
                 }
                 break;
         }
     }
 
+    public void PlayerUpgrade() => Upgrade(EUpgradeType.PLAYER);
+
+    public void TraitUpgrade() => Upgrade(EUpgradeType.TRAIT);
+
+    public void SetCurTraitElem(ETraitUpgradeElement elem) => curTraitElem = elem;
     public void UpdateResNeed(EUpgradeType upgradeType)
     {
         switch(upgradeType)
@@ -248,8 +260,13 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
                  // 여기서 처리 x
                 break;
             case EUpgradeType.PLAYER:
-            case EUpgradeType.TRAIT:
                 PlayerUpgradeNeedResCnt += PlayerUpgradeNeedResCnt / 2;
+                TestUIManager.Instance.SetPlayerCostTxt(PlayerUpgradeNeedResCnt);
+                break;
+            case EUpgradeType.TRAIT:
+                TraitUpgradeNeedResCnt += TraitUpgradeNeedResCnt / 2;
+                TestUIManager.Instance.SetTraitCostTxt(TraitUpgradeNeedResCnt);
+                //UpdateCostText();
                 break;
         }
     }

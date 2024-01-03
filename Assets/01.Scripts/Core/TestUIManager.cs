@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -26,22 +27,30 @@ public class TestUIManager : MonoSingleton<TestUIManager>
     [SerializeField] GameObject _PlayerUpgradePanel;
     [SerializeField] GameObject _TraitUpgradePanel;
 
+    [Header("Cost")]
+    [SerializeField] TextMeshProUGUI _playerCostTxt; 
+    [SerializeField] TextMeshProUGUI _traitCostTxt; 
+
+
     public override void Init()
     {
     }
 
-    public void UpgradeBase()
-    {
-        UpgradeManager.Instance.Upgrade(EUpgradeType.BASE);
-    }
-    public void UpgradePlayer()
-    {
-        UpgradeManager.Instance.Upgrade(EUpgradeType.PLAYER);
-    }
-    public void UpgradeTrait()
-    {
-        UpgradeManager.Instance.Upgrade(EUpgradeType.TRAIT);
-    }
+    //public void UpgradeBase()
+    //{
+    //    UpgradeManager.Instance.Upgrade(EUpgradeType.BASE);
+    //}
+    //public void UpgradePlayer()
+    //{
+    //    UpgradeManager.Instance.Upgrade(EUpgradeType.PLAYER);
+    //}
+    //public void UpgradeTrait()
+    //{
+    //    UpgradeManager.Instance.Upgrade(EUpgradeType.TRAIT);
+    //}
+
+    public void SetPlayerCostTxt(int cost) => _playerCostTxt.text = cost.ToString();
+    public void SetTraitCostTxt(int cost) => _traitCostTxt.text = cost.ToString();
 
     public void BaseUpgradePanel()
     {
@@ -69,7 +78,7 @@ public class TestUIManager : MonoSingleton<TestUIManager>
                 playerUpgradeContainer.SetUpgrade(playerCardTemplate, upgradeType, elem);
                 break;
             case EUpgradeType.TRAIT:
-                traitUpgradeContainer.SetUpgrade(traitCardTemplate, upgradeType, elem);
+                //traitUpgradeContainer.SetUpgrade(traitCardTemplate, upgradeType, elem);
                 break;
         }
     }
