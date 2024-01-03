@@ -23,6 +23,9 @@ public abstract class BaseUnit : Entity
     protected Transform _target;
     public Transform Target => _target;
 
+    protected Vector3 _holdPosition;
+    public Vector3 HoldPosition { get => _holdPosition; set => _holdPosition = value; }
+
     public override void Awake()
     {
         base.Awake();

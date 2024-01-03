@@ -31,7 +31,8 @@ public class PlayerController : Entity, IDetectable
     }
 
     private PlayerLineConnect _lineConnect;
-
+    private ParticleSystem _walkParticle;
+    
     public PlayerLineConnect LineConnect
     {
         get
@@ -47,7 +48,7 @@ public class PlayerController : Entity, IDetectable
     public Hammer PlayerHammer { get; private set; }
     public Interactable Target { get; set; }
 
-    public Action<PlayerController> OnHammerDownEvent;
+    public Action OnHammerDownEvent;
     
     private Transform _visualTrm;
 
@@ -56,26 +57,42 @@ public class PlayerController : Entity, IDetectable
         base.Awake();
         _lineConnect = GetComponent<PlayerLineConnect>();
         _visualTrm = transform.Find("Visual");
+        _walkParticle = _visualTrm.Find("WalkParticle").GetComponent<ParticleSystem>();
         PlayerHammer = _visualTrm.GetComponentInChildren<Hammer>();
         PlayerHammer.SetPlayerController(this);
         CharacterControllerCompo = GetComponent<CharacterController>();
         AnimatorCompo = _visualTrm.GetComponent<Animator>();
+        OnDead += OnDeadHandle;
     }
 
     public void SetVelocity(Vector3 dir)
     {
+        if (!_walkParticle.isPlaying)
+        {
+            _walkParticle.Play();
+        }
+        
         CharacterControllerCompo.Move(dir);
     }
 
-    public void Rotate(Vector3 dir)
+    public void Rotate(Vector3 dir, bool lerp = true)
     {
         var currentRotation = _visualTrm.rotation;
         var destRotation = Quaternion.LookRotation(dir);
-        _visualTrm.rotation = Quaternion.Lerp(currentRotation, destRotation, _rotateSpeed);
+
+        if (lerp)
+        {
+            _visualTrm.rotation = Quaternion.Lerp(currentRotation, destRotation, _rotateSpeed);
+        }
+        else
+        {
+            _visualTrm.rotation = destRotation;
+        }
     }
     
     public void StopImmediately()
     {
+        _walkParticle.Stop();
         CharacterControllerCompo.Move(Vector3.zero);
     }
     
@@ -103,6 +120,11 @@ public class PlayerController : Entity, IDetectable
     public void ResetAnimationSpeed()
     {
         AnimatorCompo.speed = 1f;
+    }
+
+    private void OnDeadHandle()
+    {
+        // ResManager.Instance.
     }
 
     public override void Init()

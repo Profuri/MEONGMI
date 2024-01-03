@@ -6,4 +6,5 @@ using UnityEngine;
 public class UnitStatSO : EntityStatSO
 {
     public float holdRange;
+    public LayerMask targetLayer;
 }

@@ -28,8 +28,10 @@ public class AttackerAttackState : AttackerState
             _lastAttackTime = Time.time;
             if(BaseUnit.Target.TryGetComponent(out BaseEnemy enemy))
             {
-                enemy.Damaged(_attackerStat.damage);
-                Debug.Log("Attacked");
+                if(!enemy.Dead)
+                {
+                    enemy.Damaged(_attackerStat.damage);
+                }
                 _stateMachine.ChangeState(AttackerUnitStateType.Chase);
             }
         }

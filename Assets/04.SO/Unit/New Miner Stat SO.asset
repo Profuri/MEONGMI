@@ -15,5 +15,8 @@ MonoBehaviour:
   moveSpeed: 10
   maxHp: 50
   holdRange: 10
-  gatherSpeed: 4
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  gatherDuration: 3
   maxResCount: 20

@@ -2295,6 +2295,7 @@ GameObject:
   - component: {fileID: 636818195}
   - component: {fileID: 636818194}
   - component: {fileID: 636818193}
+  - component: {fileID: 636818197}
   m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
@@ -2403,6 +2404,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636818191}
   m_Mesh: {fileID: 4300000, guid: 8865d0e964ac05142a03c9c7f84f265a, type: 3}
+--- !u!114 &636818197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636818191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78886c8b87d9554fb73d83b8fccb068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &669456393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2491,6 +2504,8 @@ GameObject:
   - component: {fileID: 704476409}
   - component: {fileID: 704476408}
   - component: {fileID: 704476412}
+  - component: {fileID: 704476413}
+  - component: {fileID: 704476414}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2538,7 +2553,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _restPhaseTime: 30
-  _raidPhaseTime: 100
   _phaseInfoList:
   - {fileID: 11400000, guid: 43b91bf0a3fdd9e44b9e886701f7408e, type: 2}
   - {fileID: 11400000, guid: ed831fe7ae628254fbfa65688c194aed, type: 2}
@@ -2582,6 +2596,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae0171a78f6ebd4ca51b5e2296ba688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &704476413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704476406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31b435fe6e018ce408dc261e8d7cc36c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &704476414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704476406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9192dc60253d4648a7ed836d056813a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerFollowCam: {fileID: 2024322187}
 --- !u!1001 &772624480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4421,6 +4460,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateSpeed: 30
+  _duration: 0
+  _strength: 0
+  _vibrato: 1
+  _randomness: 0
+  _fadeOut: 0
 --- !u!1 &1694283451
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,6 +4512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02bf62c81d0f4a53bf696c20f21d7153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _distanceInterval: 0
+  _angleInterval: 0
 --- !u!1001 &1760252008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5529,6 +5575,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2024322188}
   - component: {fileID: 2024322187}
+  - component: {fileID: 2024322189}
+  - component: {fileID: 2024322190}
   m_Layer: 0
   m_Name: PlayerFollowCam
   m_TagString: Untagged
@@ -5591,6 +5639,82 @@ Transform:
   - {fileID: 186290384}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0.002}
+--- !u!114 &2024322189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024322186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &2024322190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024322186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &2024971633
 PrefabInstance:
   m_ObjectHideFlags: 0
