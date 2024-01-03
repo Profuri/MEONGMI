@@ -41,6 +41,7 @@ public class ResourceMono : Orb
     private void Remove()
     {
         _playerController.OnHammerDownEvent -= Gather;
+        _playerController = null;
         if (_isOn)
         {
             GetResource();
