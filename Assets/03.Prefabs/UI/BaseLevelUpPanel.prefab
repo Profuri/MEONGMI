@@ -532,8 +532,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1325b0034e339ab4c99c910e012e4a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainTrm: {fileID: 3113894632377759770}
   UpgradeCards: []
-  mainTrm: {fileID: 3113894632377759770}
 --- !u!1 &3472789386394701254
 GameObject:
   m_ObjectHideFlags: 0
