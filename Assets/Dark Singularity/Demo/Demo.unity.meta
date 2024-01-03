@@ -1,5 +1,10 @@
 fileFormatVersion: 2
-guid: cbcfce5f325280d49aa70f6c9002589c
+<<<<<<<< HEAD:Assets/00.Scenes/Unit.meta
+guid: 5213590ba80f5c546b20c6232cb835b6
+folderAsset: yes
+========
+guid: 078bce3c5ee01834689876a7adb2ee5f
+>>>>>>>> main:Assets/99.Assets/GabrielAguiarProductions/VFXGraph_Hits_2020.3_URP_v1.unitypackage.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -2,13 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Android;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
-
-
 
 public class EnemySpawner : MonoSingleton<EnemySpawner>
 {
@@ -61,8 +55,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         int randomAppearEnemyCnt;
         
         _currentEnemyList.Clear();
-        
-        
+
         while (appearMaxEnemyCnt != _currentDeadCnt)
         {
             if (appearMaxEnemyCnt > _currentEnemyList.Count)

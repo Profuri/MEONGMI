@@ -24,7 +24,6 @@ public class GameManager : MonoSingleton<GameManager>
     private float _maxDistance;
     public float MaxDistance => _maxDistance;
 
-    
     private void Awake()
     {
         GameManager.Instance.Init();
@@ -41,10 +40,10 @@ public class GameManager : MonoSingleton<GameManager>
         {
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
-        EnemySpawner.Instance.Init();
-        PhaseManager.Instance.Init(); 
         
-        //EnemySpawner.Instance.StartPhase(CurrentPhase);
+        PhaseManager.Instance.Init();
+        EnemySpawner.Instance.Init();
+        EnemySpawner.Instance.StartPhase(PhaseManager.Instance.Phase);
         
         ResManager.Instance.Init();
         //UIManager.Instance.Init();
