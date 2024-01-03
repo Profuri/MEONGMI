@@ -4577,6 +4577,8 @@ MonoBehaviour:
   _baseConnectHole: {fileID: 1069973914}
   _line: {fileID: 1469382823}
   _lineLength: 27
+  _lineConnectToggleTime: 0.5
+  _lineControlCancelTime: 0.5
 --- !u!114 &1557457386
 MonoBehaviour:
   m_ObjectHideFlags: 0

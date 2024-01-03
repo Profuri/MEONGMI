@@ -16,7 +16,7 @@ public class Line : MonoBehaviour
         _lineRenderer = GetComponent<LineRenderer>();
     }
 
-    private void Update()
+    public void LineUpdate()
     {
         if (_startHole is null || _endHole is null)
         {
