@@ -107,7 +107,7 @@ public class PlayerFeatureChoicePanel : ChoicePanel
         _roulettTrm.DOAnchorPosX(-3225f, 4f).SetEase(Ease.OutQuad).OnComplete(() =>
         {
             //_button.interactable = true;
-            _title.SetText(result.name);
+            _title.SetText(result.Name);
             _description.SetText(result.Description);
 
             _effectImage.gameObject.SetActive(true);

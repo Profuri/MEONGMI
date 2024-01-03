@@ -10,7 +10,7 @@ public class InfoImage : MonoBehaviour
 
     public void Setting(UpgradeElemInfoSO so)
     {
-        Debug.Log(so.name);
+        Debug.Log(so.Name);
         myInfo = so;
     }
 }

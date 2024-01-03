@@ -6,7 +6,7 @@ public class UpgradeElemInfoSO : ScriptableObject
 {
     public EUpgradeType UpgradeType;
     //public bool canDuplication;
-    public string name;
+    public string Name;
     [TextArea]
     public string Description;
     public Sprite Image;
