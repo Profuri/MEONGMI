@@ -93,8 +93,6 @@ MonoBehaviour:
   _baseConnectHole: {fileID: 0}
   _line: {fileID: 0}
   _lineLength: 10
-  _lineConnectToggleTime: 0
-  _lineControlCancelTime: 0
 --- !u!195 &750400313902045047
 NavMeshAgent:
   m_ObjectHideFlags: 0

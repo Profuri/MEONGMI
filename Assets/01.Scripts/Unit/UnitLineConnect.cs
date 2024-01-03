@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UnitLineConnect : MonoBehaviour
 {
@@ -13,15 +14,7 @@ public class UnitLineConnect : MonoBehaviour
     [SerializeField] private float _lineLength;
     public float LineLength => _lineLength;
 
-    [SerializeField] private float _lineConnectToggleTime;
-    [SerializeField] private float _lineControlCancelTime;
-
     private Vector3 _lastConnectPos;
-
-    private float _toggleTimer;
-    private float _cancelTimer;
-
-    private bool _updatingToggle;
 
     private BaseUnit _unit;
 
@@ -32,45 +25,20 @@ public class UnitLineConnect : MonoBehaviour
         _unit = GetComponent<BaseUnit>();
     }
 
+    //private void Start()
+    //{
+    //    _line.SetStartHole(_baseConnectHole);
+    //    _line.SetEndHole(_unitConnectHolder);
+
+    //    ConnectLine();
+    //}
+
     private void Update()
     {
-        if (_updatingToggle)
-        {
-            if (Vector3.Distance(_lastConnectPos, _unitRoot.position) > 3f)
-            {
-                return;
-            }
-
-            _toggleTimer += Time.deltaTime;
-            _cancelTimer = 0f;
-            if (_toggleTimer >= _lineConnectToggleTime)
-            {
-                if (_connect)
-                {
-                    DetachLine();
-                }
-                else
-                {
-                    ConnectLine();
-                }
-
-                _updatingToggle = false;
-            }
-        }
-
         if (_connect)
         {
             _lastConnectPos = _unitConnectHole.position;
             _line.LineUpdate();
-        }
-
-        if (_toggleTimer >= 0f)
-        {
-            _cancelTimer += Time.deltaTime;
-            if (_cancelTimer >= _lineControlCancelTime)
-            {
-                _toggleTimer = 0f;
-            }
         }
     }
 
@@ -94,6 +62,9 @@ public class UnitLineConnect : MonoBehaviour
 
     private void ConnectLine()
     {
+        _line.SetStartHole(_baseConnectHole);
+        _line.SetEndHole(_unitConnectHolder);
+
         _connect = true;
     }
 
@@ -108,10 +79,18 @@ public class UnitLineConnect : MonoBehaviour
         _lineLength = lenght;
     }
 
-    public void Init(Line line, Transform baseConnectHole)
+    public void SetLine(Line line)
     {
         _line = line;
-        _baseConnectHole = baseConnectHole;
+    }
+
+    public void SetBaseConnectHole(Transform trm)
+    {
+        _baseConnectHole = trm;
+    }
+
+    public void Connect()
+    {
         _line.SetStartHole(_baseConnectHole);
         _line.SetEndHole(_unitConnectHolder);
         ConnectLine();

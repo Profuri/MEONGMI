@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: New Attacker Stat SO
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  hp: 20
+  maxHp: 50
+  holdRange: 20
   attackDuration: 1.5
-  damage: 4
-  findArea: 3
+  damage: 10000
+  findArea: 10
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  attackRange: 2

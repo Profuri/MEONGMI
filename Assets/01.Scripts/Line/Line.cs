@@ -18,10 +18,6 @@ public class Line : PoolableMono
 
     public override void Init()
     {
-        SetStartHole(_startHole);
-        SetEndHole(_endHole);
-
-        LineUpdate();
     }
 
     public void LineUpdate()

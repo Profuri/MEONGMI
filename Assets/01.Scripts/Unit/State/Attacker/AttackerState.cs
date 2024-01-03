@@ -6,10 +6,13 @@ using Random = UnityEngine.Random;
 
 public class AttackerState : UnitState
 {
-    protected Vector3 _holdPosition;
     protected Vector3 _destination;
 
     protected AttackerStatSO _attackerStat;
+
+    protected AttackerUnit _attackerUnit => BaseUnit as AttackerUnit;
+
+    protected int _speedHash = Animator.StringToHash("speed");
 
     public AttackerState(StateMachine stateMachine, Entity owner, Enum type) : base(stateMachine, owner, type)
     {

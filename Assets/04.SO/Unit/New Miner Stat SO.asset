@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: New Miner Stat SO
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  hp: 20
+  maxHp: 50
+  holdRange: 10
   gatherSpeed: 4
   maxResCount: 20
