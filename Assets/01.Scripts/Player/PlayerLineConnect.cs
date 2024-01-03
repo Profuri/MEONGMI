@@ -32,7 +32,10 @@ public class PlayerLineConnect : MonoBehaviour
     {
         _playerController = GetComponent<PlayerController>();
         _playerController.InputReader.OnLineConnectEvent += ConnectHandler;
-        
+    }
+
+    private void Start()
+    {
         _line.SetStartHole(_baseConnectHole);
         _line.SetEndHole(_playerConnectHolder);
         

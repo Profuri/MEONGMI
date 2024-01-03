@@ -19,7 +19,7 @@ public class EnemyAnimator : MonoBehaviour
     protected readonly int _dissolveHash = Shader.PropertyToID("_Dissolve");
 
     
-    protected List<SkinnedMeshRenderer> _meshRendererList = new List<SkinnedMeshRenderer>();
+    protected List<Renderer> _meshRendererList = new List<Renderer>();
     
     private Coroutine _dissolveCoroutine;
     
@@ -27,6 +27,8 @@ public class EnemyAnimator : MonoBehaviour
     {
         _baseEnemy = baseEnemy;
         _animator = animator;
+        
+         GetComponentsInChildren(_meshRendererList);
     }
 
     public void OnHitEnd()
@@ -57,13 +59,17 @@ public class EnemyAnimator : MonoBehaviour
     {
         float timer = 0f;
 
-        float value = Mathf.Clamp(startValue, endValue, timer / time);
         while (timer <= time)
         {
             timer += Time.deltaTime;
+            float value = Mathf.Lerp(startValue, endValue, timer / time);
+            
+            Debug.Log($"Value: {value}");
 
-            foreach (SkinnedMeshRenderer meshRenderer in _meshRendererList)
+            foreach (Renderer meshRenderer in _meshRendererList)
             {
+                // Debug.Log($"MeshRenderer: {meshRenderer}");
+                // meshRenderer.material.SetFloat(_dissolveHash,value);
                 MaterialPropertyBlock matPropBlock = new MaterialPropertyBlock();
                 meshRenderer.GetPropertyBlock(matPropBlock);
                 matPropBlock.SetFloat(_dissolveHash,value);
