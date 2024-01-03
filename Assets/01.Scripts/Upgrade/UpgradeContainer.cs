@@ -5,77 +5,35 @@ using UnityEngine;
 
 public class UpgradeContainer : MonoBehaviour
 {
+    [SerializeField] Transform _mainTrm;
     public List<GameObject> UpgradeCards;
 
     private List<BaseUpgradeElemSO> baseElemInfos;
     private List<PlayerUpgradeElemSO> playerElemInfos;
     private List<TraitUpgradeElemSO> traitElemInfos;
 
-    public void Awake()
-    {
-        LoadUpdateInfos();
-    }
-
-    private void LoadUpdateInfos()
-    {
-        baseElemInfos = new();
-        playerElemInfos = new();
-        traitElemInfos = new();
-
-        string[] baseAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Base" });
-
-        foreach (string assetName in baseAssetNames)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID를 기반으로 경로
-            BaseUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<BaseUpgradeElemSO>(assetPath);
-            if (itemData != null)
-            {
-                baseElemInfos.Add(itemData);
-                Debug.Log(itemData.name);
-            }
-        }
-
-        string[] playerAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Player" });
-
-        foreach (string assetName in playerAssetNames)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID를 기반으로 경로
-            PlayerUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<PlayerUpgradeElemSO>(assetPath);
-            if (itemData != null)
-            {
-                playerElemInfos.Add(itemData);
-                Debug.Log(itemData.name);
-            }
-        }
-
-        string[] traitAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Trait" });
-
-        foreach (string assetName in traitAssetNames)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID를 기반으로 경로
-            TraitUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<TraitUpgradeElemSO>(assetPath);
-            if (itemData != null)
-            {
-                traitElemInfos.Add(itemData);
-                Debug.Log(itemData.name);
-            }
-        }
-    }
-
     public void SetUpgrade(GameObject templateItem, EUpgradeType type, int elemNum)
     {
-        this.gameObject.SetActive(true);
+        baseElemInfos = UpgradeManager.Instance.BaseElemInfos;
+        playerElemInfos = UpgradeManager.Instance.PlayerElemInfos;
+        traitElemInfos = UpgradeManager.Instance.TraitElemInfos;
+        
         if (type == EUpgradeType.BASE)
         {
             //base 3개 띄움
-            for (int i = 0; i < baseElemInfos.Count; i++)
+            if (transform.childCount == 0)
             {
-                GameObject upgradeObj = Instantiate(templateItem, transform);
-                UpgradeCard upgradeUI = upgradeObj.GetComponent<UpgradeCard>();
-                BaseUpgradeElemSO upgradeElem = baseElemInfos[i];
-                upgradeUI.Setting(upgradeElem, ReleaseUpgrade);
-                UpgradeCards.Add(upgradeObj);
+                for (int i = 0; i < baseElemInfos.Count; i++)
+                {
+                    GameObject upgradeObj = Instantiate(templateItem, transform);
+                    BaseUpgradeCard upgradeUI = upgradeObj.GetComponent<BaseUpgradeCard>();
+                    BaseUpgradeElemSO upgradeElem = baseElemInfos[i];
+                    upgradeUI.Setting(upgradeElem, null);
+                    UpgradeCards.Add(upgradeObj);
+                }
             }
+            else
+                Debug.Log("BaseItem이 이미 존재");
         }
         else
         {
@@ -84,6 +42,7 @@ public class UpgradeContainer : MonoBehaviour
             if (type == EUpgradeType.PLAYER)
             {
                 EPlayerUpgradeElement etype = (EPlayerUpgradeElement)elemNum;
+                Debug.Log(etype);
                 PlayerUpgradeElemSO player = playerElemInfos.Find((info) => info.Type == etype);
                 if (player != null)
                     upgradeUI.Setting(player, ReleaseUpgrade);
@@ -113,7 +72,7 @@ public class UpgradeContainer : MonoBehaviour
             Destroy(item);
         });
         UpgradeCards.Clear();
-        gameObject.SetActive(false);
+        _mainTrm.gameObject.SetActive(false);
     }
 
     public void OnDisable()

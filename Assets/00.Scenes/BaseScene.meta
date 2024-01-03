@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/00.Scenes/BaseScene.meta
 guid: 4ff97caf2882b469fb9c03615df0942d
 folderAsset: yes
+========
+guid: a800923e17f09194d870d4da80ff991c
+>>>>>>>> HyungJoo:Assets/Dark Singularity/Demo/Demo.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

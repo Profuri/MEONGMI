@@ -33,7 +33,7 @@ public class PlayerShotState : PlayerState
         var groundPoint = GetGroundPoint();
         var dir = (groundPoint - _player.transform.position).normalized;
         dir.y = 0;
-        _player.PlayerHammer.Shot(BulletType.Missile, dir);
+        _player.PlayerHammer.Shot(BulletType.Normal, dir);
     }
     
     private Vector3 GetGroundPoint()

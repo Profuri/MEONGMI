@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd14fe1d5696ba458f299d9c65fcd43, type: 3}
   m_Name: RecoveryUp
   m_EditorClassIdentifier: 
+  UpgradeType: 2
+  name: "\uCD08\uB2F9 \uD68C\uBCF5\uB7C9 \uC99D\uAC00"
   Description: "\uD50C\uB808\uC774\uC5B4 \uCD08\uB2F9 \uD68C\uBCF5\uB7C9\uC774 \uC99D\uAC00\uD55C\uB2E4."
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 324aa76ac50ea4eae8f0a70ec0bb3e5d, type: 3}
   Type: 5

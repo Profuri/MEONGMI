@@ -27,6 +27,7 @@ public class EnemyChaseState : EnemyState
     
     public override void UpdateState()
     {
+        if (BaseEnemy.ActionData.IsStopped) return;
         BaseEnemy.AnimatorCompo.SetFloat(_speedHash,BaseEnemy.NavMeshAgent.velocity.magnitude);
         
         Vector3 originPos = BaseEnemy.transform.position;
