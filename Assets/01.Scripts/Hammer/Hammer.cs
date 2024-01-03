@@ -32,23 +32,33 @@ public class Hammer : MonoBehaviour
 
         var cnt = _playerController.PlayerStat.shotCnt.GetValue();
         _shotPoint.localEulerAngles = Vector3.zero;
+        _shotPoint.localPosition = new Vector3(0, 3, 0);
 
         if (cnt % 2 == 0)
         {
-            
+            for (var i = 1; i <= cnt / 2; i++)
+            {
+                _shotPoint.localPosition = new Vector3(0, 3, -i * _distanceInterval);
+                var bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
+                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+                
+                _shotPoint.localPosition = new Vector3(0, 3, i * _distanceInterval);
+                bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
+                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+            }
         }
         else
         {
             var bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
             bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
 
-            for (var i = 0; i < cnt / 2; i++)
+            for (var i = 1; i <= cnt / 2; i++)
             {
-                _shotPoint.localEulerAngles = new Vector3(0, 0, -i * _angleInterval);
+                _shotPoint.localEulerAngles = new Vector3(-i * _angleInterval, 0, 0);
                 bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
                 bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
                 
-                _shotPoint.localEulerAngles = new Vector3(0, 0, i * _angleInterval);
+                _shotPoint.localEulerAngles = new Vector3(i * _angleInterval, 0, 0);
                 bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
                 bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
             }

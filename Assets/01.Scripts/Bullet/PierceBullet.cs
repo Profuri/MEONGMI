@@ -8,7 +8,8 @@ public class PierceBullet : Bullet
     public override void Init()
     {
         base.Init();
-        _damagedEntity = new List<Entity>();
+        _damagedEntity ??= new List<Entity>();
+        _damagedEntity.Clear();
     }
 
     public override void Update()
