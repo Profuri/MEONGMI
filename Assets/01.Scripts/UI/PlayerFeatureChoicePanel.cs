@@ -91,6 +91,9 @@ public class PlayerFeatureChoicePanel : ChoicePanel
             Sequence seq = DOTween.Sequence();
             seq.Append(_effectPanel.DOFade(0.7f, 0.25f));
             seq.Insert(0, _effectImage.transform.DOScale(new Vector3(1.7f, 1.7f, 1.7f), 0.25f));
+            seq.AppendInterval(2);
+            seq.OnComplete(() => UpgradeManager.Instance.ApplyUpgradeTrait(result.Type));
+            Debug.Log(result.Type.ToString());
         });
 
         return result;

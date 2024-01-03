@@ -232,4 +232,20 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         }
     }
 
+
+    public void ApplyUpgradeTrait(ETraitUpgradeElement upgradeElem)
+    {
+
+    }
+    public void ApplyUpgradePlayer(EPlayerUpgradeElement upgradeElem)
+    {
+
+    }
+    
+    public void ApplyUpgradeBase(EBaseUpgradeElement upgradeElem)
+    {
+
+    }
+
+
 }
