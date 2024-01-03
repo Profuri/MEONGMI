@@ -1,24 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.InputSystem.OnScreen;
+
 public class PhaseManager : MonoSingleton<PhaseManager>
 {
     [SerializeField] private float _restPhaseTime;
-    [SerializeField] private float _raidPhaseTime;
-    
-    [SerializeField] 
-    private List<PhaseInfoSO> _phaseInfoList = new List<PhaseInfoSO>();
+
+    [SerializeField] private List<PhaseInfoSO> _phaseInfoList = new List<PhaseInfoSO>();
     public List<PhaseInfoSO> PhaseInfoList => _phaseInfoList;
-    
+
     public int Phase { get; private set; }
-    
+
     private PhaseType _phase;
     private bool _phaseStart;
 
     private float _currentTime;
 
-    private void Awake()
+    public event Action<float, float> OnRestTimeEvent;
+    
+    public override void Init()
     {
+        Phase = 0;
+        PhaseStart();
     }
+    
     public void PhaseStart()
     {
         _phaseStart = true;
@@ -36,21 +42,15 @@ public class PhaseManager : MonoSingleton<PhaseManager>
         {
             return;
         }
-
-        _currentTime += Time.deltaTime;
-
+        
         if (_phase == PhaseType.Rest)
         {
+            _currentTime += Time.deltaTime;
+            Debug.Log($"CurrentTime: {_currentTime} RestPhaseTime: {_restPhaseTime}");
+            OnRestTimeEvent?.Invoke(_currentTime,_restPhaseTime);
             if (_currentTime >= _restPhaseTime)
             {
                 ChangePhase(PhaseType.Raid);
-            }
-        }
-        else
-        {
-            if (_currentTime >= _raidPhaseTime)
-            {
-                ChangePhase(PhaseType.Rest);
             }
         }
     }
@@ -58,12 +58,13 @@ public class PhaseManager : MonoSingleton<PhaseManager>
     public void ChangePhase(PhaseType type)
     {
         _phase = type;
-    }
 
-    public override void Init()
-    {
-        Phase = 0;
-        EnemySpawner.Instance.StartPhase(0);
-        
+        _currentTime = 0f;
+        if (type == PhaseType.Raid)
+        {
+            EnemySpawner.Instance.StartPhase(Phase);
+            Phase++;
+        }
     }
 }
+

@@ -44,6 +44,8 @@ public class GameManager : MonoSingleton<GameManager>
     public override void Init()
     {
         MainCam = Camera.main;
+
+        SceneManagement.Instance.Init();
         PoolManager.Instance = new PoolManager(transform);
         foreach (var pair in _poolingList.pairs)
         {

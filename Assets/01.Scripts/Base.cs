@@ -18,10 +18,10 @@ public class Base : MonoBehaviour,IDamageable
     public void Damaged(float damage)
     {
         //이펙트 소환.
-        // VFXPlayer vfxPlayer = PoolManager.Instance.Pop("ResHitParticle") as VFXPlayer;
-        // Vector3 offset = Vector3.up * 1.5f;
-        // vfxPlayer.transform.position = transform.position + offset;
-        // vfxPlayer.PlayEffect();
+        VFXPlayer vfxPlayer = PoolManager.Instance.Pop("ResHitParticle") as VFXPlayer;
+        Vector3 offset = Vector3.up * 0.75f;
+        vfxPlayer.transform.position = _arc.transform.position + offset;
+        vfxPlayer.PlayEffect();
         _arc.ShakePosition();
         ResManager.Instance.UseResource((int)damage);
     }

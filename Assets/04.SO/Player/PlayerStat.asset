@@ -19,7 +19,7 @@ MonoBehaviour:
     _baseValue: 0
     modifiers: []
   damage:
-    _baseValue: 7
+    _baseValue: 500
     modifiers: []
   recovery:
     _baseValue: 0

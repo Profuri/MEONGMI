@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 3169075392332028219}
   - component: {fileID: 671466324118795071}
   - component: {fileID: 1310942658603375642}
+  - component: {fileID: 8023427703670621195}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -249,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolingList: {fileID: 11400000, guid: b9b664e83f72d064989a60ded7f889d5, type: 2}
-  _maxDistance: 0
+  _maxDistance: 30
 --- !u!114 &3169075392332028219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +277,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _restPhaseTime: 30
-  _raidPhaseTime: 100
   _phaseInfoList:
   - {fileID: 11400000, guid: 43b91bf0a3fdd9e44b9e886701f7408e, type: 2}
   - {fileID: 11400000, guid: ed831fe7ae628254fbfa65688c194aed, type: 2}
@@ -291,5 +291,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab5589f4cb3263945bc3dff07c8cebd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8023427703670621195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7683668352225456390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31b435fe6e018ce408dc261e8d7cc36c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
