@@ -18,6 +18,8 @@ TagManager:
   - Monster
   - Map
   - 
+  - Unit
+  - MiniMap
   - 
   - 
   - 

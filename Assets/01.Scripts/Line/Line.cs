@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Line : MonoBehaviour
+public class Line : PoolableMono
 {
     [SerializeField] private float _interval;
 
@@ -18,6 +18,14 @@ public class Line : MonoBehaviour
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _startPointParticle = transform.Find("StartParticle").GetComponent<ParticleSystem>();
+    }
+
+    public override void Init()
+    {
+        SetStartHole(_startHole);
+        SetEndHole(_endHole);
+
+        LineUpdate();
     }
 
     public void LineUpdate()
