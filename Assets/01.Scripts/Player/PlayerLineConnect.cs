@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 public class PlayerLineConnect : MonoBehaviour
 {
     [SerializeField] private Transform _playerRoot;
+    [SerializeField] private Transform _playerConnectHolder;
     [SerializeField] private Transform _playerConnectHole;
     [SerializeField] private Transform _baseConnectHole;
 
@@ -33,7 +34,7 @@ public class PlayerLineConnect : MonoBehaviour
         _playerController.InputReader.OnLineConnectEvent += ConnectHandler;
         
         _line.SetStartHole(_baseConnectHole);
-        _line.SetEndHole(_playerConnectHole);
+        _line.SetEndHole(_playerConnectHolder);
         
         ConnectLine();
     }
@@ -84,6 +85,7 @@ public class PlayerLineConnect : MonoBehaviour
     {
         if (_connect)
         {
+            _playerConnectHolder.position = _playerConnectHole.position;
             LerpPositionInCircle();
         }
     }
