@@ -1,7 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PierceBullet : Bullet
 {
+    private List<Entity> _damagedEntity;
+
+    public override void Init()
+    {
+        base.Init();
+        _damagedEntity = new List<Entity>();
+    }
+
     public override void Update()
     {
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_dir), 0.1f);
@@ -13,7 +22,14 @@ public class PierceBullet : Bullet
             {
                 if (cols[i].TryGetComponent<Entity>(out var entity))
                 {
-                    entity.Damaged(_damage);
+                    if (!entity.Dead && !_damagedEntity.Find(x => x.GetHashCode() == entity.GetHashCode()))
+                    {
+                        entity.Damaged(_damage);
+                        var particle = PoolManager.Instance.Pop($"{_bulletType.ToString()}Hit") as PoolableParticle;
+                        particle.SetPositionAndRotation(entity.transform.position);
+                        particle.Play();
+                        _damagedEntity.Add(entity);
+                    }
                 }    
             }
         }
