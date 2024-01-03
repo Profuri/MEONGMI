@@ -22,7 +22,8 @@ public class PlayerController : Entity, IDetectable
     public BulletType BulletType => _bulletType;
 
     private PlayerLineConnect _lineConnect;
-
+    private ParticleSystem _walkParticle;
+    
     public PlayerLineConnect LineConnect
     {
         get
@@ -47,14 +48,21 @@ public class PlayerController : Entity, IDetectable
         base.Awake();
         _lineConnect = GetComponent<PlayerLineConnect>();
         _visualTrm = transform.Find("Visual");
+        _walkParticle = _visualTrm.Find("WalkParticle").GetComponent<ParticleSystem>();
         PlayerHammer = _visualTrm.GetComponentInChildren<Hammer>();
         PlayerHammer.SetPlayerController(this);
         CharacterControllerCompo = GetComponent<CharacterController>();
         AnimatorCompo = _visualTrm.GetComponent<Animator>();
+        OnDead += OnDeadHandle;
     }
 
     public void SetVelocity(Vector3 dir)
     {
+        if (!_walkParticle.isPlaying)
+        {
+            _walkParticle.Play();
+        }
+        
         CharacterControllerCompo.Move(dir);
     }
 
@@ -75,6 +83,7 @@ public class PlayerController : Entity, IDetectable
     
     public void StopImmediately()
     {
+        _walkParticle.Stop();
         CharacterControllerCompo.Move(Vector3.zero);
     }
     
@@ -102,6 +111,11 @@ public class PlayerController : Entity, IDetectable
     public void ResetAnimationSpeed()
     {
         AnimatorCompo.speed = 1f;
+    }
+
+    private void OnDeadHandle()
+    {
+        // ResManager.Instance.
     }
 
     public override void Init()

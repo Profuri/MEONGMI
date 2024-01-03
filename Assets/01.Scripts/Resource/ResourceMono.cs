@@ -101,9 +101,9 @@ public class ResourceMono : Orb
 
     public void SetScale(float scale)
     {
-        if (scale < 0.5f)
+        if (scale < 1f)
         {
-            scale = 0.5f;
+            scale = 1f;
         }
         
         transform.localScale = new Vector3(scale, scale, scale);

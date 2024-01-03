@@ -26,6 +26,10 @@ public class PlayerChargingState : PlayerState
         {
             _player.SetVelocity(movementInput * movementSpeed);
         }
+        else
+        {
+            _player.StopImmediately();
+        }
         
         if (groundPoint != -Vector3.one)
         {
