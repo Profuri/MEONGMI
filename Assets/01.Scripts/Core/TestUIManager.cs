@@ -68,6 +68,5 @@ public class TestUIManager : MonoSingleton<TestUIManager>
                 traitUpgradeContainer.SetUpgrade(traitCardTemplate, upgradeType, elem);
                 break;
         }
-
     }
 }

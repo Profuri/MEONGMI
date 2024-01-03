@@ -32,7 +32,7 @@ public class PlayerStatChoicePanel : ChoicePanel
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K) && _isRolling == false)
+        if(Input.GetKeyDown(KeyCode.K))
         {
             RollImage();
         }
@@ -76,7 +76,7 @@ public class PlayerStatChoicePanel : ChoicePanel
         _description.SetText(_upgradeCard.Info.Description);
         _button.enabled = true;
         _backglow.SetActive(true);
-        _isRolling = false;
+        //_isRolling = false;
     }
 
     private T[] ShuffleArray<T>(T[] array)
