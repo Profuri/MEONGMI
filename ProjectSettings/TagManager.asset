@@ -16,6 +16,8 @@ TagManager:
   - Base
   - Orb
   - Monster
+  - Map
+  - 
   - Unit
   - MiniMap
   - 

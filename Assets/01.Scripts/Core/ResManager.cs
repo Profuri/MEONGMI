@@ -6,13 +6,15 @@ using UnityEngine;
 public class ResManager : MonoSingleton<ResManager>
 {
     [SerializeField] private BaseStatSO _baseStatSO;
-
+    private ResSpawner _resSpawner;
+    
     public int ResourceCnt { get; private set; }
+
     public event Action OnResourceToZero;
 
     public override void Init()
     {
-
+        _resSpawner = new ResSpawner(PhaseManager.Instance.PhaseInfoList);
     }
 
     public bool CanUseResource(int resourceCnt) => ResourceCnt >= resourceCnt;

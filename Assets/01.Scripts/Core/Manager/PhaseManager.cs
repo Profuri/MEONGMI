@@ -1,15 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
-
 public class PhaseManager : MonoSingleton<PhaseManager>
 {
     [SerializeField] private float _restPhaseTime;
     [SerializeField] private float _raidPhaseTime;
-
+    
+    [SerializeField] 
+    private List<PhaseInfoSO> _phaseInfoList = new List<PhaseInfoSO>();
+    public List<PhaseInfoSO> PhaseInfoList => _phaseInfoList;
+    
+    public int Phase { get; private set; }
+    
     private PhaseType _phase;
     private bool _phaseStart;
 
     private float _currentTime;
 
+    private void Awake()
+    {
+    }
     public void PhaseStart()
     {
         _phaseStart = true;
@@ -53,5 +62,8 @@ public class PhaseManager : MonoSingleton<PhaseManager>
 
     public override void Init()
     {
+        Phase = 0;
+        EnemySpawner.Instance.StartPhase(0);
+
     }
 }

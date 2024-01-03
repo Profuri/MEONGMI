@@ -15,3 +15,6 @@ MonoBehaviour:
   enemyList:
   - {fileID: 5347434663355265045, guid: 720e9c5bad004434daa745e5c9e6135a, type: 3}
   - {fileID: 7104032267645828274, guid: d325e6779f172dd4e808db3da1efc6cf, type: 3}
+  - {fileID: 2327648150561147126, guid: 6f52f385bbdb15740b92dc521858e1e0, type: 3}
+  - {fileID: 2327648150561147126, guid: 1be81daff5fa4184d987ad6304f93ab0, type: 3}
+  - {fileID: 3909454726733665303, guid: e64cba6da66f6784db476c0acb9e7c44, type: 3}

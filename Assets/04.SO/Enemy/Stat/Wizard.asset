@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Wizard
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  hp: 10
+  maxHp: 50

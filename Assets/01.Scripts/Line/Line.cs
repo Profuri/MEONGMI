@@ -17,7 +17,6 @@ public class Line : PoolableMono
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
-
         _startPointParticle = transform.Find("StartParticle").GetComponent<ParticleSystem>();
     }
 

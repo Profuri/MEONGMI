@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Golem
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  hp: 50
+  maxHp: 400
