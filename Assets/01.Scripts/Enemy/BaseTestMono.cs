@@ -5,11 +5,14 @@ using UnityEngine.VFX;
 
 public class BaseTestMono : MonoBehaviour
 {
+    [SerializeField] private EntityStatSO _entityStatSO;
+    private float _hp;
 
     private void Awake()
     {
         _hp = _entityStatSO.maxHp;
     }
+
     public void Damaged(float damage)
     {
         VFXPlayer vfxPlayer = PoolManager.Instance.Pop("ResHitParticle") as VFXPlayer;
