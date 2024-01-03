@@ -25,6 +25,7 @@ public class PlayerGatherState : PlayerState
     private void GatheringFinishHandle()
     {
         Debug.Log("!!");
+        _player.OnHammerDownEvent?.Invoke(_player);
         _stateMachine.ChangeState(PlayerStateType.Idle);
     }
 }

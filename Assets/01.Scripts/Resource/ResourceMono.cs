@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(Collider))]
-public class ResourceMono : PoolableMono
+public class ResourceMono : Orb
 {
     private int _curResCnt;
     private bool _isOn = false;
@@ -20,12 +20,28 @@ public class ResourceMono : PoolableMono
         {
             Debug.Log("Can't add more resource!! ");
         }
+    }
 
-        PoolManager.Instance.Push(this);
+    public override void OnInteract(Entity entity)
+    {
+        base.OnInteract(entity);
+        PlayerController player = entity as PlayerController;
+        player.OnHammerDownEvent += Remove;
+    }
+
+    private void Remove(PlayerController controller)
+    {
+        controller.OnHammerDownEvent -= Remove;
+        if (_isOn)
+        {
+            GetResource();
+            StartDissolveCor(0f,1f,0.7f,() => PoolManager.Instance.Push(this));
+        }
     }
 
     public override void Init()
     {
+        base.Init();
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
 
         StartDissolveCor(1f,0f,3f,() => _isOn = true);
@@ -54,5 +70,11 @@ public class ResourceMono : PoolableMono
     public void SetResourceCnt(int cnt)
     {
         _curResCnt = cnt;
+    }
+
+    public void SetScale(float scale)
+    {
+        transform.localScale = new Vector3(scale, scale, scale);
+        _interactRadius = scale + 1f;
     }
 }

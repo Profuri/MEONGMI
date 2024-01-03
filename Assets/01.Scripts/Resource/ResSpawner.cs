@@ -43,7 +43,7 @@ public class ResSpawner
                 int resCnt = Mathf.CeilToInt(Vector3.Distance(randomPos,baseTrmPos));
                 //제곱을 해
                 ResourceMono resource = PoolManager.Instance.Pop("ResourceMono") as ResourceMono;
-                resource.transform.localScale = new Vector3(Mathf.Sqrt(resCnt * 0.5f),Mathf.Sqrt(resCnt * 0.5f),Mathf.Sqrt(resCnt * 0.5f));
+                resource.SetScale(Mathf.Sqrt(resCnt * 0.5f));
                 resCnt *= resCnt;
                 resource.SetResourceCnt(resCnt);
                 resource.transform.position = randomPos;
