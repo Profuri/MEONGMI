@@ -12,6 +12,7 @@ namespace InputControl
         
         public event InputEventListener OnMouseLeftClickEvent = null;
         public event InputEventListener OnMouseRightClickEvent = null;
+        public event InputEventListener<bool> OnLineConnectEvent = null;
 
         private InputControls _inputControls;
 
@@ -54,6 +55,18 @@ namespace InputControl
             if (context.started || context.canceled)
             {
                 OnMouseRightClickEvent?.Invoke();
+            }
+        }
+
+        public void OnLineConnect(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                OnLineConnectEvent?.Invoke(true);
+            }
+            else if (context.canceled)
+            {
+                OnLineConnectEvent?.Invoke(false);
             }
         }
     }

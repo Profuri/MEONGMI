@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using System.Linq;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -12,7 +8,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         get
         {
-            if (_playerController == null)
+            if (_playerController is null)
             {
                 _playerController = FindObjectOfType<PlayerController>();
             }
@@ -42,8 +38,8 @@ public class GameManager : MonoSingleton<GameManager>
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
 
-        EnemySpawner.Instance.Init();
-        EnemySpawner.Instance.StartPhase(0);
+        // EnemySpawner.Instance.Init();
+        // EnemySpawner.Instance.StartPhase(0);
         
         ResManager.Instance.Init();
         //UIManager.Instance.Init();
