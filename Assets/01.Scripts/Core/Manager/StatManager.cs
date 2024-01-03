@@ -24,11 +24,16 @@ public class StatManager : MonoSingleton<StatManager>
     [SerializeField] private int AddUnitMaxValue;
     [SerializeField] private float AddMovementRangeValue;
 
-    [Header("TraitStat")]
-    public Dictionary<ETraitUpgradeElement, bool> traitDicionary;
+   // [Header("TraitStat")]
+    public Dictionary<ETraitUpgradeElement, bool> TraitDicionary;
 
+    public ETraitUpgradeElement CurTrait;
+
+    [field:SerializeField]
     public int MaxResValue { get; set; }
+    [field:SerializeField]
     public int UnitMaxValue { get; set; }
+    [field:SerializeField]
     public float MovementRange { get; set; }
 
   
@@ -43,14 +48,17 @@ public class StatManager : MonoSingleton<StatManager>
         SetTraitInit();
         BaseInit();
     }
-    
+
+
     public void SetTraitInit()
     {
-        traitDicionary ??= new Dictionary<ETraitUpgradeElement, bool>();
+        TraitDicionary = new Dictionary<ETraitUpgradeElement, bool>();
         foreach (ETraitUpgradeElement type in Enum.GetValues(typeof(ETraitUpgradeElement)))
         {
-            traitDicionary.Add(type, false);
+            Debug.Log(type.ToString());
+            TraitDicionary.Add(type, false);
         }
+        CurTrait = ETraitUpgradeElement.NONE;
     }
 
     public void BaseInit()
@@ -126,18 +134,30 @@ public class StatManager : MonoSingleton<StatManager>
 
     public void SetTrait(ETraitUpgradeElement elem)
     {
-        foreach (var pair in traitDicionary)
-        {
-            traitDicionary[pair.Key] = false;
-        };
+        Debug.Log(TraitDicionary.Count);
+        //foreach (var pair in TraitDicionary)
+        //{
+        //    Debug.Log(pair);
+        //    TraitDicionary[pair.Key] = false;
+        //};
 
-        traitDicionary[elem] = true;
+        for(int i = -1; i < TraitDicionary.Count - 1; i++)
+        {
+            TraitDicionary[(ETraitUpgradeElement)i] = false;
+        }
+
+        TraitDicionary[elem] = true;
+
+        CurTrait = elem;
     }
 
     public ETraitUpgradeElement GetCurTrait()
     {
-        foreach (var pair in traitDicionary)
+        foreach (var pair in TraitDicionary)
         {
+            if (pair.Key == ETraitUpgradeElement.NONE || pair.Key == ETraitUpgradeElement.END)
+                continue;
+
             if(pair.Value)
                 return pair.Key;
         };

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EntityStat
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  hp: 30
+  maxHp: 10

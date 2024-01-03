@@ -274,6 +274,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     public void ApplyUpgradeTrait(ETraitUpgradeElement upgradeElem)
     {
+        Debug.Log(upgradeElem);
         StatManager.Instance.SetTrait(upgradeElem);
     }
 
