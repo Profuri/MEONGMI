@@ -90,7 +90,13 @@ public class PlayerController : Entity, IDetectable
     {
         _stateMachine.Initialize(this, PlayerStateType.Idle);
     }
-    
+
+    public override void Damaged(float damage)
+    {
+        base.Damaged(damage);
+        TestUIManager.Instance.IngameUI.UpdatePlayerHP();
+    }
+
     public void SetAnimationSpeed(float speed)
     {
         AnimatorCompo.speed = speed;

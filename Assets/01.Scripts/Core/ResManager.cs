@@ -16,14 +16,28 @@ public class ResManager : MonoSingleton<ResManager>
     public int PlayerResourceCnt
     {
         get { return playerResourceCnt; }
-        private set { Mathf.Clamp(playerResourceCnt, 0, StatManager.Instance.GetPlayerResMax()); }
+        private set 
+        {
+            if (value != playerResourceCnt)
+            {
+                playerResourceCnt = Mathf.Clamp(playerResourceCnt, 0, StatManager.Instance.GetPlayerResMax()); 
+                TestUIManager.Instance.IngameUI.UpdatePlayerResource();
+            }
+        }
     }
 
     private int baseResourceCnt;
     public int BaseResourceCnt
     {
         get { return baseResourceCnt; }
-        private set { Mathf.Clamp(baseResourceCnt, 0, StatManager.Instance.MaxBaseResValue); }
+        private set 
+        {
+            if (value != playerResourceCnt)
+            {
+                baseResourceCnt = Mathf.Clamp(baseResourceCnt, 0, StatManager.Instance.MaxBaseResValue);
+                TestUIManager.Instance.IngameUI.UpdateBaseResource();
+            }
+        }
     }
 
     public event Action OnResourceToZero;

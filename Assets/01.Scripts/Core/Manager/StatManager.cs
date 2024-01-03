@@ -164,7 +164,7 @@ public class StatManager : MonoSingleton<StatManager>
                 GameManager.Instance.PlayerController.SetBullet(BulletType.Transition);
                 break;
         }
-        TestUIManager.Instance.IngameHUD.TraitsBarUpdate(CurTrait);
+        TestUIManager.Instance.IngameUI.TraitsBarUpdate(CurTrait);
     }
 
     public ETraitUpgradeElement GetCurTrait()

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: BaseStat
   m_EditorClassIdentifier: 
   MaxResCnt: 10
+  PlayerMaxResCnt: 100
   UnitMaxCnt: 10
   MovementRange: 3

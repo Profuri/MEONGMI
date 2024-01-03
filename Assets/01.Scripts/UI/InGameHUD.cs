@@ -34,13 +34,16 @@ public class InGameHUD : UIComponent
 
     public void Update()
     {
-        
+        UpdatePhaseTime();
     }
 
     private void ReSet()
     {
         features.ForEach(feature => feature.SetActive(false));
-        UnitText.text = $"{0} / {StatManager.Instance.UnitMaxValue}";
+        UpdateBaseResource();
+        UpdatePlayerResource();
+        UpdatePlayerHP();
+        UpdateUnitText();
     }
 
     public void UpdateBaseResource()
@@ -59,9 +62,17 @@ public class InGameHUD : UIComponent
         //playerResourceText.text = curRes.ToString();
     }
 
+    public void UpdatePlayerHP()
+    {
+        int curHP = (int)GameManager.Instance.PlayerController.CurrentHP;
+        int maxHP = (int)GameManager.Instance.PlayerController.GetMaxHP();
+        UpdateSlider(playerHpSlider, curHP, maxHP);
+        //playerResourceText.text = curRes.ToString();
+    }
+
     public void UpdateUnitText()
     {
-        int curRes = BaseManager.Instance.CurUnitCount;
+        int curRes = GameManager.Instance.Base.CurUnitCount;
         int maxRes = StatManager.Instance.UnitMaxValue;
         UpdateSlider(unitSlider, curRes, maxRes);
         UnitText.text = $"{curRes} / {maxRes}";
@@ -69,15 +80,9 @@ public class InGameHUD : UIComponent
 
     public void UpdatePhaseTime()
     {
-        timeText.text = PhaseManager.Instance.GetCurTime().ToString();
+        timeText.text = PhaseManager.Instance.GetCurTime().ToString("0");
     }
 
-    public void UpdateSlider(Slider slider, float minValue, float maxValue)
-    {
-        float start = slider.value;
-        DOTween.To(() => start, value => slider.value = value, minValue / maxValue, 0.3f).SetEase(sliderEase);
-    }
-    
     public void TraitsBarUpdate(ETraitUpgradeElement trait)
     {
         features.ForEach((feature) =>
@@ -87,6 +92,12 @@ public class InGameHUD : UIComponent
             else
                 feature.SetActive(false);
         });
+    }
+
+    public void UpdateSlider(Slider slider, float minValue, float maxValue)
+    {
+        float start = slider.value;
+        DOTween.To(() => start, value => slider.value = value, minValue / maxValue, 0.3f).SetEase(sliderEase);
     }
 
 }
