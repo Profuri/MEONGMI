@@ -34,7 +34,7 @@ public class PlayerController : Entity
         CharacterControllerCompo = GetComponent<CharacterController>();
         AnimatorCompo = _visualTrm.GetComponent<Animator>();
     }
-    
+
     public void SetVelocity(Vector3 dir)
     {
         CharacterControllerCompo.Move(dir);
