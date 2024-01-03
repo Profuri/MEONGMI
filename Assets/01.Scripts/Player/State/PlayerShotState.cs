@@ -35,7 +35,7 @@ public class PlayerShotState : PlayerState
         dir.y = 0;
         _player.PlayerHammer.Shot(BulletType.Normal, dir);
     }
-    
+        
     private Vector3 GetGroundPoint()
     {
         var mouseScreenPos = _player.InputReader.mouseScreenPos;

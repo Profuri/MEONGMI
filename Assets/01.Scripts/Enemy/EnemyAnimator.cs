@@ -64,12 +64,8 @@ public class EnemyAnimator : MonoBehaviour
             timer += Time.deltaTime;
             float value = Mathf.Lerp(startValue, endValue, timer / time);
             
-            Debug.Log($"Value: {value}");
-
             foreach (Renderer meshRenderer in _meshRendererList)
             {
-                // Debug.Log($"MeshRenderer: {meshRenderer}");
-                // meshRenderer.material.SetFloat(_dissolveHash,value);
                 MaterialPropertyBlock matPropBlock = new MaterialPropertyBlock();
                 meshRenderer.GetPropertyBlock(matPropBlock);
                 matPropBlock.SetFloat(_dissolveHash,value);
