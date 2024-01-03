@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e361c38a767c34b4f8c088c732523aa9, type: 3}
-  m_Name: Phase1EnemyList
+  m_Name: Phase2EnemyList
   m_EditorClassIdentifier: 
   enemyList:
   - {fileID: 2327648150561147126, guid: 6f52f385bbdb15740b92dc521858e1e0, type: 3}
   - {fileID: 3909454726733665303, guid: e64cba6da66f6784db476c0acb9e7c44, type: 3}
-  - {fileID: 3909454726733665303, guid: e64cba6da66f6784db476c0acb9e7c44, type: 3}
+  - {fileID: 5347434663355265045, guid: 720e9c5bad004434daa745e5c9e6135a, type: 3}

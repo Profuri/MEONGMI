@@ -281,6 +281,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02bf62c81d0f4a53bf696c20f21d7153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _distanceInterval: 0
+  _angleInterval: 0
+  _colorTypeList:
+  - color: {r: 0, g: 0.8857479, b: 1, a: 0}
+    type: 0
+  - color: {r: 0, g: 0, b: 0, a: 0}
+    type: 0
+  - color: {r: 0, g: 0, b: 0, a: 0}
+    type: 0
+  - color: {r: 0, g: 0, b: 0, a: 0}
+    type: 0
+  - color: {r: 0, g: 0, b: 0, a: 0}
+    type: 0
+  - color: {r: 0, g: 0, b: 0, a: 0}
+    type: 0
+  - color: {r: 0, g: 0, b: 0, a: 0}
+    type: 0
 --- !u!1 &5769561658851570883
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,6 +412,7 @@ MonoBehaviour:
   _interactableMask:
     serializedVersion: 2
     m_Bits: 512
+  _bulletType: 0
 --- !u!114 &8907219923339110448
 MonoBehaviour:
   m_ObjectHideFlags: 0

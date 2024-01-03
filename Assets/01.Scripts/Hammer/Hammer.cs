@@ -1,6 +1,14 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
+[System.Serializable]
+public class ColorType
+{
+    [ColorUsage(true,true)] public Color color;
+    public BulletType type;
+}
 public class Hammer : MonoBehaviour
 {
     [SerializeField] private float _distanceInterval;
@@ -12,20 +20,48 @@ public class Hammer : MonoBehaviour
     private Transform _shotPoint;
     private PlayerController _playerController;
 
+    private MeshRenderer _meshRenderer;
+
     private readonly int _shotTriggerHash = Animator.StringToHash("Shot");
     private readonly int _gatheringTriggerHash = Animator.StringToHash("Gathering");
     private readonly int _chargingToggleHash = Animator.StringToHash("Charging");
 
+    [SerializeField] private List<ColorType> _colorTypeList = new List<ColorType>();
+    private readonly int _emission = Shader.PropertyToID("_EmissionColor");
+
+    public Color GetColorByBulletType(BulletType type)
+    {
+        foreach (ColorType ct in _colorTypeList)
+        {
+            if (ct.type == type)
+            {
+                return ct.color;
+            }
+        }
+
+        return Color.blue;
+    }
+
+    private void SetEmissionColor(BulletType type)
+    {
+        MaterialPropertyBlock matblock = new MaterialPropertyBlock();
+        _meshRenderer.GetPropertyBlock(matblock);
+        matblock.SetColor(_emission,GetColorByBulletType(type));
+        _meshRenderer.SetPropertyBlock(matblock);
+    }
     private void Awake()
     {
         var visualTrm = transform.Find("Visual");
         _shotPoint = visualTrm.Find("ShotPoint");
         _animator = visualTrm.GetComponent<Animator>();
         _eventTrigger = visualTrm.GetComponent<HammerAnimationEndEventTrigger>();
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
-
+    
+    
     public void Shot(BulletType type, Vector3 dir)
     {
+        SetEmissionColor(type);
         var particle = PoolManager.Instance.Pop($"{type.ToString()}Flash") as PoolableParticle;
         particle.SetPositionAndRotation(_shotPoint.position, Quaternion.LookRotation(dir));
         particle.Play();

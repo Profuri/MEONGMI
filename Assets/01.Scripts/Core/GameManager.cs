@@ -38,6 +38,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
         GameManager.Instance.Init();
     }
 
@@ -52,15 +53,17 @@ public class GameManager : MonoSingleton<GameManager>
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
         
-        CameraManager.Instance.Init();
-        
-        PhaseManager.Instance.Init();
-        EnemySpawner.Instance.Init();
 
-        PhaseManager.Instance.Init();
+        SceneManagement.Instance.OnGameStartEvent += () =>
+        {
+            CameraManager.Instance.Init();
+            PhaseManager.Instance.Init();
+            EnemySpawner.Instance.Init();
+
+            PhaseManager.Instance.Init();
         
-        
-        ResManager.Instance.Init();
+            ResManager.Instance.Init();
+        };
         //UIManager.Instance.Init();
     }
 }
