@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BaseEntityStat
   m_EditorClassIdentifier: 
   moveSpeed: 300
-  hp: 30
+  maxHp: 100

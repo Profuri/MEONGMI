@@ -28,6 +28,6 @@ public class EnemyDeadState : EnemyState
 
     private void TempDissolve()
     {
-        BaseEnemy.EnemyAnimator.StartDissolveCor(0f,1f,0.5f,() => PoolManager.Instance.Push(BaseEnemy));      
+        BaseEnemy.EnemyAnimator.StartDissolveCor(0f,1f,0.8f,() => EnemySpawner.Instance.DeadEnemy(BaseEnemy));      
     }
 }

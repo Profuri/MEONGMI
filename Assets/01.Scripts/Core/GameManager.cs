@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public Transform PlayerTrm { get; private set; }
+    public Transform PlayerTrm => PlayerController.transform;
     private PlayerController _playerController;
     public PlayerController PlayerController
     {
@@ -15,8 +15,20 @@ public class GameManager : MonoSingleton<GameManager>
             return _playerController;
         }
     }
-    public Transform BaseTrm { get; private set; }
-    
+
+    public Transform BaseTrm => Base.transform;
+    private Base _base;
+    public Base Base
+    {
+        get
+        {
+            if (_base == null)
+            {
+                _base = FindObjectOfType<Base>();
+            }
+            return _base;
+        }
+    }
     public Camera MainCam { get; private set; }
 
     [SerializeField] private PoolingListSO _poolingList;
@@ -32,18 +44,21 @@ public class GameManager : MonoSingleton<GameManager>
     public override void Init()
     {
         MainCam = Camera.main;
-        PlayerTrm = GameObject.Find("Player")?.transform;
-        BaseTrm = GameObject.Find("Base")?.transform;
-        
+
+        SceneManagement.Instance.Init();
         PoolManager.Instance = new PoolManager(transform);
         foreach (var pair in _poolingList.pairs)
         {
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
         
+        CameraManager.Instance.Init();
+        
         PhaseManager.Instance.Init();
         EnemySpawner.Instance.Init();
-        EnemySpawner.Instance.StartPhase(PhaseManager.Instance.Phase);
+
+        PhaseManager.Instance.Init();
+        
         
         ResManager.Instance.Init();
         //UIManager.Instance.Init();

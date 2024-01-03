@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class BaseTestMono : MonoBehaviour,IDamageable
+public class BaseTestMono : MonoBehaviour
 {
-    [SerializeField] private EntityStatSO _entityStatSO;
-    private float _hp;
 
     private void Awake()
     {

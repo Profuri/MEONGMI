@@ -17,19 +17,6 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         _currentEnemyList = new List<BaseEnemy>();
         _currentDeadCnt = 0;
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("T");
-            foreach (var enemy in _currentEnemyList)
-            {
-                Debug.Log("dd");
-                enemy.Damaged(10);
-            }
-        }
-    }
     
     public void StartPhase(int phase)
     {
@@ -97,6 +84,8 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         }
         Debug.Log("OnPhaseEnd");
         OnPhaseEnd?.Invoke(phase);
+
+        PhaseManager.Instance.ChangePhase(PhaseType.Rest);
     }
 
     public void DeadEnemy(BaseEnemy enemy)

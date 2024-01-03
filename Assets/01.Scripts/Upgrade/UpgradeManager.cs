@@ -274,57 +274,17 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     public void ApplyUpgradeTrait(ETraitUpgradeElement upgradeElem)
     {
-        switch (upgradeElem)
-        {
-            case ETraitUpgradeElement.RESTOBULLET:
-                break;
-            case ETraitUpgradeElement.SLOW:
-                break;
-            case ETraitUpgradeElement.PENETRATE:
-                break;
-            case ETraitUpgradeElement.FOLLOW:
-                break;
-            case ETraitUpgradeElement.DOTDAMAGE:
-                break;
-            case ETraitUpgradeElement.STATIC:
-                break;
-        }
+        Debug.Log(upgradeElem);
+        StatManager.Instance.SetTrait(upgradeElem);
     }
+
     public void ApplyUpgradePlayer(EPlayerUpgradeElement upgradeElem)
     {
-        switch (upgradeElem)
-        {
-            case EPlayerUpgradeElement.BULLETCOUNTUP:
-                break;
-            case EPlayerUpgradeElement.FIRESPEEDUP:
-                break;
-            case EPlayerUpgradeElement.MOVESPEEDUP:
-                break;
-            case EPlayerUpgradeElement.COLLECTSPEEDUP:
-                break;
-            case EPlayerUpgradeElement.DAMAGE:
-                break;
-            case EPlayerUpgradeElement.RECOVERY:
-                break;
-            case EPlayerUpgradeElement.LUCK:
-                break;
-            case EPlayerUpgradeElement.DEPEND:
-                break;
-            case EPlayerUpgradeElement.HP:
-                break;
-        }
+        StatManager.Instance.AddModifier(upgradeElem);
     }
 
     public void ApplyUpgradeBase(EBaseUpgradeElement upgradeElem)
     {
-        switch (upgradeElem)
-        {
-            case EBaseUpgradeElement.UNITCNT:
-                break;
-            case EBaseUpgradeElement.LINELEN:
-                break;
-            case EBaseUpgradeElement.MAXRES:
-                break;
-        }
+        StatManager.Instance.AddBaseStat(upgradeElem);
     }
 }

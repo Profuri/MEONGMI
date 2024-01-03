@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183692e755b28314f98df802ec4dd67e, type: 3}
   m_Name: Golem
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  maxHp: 400
+  moveSpeed: 1
+  maxHp: 200

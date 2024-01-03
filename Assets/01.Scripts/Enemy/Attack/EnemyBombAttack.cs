@@ -32,9 +32,8 @@ public class EnemyBombAttack : EnemyAttack
             }
         }
         _lastAtkTime = Time.time;
-        Debug.Log("Bomb!!!!!!!!!!");
         _baseEnemy.NavMeshAgent.enabled = false;
         _baseEnemy.ActionData.IsStopped = true;
-        PoolManager.Instance.Push(_baseEnemy);
+        EnemySpawner.Instance.DeadEnemy(_baseEnemy);
     }
 }

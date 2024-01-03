@@ -17,11 +17,13 @@ public class EnemyAnimator : MonoBehaviour
     protected readonly int _deadHash = Animator.StringToHash("DEAD");
     
     protected readonly int _dissolveHash = Shader.PropertyToID("_Dissolve");
+    protected readonly int _blinkHash = Shader.PropertyToID("_Blink");
 
     
     protected List<Renderer> _meshRendererList = new List<Renderer>();
     
     private Coroutine _dissolveCoroutine;
+    private Coroutine _blinkCoroutine;
     
     public void Init(BaseEnemy baseEnemy, Animator animator)
     {
@@ -29,6 +31,15 @@ public class EnemyAnimator : MonoBehaviour
         _animator = animator;
         
          GetComponentsInChildren(_meshRendererList);
+         
+         foreach (Renderer meshRenderer in _meshRendererList)
+         {
+             MaterialPropertyBlock matPropBlock = new MaterialPropertyBlock();
+             meshRenderer.GetPropertyBlock(matPropBlock);
+             matPropBlock.SetFloat(_dissolveHash,0f);
+             matPropBlock.SetFloat(_blinkHash,0f);
+             meshRenderer.SetPropertyBlock(matPropBlock);
+         }
     }
 
     public void OnHitEnd()
@@ -53,9 +64,42 @@ public class EnemyAnimator : MonoBehaviour
     
     public void StartDissolveCor(float startValue, float endValue, float time = 0.5f, Action Callback = null)
     {
-        _dissolveCoroutine = StartCoroutine(DissolveCoroutine(startValue, endValue, time, Callback));
+        _dissolveCoroutine = StartCoroutine(FloatCoroutine(startValue, endValue, time, Callback,_dissolveHash));
     }
-    private IEnumerator DissolveCoroutine(float startValue, float endValue, float time , Action Callback)
+
+    public void StartBlinkCoroutine(float startValue, float endValue, float time = 0.1f, Action Callback = null)
+    {
+        if (_blinkCoroutine != null)
+        {
+            StopCoroutine(_blinkCoroutine);
+        }
+
+        _blinkCoroutine = StartCoroutine(BlinkCoroutine(startValue, endValue, time, Callback, _blinkHash));
+    }
+
+    private IEnumerator BlinkCoroutine(float startValue, float endValue, float time, Action Callback, int hash)
+    {
+        foreach (Renderer meshRenderer in _meshRendererList)
+        {
+            MaterialPropertyBlock matPropBlock = new MaterialPropertyBlock();
+            meshRenderer.GetPropertyBlock(matPropBlock);
+            matPropBlock.SetFloat(hash,endValue);
+            meshRenderer.SetPropertyBlock(matPropBlock);
+        }
+
+        yield return new WaitForSeconds(time);
+        
+        foreach (Renderer meshRenderer in _meshRendererList)
+        {
+            MaterialPropertyBlock matPropBlock = new MaterialPropertyBlock();
+            meshRenderer.GetPropertyBlock(matPropBlock);
+            matPropBlock.SetFloat(hash,startValue);
+            meshRenderer.SetPropertyBlock(matPropBlock);
+        }
+
+        Callback?.Invoke();
+    }
+    private IEnumerator FloatCoroutine(float startValue, float endValue, float time , Action Callback,int hash)
     {
         float timer = 0f;
 
@@ -64,15 +108,11 @@ public class EnemyAnimator : MonoBehaviour
             timer += Time.deltaTime;
             float value = Mathf.Lerp(startValue, endValue, timer / time);
             
-            Debug.Log($"Value: {value}");
-
             foreach (Renderer meshRenderer in _meshRendererList)
             {
-                // Debug.Log($"MeshRenderer: {meshRenderer}");
-                // meshRenderer.material.SetFloat(_dissolveHash,value);
                 MaterialPropertyBlock matPropBlock = new MaterialPropertyBlock();
                 meshRenderer.GetPropertyBlock(matPropBlock);
-                matPropBlock.SetFloat(_dissolveHash,value);
+                matPropBlock.SetFloat(hash,value);
                 meshRenderer.SetPropertyBlock(matPropBlock);
             }
             yield return null;

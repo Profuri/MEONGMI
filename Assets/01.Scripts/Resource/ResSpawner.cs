@@ -11,7 +11,6 @@ public class ResSpawner
     {
         this._phaseInfoList = phaseInfoList;
         _isOn = true;
-        return;
         ResManager.Instance.StartCoroutine(SpawnResourceCor());
     }
 
@@ -30,11 +29,22 @@ public class ResSpawner
             {
                 //멀어진거에 따라 개수가 다르게 증가
                 Vector3 randomPos = Random.insideUnitSphere * GameManager.Instance.MaxDistance + baseTrmPos;
+                randomPos.y = 100f;
+                bool result = Physics.Raycast(randomPos,Vector3.down,out RaycastHit info,Mathf.Infinity,1 << LayerMask.NameToLayer("Ground"));
+                if (result)
+                {
+                    randomPos.y = info.point.y;
+                }
+                else
+                {
+                    Debug.LogError("Can't check ground !!!");
+                }
+                
                 int resCnt = Mathf.CeilToInt(Vector3.Distance(randomPos,baseTrmPos));
                 //제곱을 해
-                resCnt *= resCnt;
-                
                 ResourceMono resource = PoolManager.Instance.Pop("ResourceMono") as ResourceMono;
+                resource.SetScale(Mathf.Sqrt(resCnt * 0.5f));
+                resCnt *= resCnt;
                 resource.SetResourceCnt(resCnt);
                 resource.transform.position = randomPos;
                 yield return null;

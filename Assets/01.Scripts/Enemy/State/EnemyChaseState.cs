@@ -65,6 +65,7 @@ public class EnemyChaseState : EnemyState
 
     public bool InAttackRange(float distance)
     {
-        return distance <= BaseEnemy.EnemyAttackSO.attackRange;
+        return distance <= BaseEnemy.EnemyAttackSO.attackRange +
+            GameManager.Instance.Base.Collider.bounds.size.x * 0.3f;
     }
 }
