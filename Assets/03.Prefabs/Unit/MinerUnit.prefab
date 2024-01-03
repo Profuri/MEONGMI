@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3436320731510947323}
   - component: {fileID: 3228306270747666080}
-  - component: {fileID: 4869142877984898250}
   - component: {fileID: 1700723805719145151}
+  - component: {fileID: 387357907624620096}
   - component: {fileID: 750400313902045047}
   m_Layer: 11
-  m_Name: AttackerUnit
+  m_Name: MinerUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,19 +62,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.2, z: -0.07}
---- !u!114 &4869142877984898250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 437493206769592268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 221d148922bb0ff4b96658e10d3ba53e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _entityStatSO: {fileID: 11400000, guid: 1e2c98b5d06d1c04482106b22a43d5ea, type: 2}
 --- !u!114 &1700723805719145151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,9 +79,22 @@ MonoBehaviour:
   _unitConnectHole: {fileID: 2287939437400877788}
   _baseConnectHole: {fileID: 0}
   _line: {fileID: 0}
-  _lineLength: 10
+  _lineLength: 0
   _lineConnectToggleTime: 0
   _lineControlCancelTime: 0
+--- !u!114 &387357907624620096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437493206769592268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af53347a41ef5b4dbf83945e465f107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entityStatSO: {fileID: 11400000, guid: d420f6fd443bdc847a40c4e82f5b432b, type: 2}
 --- !u!195 &750400313902045047
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -849,11 +849,11 @@ PrefabInstance:
     - target: {fileID: 9500000, guid: 02dd6406ed1ebc248b2fafd0485e0de9, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: e9b6e94fb8647294295919ace7471393, type: 2}
+      objectReference: {fileID: 9100000, guid: dec889e212a355d4396b0b40cfcdf564, type: 2}
     - target: {fileID: 13700000, guid: 02dd6406ed1ebc248b2fafd0485e0de9, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: ad6ecda871e79af48b0e3bd7a70b122d, type: 2}
+      objectReference: {fileID: 2100000, guid: dc5c04199aa6a51408794ed495696f01, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

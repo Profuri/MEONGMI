@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,13 @@ public abstract class BaseUnit : Entity
     protected UnitType _unitType;
     public UnitType UnitType => _unitType;
 
-    protected UnitLineConnect _unitLine;
-    public UnitLineConnect UnitLine => _unitLine;
+    protected UnitLineConnect _lineConnect;
+    public UnitLineConnect LineConnect => _lineConnect;
 
-    protected UnitStatSO _unitStatSO;
-    public UnitStatSO UnitStatSO => _unitStatSO;
+    protected Line _line;
+    public Line Line => _line;
+
+    public UnitStatSO UnitStatSO => _entityStatSO as UnitStatSO;
 
     protected NavMeshAgent _navMesh;
     public NavMeshAgent NavMesh => _navMesh;
@@ -22,6 +25,19 @@ public abstract class BaseUnit : Entity
         base.Awake();
         AnimatorCompo = transform.Find("Visual").GetComponent<Animator>();
         _navMesh = GetComponent<NavMeshAgent>();
-        _unitLine = GetComponent<UnitLineConnect>();
+        _lineConnect = GetComponent<UnitLineConnect>();
+        transform.position = Vector3.zero;
+        _navMesh.enabled = true;
+    }
+
+    public void SetLine(Line line, Transform baseConnectHole)
+    {
+        _line = line;
+        _lineConnect.Init(line, baseConnectHole);
+    }
+
+    public override void Init()
+    {
+
     }
 }

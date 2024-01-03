@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class UnitManager : MonoSingleton<UnitManager>
 {
-    [SerializeField] private BaseStatSO _baseData;
-
     private List<BaseUnit> _unitList;
+
+    public int UnitCount => _unitList.Count;
 
     public override void Init()
     {
@@ -16,6 +16,7 @@ public class UnitManager : MonoSingleton<UnitManager>
     public BaseUnit CreateUnit(UnitType type)
     {
         BaseUnit unit = PoolManager.Instance.Pop($"{type.ToString()}Unit") as BaseUnit;
+        unit.transform.position = transform.position;
         return unit;
     }
 }
