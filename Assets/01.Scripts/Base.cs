@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Base : MonoBehaviour,IDamageable
+public class Base : Interactable, IDamageable
 {
     public Collider Collider { get; private set; }
     private Arc _arc;
@@ -24,5 +24,10 @@ public class Base : MonoBehaviour,IDamageable
         vfxPlayer.PlayEffect();
         _arc.ShakePosition();
         ResManager.Instance.UseResource((int)damage);
+    }
+
+    public override void OnInteract(Entity entity)
+    {
+        
     }
 }

@@ -38,7 +38,7 @@ public class PlayerController : Entity, IDetectable
     public Hammer PlayerHammer { get; private set; }
     public Interactable Target { get; set; }
 
-    public Action<PlayerController> OnHammerDownEvent;
+    public Action OnHammerDownEvent;
     
     private Transform _visualTrm;
 
