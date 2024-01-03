@@ -12,9 +12,6 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoSingleton<EnemySpawner>
 {
-    [SerializeField] private List<PhaseInfoSO> _phaseInfoList = new List<PhaseInfoSO>();
-
-    [SerializeField] private float _maxDistance;
     private List<BaseEnemy> _currentEnemyList;
     private int _currentDeadCnt;
 
@@ -54,11 +51,13 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     {
         _currentDeadCnt = 0;
         
-        EnemyListSO enemyList = _phaseInfoList[phase].enemyListSO;
-        int appearMaxEnemyCnt = _phaseInfoList[phase].appearMaxEnemyCnt;
-        int appearDelay = _phaseInfoList[phase].appearDelay;
-        int appearMaxOnceEnemyCnt = _phaseInfoList[phase].appearOnceMaxEnemyCnt;
-        int appearMinOnceEnemyCnt = _phaseInfoList[phase].appearOnceMinEnemyCnt;
+        var phaseInfoList = PhaseManager.Instance.PhaseInfoList;
+        
+        EnemyListSO enemyList = phaseInfoList[phase].enemyListSO;
+        int appearMaxEnemyCnt = phaseInfoList[phase].appearMaxEnemyCnt;
+        int appearDelay = phaseInfoList[phase].appearDelay;
+        int appearMaxOnceEnemyCnt = phaseInfoList[phase].appearOnceMaxEnemyCnt;
+        int appearMinOnceEnemyCnt = phaseInfoList[phase].appearOnceMinEnemyCnt;
         int randomAppearEnemyCnt;
         
         _currentEnemyList.Clear();
@@ -77,7 +76,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
                     var spherePoint = Random.insideUnitSphere;
                     spherePoint.y = 0;
                     var dir = spherePoint.normalized;
-                    var randomPoint = dir * Random.Range(lineLength, _maxDistance);
+                    var randomPoint = dir * Random.Range(lineLength, GameManager.Instance.MaxDistance);
                     var unitPoint = randomPoint + GameManager.Instance.BaseTrm.position;
                     unitPoint.y = 100f;
                     

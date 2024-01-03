@@ -20,6 +20,10 @@ public class GameManager : MonoSingleton<GameManager>
     public Camera MainCam { get; private set; }
 
     [SerializeField] private PoolingListSO _poolingList;
+    [SerializeField] 
+    private float _maxDistance;
+    public float MaxDistance => _maxDistance;
+
     
     private void Awake()
     {
@@ -37,9 +41,10 @@ public class GameManager : MonoSingleton<GameManager>
         {
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
-
         EnemySpawner.Instance.Init();
-        EnemySpawner.Instance.StartPhase(0);
+        PhaseManager.Instance.Init(); 
+        
+        //EnemySpawner.Instance.StartPhase(CurrentPhase);
         
         ResManager.Instance.Init();
         //UIManager.Instance.Init();
