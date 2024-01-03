@@ -31,17 +31,17 @@ public class Line : PoolableMono
             return;
         }
 
-        var distance = Vector3.Distance(_startHole.position, _endHole.position);
-        var cnt = Mathf.CeilToInt(distance / _interval);
-        _lineRenderer.positionCount = cnt;
-        
-        var dir = (_endHole.position - _startHole.position).normalized;
-
-        for (var i = 0; i < _lineRenderer.positionCount; i++)
-        {
-            var pos = _startHole.position + dir * (_interval * i);
-            _lineRenderer.SetPosition(i, pos);
-        }
+        // var distance = Vector3.Distance(_startHole.position, _endHole.position);
+        // var cnt = Mathf.CeilToInt(distance / _interval);
+        // _lineRenderer.positionCount = cnt;
+        //
+        // var dir = (_endHole.position - _startHole.position).normalized;
+        //
+        // for (var i = 0; i < _lineRenderer.positionCount; i++)
+        // {
+        //     var pos = _startHole.position + dir * (_interval * i);
+        //     _lineRenderer.SetPosition(i, pos);
+        // }
     }
 
     public void SetStartHole(Transform startHole)
