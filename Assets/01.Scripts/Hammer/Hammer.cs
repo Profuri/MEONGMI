@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class Hammer : MonoBehaviour
 {
+    [SerializeField] private float _distanceInterval;
+    [SerializeField] private float _angleInterval;
+    
     private Animator _animator;
     private HammerAnimationEndEventTrigger _eventTrigger;
 
     private Transform _shotPoint;
-
     private PlayerController _playerController;
 
     private readonly int _shotTriggerHash = Animator.StringToHash("Shot");
@@ -28,8 +30,41 @@ public class Hammer : MonoBehaviour
         particle.SetPositionAndRotation(_shotPoint.position, Quaternion.LookRotation(dir));
         particle.Play();
 
-        var bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
-        bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position, dir);
+        var cnt = _playerController.PlayerStat.shotCnt.GetValue();
+        _shotPoint.localEulerAngles = Vector3.zero;
+        _shotPoint.localPosition = new Vector3(0, 3, 0);
+
+        if (cnt % 2 == 0)
+        {
+            for (var i = 1; i <= cnt / 2; i++)
+            {
+                _shotPoint.localPosition = new Vector3(0, 3, -i * _distanceInterval);
+                var bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
+                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+                
+                _shotPoint.localPosition = new Vector3(0, 3, i * _distanceInterval);
+                bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
+                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+            }
+        }
+        else
+        {
+            var bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
+            bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+
+            for (var i = 1; i <= cnt / 2; i++)
+            {
+                _shotPoint.localEulerAngles = new Vector3(-i * _angleInterval, 0, 0);
+                bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
+                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+                
+                _shotPoint.localEulerAngles = new Vector3(i * _angleInterval, 0, 0);
+                bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
+                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+            }
+        }
+        
+        CameraManager.Instance.ImpulseCam(0.25f, 0.15f, new Vector3(1, 1, 0));
     }
 
     public void SetPlayerController(PlayerController playerController)

@@ -37,7 +37,7 @@ MonoBehaviour:
     _baseValue: 10
     modifiers: []
   chargingSpeed:
-    _baseValue: 3
+    _baseValue: 5
     modifiers: []
   gatheringSpeed:
     _baseValue: 1

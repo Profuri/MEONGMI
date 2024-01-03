@@ -51,6 +51,10 @@ public class GameManager : MonoSingleton<GameManager>
         {
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
+        
+        CameraManager.Instance.Init();
+        
+        PhaseManager.Instance.Init();
         EnemySpawner.Instance.Init();
 
         PhaseManager.Instance.Init();
