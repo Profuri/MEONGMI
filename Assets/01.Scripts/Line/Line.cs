@@ -11,18 +11,23 @@ public class Line : MonoBehaviour
     private Transform _startHole;
     private Transform _endHole;
 
+    private ParticleSystem _startPointParticle;
+    private ParticleSystem _endPointParticle;
+
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+
+        _startPointParticle = transform.Find("StartParticle").GetComponent<ParticleSystem>();
     }
 
-    private void Update()
+    public void LineUpdate()
     {
         if (_startHole is null || _endHole is null)
         {
             return;
         }
-        
+
         var distance = Vector3.Distance(_startHole.position, _endHole.position);
         var cnt = Mathf.CeilToInt(distance / _interval);
         _lineRenderer.positionCount = cnt;
@@ -38,6 +43,7 @@ public class Line : MonoBehaviour
 
     public void SetStartHole(Transform startHole)
     {
+        _startPointParticle.transform.position = startHole.position;
         _startHole = startHole;
     }
 

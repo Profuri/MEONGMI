@@ -28,6 +28,7 @@ public class PlayerChargingState : PlayerState
         if (groundPoint != -Vector3.one)
         {
             var lookDir = (groundPoint - _player.transform.position).normalized;
+            lookDir.y = 0;
             _player.Rotate(lookDir);
         }
     }
