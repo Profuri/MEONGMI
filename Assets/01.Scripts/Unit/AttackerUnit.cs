@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackUnit : BaseUnit
+public class AttackerUnit : BaseUnit
 {
     public override void Init()
     {
-        
+        _unitType = UnitType.Attacker;
     }
 
     protected override void RegisterStates()
@@ -23,6 +23,6 @@ public class AttackUnit : BaseUnit
 
     protected override void SetInitState()
     {
-        
+        _stateMachine.ChangeState(AttackerUnitStateType.Idle);
     }
 }

@@ -11,10 +11,14 @@ public class UnitLineConnect : MonoBehaviour
 
     [SerializeField] private float _lineLenght;
 
-    private void Awake()
+    public void SetLine(Line line)
     {
-        _line.SetStartHole(_baseConnectHole);
-        _line.SetEndHole(_unitConnectHole);
+        _line = line;
+        if(_line != null)
+        {
+            _line.SetStartHole(_baseConnectHole);
+            _line.SetEndHole(_unitConnectHole);
+        }
     }
 
     private void LateUpdate()

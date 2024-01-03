@@ -7,7 +7,7 @@ public class MinerUnit : BaseUnit
 {
     public override void Init()
     {
-        
+        _unitType = UnitType.Miner;
     }
 
     protected override void RegisterStates()
