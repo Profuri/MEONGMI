@@ -30,6 +30,7 @@ public class PlayerChaseState : PlayerState
         if (distance <= _player.Target.InteractRadius)
         {
             _stateMachine.ChangeState(PlayerStateType.Idle);
+            _player.Rotate(dir, false);
             _player.Target.OnInteract(_player);
             _player.Target = null;
             return;

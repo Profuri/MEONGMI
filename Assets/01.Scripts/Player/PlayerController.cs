@@ -58,11 +58,19 @@ public class PlayerController : Entity, IDetectable
         CharacterControllerCompo.Move(dir);
     }
 
-    public void Rotate(Vector3 dir)
+    public void Rotate(Vector3 dir, bool lerp = true)
     {
         var currentRotation = _visualTrm.rotation;
         var destRotation = Quaternion.LookRotation(dir);
-        _visualTrm.rotation = Quaternion.Lerp(currentRotation, destRotation, _rotateSpeed);
+
+        if (lerp)
+        {
+            _visualTrm.rotation = Quaternion.Lerp(currentRotation, destRotation, _rotateSpeed);
+        }
+        else
+        {
+            _visualTrm.rotation = destRotation;
+        }
     }
     
     public void StopImmediately()
