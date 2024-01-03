@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UpgradeContainer : MonoBehaviour
 {
+    [SerializeField] Transform _mainTrm;
     public List<GameObject> UpgradeCards;
 
     private List<BaseUpgradeElemSO> baseElemInfos;
@@ -118,7 +119,7 @@ public class UpgradeContainer : MonoBehaviour
             Destroy(item);
         });
         UpgradeCards.Clear();
-        gameObject.SetActive(false);
+        _mainTrm.gameObject.SetActive(false);
     }
 
     public void OnDisable()
