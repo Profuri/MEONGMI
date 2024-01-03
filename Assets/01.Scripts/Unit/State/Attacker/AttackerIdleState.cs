@@ -23,6 +23,6 @@ public class AttackerIdleState : AttackerState
     public override void UpdateState()
     {
         base.UpdateState();
-        _stateMachine.ChangeState(AttackerUnitStateType.Move);
+        _stateMachine.ChangeState(AttackerUnitStateType.Chase);
     }
 }

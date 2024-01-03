@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CollectSpeedUp
   m_EditorClassIdentifier: 
   UpgradeType: 2
-  name: "\uCC44\uAD11 \uC18D\uB3C4 \uC99D\uAC00"
+  Name: "\uCC44\uAD11 \uC18D\uB3C4 \uC99D\uAC00"
   Description: "\uD50C\uB808\uC774\uC5B4 \uCC44\uAD11 \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD55C\uB2E4."
   Image: {fileID: 21300000, guid: c8dc8d1f8ab2b435c95cad294954c32e, type: 3}
   Type: 3

@@ -12,7 +12,7 @@ public class Stat
 
     public float GetValue()
     {
-        return _baseValue + modifiers.Sum();
+        return Mathf.Clamp(_baseValue + modifiers.Sum(), 0, 999);
     }
 
     public void SetDefaultValue(float value)
@@ -34,5 +34,10 @@ public class Stat
         {
             modifiers.Remove(value);
         }
+    }
+
+    public void RemoveAll()
+    {
+        modifiers.Clear();
     }
 }

@@ -23,13 +23,26 @@ public class AttackerMoveState : AttackerState
 
     public override void UpdateState()
     {
-        if (Vector3.Distance(BaseUnit.transform.position, _destination) < 0.3f)
-        {
-            float rand = Random.Range(0f, Mathf.PI * 2f);
-            Vector3 normal = new Vector3(Mathf.Cos(rand), 0f, Mathf.Sin(rand));
-            _destination = _holdPosition + normal * _attackerStat.holdRange;
+        base.UpdateState();
 
-            //BaseUnit.NavMesh.SetDestination(_destination);
+        Vector3 originPos = BaseUnit.transform.position;
+        float range = _attackerStat.findArea;
+        int layer = _attackerStat.targetLayer;
+
+        var cols = Physics.OverlapSphere(originPos, range, layer);
+
+        if (cols.Length > 0)
+        {
+            foreach (Collider col in cols)
+            {
+                if (col.TryGetComponent(out BaseEnemy enemy))
+                {
+                    BaseUnit.SetTarget(enemy.transform);
+                    BaseUnit.NavMesh.SetDestination(BaseUnit.Target.position);
+                    _stateMachine.ChangeState(AttackerUnitStateType.Chase);
+                    return;
+                }
+            }
         }
     }
 }

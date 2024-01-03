@@ -36,7 +36,7 @@ public class PlayerFeatureChoicePanel : ChoicePanel
 
     private void OnEnable()
     {
-        ResetRoulett();
+        //ResetRoulett();
         Init();
     }
 
@@ -63,6 +63,11 @@ public class PlayerFeatureChoicePanel : ChoicePanel
         for (int i = 0; i < _upgradeCards.Count; i++)
         {
             int rand = Random.Range(0, _featureDataList.Count - 1);
+            if(_featureDataList[rand].Type == UpgradeManager.Instance.curTraitElem)
+            {
+                i--;
+                continue;
+            }
             _upgradeCards[i].Setting(_featureDataList[rand], null);
             
             Image image = _upgradeCards[i].GetComponent<Image>();
@@ -77,17 +82,12 @@ public class PlayerFeatureChoicePanel : ChoicePanel
             
             if (i == 25)
             {
-                if (UpgradeManager.Instance.curTraitElem == _featureDataList[rand].Type) //중복 방지
-                {
-                    i--;
-                    continue;
-                }
-                UpgradeManager.Instance.SetCurTraitElem(_featureDataList[rand].Type);
                 result = _featureDataList[rand];
             }
             prev = rand;
         }
 
+        UpgradeManager.Instance.SetCurTraitElem(result.Type);
         return result;
     }
 
@@ -117,7 +117,7 @@ public class PlayerFeatureChoicePanel : ChoicePanel
             Sequence seq = DOTween.Sequence();
             seq.Append(_effectPanel.DOFade(0.7f, 0.25f));
             seq.Insert(0, _effectImage.transform.DOScale(new Vector3(1.7f, 1.7f, 1.7f), 0.25f));
-            seq.AppendInterval(3.5f);
+            seq.AppendInterval(1.5f);
             seq.OnComplete(() =>
             {
                 UpgradeManager.Instance.ApplyUpgradeTrait(result.Type);

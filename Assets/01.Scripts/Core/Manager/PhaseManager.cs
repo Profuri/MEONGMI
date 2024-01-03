@@ -16,6 +16,8 @@ public class PhaseManager : MonoSingleton<PhaseManager>
     private bool _phaseStart;
 
     private float _currentTime;
+    public float GetCurTime() => _currentTime;  
+    
 
     public event Action<float, float> OnRestTimeEvent;
     

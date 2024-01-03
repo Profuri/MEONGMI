@@ -8,6 +8,10 @@ using UnityEngine;
 public class TestUIManager : MonoSingleton<TestUIManager>
 {
     [Header("Root")]
+    [SerializeField] InGameHUD _IngameHUD;
+    public InGameHUD IngameHUD => _IngameHUD;   
+
+
     [SerializeField] GameObject UpgradeUIPanel;
     [SerializeField] GameObject _PlayerAndTraitPanel;
 
@@ -51,6 +55,9 @@ public class TestUIManager : MonoSingleton<TestUIManager>
 
     public void SetPlayerCostTxt(int cost) => _playerCostTxt.text = cost.ToString();
     public void SetTraitCostTxt(int cost) => _traitCostTxt.text = cost.ToString();
+
+    public void UpgradeRootPanelOn() => UpgradeUIPanel.SetActive(true);
+    
 
     public void BaseUpgradePanel()
     {

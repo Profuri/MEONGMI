@@ -20,6 +20,9 @@ public abstract class BaseUnit : Entity
     protected NavMeshAgent _navMesh;
     public NavMeshAgent NavMesh => _navMesh;
 
+    protected Transform _target;
+    public Transform Target => _target;
+
     public override void Awake()
     {
         base.Awake();
@@ -30,14 +33,33 @@ public abstract class BaseUnit : Entity
         _navMesh.enabled = true;
     }
 
-    public void SetLine(Line line, Transform baseConnectHole)
-    {
-        _line = line;
-        _lineConnect.Init(line, baseConnectHole);
-    }
-
     public override void Init()
     {
+        _navMesh.enabled = true;
+    }
 
+    public void SetLine(Line line)
+    {
+        LineConnect.SetLine(line);
+    }
+
+    public void SetPosition(Vector3 pos)
+    {
+        NavMesh.enabled = false;
+        transform.position = pos;
+        NavMesh.enabled = true;
+    }
+
+    public void SetTarget(Transform trm)
+    {
+        _target = trm;
+    }
+
+    public void StopImmediately()
+    {
+        if (NavMesh.enabled)
+        {
+            NavMesh.SetDestination(transform.position);
+        }
     }
 }

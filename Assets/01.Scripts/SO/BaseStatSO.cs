@@ -6,6 +6,7 @@ using UnityEngine;
 public class BaseStatSO : ScriptableObject
 {
     public int MaxResCnt;
+    public int PlayerMaxResCnt;
     public int UnitMaxCnt;
     public float MovementRange;
 }
