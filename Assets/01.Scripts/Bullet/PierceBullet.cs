@@ -4,7 +4,8 @@ public class PierceBullet : Bullet
 {
     public override void Update()
     {
-        transform.rotation = Quaternion.LookRotation(_dir);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_dir), 0.1f);
+        _rigidbody.velocity = transform.forward * _bulletSpeed;
 
         if (DamageCheck(out var cols, out var cnt))
         {
