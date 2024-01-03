@@ -142,6 +142,17 @@
                 },
                 {
                     "name": "",
+                    "id": "e755080e-31ae-4e63-a286-fac2ee9c4e73",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Charging",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b5fa402f-ddeb-45f0-ae43-db769a04ec93",
                     "path": "<Keyboard>/b",
                     "interactions": "",
