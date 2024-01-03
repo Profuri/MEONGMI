@@ -32,7 +32,6 @@ public class PlayerChaseState : PlayerState
             _stateMachine.ChangeState(PlayerStateType.Idle);
             _player.Rotate(dir, false);
             _player.Target.OnInteract(_player);
-            _player.Target = null;
             return;
         }
 

@@ -24,7 +24,12 @@ public class PlayerGatherState : PlayerState
     
     private void GatheringFinishHandle()
     {
-        Debug.Log("!!");
+        CameraManager.Instance.ImpulseCam(0.25f, 0.15f, new Vector3(0, -1, 0));
+
+        var particle = PoolManager.Instance.Pop("GatheringParticle") as PoolableParticle;
+        particle.SetPositionAndRotation(_player.Target.transform.position);
+        particle.Play();
+
         _player.OnHammerDownEvent?.Invoke(_player);
         _stateMachine.ChangeState(PlayerStateType.Idle);
     }
