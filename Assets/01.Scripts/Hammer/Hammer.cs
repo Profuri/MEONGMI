@@ -40,27 +40,37 @@ public class Hammer : MonoBehaviour
             {
                 _shotPoint.localPosition = new Vector3(0, 3, -i * _distanceInterval);
                 var bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
-                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+                var attackDir = _shotPoint.up;
+                attackDir.y = 0;
+                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + attackDir * 0.5f, attackDir);
                 
                 _shotPoint.localPosition = new Vector3(0, 3, i * _distanceInterval);
                 bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
-                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+                attackDir = _shotPoint.up;
+                attackDir.y = 0;
+                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + attackDir * 0.5f, attackDir);
             }
         }
         else
         {
             var bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
-            bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+            var attackDir = _shotPoint.up;
+            attackDir.y = 0;
+            bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + attackDir * 0.5f, attackDir);
 
             for (var i = 1; i <= cnt / 2; i++)
             {
                 _shotPoint.localEulerAngles = new Vector3(-i * _angleInterval, 0, 0);
                 bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
-                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+                attackDir = _shotPoint.up;
+                attackDir.y = 0;
+                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + attackDir * 0.5f, attackDir);
                 
                 _shotPoint.localEulerAngles = new Vector3(i * _angleInterval, 0, 0);
                 bullet = PoolManager.Instance.Pop($"{type.ToString()}Bullet") as Bullet;
-                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + _shotPoint.up * 0.5f, _shotPoint.up);
+                attackDir = _shotPoint.up;
+                attackDir.y = 0;
+                bullet.Setting(type, _playerController.PlayerStat.damage.GetValue(), _shotPoint.position + attackDir * 0.5f, attackDir);
             }
         }
         
