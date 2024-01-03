@@ -68,14 +68,19 @@ public class UpgradeContainer : MonoBehaviour
         if (type == EUpgradeType.BASE)
         {
             //base 3개 띄움
-            for (int i = 0; i < baseElemInfos.Count; i++)
+            if (transform.childCount == 0)
             {
-                GameObject upgradeObj = Instantiate(templateItem, transform);
-                UpgradeCard upgradeUI = upgradeObj.GetComponent<UpgradeCard>();
-                BaseUpgradeElemSO upgradeElem = baseElemInfos[i];
-                upgradeUI.Setting(upgradeElem, ReleaseUpgrade);
-                UpgradeCards.Add(upgradeObj);
+                for (int i = 0; i < baseElemInfos.Count; i++)
+                {
+                    GameObject upgradeObj = Instantiate(templateItem, transform);
+                    BaseUpgradeCard upgradeUI = upgradeObj.GetComponent<BaseUpgradeCard>();
+                    BaseUpgradeElemSO upgradeElem = baseElemInfos[i];
+                    upgradeUI.Setting(upgradeElem, null);
+                    UpgradeCards.Add(upgradeObj);
+                }
             }
+            else
+                Debug.Log("BaseItem이 이미 존재");
         }
         else
         {

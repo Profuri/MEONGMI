@@ -7,30 +7,24 @@ using UnityEngine.UI;
 
 public class UpgradeCard : MonoBehaviour
 {
-    private TextMeshProUGUI description;
-    private Image image;
+    private UpgradeElemInfoSO myInfo;
+    public UpgradeElemInfoSO Info => myInfo;
 
     private Action ReleaseAct;
 
-    private void Awake()
-    {
-        description = transform.Find("Description").GetComponent<TextMeshProUGUI>();
-        image = transform.Find("Background/Image").GetComponent<Image>();
-    }
-
-    public void Setting(UpgradeElemInfoSO so, Action releaseAct)
+    public virtual void Setting(UpgradeElemInfoSO so, Action releaseAct)
     {
         Debug.Log(so.name);
-        description.text = so.Description;
-        image.sprite = so.Image;
+        //description.text = so.Description;
+        //image.sprite = so.Image;
+        myInfo = so;
         gameObject.name = so.name;
         ReleaseAct = releaseAct;
     }
 
-    public void OnClick()
+    public virtual void OnClick()
     {
         //효과적용
-
         ReleaseAct?.Invoke();
     }
 }

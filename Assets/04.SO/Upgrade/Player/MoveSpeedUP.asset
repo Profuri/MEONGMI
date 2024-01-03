@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd14fe1d5696ba458f299d9c65fcd43, type: 3}
   m_Name: MoveSpeedUP
   m_EditorClassIdentifier: 
+  UpgradeType: 2
+  name: "\uC774\uB3D9 \uC18D\uB3C4 \uC99D\uAC00"
   Description: "\uD50C\uB808\uC774\uC5B4 \uC774\uB3D9 \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD55C\uB2E4."
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: e960a3ff860a14b91b77c73134951572, type: 3}
   Type: 2

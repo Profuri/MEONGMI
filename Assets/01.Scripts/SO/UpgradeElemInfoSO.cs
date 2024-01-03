@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class UpgradeElemInfoSO : ScriptableObject
 {
-    //public EUpgradeType UpgradeType;
+    public EUpgradeType UpgradeType;
     //public bool canDuplication;
     [TextArea]
     public string Description;
     public Sprite Image;
-
+   
 //#if UNITY_EDITOR
 //    public void OnValidate()
 //    {
