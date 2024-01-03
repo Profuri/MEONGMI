@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Base : MonoBehaviour,IDamageable
+public class Base : Interactable, IDamageable
 {
     public Collider Collider { get; private set; }
     private Arc _arc;
@@ -26,5 +26,10 @@ public class Base : MonoBehaviour,IDamageable
         
         CameraManager.Instance.ImpulseCam(1, 0.1f, new Vector3(0, -1, 0));
         ResManager.Instance.UseResource((int)damage);
+    }
+
+    public override void OnInteract(Entity entity)
+    {
+        
     }
 }
