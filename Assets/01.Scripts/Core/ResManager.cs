@@ -8,6 +8,7 @@ public class ResManager : MonoSingleton<ResManager>
     [SerializeField] private BaseStatSO _baseStatSO;
 
     public int ResourceCnt { get; private set; }
+    public int BaseResourceCnt { get; private set; }
     public event Action OnResourceToZero;
 
     public override void Init()

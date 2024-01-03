@@ -8,6 +8,10 @@ using UnityEngine;
 public class TestUIManager : MonoSingleton<TestUIManager>
 {
     [Header("Root")]
+    [SerializeField] InGameHUD _IngameHUD;
+    public InGameHUD IngameHUD => _IngameHUD;   
+
+
     [SerializeField] GameObject UpgradeUIPanel;
     [SerializeField] GameObject _PlayerAndTraitPanel;
 

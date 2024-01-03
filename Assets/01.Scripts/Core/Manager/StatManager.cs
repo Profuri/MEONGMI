@@ -149,6 +149,8 @@ public class StatManager : MonoSingleton<StatManager>
         TraitDicionary[elem] = true;
 
         CurTrait = elem;
+        
+        TestUIManager.Instance.IngameHUD.TraitsBarUpdate(CurTrait);
     }
 
     public ETraitUpgradeElement GetCurTrait()
