@@ -64,6 +64,6 @@ public class PhaseManager : MonoSingleton<PhaseManager>
     {
         Phase = 0;
         EnemySpawner.Instance.StartPhase(0);
-
+        
     }
 }

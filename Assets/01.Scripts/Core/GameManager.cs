@@ -49,10 +49,10 @@ public class GameManager : MonoSingleton<GameManager>
         {
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
-        
-        PhaseManager.Instance.Init();
         EnemySpawner.Instance.Init();
-        EnemySpawner.Instance.StartPhase(PhaseManager.Instance.Phase);
+
+        PhaseManager.Instance.Init();
+        
         
         ResManager.Instance.Init();
         //UIManager.Instance.Init();

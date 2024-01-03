@@ -29,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emission:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: adde878a1dee34e0fac1a556c095e807, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metalic:
@@ -54,6 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Blink: 0
     - _Dissolve: 0
     - _DissolveSize: 30
     - _MetalicValue: 0
@@ -61,8 +62,9 @@ Material:
     - _QueueOffset: 0
     - _Smoothness: 0
     m_Colors:
+    - _BlinkColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 1.7862291, b: 4, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2215925535707183102
 MonoBehaviour:

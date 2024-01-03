@@ -29,6 +29,8 @@ public abstract class BaseEnemy : Entity
 
     protected Coroutine _stopCoroutine;
 
+    private Transform _cylinder;
+
     private Transform _target;
     public Transform Target
     {
@@ -46,24 +48,35 @@ public abstract class BaseEnemy : Entity
     
     public EnemyType EnemyType;
 
-    public sealed override void Init() 
+    public sealed override void Init()
     {
+        CurrentHP = _entityStatSO.maxHp;
         Transform visualTrm = transform.Find("Visual");
         Transform actionDataTrm = transform.Find("ActionData");
+        _cylinder = transform.Find("Cylinder");
 
         ActionData = actionDataTrm.GetComponent<EnemyActionData>();
         AnimatorCompo = visualTrm.GetComponent<Animator>();
         EnemyAnimator = visualTrm.GetComponent<EnemyAnimator>();
         CharacterControllerCompo = GetComponent<CharacterController>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
-        
 
         EnemyAnimator.Init(this,AnimatorCompo);
-        NavMeshAgent.speed = EntityStatSo.moveSpeed;
-        NavMeshAgent.enabled = true;
-        ActionData.IsStopped = false;
-        EnemyType = EnemyAttackSO.enemyType;
+        ActionData.IsStopped = true;
+        CharacterControllerCompo.enabled = false;
         
+        _stateMachine.ChangeState(EEnemyState.Normal);
+        
+        EnemyAnimator.StartDissolveCor(1f,0f,1.2f, () =>
+        {
+            this.gameObject.SetActive(true);
+            _cylinder.gameObject.SetActive(true);
+            CharacterControllerCompo.enabled = true;
+            NavMeshAgent.speed = EntityStatSo.moveSpeed;
+            ActionData.IsStopped = false;
+            NavMeshAgent.enabled = true;
+            EnemyType = EnemyAttackSO.enemyType;
+        });
         OnDead += DeadHandle;
     }
     
@@ -82,6 +95,7 @@ public abstract class BaseEnemy : Entity
     public override void Damaged(float damage)
     {
         base.Damaged(damage);
+        EnemyAnimator.StartBlinkCoroutine(0f,1f,0.1f,null);
         //StopImmediately(true);
     }
 
@@ -123,6 +137,8 @@ public abstract class BaseEnemy : Entity
 
     protected virtual void DeadHandle()
     {
+        _cylinder.gameObject.SetActive(false);
+        CharacterControllerCompo.enabled = false;
         _stateMachine.ChangeState(EEnemyState.Dead);  
     }
 }

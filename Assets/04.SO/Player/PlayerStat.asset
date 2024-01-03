@@ -19,7 +19,7 @@ MonoBehaviour:
     _baseValue: 0
     modifiers: []
   damage:
-    _baseValue: 500
+    _baseValue: 7
     modifiers: []
   recovery:
     _baseValue: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     _baseValue: 1
     modifiers: []
   shotDelay:
-    _baseValue: 0.5
+    _baseValue: 0.1
     modifiers: []
   moveSpeed:
     _baseValue: 10
