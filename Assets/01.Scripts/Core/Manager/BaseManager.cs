@@ -15,7 +15,7 @@ public class BaseManager : MonoSingleton<BaseManager>
     public int CurResCount
     {
         get { return curResCount; }
-        private set { Mathf.Clamp(curResCount, 0, StatManager.Instance.MaxResValue); }
+        private set { Mathf.Clamp(curResCount, 0, StatManager.Instance.MaxBaseResValue); }
     }
 
     private void Awake()

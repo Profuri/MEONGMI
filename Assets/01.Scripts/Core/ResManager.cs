@@ -7,7 +7,7 @@ public class ResManager : MonoSingleton<ResManager>
 {
     [SerializeField] private BaseStatSO _baseStatSO;
 
-    public int ResourceCnt { get; private set; }
+    public int PlayerResourceCnt { get; private set; }
     public int BaseResourceCnt { get; private set; }
     public event Action OnResourceToZero;
 
@@ -16,15 +16,15 @@ public class ResManager : MonoSingleton<ResManager>
 
     }
 
-    public bool CanUseResource(int resourceCnt) => ResourceCnt >= resourceCnt;
+    public bool CanUseResource(int resourceCnt) => PlayerResourceCnt >= resourceCnt;
 
     public bool AddResource(int plusResourceCnt)
     {
-        int curCnt = ResourceCnt + plusResourceCnt;
-        ResourceCnt = curCnt;
-        ResourceCnt = Mathf.Clamp(ResourceCnt, 0, _baseStatSO.MaxResCnt);
+        int curCnt = PlayerResourceCnt + plusResourceCnt;
+        PlayerResourceCnt = curCnt;
+        PlayerResourceCnt = Mathf.Clamp(PlayerResourceCnt, 0, _baseStatSO.MaxResCnt);
 
-        Debug.Log($"CurrentResourceCnt: {ResourceCnt}");
+        Debug.Log($"CurrentResourceCnt: {PlayerResourceCnt}");
         return curCnt <= _baseStatSO.MaxResCnt;
     }
 
@@ -32,8 +32,8 @@ public class ResManager : MonoSingleton<ResManager>
     {
         if (CanUseResource(resourceCnt))
         {
-            ResourceCnt -= resourceCnt;
-            if (ResourceCnt == 0)
+            PlayerResourceCnt -= resourceCnt;
+            if (PlayerResourceCnt == 0)
             {
                 OnResourceToZero?.Invoke();
             }
@@ -45,6 +45,6 @@ public class ResManager : MonoSingleton<ResManager>
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
-            ResourceCnt += 10000;
+            PlayerResourceCnt += 10000;
     }
 }

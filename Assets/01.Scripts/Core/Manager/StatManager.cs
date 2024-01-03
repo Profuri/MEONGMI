@@ -30,7 +30,7 @@ public class StatManager : MonoSingleton<StatManager>
     public ETraitUpgradeElement CurTrait;
 
     [field:SerializeField]
-    public int MaxResValue { get; set; }
+    public int MaxBaseResValue { get; set; }
     [field:SerializeField]
     public int UnitMaxValue { get; set; }
     [field:SerializeField]
@@ -63,7 +63,7 @@ public class StatManager : MonoSingleton<StatManager>
 
     public void BaseInit()
     {
-        MaxResValue = BaseStats.MaxResCnt;
+        MaxBaseResValue = BaseStats.MaxResCnt;
         UnitMaxValue = BaseStats.UnitMaxCnt;
         MovementRange = BaseStats.MovementRange;
     }
@@ -127,7 +127,7 @@ public class StatManager : MonoSingleton<StatManager>
                 MovementRange += AddMovementRangeValue;
                 break;
             case EBaseUpgradeElement.MAXRES:
-                MaxResValue += AddMaxResValue;
+                MaxBaseResValue += AddMaxResValue;
                 break;
         }
     }
