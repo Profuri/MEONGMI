@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 
 public class PlayerFeatureChoicePanel : ChoicePanel
 {
+    [SerializeField] private GameObject _mainTrm;
     [SerializeField] private RectTransform _roulettTrm;
     [SerializeField] private List<TraitUpgradeElemSO> _featureDataList;
     [SerializeField] private Button _button;
@@ -29,10 +30,29 @@ public class PlayerFeatureChoicePanel : ChoicePanel
         {
             _images.Add(_upgradeCards[i].GetComponent<Image>());
         }
-        _particleSystem.Stop();
         
         _effectImage = _effectPanel.transform.Find("Image").GetComponent<Image>();
+    }
+
+    private void OnEnable()
+    {
         ResetRoulett();
+        Init();
+    }
+
+    private void Init()
+    {
+        _title.SetText("특성 해제");
+        _description.SetText("당신의 운명은?");
+
+        _button.interactable = true;
+        _particleSystem.Stop();
+        _particleSystem.gameObject.SetActive(false);
+
+        _effectImage.transform.DOScale(Vector3.one, 0f);
+        _effectImage.gameObject.SetActive(false);
+        Color color = _effectPanel.color;
+        _effectPanel.color = new Color(color.r, color.g, color.b, 0);
     }
 
     public TraitUpgradeElemSO ResetRoulett()
@@ -68,7 +88,6 @@ public class PlayerFeatureChoicePanel : ChoicePanel
     //Debug Function
     public void OnRolling()
     {
-
         Rolling();
     }
 
@@ -86,14 +105,19 @@ public class PlayerFeatureChoicePanel : ChoicePanel
             _description.SetText(result.Description);
 
             _effectImage.gameObject.SetActive(true);
+            _particleSystem.gameObject.SetActive(true);
             _particleSystem.Play();
 
             Sequence seq = DOTween.Sequence();
             seq.Append(_effectPanel.DOFade(0.7f, 0.25f));
             seq.Insert(0, _effectImage.transform.DOScale(new Vector3(1.7f, 1.7f, 1.7f), 0.25f));
-            seq.AppendInterval(2);
-            seq.OnComplete(() => UpgradeManager.Instance.ApplyUpgradeTrait(result.Type));
-            Debug.Log(result.Type.ToString());
+            seq.AppendInterval(3.5f);
+            seq.OnComplete(() =>
+            {
+                UpgradeManager.Instance.ApplyUpgradeTrait(result.Type);
+                Debug.Log(result.Type.ToString());
+                _mainTrm.SetActive(false);
+            });
         });
 
         return result;

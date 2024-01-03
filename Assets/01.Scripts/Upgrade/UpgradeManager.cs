@@ -50,11 +50,8 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 {
 
     [SerializeField] private int basicUpgradeNeedCnt;
-    [field:SerializeField]
-    public int BaseUpgradeNeedResCnt { get; set; } 
-    [field:SerializeField]
+    public Dictionary<EBaseUpgradeElement, int> BaseUpgradeNeedResCntDic { get; set; } 
     public int PlayerUpgradeNeedResCnt { get; set; }
-    [field:SerializeField]
     public int TraitUpgradeNeedResCnt { get; set; }
 
     public ETraitUpgradeElement curTraitElem = ETraitUpgradeElement.NONE;
@@ -69,17 +66,24 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     public List<PlayerUpgradeElemSO> PlayerElemInfos => playerElemInfos;
     public List<TraitUpgradeElemSO> TraitElemInfos => traitElemInfos;
 
+    
+
     private void Awake()
     {
         Init();
     }
-
     public override void Init()
     {
-        BaseUpgradeNeedResCnt = PlayerUpgradeNeedResCnt = TraitUpgradeNeedResCnt = basicUpgradeNeedCnt;
         LoadUpdateInfos();
-    }
 
+        //필요 머니 초기화
+        BaseUpgradeNeedResCntDic = new();
+        foreach (var elem in baseElemInfos)
+        {
+            BaseUpgradeNeedResCntDic.Add(elem.Type, elem.BaseNeedCost);
+        }
+        PlayerUpgradeNeedResCnt = TraitUpgradeNeedResCnt = basicUpgradeNeedCnt;
+    }
     private void LoadUpdateInfos()
     {
         baseElemInfos = new();
@@ -95,7 +99,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             if (itemData != null)
             {
                 baseElemInfos.Add(itemData);
-                Debug.Log(itemData.name);
+                //Debug.Log(itemData.name);
             }
         }
 
@@ -108,7 +112,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             if (itemData != null)
             {
                 playerElemInfos.Add(itemData);
-                Debug.Log(itemData.name);
+                //Debug.Log(itemData.name);
             }
         }
 
@@ -121,9 +125,24 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             if (itemData != null)
             {
                 traitElemInfos.Add(itemData);
-                Debug.Log(itemData.name);
+                //Debug.Log(itemData.name);
             }
         }
+    }
+
+    public int GetBaseUpgradeMoney(EBaseUpgradeElement elem) => BaseUpgradeNeedResCntDic[elem];
+    private void SetBaseCost(EBaseUpgradeElement elem, int value) => BaseUpgradeNeedResCntDic[elem] = value;
+
+    //나중에 리팩토링
+    public bool BaseUpgrade(EBaseUpgradeElement type, int curCost)
+    {
+        if(ResManager.Instance.UseResource(curCost))
+        {
+            int addCost = baseElemInfos.Find((elem) => elem.Type == type).AddCost;
+            SetBaseCost(type, addCost);
+            return true;
+        }
+        return false;
     }
 
     public void Upgrade(EUpgradeType upgradeType)
@@ -133,7 +152,9 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         switch(upgradeType)
         {
             case EUpgradeType.BASE:
-                upgradeCnt = BaseUpgradeNeedResCnt;
+                //upgradeCnt = BaseUpgradeNeedResCnt;
+                
+                Debug.LogError("얘는 여기서 처리 안함");
                 break;
             case EUpgradeType.PLAYER:
                 upgradeCnt = PlayerUpgradeNeedResCnt;
@@ -149,7 +170,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         if(ResManager.Instance.UseResource(upgradeCnt))
         {
             Debug.Log("Upgrade준비");
-            RandomUpgrade(upgradeType);
+            AddElement(upgradeType);
             UpdateResNeed(upgradeType);
             UpgradePanelOn(upgradeType);
         }
@@ -172,7 +193,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         }
     }
 
-    private void RandomUpgrade(EUpgradeType upgradeType)
+    public void AddElement(EUpgradeType upgradeType)
     {
         int maxEclusive = 0;
         List<int> pickedNums = new() { -1 };
@@ -181,6 +202,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
             case EUpgradeType.BASE:
                 {
                     TestUIManager.Instance.AddUpgradeElem(upgradeType, 0);
+                    //Debug.LogError("삐빅! 에러입니다1");
                 }
                 break;
             case EUpgradeType.PLAYER:
@@ -223,7 +245,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         switch(upgradeType)
         {
             case EUpgradeType.BASE:
-                BaseUpgradeNeedResCnt *= 2;
+                 // 여기서 처리 x
                 break;
             case EUpgradeType.PLAYER:
             case EUpgradeType.TRAIT:
@@ -235,17 +257,57 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     public void ApplyUpgradeTrait(ETraitUpgradeElement upgradeElem)
     {
-
+        switch (upgradeElem)
+        {
+            case ETraitUpgradeElement.RESTOBULLET:
+                break;
+            case ETraitUpgradeElement.SLOW:
+                break;
+            case ETraitUpgradeElement.PENETRATE:
+                break;
+            case ETraitUpgradeElement.FOLLOW:
+                break;
+            case ETraitUpgradeElement.DOTDAMAGE:
+                break;
+            case ETraitUpgradeElement.STATIC:
+                break;
+        }
     }
     public void ApplyUpgradePlayer(EPlayerUpgradeElement upgradeElem)
     {
-
+        switch (upgradeElem)
+        {
+            case EPlayerUpgradeElement.BULLETCOUNTUP:
+                break;
+            case EPlayerUpgradeElement.FIRESPEEDUP:
+                break;
+            case EPlayerUpgradeElement.MOVESPEEDUP:
+                break;
+            case EPlayerUpgradeElement.COLLECTSPEEDUP:
+                break;
+            case EPlayerUpgradeElement.DAMAGE:
+                break;
+            case EPlayerUpgradeElement.RECOVERY:
+                break;
+            case EPlayerUpgradeElement.LUCK:
+                break;
+            case EPlayerUpgradeElement.DEPEND:
+                break;
+            case EPlayerUpgradeElement.HP:
+                break;
+        }
     }
-    
+
     public void ApplyUpgradeBase(EBaseUpgradeElement upgradeElem)
     {
-
+        switch (upgradeElem)
+        {
+            case EBaseUpgradeElement.UNITCNT:
+                break;
+            case EBaseUpgradeElement.LINELEN:
+                break;
+            case EBaseUpgradeElement.MAXRES:
+                break;
+        }
     }
-
-
 }

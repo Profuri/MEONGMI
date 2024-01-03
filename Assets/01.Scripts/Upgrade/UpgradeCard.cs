@@ -12,7 +12,7 @@ public class UpgradeCard : MonoBehaviour
 
     private Action ReleaseAct;
 
-    public void Setting(UpgradeElemInfoSO so, Action releaseAct)
+    public virtual void Setting(UpgradeElemInfoSO so, Action releaseAct)
     {
         Debug.Log(so.name);
         //description.text = so.Description;
@@ -22,10 +22,9 @@ public class UpgradeCard : MonoBehaviour
         ReleaseAct = releaseAct;
     }
 
-    public void OnClick()
+    public virtual void OnClick()
     {
         //효과적용
-
         ReleaseAct?.Invoke();
     }
 }

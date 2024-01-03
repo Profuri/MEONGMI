@@ -4961,7 +4961,7 @@ GameObject:
   - component: {fileID: 6734331642302791506}
   - component: {fileID: 8000899539585319682}
   m_Layer: 5
-  m_Name: Icon_Critical
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5036,7 +5036,7 @@ GameObject:
   - component: {fileID: 6566152736331202927}
   - component: {fileID: 7771720300309012526}
   m_Layer: 5
-  m_Name: Icon_Gold
+  m_Name: Resource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5246,7 +5246,7 @@ GameObject:
   - component: {fileID: 2531598541833564351}
   - component: {fileID: 5055297794104127201}
   m_Layer: 5
-  m_Name: Text_+50
+  m_Name: Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5381,7 +5381,7 @@ GameObject:
   - component: {fileID: 7884513146800116592}
   - component: {fileID: 6251668844061908465}
   m_Layer: 5
-  m_Name: Text_+50 (1)
+  m_Name: AddValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5517,7 +5517,7 @@ GameObject:
   - component: {fileID: 8260375679740613502}
   - component: {fileID: 2109155059880310150}
   m_Layer: 5
-  m_Name: Button_Upgrade
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5626,7 +5626,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8260375679740613502}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 454862064932049723}
+        m_TargetAssemblyTypeName: BaseUpgradeCard, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3968640342342857887
 GameObject:
   m_ObjectHideFlags: 0
@@ -5639,7 +5651,7 @@ GameObject:
   - component: {fileID: 2466836773093040539}
   - component: {fileID: 336264635834650915}
   m_Layer: 5
-  m_Name: Text_300
+  m_Name: MoneyTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5776,7 +5788,7 @@ GameObject:
   - component: {fileID: 1959825396328657556}
   - component: {fileID: 1832027969546689095}
   m_Layer: 5
-  m_Name: Text_AttackDamage
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5910,6 +5922,7 @@ GameObject:
   - component: {fileID: 2376546340502307013}
   - component: {fileID: 5942213154634758939}
   - component: {fileID: 4383796492000496111}
+  - component: {fileID: 454862064932049723}
   m_Layer: 5
   m_Name: BaseLevelUpChoice
   m_TagString: Untagged
@@ -5979,3 +5992,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &454862064932049723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7799105057000745512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d1af7000d976046ab371639f0e4ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

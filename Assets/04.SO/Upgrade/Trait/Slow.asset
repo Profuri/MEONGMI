@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bf59933e8198147ab1bf10bce5302e, type: 3}
   m_Name: Slow
   m_EditorClassIdentifier: 
+  UpgradeType: 3
   name: "\uC2AC\uB85C\uC6B0"
   Description: "\uCD1D\uC54C\uC774 \uC801\uC5D0\uAC8C \uB454\uD654 \uD6A8\uACFC\uB97C
     \uC785\uD798."

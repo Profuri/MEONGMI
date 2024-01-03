@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e171e8bb44d2e744995e6123127c5b3a, type: 3}
   m_Name: IncreaseUnitCount
   m_EditorClassIdentifier: 
+  UpgradeType: 1
   name: "\uC720\uB2DB \uC218"
   Description: "\uC720\uB2DB \uC218 \uC99D\uAC00"
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: b1d50cb49035c459c8272b17e4f772b7, type: 3}
   Type: 0
+  NeedResource: {fileID: 21300000, guid: 3fb23bf6552b44aafb168ed0584e1641, type: 3}
+  BaseNeedCost: 10
+  AddCost: 10
+  BaseValue: 10
+  AddValue: 1

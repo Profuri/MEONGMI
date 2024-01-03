@@ -43,7 +43,11 @@ public class TestUIManager : MonoSingleton<TestUIManager>
         UpgradeManager.Instance.Upgrade(EUpgradeType.TRAIT);
     }
 
-    public void BaseUpgradePanel() => _BaseUpgradePanel.SetActive(true);
+    public void BaseUpgradePanel()
+    {
+        UpgradeManager.Instance.AddElement(EUpgradeType.BASE);
+        _BaseUpgradePanel.SetActive(true);
+    }
     public void PlayerUpgradePanel() => _PlayerUpgradePanel.SetActive(true);
     public void TraitUpgradePanel() => _TraitUpgradePanel.SetActive(true);
 
