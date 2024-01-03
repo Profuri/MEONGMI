@@ -56,14 +56,15 @@ public abstract class BaseEnemy : Entity
         EnemyAnimator = visualTrm.GetComponent<EnemyAnimator>();
         CharacterControllerCompo = GetComponent<CharacterController>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
+        
 
         EnemyAnimator.Init(this,AnimatorCompo);
         NavMeshAgent.speed = EntityStatSo.moveSpeed;
         NavMeshAgent.enabled = true;
         ActionData.IsStopped = false;
         EnemyType = EnemyAttackSO.enemyType;
-
-
+        
+        OnDead += DeadHandle;
     }
     
     protected override void RegisterStates()
@@ -81,7 +82,7 @@ public abstract class BaseEnemy : Entity
     public override void Damaged(float damage)
     {
         base.Damaged(damage);
-        StopImmediately(true);
+        //StopImmediately(true);
     }
 
     public void SetPosition(Vector3 pos)
@@ -90,9 +91,13 @@ public abstract class BaseEnemy : Entity
         transform.position = pos;
         NavMeshAgent.enabled = true;
     }
+    
     public void StopImmediately()
     {
-        NavMeshAgent.SetDestination(transform.position);
+        if (NavMeshAgent.enabled)
+        {
+            NavMeshAgent.SetDestination(transform.position);
+        }
     }
     
     public void StopImmediately(bool isStopped)
@@ -114,5 +119,10 @@ public abstract class BaseEnemy : Entity
             Callback?.Invoke();
         }
         StartCoroutine(DelayCor(time, Callback));
+    }
+
+    protected virtual void DeadHandle()
+    {
+        _stateMachine.ChangeState(EEnemyState.Dead);  
     }
 }

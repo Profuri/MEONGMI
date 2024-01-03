@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class ResourceMono : MonoBehaviour
+public class ResourceMono : PoolableMono
 {
-    [SerializeField] private int _curResCnt;
+    private int _curResCnt;
 
     public void GetResource()
     {
@@ -13,6 +13,17 @@ public class ResourceMono : MonoBehaviour
         {
             Debug.Log("Can't add more resource!! ");
         }
-        Destroy(this.gameObject);
+
+        PoolManager.Instance.Push(this);
+    }
+
+    public override void Init()
+    {
+        
+    }
+
+    public void SetResourceCnt(int cnt)
+    {
+        _curResCnt = cnt;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Android;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -11,9 +12,6 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoSingleton<EnemySpawner>
 {
-    [SerializeField] private List<PhaseInfoSO> _phaseInfoList = new List<PhaseInfoSO>();
-
-    [SerializeField] private float _maxDistance;
     private List<BaseEnemy> _currentEnemyList;
     private int _currentDeadCnt;
 
@@ -53,11 +51,13 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     {
         _currentDeadCnt = 0;
         
-        EnemyListSO enemyList = _phaseInfoList[phase].enemyListSO;
-        int appearMaxEnemyCnt = _phaseInfoList[phase].appearMaxEnemyCnt;
-        int appearDelay = _phaseInfoList[phase].appearDelay;
-        int appearMaxOnceEnemyCnt = _phaseInfoList[phase].appearOnceMaxEnemyCnt;
-        int appearMinOnceEnemyCnt = _phaseInfoList[phase].appearOnceMinEnemyCnt;
+        var phaseInfoList = PhaseManager.Instance.PhaseInfoList;
+        
+        EnemyListSO enemyList = phaseInfoList[phase].enemyListSO;
+        int appearMaxEnemyCnt = phaseInfoList[phase].appearMaxEnemyCnt;
+        int appearDelay = phaseInfoList[phase].appearDelay;
+        int appearMaxOnceEnemyCnt = phaseInfoList[phase].appearOnceMaxEnemyCnt;
+        int appearMinOnceEnemyCnt = phaseInfoList[phase].appearOnceMinEnemyCnt;
         int randomAppearEnemyCnt;
         
         _currentEnemyList.Clear();
@@ -67,32 +67,35 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         {
             if (appearMaxEnemyCnt > _currentEnemyList.Count)
             {
-                //이거 수정해줘야됨.
                 randomAppearEnemyCnt = Random.Range(appearMinOnceEnemyCnt,appearMaxOnceEnemyCnt);
                 Vector3 randomPos;
                 float lineLength = GameManager.Instance.PlayerController.LineConnect.LineLength;
-                Vector3 defaultOffset = new Vector3(1, 0, 1) * lineLength;
+                
                 for (int i = 0; i < randomAppearEnemyCnt; i++)
                 {
-                    randomPos = (Vector3)Random.insideUnitCircle * _maxDistance + defaultOffset;
-                    bool result = Physics.Raycast(randomPos,Vector3.down,out RaycastHit hitInfo, Mathf.Infinity, 1 << LayerMask.NameToLayer("Ground"));
+                    var spherePoint = Random.insideUnitSphere;
+                    spherePoint.y = 0;
+                    var dir = spherePoint.normalized;
+                    var randomPoint = dir * Random.Range(lineLength, GameManager.Instance.MaxDistance);
+                    var unitPoint = randomPoint + GameManager.Instance.BaseTrm.position;
+                    unitPoint.y = 100f;
+                    
+                    bool result = Physics.Raycast(unitPoint,Vector3.down,out RaycastHit hitInfo, Mathf.Infinity, 1 << LayerMask.NameToLayer("Ground"));
+                    
                     if (result)
                     {
-                        randomPos.y = hitInfo.collider.transform.position.y;
+                        unitPoint.y = hitInfo.point.y;
                     }
-                    
-                    Debug.Log($"RandomPos: {randomPos}");
-                
+                                        
                     var prefab = enemyList.GetRandomEnemy();
                 
                     BaseEnemy enemy = PoolManager.Instance.Pop(prefab.name) as BaseEnemy;
                 
                     enemy.Init();
                     enemy.gameObject.SetActive(true);
-                    enemy.SetPosition(randomPos);
+                    enemy.SetPosition(unitPoint);
                     _currentEnemyList.Add(enemy);
                     
-                    Debug.Log($"EnemyPos: {enemy.transform.position}");
 
                     yield return null;
                 }
