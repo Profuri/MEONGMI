@@ -4316,20 +4316,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1305424289}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1057978671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057978669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1325b0034e339ab4c99c910e012e4a69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UpgradeCards: []
-  mainTrm: {fileID: 0}
 --- !u!1 &1119134118
 GameObject:
   m_ObjectHideFlags: 0
@@ -5741,10 +5727,6 @@ PrefabInstance:
     - {fileID: 7940597322832551352, guid: af467614fa604d1429757f109be0e573, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4998930568304734369, guid: af467614fa604d1429757f109be0e573,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1057978671}
     - targetCorrespondingSourceObject: {fileID: 8522145549222999263, guid: af467614fa604d1429757f109be0e573,
         type: 3}
       insertIndex: -1
