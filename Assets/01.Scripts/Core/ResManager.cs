@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,8 +9,22 @@ public class ResManager : MonoSingleton<ResManager>
     [SerializeField] private BaseStatSO _baseStatSO;
     private ResSpawner _resSpawner;
 
-    public int PlayerResourceCnt { get; private set; }
-    public int BaseResourceCnt { get; private set; }
+    //public int PlayerResourceCnt { get; private set; }
+    //public int BaseResourceCnt { get; private set; }
+    
+    private int playerResourceCnt;
+    public int PlayerResourceCnt
+    {
+        get { return playerResourceCnt; }
+        private set { Mathf.Clamp(playerResourceCnt, 0, StatManager.Instance.GetPlayerResMax()); }
+    }
+
+    private int baseResourceCnt;
+    public int BaseResourceCnt
+    {
+        get { return baseResourceCnt; }
+        private set { Mathf.Clamp(baseResourceCnt, 0, StatManager.Instance.MaxBaseResValue); }
+    }
 
     public event Action OnResourceToZero;
 
@@ -42,6 +57,22 @@ public class ResManager : MonoSingleton<ResManager>
             return true;
         }
         return false;
+    }
+
+    public void MoveResource()
+    {
+        int baseMaxValue = StatManager.Instance.MaxBaseResValue;
+        if (PlayerResourceCnt + BaseResourceCnt > baseMaxValue)
+        {
+            int remainMoney = PlayerResourceCnt - (baseMaxValue - BaseResourceCnt);
+            PlayerResourceCnt = remainMoney;
+            BaseResourceCnt = baseMaxValue;
+        }
+        else
+        {
+            BaseResourceCnt += PlayerResourceCnt;
+            PlayerResourceCnt = 0;
+        }
     }
 
     public void Update()

@@ -53,6 +53,11 @@ public class PlayerController : Entity, IDetectable
         AnimatorCompo = _visualTrm.GetComponent<Animator>();
     }
 
+    public void SetBullet(BulletType type)
+    {
+        _bulletType = type;
+    }
+
     public void SetVelocity(Vector3 dir)
     {
         CharacterControllerCompo.Move(dir);

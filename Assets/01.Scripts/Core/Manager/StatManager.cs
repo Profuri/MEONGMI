@@ -134,13 +134,6 @@ public class StatManager : MonoSingleton<StatManager>
 
     public void SetTrait(ETraitUpgradeElement elem)
     {
-        Debug.Log(TraitDicionary.Count);
-        //foreach (var pair in TraitDicionary)
-        //{
-        //    Debug.Log(pair);
-        //    TraitDicionary[pair.Key] = false;
-        //};
-
         for(int i = -1; i < TraitDicionary.Count - 1; i++)
         {
             TraitDicionary[(ETraitUpgradeElement)i] = false;
@@ -149,7 +142,28 @@ public class StatManager : MonoSingleton<StatManager>
         TraitDicionary[elem] = true;
 
         CurTrait = elem;
-        
+
+        switch (CurTrait)
+        { 
+            case ETraitUpgradeElement.RESTOBULLET:
+                GameManager.Instance.PlayerController.SetBullet(BulletType.Material);
+                break;
+            case ETraitUpgradeElement.SLOW:
+                GameManager.Instance.PlayerController.SetBullet(BulletType.Slow);
+                break;
+            case ETraitUpgradeElement.PENETRATE:
+                GameManager.Instance.PlayerController.SetBullet(BulletType.Pierce);
+                break;
+            case ETraitUpgradeElement.FOLLOW:
+                GameManager.Instance.PlayerController.SetBullet(BulletType.Missile);
+                break;
+            case ETraitUpgradeElement.DOTDAMAGE:
+                GameManager.Instance.PlayerController.SetBullet(BulletType.Poison);
+                break;
+            case ETraitUpgradeElement.STATIC:
+                GameManager.Instance.PlayerController.SetBullet(BulletType.Transition);
+                break;
+        }
         TestUIManager.Instance.IngameHUD.TraitsBarUpdate(CurTrait);
     }
 
@@ -166,4 +180,6 @@ public class StatManager : MonoSingleton<StatManager>
 
         return ETraitUpgradeElement.NONE;
     }
+
+    public int GetPlayerResMax() => BaseStats.PlayerMaxResCnt;
 }

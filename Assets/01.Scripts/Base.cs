@@ -5,6 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Base : MonoBehaviour,IDamageable
 {
+    private int curUnitCount;
+    public int CurUnitCount
+    {
+        get { return curUnitCount; }
+        private set { Mathf.Clamp(curUnitCount, 0, StatManager.Instance.UnitMaxValue); }
+    }
+
     public Collider Collider { get; private set; }
     private Arc _arc;
     
@@ -13,6 +20,7 @@ public class Base : MonoBehaviour,IDamageable
         Collider = GetComponent<Collider>();
         _arc = transform.Find("Arc").GetComponent<Arc>();
         ResManager.Instance.OnResourceToZero += () => Destroy(this.gameObject);
+        curUnitCount = 0;
     }
     
     public void Damaged(float damage)
@@ -26,5 +34,9 @@ public class Base : MonoBehaviour,IDamageable
         
         CameraManager.Instance.ImpulseCam(1, 0.1f, new Vector3(0, -1, 0));
         ResManager.Instance.UseResource((int)damage);
+    }
+    public void AddUnit()
+    {
+        curUnitCount++;
     }
 }
