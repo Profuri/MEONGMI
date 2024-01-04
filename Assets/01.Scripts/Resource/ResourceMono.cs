@@ -64,7 +64,11 @@ public class ResourceMono : Orb
         if (_isOn)
         {
             GetResource();
-            StartDissolveCor(0f,1f,0.7f,() => PoolManager.Instance.Push(this));
+            StartDissolveCor(0f,1f,0.7f,() =>
+            {
+                PoolManager.Instance.Push(this);
+                ResSpawner.currentRes--;
+            });
         }
     }
 
@@ -124,7 +128,7 @@ public class ResourceMono : Orb
     public void SetResourceCnt(int cnt)
     {
         _curResCnt = cnt;
-        _life = (int)(cnt / 100f);
+        _life = (int)(cnt / 200f);
     }
 
     public void SetScale(float scale)

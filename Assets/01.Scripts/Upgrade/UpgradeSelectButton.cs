@@ -45,6 +45,7 @@ public class UpgradeSelectButton : MonoBehaviour
 
     public void Show()
     {
+        //gameObject.SetActive(true);
         for (int i = 0; i < images.Length; i++) images[i].DOKill();
         for (int i = 0; i < texts.Length; i++) texts[i].DOKill();
 

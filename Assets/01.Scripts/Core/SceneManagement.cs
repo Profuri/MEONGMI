@@ -14,6 +14,8 @@ public enum ESceneName
 public class SceneManagement : MonoSingleton<SceneManagement>
 {
     public event Action OnGameStartEvent;
+    public Action OnRestartGameEvent;
+    
     [SerializeField] private int _gameSceneIdx;
     
     public override void Init()

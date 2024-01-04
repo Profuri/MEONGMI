@@ -14842,7 +14842,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   _checkRadius: 1
-  _bulletSpeed: 7
+  _bulletSpeed: 12
   _bulletDestroyDelay: 4
 --- !u!54 &-5448519065081392893
 Rigidbody:

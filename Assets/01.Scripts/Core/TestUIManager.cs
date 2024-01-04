@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestUIManager : MonoSingleton<TestUIManager>
+public class TestUIManager : MonoBehaviour
 {
     [Header("Root")]
     [SerializeField] InGameHUD _IngameHUD;
@@ -37,11 +37,7 @@ public class TestUIManager : MonoSingleton<TestUIManager>
     [SerializeField] TextMeshProUGUI _playerCostTxt; 
     [SerializeField] TextMeshProUGUI _traitCostTxt; 
 
-
-    public override void Init()
-    {
-    }
-
+    
     public void UpgradeBase()
     {
         UpgradeManager.Instance.Upgrade(EUpgradeType.BASE);
@@ -72,7 +68,7 @@ public class TestUIManager : MonoSingleton<TestUIManager>
     public void PlayerAndTraitPanel() => _PlayerAndTraitPanel.SetActive(true);   
     public void UpgradeFail()
     {
-        // ÀÚ¿øÀÌ ºÎÁ·ÇÕ´Ï´Ù UI¶ç¾îÁà¾ß ÇÔ.
+        // ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½ UIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
         upgradeFailPanel.SetActive(true);
     }
 

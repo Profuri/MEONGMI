@@ -2,6 +2,8 @@ using System.Collections;
 using System.Drawing;
 using Cinemachine;
 using UnityEngine;
+using System;
+using DG.Tweening;
 
 public class CameraManager : MonoSingleton<CameraManager>
 {
@@ -33,6 +35,25 @@ public class CameraManager : MonoSingleton<CameraManager>
             StopCoroutine(_runningRoutine);
         }
         _runningRoutine = StartCoroutine(ZoomRoutine(size, time));
+    }
+
+    public void BaseTransitionMove(Action Callback)
+    {
+        Sequence seq = DOTween.Sequence();
+
+        Transform baseTrm = GameManager.Instance.BaseTrm;
+        _playerFollowCam.m_Follow = baseTrm;
+
+        
+        seq.AppendInterval(1f);
+        seq.Append(DOTween.To(() => _playerFollowCam.m_Lens.OrthographicSize, x => _playerFollowCam.m_Lens.OrthographicSize = x, 5f, 2f));
+        
+        VFXPlayer baseBomb = PoolManager.Instance.Pop("BaseBomb") as VFXPlayer;
+        baseBomb.Init();
+        baseBomb.transform.position = baseTrm.position;
+        
+        seq.AppendInterval(1f);
+        seq.AppendCallback(() => Callback?.Invoke());
     }
 
     private IEnumerator ZoomRoutine(float size, float time)

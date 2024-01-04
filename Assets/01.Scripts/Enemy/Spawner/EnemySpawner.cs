@@ -9,6 +9,8 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     private List<BaseEnemy> _currentEnemyList;
     private int _currentDeadCnt;
     
+    public int RemainEnemyCnt { get; private set; }
+
     private Coroutine _phaseCoroutine;
     public event Action<int> OnPhaseEnd;
 
@@ -50,7 +52,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         
         _currentEnemyList.Clear();
 
-        while (_appearMaxEnemyCnt > _currentDeadCnt)
+        while (_appearMaxEnemyCnt != _currentDeadCnt)
         {
             if (_appearMaxEnemyCnt > _currentEnemyList.Count)
             {
@@ -102,7 +104,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         dropResource.Init();
         dropResource.SetResourceAmount(randomEnemyResCnt);
         dropResource.transform.position = enemy.transform.position;
-            
+        
         PoolManager.Instance.Push(enemy);
         _currentDeadCnt++;
         OnEnemyDead?.Invoke(RemainMonsterCnt);

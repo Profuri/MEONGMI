@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Spider
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  maxHp: 30
+  maxHp: 10

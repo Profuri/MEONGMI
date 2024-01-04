@@ -123,21 +123,21 @@ public class InGameHUD : UIComponent
         UpdateUnitText();
     }
 
-    private void UpdateBaseResource(int cnt)
+    public void UpdateBaseResource(int cnt)
     {
         int maxRes = StatManager.Instance.MaxBaseResValue;
         UpdateSlider(baseResSlider, cnt, maxRes);
         baseResourceText.text = $"{cnt} / {maxRes}";
     }
 
-    private void UpdatePlayerResource(int cnt)
+    public void UpdatePlayerResource(int cnt)
     {
         int maxRes = StatManager.Instance.MaxBaseResValue;
         UpdateSlider(playerResSlider, cnt, maxRes);
         //playerResourceText.text = curRes.ToString();
     }
 
-    private void UpdatePlayerHp()
+    public void UpdatePlayerHp()
     {
         int curHP = (int)GameManager.Instance.PlayerController.CurrentHP;
         int maxHP = (int)GameManager.Instance.PlayerController.GetMaxHP();
@@ -145,7 +145,7 @@ public class InGameHUD : UIComponent
         //playerResourceText.text = curRes.ToString();
     }
 
-    private void UpdateUnitText()
+    public void UpdateUnitText()
     {
         int curRes = GameManager.Instance.Base.CurUnitCount;
         int maxRes = StatManager.Instance.UnitMaxValue;

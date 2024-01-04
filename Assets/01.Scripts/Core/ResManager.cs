@@ -14,7 +14,7 @@ public class ResManager : MonoSingleton<ResManager>
     private int _baseResCnt;
     public int BaseResCnt => _baseResCnt;
     
-    public event Action OnResourceToZero;
+    public Action OnResourceToZero;
 
     public event Action<int> OnChangePlayerRes;
     public event Action<int> OnChangeBaseRes;
@@ -50,6 +50,17 @@ public class ResManager : MonoSingleton<ResManager>
             return true;
         }
         return false;
+    }
+
+    public void MinusResource(int minusResourceCnt)
+    {
+        _baseResCnt -= minusResourceCnt;
+        _baseResCnt = Mathf.Clamp(_baseResCnt, 0, _baseStatSO.MaxResCnt);
+        OnChangeBaseRes?.Invoke(_baseResCnt);
+        if (_baseResCnt == 0)
+        {
+            OnResourceToZero?.Invoke();
+        }
     }
 
     public void MoveResource()

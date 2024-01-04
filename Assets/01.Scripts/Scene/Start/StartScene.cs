@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class StartScene : MonoBehaviour
 {
@@ -36,6 +37,6 @@ public class StartScene : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        SceneManagement.Instance.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PausePanel : MonoBehaviour
@@ -37,6 +38,8 @@ public class PausePanel : MonoBehaviour
 
     public void Quit()
     {
+        Time.timeScale = 0;
         SceneManagement.Instance.LoadScene("Start");
+        SceneManagement.Instance.OnRestartGameEvent?.Invoke();
     }
 }

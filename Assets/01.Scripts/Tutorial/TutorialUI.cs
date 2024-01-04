@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using TMPro;
+[System.Serializable]
+public class UIInfoClass
+{
+    public Sprite sprite;
+    public string info;
+}
 public class TutorialUI : MonoBehaviour
 {
     [SerializeField] private Transform _uiParent;
     [SerializeField] private Button _uiBtn;
 
-    [SerializeField] private List<Sprite> _imageList = new List<Sprite>();
+    [SerializeField] private List<UIInfoClass> _imageList = new List<UIInfoClass>();
+    [SerializeField] private TextMeshProUGUI _infoText;
+    
     private Image _showImage;
     private Button _leftArrowBtn;
     private Button _rightArrowBtn;
@@ -44,7 +52,7 @@ public class TutorialUI : MonoBehaviour
     public void LoadPrevImage()
     {
         if (_currentIdx == 0) return;
-        _currentIdx++;
+        _currentIdx--;
         _currentIdx = Mathf.Clamp(_currentIdx,0,_imageList.Count);
         UpdateUI();
     }
@@ -63,25 +71,26 @@ public class TutorialUI : MonoBehaviour
     {
         if (_imageList.Count == 0)
         {
-            _leftArrowBtn.enabled = false;
-            _rightArrowBtn.enabled = false;
+            _leftArrowBtn.gameObject.SetActive(false);
+            _rightArrowBtn.gameObject.SetActive(false);
             return;
         }
         
-        _showImage.sprite = _imageList[_currentIdx];
+        _infoText.SetText(_imageList[_currentIdx].info);
+        _showImage.sprite = _imageList[_currentIdx].sprite;
 
         if (_currentIdx == 0)
         {
-            _leftArrowBtn.enabled = false;
+            _leftArrowBtn.gameObject.SetActive(false);
         }
         else if (_currentIdx == _imageList.Count - 1)
         {
-            _rightArrowBtn.enabled = false;
+            _rightArrowBtn.gameObject.SetActive(false);
         }
         else
         {
-            _leftArrowBtn.enabled = true;
-            _rightArrowBtn.enabled = true;
+            _leftArrowBtn.gameObject.SetActive(true);
+            _rightArrowBtn.gameObject.SetActive(true);
         }
     }
 

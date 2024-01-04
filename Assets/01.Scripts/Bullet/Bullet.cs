@@ -42,7 +42,7 @@ public class Bullet : PoolableMono
         {
             for (var i = 0; i < cnt; i++)
             {
-                if (cols[i].TryGetComponent<Entity>(out var entity))
+                if (cols[i].TryGetComponent<IDamageable>(out var entity))
                 {
                     entity.Damaged(_damage);
                 }    

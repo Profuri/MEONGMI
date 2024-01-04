@@ -125,9 +125,15 @@ public class StatManager : MonoSingleton<StatManager>
                 break;
             case EBaseUpgradeElement.LINELEN:
                 MovementRange += AddMovementRangeValue;
+                GameManager.Instance.PlayerController.LineConnect.SetLength(MovementRange);
                 break;
             case EBaseUpgradeElement.MAXRES:
                 MaxBaseResValue += AddMaxResValue;
+                InGameHUD inGameHUD = UIManager.Instance.CurrentComponent as InGameHUD;
+                if (inGameHUD != null)
+                {
+                    inGameHUD.UpdateBaseResource(MaxBaseResValue);
+                }
                 break;
         }
     }

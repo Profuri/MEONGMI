@@ -33,6 +33,7 @@ public class Hammer : MonoBehaviour
     public void SetEmissionColor(BulletType type)
     {
         MaterialPropertyBlock matblock = new MaterialPropertyBlock();
+        Debug.Log(_meshRenderer);
         _meshRenderer.GetPropertyBlock(matblock);
         matblock.SetColor("_EmissionColor",_colorSO.GetColorByBulletType(type));
         _meshRenderer.SetPropertyBlock(matblock);

@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/04.SO/Phase/PhaseInfo10.asset.meta
+guid: 674178f1a601d284982f3023e4e7b649
+NativeFormatImporter:
+========
 guid: 6e08e365736ce5d4aaeb1ca7ded41bb6
 DefaultImporter:
+>>>>>>>> main:Assets/99.Assets/Cursor/Vector/crosshairs_vector.swf.meta
   externalObjects: {}
+  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

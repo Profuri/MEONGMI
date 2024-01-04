@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/03.Prefabs/DropResource.prefab.meta
+guid: 3bd777263fde968439d21bc04a33d4a2
+PrefabImporter:
+========
 guid: 619a215a4e2db43468cd744209381063
 DefaultImporter:
+>>>>>>>> main:Assets/99.Assets/Cursor/Kenney.url.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
