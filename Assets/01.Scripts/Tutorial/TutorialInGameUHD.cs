@@ -12,7 +12,7 @@ public class TutorialInGameUHD : UIComponent
     //[SerializeField] TextMeshProUGUI playerResourceText;
     [SerializeField] TextMeshProUGUI UnitText;
     [SerializeField] TextMeshProUGUI timeText;
-    [SerializeField] FeatureInfoPanel traitImage;
+    //[SerializeField] FeatureInfoPanel traitImage;
 
     [SerializeField] Slider playerResSlider;
     [SerializeField] Slider baseResSlider;
@@ -93,7 +93,7 @@ public class TutorialInGameUHD : UIComponent
 
     public void UpdateTrait(ETraitUpgradeElement trait)
     {
-        traitImage.TraitType = trait;
+        //traitImage.TraitType = trait;
     }
 
     public void UpdateSlider(Slider slider, float minValue, float maxValue, float time = 1f)
