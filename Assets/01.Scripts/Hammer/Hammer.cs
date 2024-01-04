@@ -54,6 +54,7 @@ public class Hammer : MonoBehaviour
         particle.SetPositionAndRotation(_shotPoint.position, Quaternion.LookRotation(dir));
         particle.Play();
 
+        
         var cnt = _playerController.PlayerStat.shotCnt.GetValue();
         _shotPoint.localEulerAngles = Vector3.zero;
         _shotPoint.localPosition = new Vector3(0, 3, 0);
