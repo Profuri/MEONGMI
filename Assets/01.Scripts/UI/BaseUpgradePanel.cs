@@ -39,7 +39,6 @@ public class BaseUpgradePanel : UIComponent
         ((RectTransform)transform).DOKill();
         ((RectTransform)transform).DOScaleY(0, 0.5f).OnComplete(() =>
         {
-            base.RemoveUI(null);
             callback?.Invoke();
         });
     }

@@ -61,12 +61,12 @@ public class CursorManager : MonoSingleton<CursorManager>
         //SetTextureColor(baseColor);
 
         pixelsHotSpot = Vector2.zero;
-		//Cursor.SetCursor(_baseCursorTexture,
-  //          new Vector2(_baseCursorTexture.width / 2f, _baseCursorTexture.height / 2f),
-  //          CursorMode.Auto);	
-		Cursor.SetCursor(cursorTexture,
-            new Vector2(pixelsHotSpot.x, pixelsHotSpot.y),
-            CursorMode.ForceSoftware);
+		Cursor.SetCursor(_baseCursorTexture,
+            new Vector2(_baseCursorTexture.width / 2f, _baseCursorTexture.height / 2f),
+            CursorMode.Auto);	
+		// Cursor.SetCursor(cursorTexture,
+  //           new Vector2(cursorTexture.width * 0.5f, pixelsHotSpot.y),
+  //           CursorMode.ForceSoftware);
 
 		curScale = baseScale;
 		curColor = baseColor;

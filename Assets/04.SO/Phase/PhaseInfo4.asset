@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e2835878582dc4f8a45513b761c6c4, type: 3}
   m_Name: PhaseInfo4
   m_EditorClassIdentifier: 
-  enemyListSO: {fileID: 11400000, guid: 6d1ffc3a5c1b7d5488e7885c8452e107, type: 2}
+  enemyListSO: {fileID: 11400000, guid: c4d7ac91df3a07341b799bfa1ad40080, type: 2}
   appearMaxEnemyCnt: 30
   appearOnceMinEnemyCnt: 3
   appearOnceMaxEnemyCnt: 5

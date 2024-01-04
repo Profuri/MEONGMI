@@ -58,22 +58,25 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     private int randomCardCount = 3;
 
+    [SerializeField]
     private List<BaseUpgradeElemSO> baseElemInfos;
+    
+    [SerializeField]
     private List<PlayerUpgradeElemSO> playerElemInfos;
+    
+    [SerializeField]
     private List<TraitUpgradeElemSO> traitElemInfos;
 
     public List<BaseUpgradeElemSO> BaseElemInfos => baseElemInfos;
     public List<PlayerUpgradeElemSO> PlayerElemInfos => playerElemInfos;
     public List<TraitUpgradeElemSO> TraitElemInfos => traitElemInfos;
-
+    
     private void Awake()
     {
         Init();
     }
     public override void Init()
     {
-        LoadUpdateInfos();
-
         //�ʿ� �Ӵ� �ʱ�ȭ
         BaseUpgradeNeedResCntDic = new();
         foreach (var elem in baseElemInfos)
@@ -83,53 +86,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         PlayerUpgradeNeedResCnt = TraitUpgradeNeedResCnt = basicUpgradeNeedCnt;
 
     }
-
-    private void LoadUpdateInfos()
-    {
-        baseElemInfos = new();
-        playerElemInfos = new();
-        traitElemInfos = new();
-
-        string[] baseAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Base" });
-
-        foreach (string assetName in baseAssetNames)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID�� ������� ���
-            BaseUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<BaseUpgradeElemSO>(assetPath);
-            if (itemData != null)
-            {
-                baseElemInfos.Add(itemData);
-                //Debug.Log(itemData.name);
-            }
-        }
-
-        string[] playerAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Player" });
-
-        foreach (string assetName in playerAssetNames)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID�� ������� ���
-            PlayerUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<PlayerUpgradeElemSO>(assetPath);
-            if (itemData != null)
-            {
-                playerElemInfos.Add(itemData);
-                //Debug.Log(itemData.name);
-            }
-        }
-
-        string[] traitAssetNames = AssetDatabase.FindAssets("", new[] { "Assets/04.SO/Upgrade/Trait" });
-
-        foreach (string assetName in traitAssetNames)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID�� ������� ���
-            TraitUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<TraitUpgradeElemSO>(assetPath);
-            if (itemData != null)
-            {
-                traitElemInfos.Add(itemData);
-                //Debug.Log(itemData.name);
-            }
-        }
-    }
-
+    
     public int GetBaseUpgradeMoney(EBaseUpgradeElement elem) => BaseUpgradeNeedResCntDic[elem];
     private void SetBaseCost(EBaseUpgradeElement elem, int value) => BaseUpgradeNeedResCntDic[elem] += value;
 
