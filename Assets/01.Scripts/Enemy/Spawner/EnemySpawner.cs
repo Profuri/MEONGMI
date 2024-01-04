@@ -9,12 +9,12 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     private List<BaseEnemy> _currentEnemyList;
     private int _currentDeadCnt;
     
-    private Coroutine _phaseCoroutine;
-    public event Action<int> OnPhaseEnd;
+    public int RemainEnemyCnt { get; private set; }
 
-    public int RemainMonsterCnt => _appearMaxEnemyCnt - _currentDeadCnt;
-    private int _appearMaxEnemyCnt;
+    private Coroutine _phaseCoroutine;
     
+    public event Action<int> OnEnemyDead; 
+
     public override void Init()
     {
         _currentEnemyList = new List<BaseEnemy>();
@@ -36,24 +36,22 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         _currentDeadCnt = 0;
         
         var phaseInfoList = PhaseManager.Instance.PhaseInfoList;
-
-        if (phase >= phaseInfoList.Count)
-        {
-            phase = phaseInfoList.Count - 1;
-        }
         
         EnemyListSO enemyList = phaseInfoList[phase].enemyListSO;
-        _appearMaxEnemyCnt = phaseInfoList[phase].appearMaxEnemyCnt;
+        int appearMaxEnemyCnt = phaseInfoList[phase].appearMaxEnemyCnt;
         int appearDelay = phaseInfoList[phase].appearDelay;
         int appearMaxOnceEnemyCnt = phaseInfoList[phase].appearOnceMaxEnemyCnt;
         int appearMinOnceEnemyCnt = phaseInfoList[phase].appearOnceMinEnemyCnt;
         int randomAppearEnemyCnt;
 
+        RemainEnemyCnt = appearMaxEnemyCnt;
+        OnEnemyDead?.Invoke(RemainEnemyCnt);
+        
         _currentEnemyList.Clear();
 
-        while (_appearMaxEnemyCnt > _currentDeadCnt)
+        while (appearMaxEnemyCnt != _currentDeadCnt)
         {
-            if (_appearMaxEnemyCnt > _currentEnemyList.Count)
+            if (appearMaxEnemyCnt > _currentEnemyList.Count)
             {
                 randomAppearEnemyCnt = Random.Range(appearMinOnceEnemyCnt,appearMaxOnceEnemyCnt);
                 Vector3 randomPos;
@@ -90,25 +88,16 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
             }
             yield return new WaitForSeconds(appearDelay);
         }
-        Debug.Log("OnPhaseEnd");
-        OnPhaseEnd?.Invoke(phase);
-
+        
         PhaseManager.Instance.ChangePhase(PhaseType.Rest);
     }
 
     public void DeadEnemy(BaseEnemy enemy)
     {
-        Debug.Log($"DeadEnemy: {enemy}");
-        
-        int phase = PhaseManager.Instance.Phase;
-        int randomEnemyResCnt = PhaseManager.Instance.PhaseInfoList[phase].GetEnemyRandomResCnt();
-        
-        DropResource dropResource = PoolManager.Instance.Pop("DropResource") as DropResource;
-        dropResource.Init();
-        dropResource.SetResourceAmount(randomEnemyResCnt);
-        dropResource.transform.position = enemy.transform.position;
-            
         PoolManager.Instance.Push(enemy);
         _currentDeadCnt++;
+        RemainEnemyCnt--;
+        OnEnemyDead?.Invoke(RemainEnemyCnt);
     }
+    //_enemyListSO.GetRandomEnemy();
 }

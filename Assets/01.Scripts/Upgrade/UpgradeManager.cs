@@ -5,44 +5,44 @@ using Random = UnityEngine.Random;
 
 public enum EUpgradeType
 {
-    BASE = 1, // ±âÁö.
-    PLAYER = 2, // ÇÃ·¹ÀÌ¾î.
-    TRAIT = 3, //Æ¯¼º.
+    BASE = 1, // ï¿½ï¿½ï¿½ï¿½.
+    PLAYER = 2, // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½.
+    TRAIT = 3, //Æ¯ï¿½ï¿½.
 }
 
 public enum EBaseUpgradeElement
 {
     NONE = -1,
-    UNITCNT = 0, // À¯´Ö ¼ö Áõ°¡.
-    LINELEN, // ÁÙ ±æÀÌ Áõ°¡.
-    MAXRES, // ÃÖ´ë ÀÚ¿ø Áõ°¡.
+    UNITCNT = 0, // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+    LINELEN, // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+    MAXRES, // ï¿½Ö´ï¿½ ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½.
     END,
 }
 
 public enum EPlayerUpgradeElement
 {
     NONE = -1,
-    BULLETCOUNTUP = 0, // ÃÑ¾Ë ¼ö Áõ°¡.
-    FIRESPEEDUP, // ¿¬»ç ¼Óµµ Áõ°¡.
-    MOVESPEEDUP, // ÀÌµ¿ ¼Óµµ Áõ°¡.
-    COLLECTSPEEDUP, // ¼öÁý ¼Óµµ Áõ°¡.
-    DAMAGE, // µ¥¹ÌÁö Áõ°¡.
-    RECOVERY, //ÃÊ´ç È¸º¹·® Áõ°¡.
-    LUCK, // Çà¿î Áõ°¡.
-    DEPEND, // ¹æ¾î·Â Áõ°¡.
-    HP, // Ã¼·Â Áõ°¡.
+    BULLETCOUNTUP = 0, // ï¿½Ñ¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+    FIRESPEEDUP, // ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½.
+    MOVESPEEDUP, // ï¿½Ìµï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½.
+    COLLECTSPEEDUP, // ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½.
+    DAMAGE, // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+    RECOVERY, //ï¿½Ê´ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+    LUCK, // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+    DEPEND, // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+    HP, // Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
     END,
 }
 
 public enum ETraitUpgradeElement
 {
     NONE = -1,
-    RESTOBULLET = 0, // ÀÚ¿ø ÃÑ¾Ë·Î.
-    SLOW, // Â÷Áö¼¦.
-    PENETRATE, // °üÅë.
-    FOLLOW, // À¯µµ.
-    DOTDAMAGE, // µµÆ® µ©(µ¶µ©).
-    STATIC, // ÀüÀÌ °ø°Ý.
+    RESTOBULLET = 0, // ï¿½Ú¿ï¿½ ï¿½Ñ¾Ë·ï¿½.
+    SLOW, // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+    PENETRATE, // ï¿½ï¿½ï¿½ï¿½.
+    FOLLOW, // ï¿½ï¿½ï¿½ï¿½.
+    DOTDAMAGE, // ï¿½ï¿½Æ® ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½).
+    STATIC, // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
     END,
 }
 
@@ -74,7 +74,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     {
         LoadUpdateInfos();
 
-        //ÇÊ¿ä ¸Ó´Ï ÃÊ±âÈ­
+        //ï¿½Ê¿ï¿½ ï¿½Ó´ï¿½ ï¿½Ê±ï¿½È­
         BaseUpgradeNeedResCntDic = new();
         foreach (var elem in baseElemInfos)
         {
@@ -101,7 +101,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
         foreach (string assetName in baseAssetNames)
         {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID¸¦ ±â¹ÝÀ¸·Î °æ·Î
+            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUIDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             BaseUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<BaseUpgradeElemSO>(assetPath);
             if (itemData != null)
             {
@@ -114,7 +114,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
         foreach (string assetName in playerAssetNames)
         {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID¸¦ ±â¹ÝÀ¸·Î °æ·Î
+            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUIDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             PlayerUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<PlayerUpgradeElemSO>(assetPath);
             if (itemData != null)
             {
@@ -127,7 +127,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
         foreach (string assetName in traitAssetNames)
         {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUID¸¦ ±â¹ÝÀ¸·Î °æ·Î
+            string assetPath = AssetDatabase.GUIDToAssetPath(assetName); //GUIDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             TraitUpgradeElemSO itemData = AssetDatabase.LoadAssetAtPath<TraitUpgradeElemSO>(assetPath);
             if (itemData != null)
             {
@@ -140,7 +140,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     public int GetBaseUpgradeMoney(EBaseUpgradeElement elem) => BaseUpgradeNeedResCntDic[elem];
     private void SetBaseCost(EBaseUpgradeElement elem, int value) => BaseUpgradeNeedResCntDic[elem] += value;
 
-    //³ªÁß¿¡ ¸®ÆÑÅä¸µ
+    //ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ä¸µ
     public bool BaseUpgrade(EBaseUpgradeElement type, int curCost)
     {
         if(ResManager.Instance.UseResource(curCost))
@@ -154,14 +154,12 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     public void Upgrade(EUpgradeType upgradeType)
     {
-        //Debug.Log("UpgradeÁØºñ");
+        //Debug.Log("Upgradeï¿½Øºï¿½");
         int upgradeCnt = 0;
         switch(upgradeType)
         {
             case EUpgradeType.BASE:
                 //upgradeCnt = BaseUpgradeNeedResCnt;
-                
-                Debug.LogError("¾ê´Â ¿©±â¼­ Ã³¸® ¾ÈÇÔ");
                 break;
             case EUpgradeType.PLAYER:
                 upgradeCnt = PlayerUpgradeNeedResCnt;
@@ -174,30 +172,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
                 return;
         }
 
-        if(ResManager.Instance.UseResource(upgradeCnt))
-        {
-            Debug.Log("UpgradeÁØºñ");
-            AddElement(upgradeType);
-            UpdateResNeed(upgradeType);
-            UpgradePanelOn(upgradeType);
-        }
-        else
-        {
-            TestUIManager.Instance.UpgradeFail();
-        }
-    }
-
-    private void UpgradePanelOn(EUpgradeType upgradeType)
-    {
-        switch (upgradeType)
-        {
-            case EUpgradeType.TRAIT:
-                TestUIManager.Instance.TraitUpgradePanel();
-                break;
-            case EUpgradeType.PLAYER:
-                TestUIManager.Instance.PlayerUpgradePanel();
-                break;
-        }
+        AddElement(upgradeType);
     }
 
     public void AddElement(EUpgradeType upgradeType)
@@ -208,8 +183,8 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         {
             case EUpgradeType.BASE:
                 {
-                    TestUIManager.Instance.AddUpgradeElem(upgradeType, 0);
-                    //Debug.LogError("»ßºò! ¿¡·¯ÀÔ´Ï´Ù1");
+                    UIManager.Instance.AddUpgradeElem(upgradeType, 0);
+                    //Debug.LogError("ï¿½ßºï¿½! ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½1");
                 }
                 break;
             case EUpgradeType.PLAYER:
@@ -229,52 +204,17 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
                         }
                         pickedNums.Add(elemNum);
                         Debug.Log(elemNum);
-                        TestUIManager.Instance.AddUpgradeElem(upgradeType, elemNum);
+                        UIManager.Instance.AddUpgradeElem(upgradeType, elemNum);
                     }
                 }
                 break;
-            case EUpgradeType.TRAIT: // Áßº¹ x
-                {
-                    //maxEclusive = (int)ETraitUpgradeElement.END;
-                    //ETraitUpgradeElement traitElem = curTraitElem;
-                    //while(traitElem == curTraitElem)
-                    //{
-                    //    traitElem = (ETraitUpgradeElement)Random.Range(0, maxEclusive);
-                    //}
-                    //TestUIManager.Instance.AddUpgradeElem(upgradeType, (int)traitElem);
-                }
-                break;
         }
     }
-
-    public void PlayerUpgrade() => Upgrade(EUpgradeType.PLAYER);
-
-    public void TraitUpgrade() => Upgrade(EUpgradeType.TRAIT);
 
     public void SetCurTraitElem(ETraitUpgradeElement elem) => curTraitElem = elem;
-    public void UpdateResNeed(EUpgradeType upgradeType)
-    {
-        switch(upgradeType)
-        {
-            case EUpgradeType.BASE:
-                 // ¿©±â¼­ Ã³¸® x
-                break;
-            case EUpgradeType.PLAYER:
-                PlayerUpgradeNeedResCnt += PlayerUpgradeNeedResCnt / 2;
-                TestUIManager.Instance.SetPlayerCostTxt(PlayerUpgradeNeedResCnt);
-                break;
-            case EUpgradeType.TRAIT:
-                TraitUpgradeNeedResCnt += TraitUpgradeNeedResCnt / 2;
-                TestUIManager.Instance.SetTraitCostTxt(TraitUpgradeNeedResCnt);
-                //UpdateCostText();
-                break;
-        }
-    }
-
 
     public void ApplyUpgradeTrait(ETraitUpgradeElement upgradeElem)
     {
-        Debug.Log(upgradeElem);
         StatManager.Instance.SetTrait(upgradeElem);
     }
 

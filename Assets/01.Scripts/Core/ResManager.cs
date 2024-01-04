@@ -9,26 +9,30 @@ public class ResManager : MonoSingleton<ResManager>
     [SerializeField] private BaseStatSO _baseStatSO;
     private ResSpawner _resSpawner;
 
-    public int PlayerResourceCnt { get; private set; }
-    public int BaseResourceCnt { get; private set; }
+    private int _playerResCnt;
+    public int PlayerResCnt => _playerResCnt;
+    private int _baseResCnt;
+    public int BaseResCnt => _baseResCnt;
     
     public event Action OnResourceToZero;
+
+    public event Action<int> OnChangePlayerRes;
+    public event Action<int> OnChangeBaseRes;
 
     public override void Init()
     {
         _resSpawner = new ResSpawner(PhaseManager.Instance.PhaseInfoList);
     }
 
-    public bool CanUseResource(int resourceCnt) => BaseResourceCnt >= resourceCnt;
+    public bool CanUseResource(int resourceCnt) => _baseResCnt >= resourceCnt;
 
     public bool AddResource(int plusResourceCnt)
     {
-        int curCnt = PlayerResourceCnt + plusResourceCnt;
-        PlayerResourceCnt = curCnt;
-        PlayerResourceCnt = Mathf.Clamp(PlayerResourceCnt, 0, _baseStatSO.MaxResCnt);
+        int curCnt = _playerResCnt + plusResourceCnt;
+        _playerResCnt = curCnt;
+        _playerResCnt = Mathf.Clamp(_playerResCnt, 0, _baseStatSO.MaxResCnt);
         
-        Debug.Log($"CurrentResourceCnt: {PlayerResourceCnt}");
-        //TestUIManager.Instance.IngameUI.UpdatePlayerResource();
+        OnChangePlayerRes?.Invoke(_playerResCnt);
         return curCnt <= _baseStatSO.MaxResCnt;
     }
 
@@ -36,12 +40,12 @@ public class ResManager : MonoSingleton<ResManager>
     {
         if (CanUseResource(resourceCnt))
         {
-            BaseResourceCnt -= resourceCnt;
-            if (BaseResourceCnt == 0)
+            _baseResCnt -= resourceCnt;
+            if (_baseResCnt == 0)
             {
                 OnResourceToZero?.Invoke();
             }
-            //TestUIManager.Instance.IngameUI.UpdateBaseResource();
+            OnChangeBaseRes?.Invoke(_baseResCnt);
             return true;
         }
         return false;
@@ -50,26 +54,26 @@ public class ResManager : MonoSingleton<ResManager>
     public void MoveResource()
     {
         int baseMaxValue = StatManager.Instance.MaxBaseResValue;
-        if (PlayerResourceCnt + BaseResourceCnt > baseMaxValue)
+        if (_playerResCnt + _baseResCnt > baseMaxValue)
         {
-            int remainMoney = PlayerResourceCnt - (baseMaxValue - BaseResourceCnt);
-            PlayerResourceCnt = remainMoney;
-            BaseResourceCnt = baseMaxValue;
+            int remainMoney = _playerResCnt - (baseMaxValue - _baseResCnt);
+            _playerResCnt = remainMoney;
+            _baseResCnt = baseMaxValue;
         }
         else
         {
-            BaseResourceCnt += PlayerResourceCnt;
-            PlayerResourceCnt = 0;
+            _baseResCnt += _playerResCnt;
+            _playerResCnt = 0;
         }
-        //TestUIManager.Instance.IngameUI.UpdateBaseResource();
-        //TestUIManager.Instance.IngameUI.UpdatePlayerResource();
+        OnChangePlayerRes?.Invoke(_playerResCnt);
+        OnChangeBaseRes?.Invoke(_baseResCnt);
     }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
-            PlayerResourceCnt += 1;
+            _playerResCnt += 1;
         if (Input.GetKeyDown(KeyCode.G))
-            BaseResourceCnt += 1;
+            _baseResCnt += 1;
     }
 }

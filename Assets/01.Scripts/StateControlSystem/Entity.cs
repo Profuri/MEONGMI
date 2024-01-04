@@ -17,7 +17,9 @@ public abstract class Entity : PoolableMono, IDamageable
     public float CurrentHP { get; protected set; }
     public virtual float GetMaxHP() => _entityStatSO.maxHp;
     public bool Dead => CurrentHP <= 0;
+    
     public event Action OnDead;
+    public event Action OnDamaged;
     
     public virtual void Awake()
     {
@@ -51,6 +53,7 @@ public abstract class Entity : PoolableMono, IDamageable
         }
         
         CurrentHP -= damage;
+        OnDamaged?.Invoke();
        // AnimatorCompo.SetTrigger(_hitHash);
         
         CurrentHP = Mathf.Clamp(CurrentHP, 0, _maxHP);

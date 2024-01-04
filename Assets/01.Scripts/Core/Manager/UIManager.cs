@@ -1,21 +1,16 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoSingleton<UIManager>
 {
     [SerializeField] private Canvas _mainCanvas;
-
-    private Stack<UIComponent> _componentStack;
-    public UIComponent TopComponent => _componentStack.Peek();
-    public bool ComponentStackEmpty => _componentStack.Count <= 0;
     
-    public override void Init()
-    {
-        _componentStack = new Stack<UIComponent>();
-        // GenerateUI("");
-    }
+    [SerializeField] private List<UpgradeSelectButton> _upgradeSelectButton;
+    
+    public UIComponent CurrentComponent { get; private set; }
 
-    public UIComponent GenerateUI(string componentName, UIGenerateOption options = UIGenerateOption.Stackable | UIGenerateOption.ClearPanel | UIGenerateOption.ResettingPos, Transform parent = null)
+    public void ChangeUI(string componentName, Action callback = null, Transform parent = null)
     {
         if (parent is null)
         {
@@ -26,55 +21,56 @@ public class UIManager : MonoSingleton<UIManager>
 
         if (ui is null)
         {
-            return null;
-        }
-        
-        ui.GenerateUI(parent, options);
-
-        if (options.HasFlag(UIGenerateOption.Stackable))
-        {
-            _componentStack.Push(ui);
-        }
-
-        return ui;
-    }
-
-    public void RemoveTopUI()
-    {
-        var top = _componentStack.Pop();
-        top.RemoveUI();
-    }
-
-    public void ReturnUI()
-    {
-        if (ComponentStackEmpty)
-        {
-            Debug.LogWarning("There is not exist current UI");
             return;
         }
 
-        var cur = _componentStack.Pop();
-
-        if (ComponentStackEmpty)
+        if (CurrentComponent is null)
         {
-            Debug.LogWarning("There is not exist prev UI");
-            return;
+            ui.GenerateUI(parent);
+        }
+        else
+        {
+            CurrentComponent.RemoveUI(() =>
+            {
+                ui.GenerateUI(parent);
+                callback?.Invoke();
+            });
         }
 
-        var prev = _componentStack.Pop();
-        
-        cur.RemoveUI();
-        GenerateUI(prev.name, prev.Options, prev.Parent);
+        CurrentComponent = ui;
     }
 
-    public void ClearPanel()
+    public override void Init()
     {
-        var uis = new List<UIComponent>();
-        _mainCanvas.GetComponentsInChildren(uis);
-
-        foreach (var ui in uis)
+        ChangeUI("InGameHUD");
+    }
+    
+    public void ShowUpgradeUI()
+    {
+        foreach(var selectBtn in _upgradeSelectButton)
         {
-            ui.RemoveUI();
+            selectBtn.Show();
+        }
+    }
+
+    public void HideUpgradeUI()
+    {
+        foreach (var selectBtn in _upgradeSelectButton)
+        {
+            selectBtn.HIde();
+        }
+    }
+    
+    public void AddUpgradeElem(EUpgradeType upgradeType, int elem)
+    {
+        switch (upgradeType)
+        {
+            case EUpgradeType.BASE:
+                ((BaseUpgradePanel)CurrentComponent).AddElem(elem);
+                break;
+            case EUpgradeType.PLAYER:
+                ((PlayerLevelUpPanel)CurrentComponent).AddElem(elem);
+                break;
         }
     }
 }

@@ -1,17 +1,18 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using System.Linq;
 using UnityEngine.UI;
 using DG.Tweening;
 
 public class InGameHUD : UIComponent
 {
-    [SerializeField] TextMeshProUGUI baseResourceText;
+    [SerializeField] private RectTransform _upperUI;
+    [SerializeField] private RectTransform _downUI;
+    
+    [SerializeField] private TextMeshProUGUI baseResourceText;
 
-    //[SerializeField] TextMeshProUGUI playerResourceText;
-    [SerializeField] TextMeshProUGUI UnitText;
+    [SerializeField] private TextMeshProUGUI UnitText;
 
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private TextMeshProUGUI enemyText;
@@ -19,36 +20,61 @@ public class InGameHUD : UIComponent
     [SerializeField] private GameObject timePanel;
     [SerializeField] private GameObject enemyPanel;
 
-    [SerializeField] FeatureInfoPanel traitImage;
+    [SerializeField] private Slider playerResSlider;
+    [SerializeField] private Slider baseResSlider;
+    [SerializeField] private Slider unitSlider;
+    [SerializeField] private Slider playerHpSlider;
 
-    [SerializeField] Slider playerResSlider;
-    [SerializeField] Slider baseResSlider;
-    [SerializeField] Slider unitSlider;
-    [SerializeField] Slider playerHpSlider;
+    [SerializeField] private Image _traitImage;
+    
+    [SerializeField] private Ease sliderEase;
 
-    [SerializeField] Ease sliderEase;
-
-    private void Awake()
+    public override void GenerateUI(Transform parent)
     {
+        base.GenerateUI(parent);
+
         PhaseManager.Instance.OnPhaseChange += ChangeTextPanel;
-    }
+        
+        ResManager.Instance.OnChangeBaseRes += UpdateBaseResource;
+        ResManager.Instance.OnChangePlayerRes += UpdatePlayerResource;
 
-    private void Start()
-    {
+        GameManager.Instance.PlayerController.OnDamaged += UpdatePlayerHp;
+        
         ReSet();
     }
 
-    public void Update()
+    public override void RemoveUI(Action callback)
     {
-        if (timePanel.activeSelf)
-        {
-            UpdatePhaseTime();
-        }
+        base.RemoveUI(callback);
+        
+        PhaseManager.Instance.OnPhaseChange -= ChangeTextPanel;
+        
+        PhaseManager.Instance.OnPhaseTimer -= UpdatePhaseTime;
+        EnemySpawner.Instance.OnEnemyDead -= UpdateEnemyCnt;
+        
+        ResManager.Instance.OnChangeBaseRes -= UpdateBaseResource;
+        ResManager.Instance.OnChangePlayerRes -= UpdatePlayerResource;
+            
+        GameManager.Instance.PlayerController.OnDamaged -= UpdatePlayerHp;
+    }
 
-        if (enemyPanel.activeSelf)
+    protected override void GenerateTransition()
+    {
+        _upperUI.DOKill();
+        _downUI.DOKill();
+        _upperUI.DOAnchorPos(new Vector2(0, 0), 0.5f);
+        _downUI.DOAnchorPos(new Vector2(0, 0), 0.5f);
+    }
+
+    protected override void RemoveTransition(Action callback)
+    {
+        _upperUI.DOKill();
+        _downUI.DOKill();
+        _upperUI.DOAnchorPos(new Vector2(0, 200), 0.5f);
+        _downUI.DOAnchorPos(new Vector2(0, -400), 0.5f).OnComplete(() =>
         {
-            UpdateEnemyCnt();
-        }
+            callback?.Invoke();
+        });
     }
 
     private void ChangeTextPanel(PhaseType type)
@@ -56,10 +82,14 @@ public class InGameHUD : UIComponent
         if (type == PhaseType.Rest)
         {
             SetTimeText();
+            PhaseManager.Instance.OnPhaseTimer += UpdatePhaseTime;
+            EnemySpawner.Instance.OnEnemyDead -= UpdateEnemyCnt;
         }
         else
         {
             SetEnemyText();
+            PhaseManager.Instance.OnPhaseTimer -= UpdatePhaseTime;
+            EnemySpawner.Instance.OnEnemyDead += UpdateEnemyCnt;
         }
     }
 
@@ -77,31 +107,30 @@ public class InGameHUD : UIComponent
 
     private void ReSet()
     {
-        ChangeTextPanel(PhaseType.Rest);
-        UpdateTrait(ETraitUpgradeElement.NONE);
-        UpdateBaseResource();
-        UpdatePlayerResource();
-        UpdatePlayerHP();
+        ChangeTextPanel(PhaseManager.Instance.PhaseType);
+        UpdatePlayerHp();
+        UpdatePlayerResource(ResManager.Instance.PlayerResCnt);
+        UpdateBaseResource(ResManager.Instance.BaseResCnt);
+        UpdateEnemyCnt(EnemySpawner.Instance.RemainEnemyCnt);
+        UpdatePhaseTime((int)(PhaseManager.Instance.RestPhaseTime - PhaseManager.Instance.GetCurTime()));
         UpdateUnitText();
     }
 
-    public void UpdateBaseResource()
+    private void UpdateBaseResource(int cnt)
     {
-        int curRes = ResManager.Instance.BaseResourceCnt;
         int maxRes = StatManager.Instance.MaxBaseResValue;
-        UpdateSlider(baseResSlider, curRes, maxRes);
-        baseResourceText.text = $"{curRes} / {maxRes}";
+        UpdateSlider(baseResSlider, cnt, maxRes);
+        baseResourceText.text = $"{cnt} / {maxRes}";
     }
 
-    public void UpdatePlayerResource()
+    private void UpdatePlayerResource(int cnt)
     {
-        int curRes = ResManager.Instance.PlayerResourceCnt;
         int maxRes = StatManager.Instance.MaxBaseResValue;
-        UpdateSlider(playerResSlider, curRes, maxRes);
+        UpdateSlider(playerResSlider, cnt, maxRes);
         //playerResourceText.text = curRes.ToString();
     }
 
-    public void UpdatePlayerHP()
+    private void UpdatePlayerHp()
     {
         int curHP = (int)GameManager.Instance.PlayerController.CurrentHP;
         int maxHP = (int)GameManager.Instance.PlayerController.GetMaxHP();
@@ -109,38 +138,33 @@ public class InGameHUD : UIComponent
         //playerResourceText.text = curRes.ToString();
     }
 
-    public void UpdateUnitText()
+    private void UpdateUnitText()
     {
         int curRes = GameManager.Instance.Base.CurUnitCount;
         int maxRes = StatManager.Instance.UnitMaxValue;
         UpdateSlider(unitSlider, curRes, maxRes);
         //UnitText.text = $"{curRes} / {maxRes}";
         UnitText.text = curRes.ToString();
-
-
     }
 
-    private void UpdatePhaseTime()
+    private void UpdatePhaseTime(int remainTime)
     {
-        var remainTime = PhaseManager.Instance.RestPhaseTime - PhaseManager.Instance.GetCurTime();
         timeText.text = $"{remainTime:0}s";
     }
 
-    private void UpdateEnemyCnt()
+    public void SetTrait(Sprite image)
     {
-        var remainEnemy = EnemySpawner.Instance.RemainMonsterCnt;
-        enemyText.text = $"{remainEnemy:0}";
+        _traitImage.sprite = image;
     }
 
-    public void UpdateTrait(ETraitUpgradeElement trait)
+    private void UpdateEnemyCnt(int remainEnemyCnt)
     {
-        traitImage.TraitType = trait;
+        enemyText.text = $"{remainEnemyCnt:0}";
     }
 
-    public void UpdateSlider(Slider slider, float minValue, float maxValue, float time = 1f)
+    private void UpdateSlider(Slider slider, float minValue, float maxValue, float time = 1f)
     {
         float start = slider.value;
         DOTween.To(() => start, value => slider.value = value, minValue / maxValue, time).SetEase(sliderEase);
     }
-
 }

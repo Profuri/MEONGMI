@@ -8,7 +8,7 @@ public class DetectPlayerIn : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            TestUIManager.Instance.ShowUpgradeUI();
+            UIManager.Instance.ShowUpgradeUI();
         }
     }
 
@@ -16,7 +16,7 @@ public class DetectPlayerIn : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            TestUIManager.Instance.HideUpgradeUI();
+            UIManager.Instance.HideUpgradeUI();
         }
     }
 
