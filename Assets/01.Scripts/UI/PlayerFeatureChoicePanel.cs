@@ -8,7 +8,7 @@ using TMPro;
 using System;
 using Random = UnityEngine.Random;
 
-public class PlayerFeatureChoicePanel : ChoicePanel
+public class PlayerFeatureChoicePanel : UIComponent
 {
     [SerializeField] private GameObject _mainTrm;
     [SerializeField] private RectTransform _roulettTrm;
@@ -34,16 +34,26 @@ public class PlayerFeatureChoicePanel : ChoicePanel
         _effectImage = _effectPanel.transform.Find("Image").GetComponent<Image>();
     }
 
-    private void OnEnable()
+    public override void GenerateUI(Transform parent)
     {
-        //ResetRoulett();
-        Init();
+        base.GenerateUI(parent);
+        Initialize();
     }
 
-    private void Init()
+    protected override void GenerateTransition()
     {
-        _title.SetText("Æ¯¼º ÇØÁ¦");
-        _description.SetText("´ç½ÅÀÇ ¿î¸íÀº?");
+        ((RectTransform)transform).DOScaleY(1, 0.5f);
+    }
+
+    protected override void RemoveTransition(Action callback)
+    {
+        ((RectTransform)transform).DOScaleY(0, 0.5f).OnComplete(() => callback?.Invoke());
+    }
+
+    private void Initialize()
+    {
+        _title.SetText("Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+        _description.SetText("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½?");
 
         _button.interactable = true;
         _particleSystem.Stop();

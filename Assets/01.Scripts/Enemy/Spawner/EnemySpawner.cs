@@ -12,8 +12,10 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     public int RemainEnemyCnt { get; private set; }
 
     private Coroutine _phaseCoroutine;
-    public event Action<int> OnPhaseEnd;
     
+    public event Action<int> OnPhaseEnd;
+    public event Action<int> OnEnemyDead; 
+
     public override void Init()
     {
         _currentEnemyList = new List<BaseEnemy>();
@@ -44,6 +46,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         int randomAppearEnemyCnt;
 
         RemainEnemyCnt = appearMaxEnemyCnt;
+        OnEnemyDead?.Invoke(RemainEnemyCnt);
         
         _currentEnemyList.Clear();
 
@@ -86,7 +89,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
             }
             yield return new WaitForSeconds(appearDelay);
         }
-        Debug.Log("OnPhaseEnd");
+        
         OnPhaseEnd?.Invoke(phase);
 
         PhaseManager.Instance.ChangePhase(PhaseType.Rest);
@@ -94,12 +97,10 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
 
     public void DeadEnemy(BaseEnemy enemy)
     {
-        Debug.Log($"DeadEnemy: {enemy}");
         PoolManager.Instance.Push(enemy);
         _currentDeadCnt++;
         RemainEnemyCnt--;
+        OnEnemyDead?.Invoke(RemainEnemyCnt);
     }
     //_enemyListSO.GetRandomEnemy();
-
-
 }

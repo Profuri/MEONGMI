@@ -14,6 +14,8 @@ public class PhaseManager : MonoSingleton<PhaseManager>
     public int Phase { get; private set; }
 
     private PhaseType _phase;
+    public PhaseType PhaseType => _phase;
+    
     private bool _phaseStart;
 
     private float _currentTime;
@@ -21,6 +23,7 @@ public class PhaseManager : MonoSingleton<PhaseManager>
     
 
     public event Action<PhaseType> OnPhaseChange;
+    public event Action<int> OnPhaseTimer;
     
     public override void Init()
     {
@@ -49,6 +52,7 @@ public class PhaseManager : MonoSingleton<PhaseManager>
         if (_phase == PhaseType.Rest)
         {
             _currentTime += Time.deltaTime;
+            OnPhaseTimer?.Invoke((int)(_restPhaseTime - _currentTime));
             
             if (_currentTime >= _restPhaseTime)
             {
@@ -65,8 +69,11 @@ public class PhaseManager : MonoSingleton<PhaseManager>
         _currentTime = 0f;
         if (type == PhaseType.Raid)
         {
-            EnemySpawner.Instance.StartPhase(Phase);
             Phase++;
+            UIManager.Instance.ChangeUI("PhaseLogPanel", () =>
+            {
+                EnemySpawner.Instance.StartPhase(Phase);
+            });
         }
     }
 }

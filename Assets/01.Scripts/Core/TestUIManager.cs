@@ -7,23 +7,16 @@ using UnityEngine;
 
 public class TestUIManager : MonoSingleton<TestUIManager>
 {
-    [Header("Root")]
-    [SerializeField] InGameHUD _IngameHUD;
-    public InGameHUD IngameUI => _IngameHUD;   
-
-
     [SerializeField] GameObject UpgradeUIPanel;
     [SerializeField] GameObject _PlayerAndTraitPanel;
 
     [Header("Container")]
     [SerializeField] UpgradeContainer playerUpgradeContainer;
     [SerializeField] UpgradeContainer baseUpgradeContainer;
-    [SerializeField] UpgradeContainer traitUpgradeContainer;
 
     [Header("CardTemplate")]
     [SerializeField] GameObject baseCardTemplate;
     [SerializeField] GameObject playerCardTemplate;
-    [SerializeField] GameObject traitCardTemplate;
 
     [Header("Panel")]
     [SerializeField] GameObject upgradeFailPanel;
@@ -64,15 +57,11 @@ public class TestUIManager : MonoSingleton<TestUIManager>
         UpgradeManager.Instance.AddElement(EUpgradeType.BASE);
         _BaseUpgradePanel.SetActive(true);
     }
+    
     public void PlayerUpgradePanel() => _PlayerUpgradePanel.SetActive(true);
     public void TraitUpgradePanel() => _TraitUpgradePanel.SetActive(true);
 
     public void PlayerAndTraitPanel() => _PlayerAndTraitPanel.SetActive(true);   
-    public void UpgradeFail()
-    {
-        // 자원이 부족합니다 UI띄어줘야 함.
-        upgradeFailPanel.SetActive(true);
-    }
 
     public void AddUpgradeElem(EUpgradeType upgradeType, int elem)
     {
