@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ResManager : MonoSingleton<ResManager>
 {
@@ -83,9 +84,12 @@ public class ResManager : MonoSingleton<ResManager>
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-            _playerResCnt += 1;
-        if (Input.GetKeyDown(KeyCode.G))
-            _baseResCnt += 1;
+        if (Keyboard.current.gKey.wasPressedThisFrame)
+        {
+            _baseResCnt += 1000;
+            
+            OnChangePlayerRes?.Invoke(_playerResCnt);
+            OnChangeBaseRes?.Invoke(_baseResCnt);
+        }
     }
 }

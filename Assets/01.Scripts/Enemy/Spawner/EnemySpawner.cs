@@ -8,8 +8,6 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
 {
     private List<BaseEnemy> _currentEnemyList;
     private int _currentDeadCnt;
-    
-    public int RemainEnemyCnt { get; private set; }
 
     private Coroutine _phaseCoroutine;
     public event Action<int> OnPhaseEnd;
@@ -41,17 +39,17 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         
         var phaseInfoList = PhaseManager.Instance.PhaseInfoList;
         
-        EnemyListSO enemyList = phaseInfoList[phase].enemyListSO;
-        _appearMaxEnemyCnt = phaseInfoList[phase].appearMaxEnemyCnt;
-        int appearDelay = phaseInfoList[phase].appearDelay;
-        int appearMaxOnceEnemyCnt = phaseInfoList[phase].appearOnceMaxEnemyCnt;
-        int appearMinOnceEnemyCnt = phaseInfoList[phase].appearOnceMinEnemyCnt;
+        EnemyListSO enemyList = phaseInfoList[phase - 1].enemyListSO;
+        _appearMaxEnemyCnt = phaseInfoList[phase - 1].appearMaxEnemyCnt;
+        int appearDelay = phaseInfoList[phase - 1].appearDelay;
+        int appearMaxOnceEnemyCnt = phaseInfoList[phase - 1].appearOnceMaxEnemyCnt;
+        int appearMinOnceEnemyCnt = phaseInfoList[phase - 1].appearOnceMinEnemyCnt;
         
         OnEnemyDead?.Invoke(RemainMonsterCnt);
         
         _currentEnemyList.Clear();
 
-        while (_appearMaxEnemyCnt > _currentDeadCnt)
+        while (RemainMonsterCnt > 0)
         {
             if (_appearMaxEnemyCnt > _currentEnemyList.Count)
             {
@@ -94,6 +92,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
                 }
                 yield return new WaitForSeconds(appearDelay);
             }
+            yield return null;
         }
         
         PhaseManager.Instance.ChangePhase(PhaseType.Rest);

@@ -54,16 +54,6 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            ResourceParticle resParticle = PoolManager.Instance.Pop("ResParticle") as ResourceParticle;
-            resParticle.Init();
-            resParticle.ChaseLine(FindObjectOfType<LineRenderer>());
-        }
-    }
-    
     public override void Init()
     {
 

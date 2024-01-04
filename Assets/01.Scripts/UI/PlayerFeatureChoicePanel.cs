@@ -73,7 +73,7 @@ public class PlayerFeatureChoicePanel : UIComponent
         int prev = -1;
         for (int i = 0; i < _upgradeCards.Count; i++)
         {
-            int rand = Random.Range(0, _featureDataList.Count - 1);
+            int rand = Random.Range(0, _featureDataList.Count);
             if(_featureDataList[rand].Type == UpgradeManager.Instance.curTraitElem)
             {
                 i--;

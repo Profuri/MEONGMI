@@ -45,14 +45,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 
         PlayBGM("TitleBGM");
     }
-
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            PlaySFX("Btn1");
-        }
-    }
+    
     public void PlaySFX(string clipName)
     {
         AudioClip clip = _audioClipSO.GetAudioClip(clipName);
