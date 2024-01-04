@@ -46,47 +46,49 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         int appearDelay = phaseInfoList[phase].appearDelay;
         int appearMaxOnceEnemyCnt = phaseInfoList[phase].appearOnceMaxEnemyCnt;
         int appearMinOnceEnemyCnt = phaseInfoList[phase].appearOnceMinEnemyCnt;
-        int randomAppearEnemyCnt;
         
         OnEnemyDead?.Invoke(RemainMonsterCnt);
         
         _currentEnemyList.Clear();
 
-        while (_appearMaxEnemyCnt != _currentDeadCnt)
+        while (_appearMaxEnemyCnt > _currentDeadCnt)
         {
-            if (_appearMaxEnemyCnt > _currentEnemyList.Count)
+            int randomAppearEnemyCnt = Random.Range(appearMinOnceEnemyCnt,appearMaxOnceEnemyCnt);
+
+            if (randomAppearEnemyCnt > _appearMaxEnemyCnt - _currentDeadCnt)
             {
-                randomAppearEnemyCnt = Random.Range(appearMinOnceEnemyCnt,appearMaxOnceEnemyCnt);
-                Vector3 randomPos;
-                float lineLength = GameManager.Instance.PlayerController.LineConnect.LineLength;
+                randomAppearEnemyCnt = _appearMaxEnemyCnt - _currentDeadCnt;
+            }
+            
+            Vector3 randomPos;
+            float lineLength = GameManager.Instance.PlayerController.LineConnect.LineLength;
                 
-                for (int i = 0; i < randomAppearEnemyCnt; i++)
+            for (int i = 0; i < randomAppearEnemyCnt; i++)
+            {
+                var spherePoint = Random.insideUnitSphere;
+                spherePoint.y = 0;
+                var dir = spherePoint.normalized;
+                var randomPoint = dir * Random.Range(lineLength, GameManager.Instance.MaxDistance);
+                var unitPoint = randomPoint + GameManager.Instance.BaseTrm.position;
+                unitPoint.y = 100f;
+                
+                bool result = Physics.Raycast(unitPoint,Vector3.down,out RaycastHit hitInfo, Mathf.Infinity, 1 << LayerMask.NameToLayer("Ground"));
+                
+                if (result)
                 {
-                    var spherePoint = Random.insideUnitSphere;
-                    spherePoint.y = 0;
-                    var dir = spherePoint.normalized;
-                    var randomPoint = dir * Random.Range(lineLength, GameManager.Instance.MaxDistance);
-                    var unitPoint = randomPoint + GameManager.Instance.BaseTrm.position;
-                    unitPoint.y = 100f;
-                    
-                    bool result = Physics.Raycast(unitPoint,Vector3.down,out RaycastHit hitInfo, Mathf.Infinity, 1 << LayerMask.NameToLayer("Ground"));
-                    
-                    if (result)
-                    {
-                        unitPoint.y = hitInfo.point.y;
-                    }
-                                        
-                    var prefab = enemyList.GetRandomEnemy();
-                
-                    BaseEnemy enemy = PoolManager.Instance.Pop(prefab.name) as BaseEnemy;
-                
-                    enemy.Init();
-                    enemy.gameObject.SetActive(true);
-                    enemy.SetPosition(unitPoint);
-                    _currentEnemyList.Add(enemy);
-                    
-                    yield return null;
+                    unitPoint.y = hitInfo.point.y;
                 }
+                                    
+                var prefab = enemyList.GetRandomEnemy();
+            
+                BaseEnemy enemy = PoolManager.Instance.Pop(prefab.name) as BaseEnemy;
+            
+                enemy.Init();
+                enemy.gameObject.SetActive(true);
+                enemy.SetPosition(unitPoint);
+                _currentEnemyList.Add(enemy);
+                
+                yield return null;
             }
             yield return new WaitForSeconds(appearDelay);
         }

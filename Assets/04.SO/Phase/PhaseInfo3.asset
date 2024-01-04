@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhaseInfo3
   m_EditorClassIdentifier: 
   enemyListSO: {fileID: 11400000, guid: c4d7ac91df3a07341b799bfa1ad40080, type: 2}
-  appearMaxEnemyCnt: 25
+  appearMaxEnemyCnt: 10
   appearOnceMinEnemyCnt: 3
   appearOnceMaxEnemyCnt: 5
   appearDelay: 15
