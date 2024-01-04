@@ -100,4 +100,10 @@ public class UnitLineConnect : MonoBehaviour
     {
         _unitConnectHolder = holder.transform;
     }
+
+    public void Delete()
+    {
+        PoolManager.Instance.Push(_unitConnectHolder.GetComponent<LaserHolder>());
+        PoolManager.Instance.Push(_line);
+    }
 }

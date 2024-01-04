@@ -20,7 +20,7 @@ public class PhaseManager : MonoSingleton<PhaseManager>
     public float GetCurTime() => _currentTime;  
     
 
-    public event Action<float, float> OnRestTimeEvent;
+    public event Action<PhaseType> OnPhaseChange;
     
     public override void Init()
     {
@@ -49,7 +49,6 @@ public class PhaseManager : MonoSingleton<PhaseManager>
         if (_phase == PhaseType.Rest)
         {
             _currentTime += Time.deltaTime;
-            OnRestTimeEvent?.Invoke(_currentTime,_restPhaseTime);
             
             if (_currentTime >= _restPhaseTime)
             {
@@ -61,6 +60,7 @@ public class PhaseManager : MonoSingleton<PhaseManager>
     public void ChangePhase(PhaseType type)
     {
         _phase = type;
+        OnPhaseChange?.Invoke(type);
 
         _currentTime = 0f;
         if (type == PhaseType.Raid)
