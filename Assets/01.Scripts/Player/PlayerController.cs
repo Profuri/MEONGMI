@@ -98,6 +98,11 @@ public class PlayerController : Entity, IDetectable
         base.Start();
     }
 
+    public void OnDisable()
+    {
+        _stateMachine.CurrentState.ExitState();
+    }
+
     public void SetVelocity(Vector3 dir)
     {
         if (!_walkParticle.isPlaying)
