@@ -28,8 +28,6 @@ public class StartFadeOutPanel : MonoBehaviour
         seq.Append(_fadeUI.rectTransform.DOScale(_maxOffset, _fadeTime).SetEase(Ease.InOutCubic));
         while (!asyncLoad.isDone || timer < _timerMinValue)
         {
-            Debug.Log($"IsDone: {asyncLoad.isDone}");
-            Debug.Log($"Progress {asyncLoad.progress}");
             timer += Time.deltaTime;
 
             float percent = Mathf.Min(asyncLoad.progress, timer / _timerMinValue);

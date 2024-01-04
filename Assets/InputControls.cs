@@ -71,6 +71,15 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ESC"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd8052e2-1d52-4a79-bc4b-bd4c7aaa17ae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -183,6 +192,17 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""action"": ""LineConnect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12580ec1-6358-4327-8a1e-6607c0e105cb"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ESC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -196,6 +216,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         m_Player_Charging = m_Player.FindAction("Charging", throwIfNotFound: true);
         m_Player_LineConnect = m_Player.FindAction("LineConnect", throwIfNotFound: true);
+        m_Player_ESC = m_Player.FindAction("ESC", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,6 +283,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MousePos;
     private readonly InputAction m_Player_Charging;
     private readonly InputAction m_Player_LineConnect;
+    private readonly InputAction m_Player_ESC;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -271,6 +293,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
         public InputAction @Charging => m_Wrapper.m_Player_Charging;
         public InputAction @LineConnect => m_Wrapper.m_Player_LineConnect;
+        public InputAction @ESC => m_Wrapper.m_Player_ESC;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -295,6 +318,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @LineConnect.started += instance.OnLineConnect;
             @LineConnect.performed += instance.OnLineConnect;
             @LineConnect.canceled += instance.OnLineConnect;
+            @ESC.started += instance.OnESC;
+            @ESC.performed += instance.OnESC;
+            @ESC.canceled += instance.OnESC;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -314,6 +340,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @LineConnect.started -= instance.OnLineConnect;
             @LineConnect.performed -= instance.OnLineConnect;
             @LineConnect.canceled -= instance.OnLineConnect;
+            @ESC.started -= instance.OnESC;
+            @ESC.performed -= instance.OnESC;
+            @ESC.canceled -= instance.OnESC;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -338,5 +367,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         void OnMousePos(InputAction.CallbackContext context);
         void OnCharging(InputAction.CallbackContext context);
         void OnLineConnect(InputAction.CallbackContext context);
+        void OnESC(InputAction.CallbackContext context);
     }
 }

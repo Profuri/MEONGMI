@@ -34,6 +34,12 @@ public class PhaseLogPanel : UIComponent
 
     protected override void GenerateTransition()
     {
+        _upperBound.DOKill();
+        _downBound.DOKill();
+        _mainTextPanel.DOKill();
+        _upperTextPanel.DOKill();
+        _downTextPanel.DOKill();
+        
         _upperBound.DOAnchorPos(new Vector2(0, 0), 0.5f);
         _downBound.DOAnchorPos(new Vector2(0, 0), 0.5f);
 
@@ -50,6 +56,12 @@ public class PhaseLogPanel : UIComponent
 
     protected override void RemoveTransition(Action callback)
     {
+        _upperBound.DOKill();
+        _downBound.DOKill();
+        _mainTextPanel.DOKill();
+        _upperTextPanel.DOKill();
+        _downTextPanel.DOKill();
+        
         _upperBound.DOAnchorPos(new Vector2(0, 150), 0.5f);
         _downBound.DOAnchorPos(new Vector2(0, -150), 0.5f);
 
@@ -69,8 +81,8 @@ public class PhaseLogPanel : UIComponent
         else
         {
             _mainText.text = "REST TIME";
-            _upperText.text = "SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE";
-            _downText.text = "SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE";
+            _upperText.text = "SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE";
+            _downText.text = "SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE";
         }
         GameManager.Instance.StartCoroutine(LogRoutine());
     }

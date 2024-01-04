@@ -6,10 +6,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using InputControl;
 using Random = UnityEngine.Random;
 
 public class PlayerFeatureChoicePanel : UIComponent
 {
+    [SerializeField] private InputReader _inputReader;
+    
     [SerializeField] private GameObject _mainTrm;
     [SerializeField] private RectTransform _roulettTrm;
     [SerializeField] private List<TraitUpgradeElemSO> _featureDataList;
@@ -38,22 +41,36 @@ public class PlayerFeatureChoicePanel : UIComponent
     {
         base.GenerateUI(parent);
         Initialize();
+        _inputReader.OnESCInputEvent += OnESCHandle;
+    }
+
+    public override void RemoveUI(Action callback)
+    {
+        base.RemoveUI(callback);
+        _inputReader.OnESCInputEvent -= OnESCHandle;
+    }
+
+    private void OnESCHandle()
+    {
+        UIManager.Instance.ChangeUI("InGameHUD");
     }
 
     protected override void GenerateTransition()
     {
+        ((RectTransform)transform).DOKill();
         ((RectTransform)transform).DOScaleY(1, 0.5f);
     }
 
     protected override void RemoveTransition(Action callback)
     {
+        ((RectTransform)transform).DOKill();
         ((RectTransform)transform).DOScaleY(0, 0.5f).OnComplete(() => callback?.Invoke());
     }
 
     private void Initialize()
     {
-        _title.SetText("Ư�� ����");
-        _description.SetText("����� �����?");
+        _title.SetText("특성 해제");
+        _description.SetText("당신의 운명은?");
 
         _button.interactable = true;
         _particleSystem.Stop();
@@ -130,9 +147,9 @@ public class PlayerFeatureChoicePanel : UIComponent
             seq.AppendInterval(1.5f);
             seq.OnComplete(() =>
             {
+                OnESCHandle();
                 UpgradeManager.Instance.ApplyUpgradeTrait(result.Type);
-                Debug.Log(result.Type.ToString());
-                _mainTrm.SetActive(false);
+                ((InGameHUD)UIManager.Instance.CurrentComponent).SetTrait(result.Image);
             });
         });
 

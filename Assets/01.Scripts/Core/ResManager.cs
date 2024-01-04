@@ -10,7 +10,9 @@ public class ResManager : MonoSingleton<ResManager>
     private ResSpawner _resSpawner;
 
     private int _playerResCnt;
+    public int PlayerResCnt => _playerResCnt;
     private int _baseResCnt;
+    public int BaseResCnt => _baseResCnt;
     
     public event Action OnResourceToZero;
 

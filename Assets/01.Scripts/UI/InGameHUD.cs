@@ -25,6 +25,8 @@ public class InGameHUD : UIComponent
     [SerializeField] private Slider unitSlider;
     [SerializeField] private Slider playerHpSlider;
 
+    [SerializeField] private Image _traitImage;
+    
     [SerializeField] private Ease sliderEase;
 
     public override void GenerateUI(Transform parent)
@@ -58,17 +60,19 @@ public class InGameHUD : UIComponent
 
     protected override void GenerateTransition()
     {
+        _upperUI.DOKill();
+        _downUI.DOKill();
         _upperUI.DOAnchorPos(new Vector2(0, 0), 0.5f);
         _downUI.DOAnchorPos(new Vector2(0, 0), 0.5f);
     }
 
     protected override void RemoveTransition(Action callback)
     {
-        Debug.Log(1);
+        _upperUI.DOKill();
+        _downUI.DOKill();
         _upperUI.DOAnchorPos(new Vector2(0, 200), 0.5f);
         _downUI.DOAnchorPos(new Vector2(0, -400), 0.5f).OnComplete(() =>
         {
-            Debug.Log(2);
             callback?.Invoke();
         });
     }
@@ -105,6 +109,10 @@ public class InGameHUD : UIComponent
     {
         ChangeTextPanel(PhaseManager.Instance.PhaseType);
         UpdatePlayerHp();
+        UpdatePlayerResource(ResManager.Instance.PlayerResCnt);
+        UpdateBaseResource(ResManager.Instance.BaseResCnt);
+        UpdateEnemyCnt(EnemySpawner.Instance.RemainEnemyCnt);
+        UpdatePhaseTime((int)(PhaseManager.Instance.RestPhaseTime - PhaseManager.Instance.GetCurTime()));
         UpdateUnitText();
     }
 
@@ -142,6 +150,11 @@ public class InGameHUD : UIComponent
     private void UpdatePhaseTime(int remainTime)
     {
         timeText.text = $"{remainTime:0}s";
+    }
+
+    public void SetTrait(Sprite image)
+    {
+        _traitImage.sprite = image;
     }
 
     private void UpdateEnemyCnt(int remainEnemyCnt)

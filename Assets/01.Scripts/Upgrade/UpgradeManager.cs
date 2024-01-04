@@ -160,8 +160,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         {
             case EUpgradeType.BASE:
                 //upgradeCnt = BaseUpgradeNeedResCnt;
-                
-                Debug.LogError("��� ���⼭ ó�� ����");
                 break;
             case EUpgradeType.PLAYER:
                 upgradeCnt = PlayerUpgradeNeedResCnt;
@@ -174,30 +172,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
                 return;
         }
 
-        if(ResManager.Instance.UseResource(upgradeCnt))
-        {
-            Debug.Log("Upgrade�غ�");
-            AddElement(upgradeType);
-            UpdateResNeed(upgradeType);
-            UpgradePanelOn(upgradeType);
-        }
-        else
-        {
-            // TestUIManager.Instance.UpgradeFail();
-        }
-    }
-
-    private void UpgradePanelOn(EUpgradeType upgradeType)
-    {
-        switch (upgradeType)
-        {
-            case EUpgradeType.TRAIT:
-                TestUIManager.Instance.TraitUpgradePanel();
-                break;
-            case EUpgradeType.PLAYER:
-                TestUIManager.Instance.PlayerUpgradePanel();
-                break;
-        }
+        AddElement(upgradeType);
     }
 
     public void AddElement(EUpgradeType upgradeType)
@@ -208,7 +183,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
         {
             case EUpgradeType.BASE:
                 {
-                    TestUIManager.Instance.AddUpgradeElem(upgradeType, 0);
+                    UIManager.Instance.AddUpgradeElem(upgradeType, 0);
                     //Debug.LogError("�ߺ�! �����Դϴ�1");
                 }
                 break;
@@ -229,52 +204,17 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
                         }
                         pickedNums.Add(elemNum);
                         Debug.Log(elemNum);
-                        TestUIManager.Instance.AddUpgradeElem(upgradeType, elemNum);
+                        UIManager.Instance.AddUpgradeElem(upgradeType, elemNum);
                     }
                 }
                 break;
-            case EUpgradeType.TRAIT: // �ߺ� x
-                {
-                    //maxEclusive = (int)ETraitUpgradeElement.END;
-                    //ETraitUpgradeElement traitElem = curTraitElem;
-                    //while(traitElem == curTraitElem)
-                    //{
-                    //    traitElem = (ETraitUpgradeElement)Random.Range(0, maxEclusive);
-                    //}
-                    //TestUIManager.Instance.AddUpgradeElem(upgradeType, (int)traitElem);
-                }
-                break;
         }
     }
-
-    public void PlayerUpgrade() => Upgrade(EUpgradeType.PLAYER);
-
-    public void TraitUpgrade() => Upgrade(EUpgradeType.TRAIT);
 
     public void SetCurTraitElem(ETraitUpgradeElement elem) => curTraitElem = elem;
-    public void UpdateResNeed(EUpgradeType upgradeType)
-    {
-        switch(upgradeType)
-        {
-            case EUpgradeType.BASE:
-                 // ���⼭ ó�� x
-                break;
-            case EUpgradeType.PLAYER:
-                PlayerUpgradeNeedResCnt += PlayerUpgradeNeedResCnt / 2;
-                TestUIManager.Instance.SetPlayerCostTxt(PlayerUpgradeNeedResCnt);
-                break;
-            case EUpgradeType.TRAIT:
-                TraitUpgradeNeedResCnt += TraitUpgradeNeedResCnt / 2;
-                TestUIManager.Instance.SetTraitCostTxt(TraitUpgradeNeedResCnt);
-                //UpdateCostText();
-                break;
-        }
-    }
-
 
     public void ApplyUpgradeTrait(ETraitUpgradeElement upgradeElem)
     {
-        Debug.Log(upgradeElem);
         StatManager.Instance.SetTrait(upgradeElem);
     }
 

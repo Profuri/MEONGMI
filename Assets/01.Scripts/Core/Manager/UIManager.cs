@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoSingleton<UIManager>
 {
     [SerializeField] private Canvas _mainCanvas;
+    
+    [SerializeField] private List<UpgradeSelectButton> _upgradeSelectButton;
     
     public UIComponent CurrentComponent { get; private set; }
 
@@ -40,5 +43,34 @@ public class UIManager : MonoSingleton<UIManager>
     public override void Init()
     {
         ChangeUI("InGameHUD");
+    }
+    
+    public void ShowUpgradeUI()
+    {
+        foreach(var selectBtn in _upgradeSelectButton)
+        {
+            selectBtn.Show();
+        }
+    }
+
+    public void HideUpgradeUI()
+    {
+        foreach (var selectBtn in _upgradeSelectButton)
+        {
+            selectBtn.HIde();
+        }
+    }
+    
+    public void AddUpgradeElem(EUpgradeType upgradeType, int elem)
+    {
+        switch (upgradeType)
+        {
+            case EUpgradeType.BASE:
+                ((BaseUpgradePanel)CurrentComponent).AddElem(elem);
+                break;
+            case EUpgradeType.PLAYER:
+                ((PlayerLevelUpPanel)CurrentComponent).AddElem(elem);
+                break;
+        }
     }
 }

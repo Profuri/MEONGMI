@@ -178,6 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 690d1effda4641bfad51ad807e2dfdcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputReader: {fileID: 11400000, guid: 0b2ddb7c40369994293d5e03cee5f8a1, type: 2}
+  _cardTemplete: {fileID: 4208071136110261279, guid: 5a1c2afdc340d834195a5bb707620e66,
+    type: 3}
+  _upgradeContainer: {fileID: 5216818913582564173}
 --- !u!1 &5745072475125787428
 GameObject:
   m_ObjectHideFlags: 0
