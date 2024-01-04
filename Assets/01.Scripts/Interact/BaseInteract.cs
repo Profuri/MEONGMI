@@ -9,6 +9,6 @@ public class BaseInteract : Interactable
 
         entity.StateMachine.ChangeState(PlayerStateType.Idle);
         ResManager.Instance.MoveResource();
-        TestUIManager.Instance.UpgradeRootPanelOn();
+        //TestUIManager.Instance.UpgradeRootPanelOn();
     }
 }
