@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class PlayerStatChoicePanel : ChoicePanel
+public class PlayerStatChoicePanel : MonoBehaviour
 {
     [SerializeField] private RectTransform _imageListTrm;
     //[SerializeField] private UpgradeContainer _upgradeContainer;
@@ -30,12 +30,9 @@ public class PlayerStatChoicePanel : ChoicePanel
         Init();
     }
 
-    private void Update()
+    private void Start()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            RollImage();
-        }
+        RollImage();
     }
 
     private void Init()

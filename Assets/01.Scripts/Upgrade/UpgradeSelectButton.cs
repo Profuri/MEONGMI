@@ -75,13 +75,16 @@ public class UpgradeSelectButton : MonoBehaviour
         switch (Type)
         {
             case EUpgradeType.BASE:
-                TestUIManager.Instance.BaseUpgradePanel();
+                UIManager.Instance.ChangeUI("BaseUpgradePanel");
+                // TestUIManager.Instance.BaseUpgradePanel();
                 break;
             case EUpgradeType.PLAYER:
-                TestUIManager.Instance.UpgradePlayer();
+                UIManager.Instance.ChangeUI("PlayerLevelUpPanel");
+                // TestUIManager.Instance.UpgradePlayer();
                 break;
             case EUpgradeType.TRAIT:
-                TestUIManager.Instance.UpgradeTrait();
+                UIManager.Instance.ChangeUI("PlayerFeatureChoicePanel");
+                // TestUIManager.Instance.UpgradeTrait();
                 break;
         }
     }

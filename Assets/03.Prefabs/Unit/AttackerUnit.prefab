@@ -156,7 +156,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9108929679513093950}
-  - component: {fileID: 2207057414058270343}
   m_Layer: 0
   m_Name: PlayerHammer
   m_TagString: Untagged
@@ -182,21 +181,6 @@ Transform:
   - {fileID: 6178026940492959677}
   m_Father: {fileID: 7190840904073114928}
   m_LocalEulerAnglesHint: {x: 78.526, y: -56.435, z: -219.879}
---- !u!114 &2207057414058270343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782070303174489906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02bf62c81d0f4a53bf696c20f21d7153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _distanceInterval: 0
-  _angleInterval: 0
-  _colorTypeList: []
 --- !u!1 &2238402289586391160
 GameObject:
   m_ObjectHideFlags: 0

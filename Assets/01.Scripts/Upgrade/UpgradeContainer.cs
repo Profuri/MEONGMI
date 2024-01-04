@@ -20,7 +20,7 @@ public class UpgradeContainer : MonoBehaviour
         
         if (type == EUpgradeType.BASE)
         {
-            //base 3°³ ¶ç¿ò
+            //base 3ï¿½ï¿½ ï¿½ï¿½ï¿½
             if (transform.childCount == 0)
             {
                 for (int i = 0; i < baseElemInfos.Count; i++)
@@ -33,7 +33,7 @@ public class UpgradeContainer : MonoBehaviour
                 }
             }
             else
-                Debug.Log("BaseItemÀÌ ÀÌ¹Ì Á¸Àç");
+                Debug.Log("BaseItemï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½");
         }
         else
         {
@@ -61,7 +61,7 @@ public class UpgradeContainer : MonoBehaviour
             }
 
             UpgradeCards.Add(upgradeObj);
-            //°¢ Å¸ÀÔÀÇ elemNumÀÇ upgrade ¸¦ ¶ç¿ò
+            //ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ elemNumï¿½ï¿½ upgrade ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
     }
 
@@ -72,7 +72,7 @@ public class UpgradeContainer : MonoBehaviour
             Destroy(item);
         });
         UpgradeCards.Clear();
-        _mainTrm.gameObject.SetActive(false);
+        UIManager.Instance.ChangeUI("InGameHUD");
     }
 
     public void OnDisable()

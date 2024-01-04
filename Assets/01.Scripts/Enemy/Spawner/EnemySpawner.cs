@@ -14,6 +14,9 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
 
     public int RemainMonsterCnt => _appearMaxEnemyCnt - _currentDeadCnt;
     private int _appearMaxEnemyCnt;
+    
+    public event Action<int> OnEnemyDead; 
+
     public override void Init()
     {
         _currentEnemyList = new List<BaseEnemy>();
@@ -43,6 +46,9 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         int appearMinOnceEnemyCnt = phaseInfoList[phase].appearOnceMinEnemyCnt;
         int randomAppearEnemyCnt;
 
+        RemainEnemyCnt = appearMaxEnemyCnt;
+        OnEnemyDead?.Invoke(RemainEnemyCnt);
+        
         _currentEnemyList.Clear();
 
         while (_appearMaxEnemyCnt > _currentDeadCnt)
@@ -84,16 +90,12 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
             }
             yield return new WaitForSeconds(appearDelay);
         }
-        Debug.Log("OnPhaseEnd");
-        OnPhaseEnd?.Invoke(phase);
-
+        
         PhaseManager.Instance.ChangePhase(PhaseType.Rest);
     }
 
     public void DeadEnemy(BaseEnemy enemy)
     {
-        Debug.Log($"DeadEnemy: {enemy}");
-        
         int phase = PhaseManager.Instance.Phase;
         int randomEnemyResCnt = PhaseManager.Instance.PhaseInfoList[phase].GetEnemyRandomResCnt();
         
@@ -104,5 +106,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
             
         PoolManager.Instance.Push(enemy);
         _currentDeadCnt++;
+        RemainEnemyCnt--;
+        OnEnemyDead?.Invoke(RemainEnemyCnt);
     }
 }

@@ -12,7 +12,11 @@ public class UnitManager : MonoSingleton<UnitManager>
     public override void Init()
     {
         UnitList = new List<BaseUnit>();
-        UnitCountDictionary = new Dictionary<UnitType, int>();
+        UnitCountDictionary = new Dictionary<UnitType, int>
+        {
+            { UnitType.Attacker, 0 },
+            { UnitType.Miner, 0 }
+        };
     }
 
     public BaseUnit CreateUnit(UnitType type, Vector3 position)
