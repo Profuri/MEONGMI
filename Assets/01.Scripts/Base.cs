@@ -16,7 +16,8 @@ public class Base : Interactable, IDamageable
     private Arc _arc;
 
     private UnitType _currentUnit;
-    
+    [SerializeField] private SpriteRenderer _miniMapLine;
+
     private void Awake()
     {
         Collider = GetComponent<Collider>();
@@ -86,6 +87,11 @@ public class Base : Interactable, IDamageable
                 
             }
         }
+    }
+
+    public void SetMiniMapLine(float length)
+    {
+        _miniMapLine.transform.localScale = Vector3.one * (length + 5f);
     }
         
     public void AddUnit()
