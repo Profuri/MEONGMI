@@ -37,8 +37,15 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-        Instance.Init();
+        if (GameManager.Instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance.Init();
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
     private void Update()
