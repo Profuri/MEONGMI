@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8cc21176681f94c8c3840cf3eb9ef0, type: 3}
   m_Name: BgmClipSO
   m_EditorClassIdentifier: 
-  clipList: []
+  clipList:
+  - {fileID: 8300000, guid: 2a6a0d6dc0b523845ae3fbfe46244c2d, type: 3}
+  - {fileID: 8300000, guid: cb86ff22b21debc43a688e63ea5be33d, type: 3}

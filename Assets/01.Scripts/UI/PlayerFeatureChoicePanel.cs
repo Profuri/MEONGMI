@@ -94,6 +94,7 @@ public class PlayerFeatureChoicePanel : ChoicePanel
     //Debug Function
     public void OnRolling()
     {
+        SoundManager.Instance.PlaySFX("UseMoney");
         Rolling();
     }
 
@@ -113,6 +114,8 @@ public class PlayerFeatureChoicePanel : ChoicePanel
             _effectImage.gameObject.SetActive(true);
             _particleSystem.gameObject.SetActive(true);
             _particleSystem.Play();
+
+            SoundManager.Instance.PlaySFX("Player_Feature");
 
             Sequence seq = DOTween.Sequence();
             seq.Append(_effectPanel.DOFade(0.7f, 0.25f));

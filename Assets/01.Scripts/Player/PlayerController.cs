@@ -103,6 +103,7 @@ public class PlayerController : Entity, IDetectable
         if (!_walkParticle.isPlaying)
         {
             _walkParticle.Play();
+            SoundManager.Instance.PlaySFX("PlayerWalk");
         }
         
         CharacterControllerCompo.Move(dir);
@@ -148,6 +149,7 @@ public class PlayerController : Entity, IDetectable
     public override void Damaged(float damage)
     {
         base.Damaged(damage);
+        SoundManager.Instance.PlaySFX("PlayerHit");
         TestUIManager.Instance.IngameUI.UpdatePlayerHP();
     }
 

@@ -50,6 +50,7 @@ public class PlayerStatChoicePanel : ChoicePanel
         if (_isRolling) return;
         _isRolling = true;
 
+        SoundManager.Instance.PlaySFX("Roulette-Start");
         Image[] imageList = _imageListTrm.GetComponentsInChildren<Image>();
         _statIconImages = ShuffleArray(_statIconImages);
         //imageList = ShuffleArray(imageList);
@@ -63,6 +64,7 @@ public class PlayerStatChoicePanel : ChoicePanel
         _imageListTrm.DOAnchorPosY((imageList.Length - 1) * 235f, 1.5f)
         .OnComplete(() =>
         {
+            SoundManager.Instance.PlaySFX("Player_Feature");
             imageList[0].sprite = imageList[imageList.Length - 1].sprite;
             EndRolling(imageList[0]);
         });

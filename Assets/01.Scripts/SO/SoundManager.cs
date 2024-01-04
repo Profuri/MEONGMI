@@ -23,7 +23,12 @@ public class SoundManager : MonoSingleton<SoundManager>
     public float soundFadeOnTime;
 
     private AudioSource[] _audioSources = new AudioSource[(int)SoundEnum.END];
-    
+
+    private void Awake()
+    {
+        Init();    
+    }
+
     public override void Init()
     {
         string[] soundNames = System.Enum.GetNames(typeof(SoundEnum));
@@ -37,9 +42,17 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
 
         _audioSources[(int)SoundEnum.BGM].loop = true;
-    }
-    
 
+        PlayBGM("TitleBGM");
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            PlaySFX("Btn1");
+        }
+    }
     public void PlaySFX(string clipName)
     {
         AudioClip clip = _audioClipSO.GetAudioClip(clipName);

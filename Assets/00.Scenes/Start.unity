@@ -6944,7 +6944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 268238
+  GUIID: 342192
 --- !u!1 &1652524242
 GameObject:
   m_ObjectHideFlags: 0
@@ -7850,6 +7850,7 @@ GameObject:
   - component: {fileID: 6055261211917678169}
   - component: {fileID: 2981678064920489544}
   - component: {fileID: 7909215797436347257}
+  - component: {fileID: 7909215797436347258}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -7948,6 +7949,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9192dc60253d4648a7ed836d056813a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7909215797436347258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3213357038666455877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece3b5fbc7c781549a2084a9e530bdbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClipSO: {fileID: 11400000, guid: 1241ea5ac60d34541aa972fcaa63c7c9, type: 2}
+  _bgmClipSO: {fileID: 11400000, guid: 01395369279cbc240bc771ee95e45d9d, type: 2}
+  _masterMixer: {fileID: 24100000, guid: 2715c9499a876e245a81cab25c784de0, type: 2}
+  _bgmGroup: {fileID: 7149268853506307704, guid: 2715c9499a876e245a81cab25c784de0,
+    type: 2}
+  _sfxGroup: {fileID: 4355188839373058363, guid: 2715c9499a876e245a81cab25c784de0,
+    type: 2}
+  soundFadeOnTime: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

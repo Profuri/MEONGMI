@@ -74,6 +74,8 @@ public class GameManager : MonoSingleton<GameManager>
             ResManager.Instance.Init();
             
             UnitManager.Instance.Init();
+
+            SoundManager.Instance.PlayBGM("Rehearsal Decay");
         };
         //UIManager.Instance.Init();
     }
