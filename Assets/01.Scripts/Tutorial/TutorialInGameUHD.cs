@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class InGameHUD : UIComponent
+public class TutorialInGameUHD : UIComponent
 {
     [SerializeField] TextMeshProUGUI baseResourceText;
     //[SerializeField] TextMeshProUGUI playerResourceText;
@@ -24,12 +24,20 @@ public class InGameHUD : UIComponent
 
     private TextMeshProUGUI _phaseText;
     
+
+
+    [SerializeField] private int _maxResCnt;
+    [SerializeField] private int _maxPlayerResCnt;
+    [SerializeField] private int _unitMaxCnt;
+    public int PlayerResourceCnt { get; set; }
+    public int BaseResourceCnt { get; set; }
+    public int CurUnitCnt { get; set; }
+    
+    
     private void Awake()
     {
-        if (SceneManagement.Instance != null)
-        {
-            SceneManagement.Instance.OnGameStartEvent += ReSet;
-        }
+        CameraManager.Instance.Init();
+        ReSet();
     }
     public void Update()
     {
@@ -49,50 +57,38 @@ public class InGameHUD : UIComponent
 
     public void UpdateBaseResource()
     {
-        int curRes = ResManager.Instance.BaseResourceCnt;
-        int maxRes = StatManager.Instance.MaxBaseResValue;
+        int curRes = BaseResourceCnt;
+        int maxRes = _maxResCnt;
         UpdateSlider(baseResSlider, curRes, maxRes);
         baseResourceText.text = $"{curRes} / {maxRes}";
     }
 
     public void UpdatePlayerResource()
     {
-        int curRes = ResManager.Instance.PlayerResourceCnt;
-        int maxRes = StatManager.Instance.MaxBaseResValue;
+        int curRes = PlayerResourceCnt;
+        int maxRes = _maxPlayerResCnt;
         UpdateSlider(playerResSlider, curRes, maxRes);
-        //playerResourceText.text = curRes.ToString();
     }
 
     public void UpdatePlayerHP()
     {
-        int curHP = (int)GameManager.Instance.PlayerController.CurrentHP;
-        Debug.Log($"PlayerController: {GameManager.Instance.PlayerController}");
-        int maxHP = (int)GameManager.Instance.PlayerController.GetMaxHP();
+        int curHP = 10;
+        int maxHP = 10;
         UpdateSlider(playerHpSlider, curHP, maxHP);
-        //playerResourceText.text = curRes.ToString();
     }
 
     public void UpdateUnitText()
     {
-        int curRes = GameManager.Instance.Base.CurUnitCount;
-        int maxRes = StatManager.Instance.UnitMaxValue;
+        int curRes = CurUnitCnt;
+        int maxRes = _unitMaxCnt;
         UpdateSlider(unitSlider, curRes, maxRes);
-        //UnitText.text = $"{curRes} / {maxRes}";
         UnitText.text = curRes.ToString();
     }
 
     public void UpdatePhaseTime()
     {
-        if (PhaseManager.Instance.PhaseType == PhaseType.Raid)
-        {
-            _phaseText.text = " Remain Monster";
-            timeText.text = $"{EnemySpawner.Instance.RemainMonsterCnt}";
-        }
-        else
-        {
-            _phaseText.text = "Next Phase...";
-            timeText.text = $"{PhaseManager.Instance.GetCurTime().ToString("0")} / {PhaseManager.Instance.RestPhaseTime}";
-        }
+        _phaseText.text = " Remain Monster";
+        timeText.SetText("9999");
     }
 
     public void UpdateTrait(ETraitUpgradeElement trait)

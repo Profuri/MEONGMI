@@ -33,4 +33,9 @@ public class StartScene : MonoBehaviour
         Debug.Log("ExitGame");
         Application.Quit();
     }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManagement.Instance.LoadScene(sceneName);
+    }
 }

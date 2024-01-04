@@ -10,6 +10,7 @@ public class PlayerChargingState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        
         CameraManager.Instance.Zoom(9.5f, 0.2f);
         _player.InputReader.OnMouseLeftClickEvent += ShotHandle;
         _player.InputReader.OnMouseRightClickEvent += ChargingHandle;
@@ -49,7 +50,7 @@ public class PlayerChargingState : PlayerState
     private Vector3 GetGroundPoint()
     {
         var mouseScreenPos = _player.InputReader.mouseScreenPos;
-        var ray = GameManager.Instance.MainCam.ScreenPointToRay(mouseScreenPos);
+        var ray = Core.Define.MainCam.ScreenPointToRay(mouseScreenPos);
         var isHit = Physics.Raycast(ray, out var hit, Mathf.Infinity, _player.GroundMask);
         return isHit ? hit.point : -Vector3.one;
     }

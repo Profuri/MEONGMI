@@ -18,6 +18,8 @@ public class PhaseInfoSO : ScriptableObject
     public float resMinSpawnTime;
     public float resMaxSpawnTime;
 
+    public float restPhaseTime;
+
     public int GetSpawnCnt() => Random.Range(resMinSpawnCnt, resMaxSpawnCnt + 1);
     public float GetSpawnTime() => Random.Range(resMinSpawnTime, resMaxSpawnTime);
 }

@@ -11,7 +11,9 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
 
     private Coroutine _phaseCoroutine;
     public event Action<int> OnPhaseEnd;
-    
+
+    public int RemainMonsterCnt => _appearMaxEnemyCnt - _currentDeadCnt;
+    private int _appearMaxEnemyCnt;
     public override void Init()
     {
         _currentEnemyList = new List<BaseEnemy>();
@@ -35,7 +37,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         var phaseInfoList = PhaseManager.Instance.PhaseInfoList;
         
         EnemyListSO enemyList = phaseInfoList[phase].enemyListSO;
-        int appearMaxEnemyCnt = phaseInfoList[phase].appearMaxEnemyCnt;
+        _appearMaxEnemyCnt = phaseInfoList[phase].appearMaxEnemyCnt;
         int appearDelay = phaseInfoList[phase].appearDelay;
         int appearMaxOnceEnemyCnt = phaseInfoList[phase].appearOnceMaxEnemyCnt;
         int appearMinOnceEnemyCnt = phaseInfoList[phase].appearOnceMinEnemyCnt;
@@ -43,9 +45,9 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         
         _currentEnemyList.Clear();
 
-        while (appearMaxEnemyCnt != _currentDeadCnt)
+        while (_appearMaxEnemyCnt > _currentDeadCnt)
         {
-            if (appearMaxEnemyCnt > _currentEnemyList.Count)
+            if (_appearMaxEnemyCnt > _currentEnemyList.Count)
             {
                 randomAppearEnemyCnt = Random.Range(appearMinOnceEnemyCnt,appearMaxOnceEnemyCnt);
                 Vector3 randomPos;
