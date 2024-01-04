@@ -18,7 +18,7 @@ public class TutorialPlayer : MonoBehaviour
     {
         if (isOn)
         {
-            _infoText.transform.rotation = Quaternion.LookRotation((Core.Define.MainCam.transform.position - _infoText.transform.position) * -1);
+            _infoText.transform.rotation = Quaternion.LookRotation((CameraManager.Instance.MainCam.transform.position - _infoText.transform.position) * -1);
         }
         else
         {

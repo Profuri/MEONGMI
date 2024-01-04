@@ -19,7 +19,7 @@ public class InformationText : MonoBehaviour
 
     private void Update()
     {
-        transform.rotation = Quaternion.LookRotation((Core.Define.MainCam.transform.position - transform.position) * -1);
+        transform.rotation = Quaternion.LookRotation((CameraManager.Instance.MainCam.transform.position - transform.position) * -1);
     }
     public void SetText(string text)
     {

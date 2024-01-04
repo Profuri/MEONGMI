@@ -50,7 +50,7 @@ public class PlayerChargingState : PlayerState
     private Vector3 GetGroundPoint()
     {
         var mouseScreenPos = _player.InputReader.mouseScreenPos;
-        var ray = Core.Define.MainCam.ScreenPointToRay(mouseScreenPos);
+        var ray = CameraManager.Instance.MainCam.ScreenPointToRay(mouseScreenPos);
         var isHit = Physics.Raycast(ray, out var hit, Mathf.Infinity, _player.GroundMask);
         return isHit ? hit.point : -Vector3.one;
     }

@@ -77,7 +77,6 @@ public class GameManager : MonoSingleton<GameManager>
 
         SceneManagement.Instance.OnGameStartEvent += () =>
         {
-            Core.Define.ResetCamera();
             CameraManager.Instance.Init();
             PhaseManager.Instance.Init();
             EnemySpawner.Instance.Init();
