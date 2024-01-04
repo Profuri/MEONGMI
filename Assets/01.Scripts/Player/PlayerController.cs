@@ -84,6 +84,7 @@ public class PlayerController : Entity, IDetectable
     public void SetBullet(BulletType type)
     {
         _bulletType = type;
+        PlayerHammer.SetEmissionColor(type);
     }
 
     public override void Start()

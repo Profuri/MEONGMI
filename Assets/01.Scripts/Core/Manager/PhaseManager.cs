@@ -6,6 +6,7 @@ using UnityEngine.InputSystem.OnScreen;
 public class PhaseManager : MonoSingleton<PhaseManager>
 {
     [SerializeField] private float _restPhaseTime;
+    public float RestPhaseTime => _restPhaseTime;
 
     [SerializeField] private List<PhaseInfoSO> _phaseInfoList = new List<PhaseInfoSO>();
     public List<PhaseInfoSO> PhaseInfoList => _phaseInfoList;

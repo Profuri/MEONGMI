@@ -42,7 +42,7 @@ public class Hammer : MonoBehaviour
         return Color.blue;
     }
 
-    private void SetEmissionColor(BulletType type)
+    public void SetEmissionColor(BulletType type)
     {
         MaterialPropertyBlock matblock = new MaterialPropertyBlock();
         _meshRenderer.GetPropertyBlock(matblock);
@@ -50,6 +50,7 @@ public class Hammer : MonoBehaviour
         matblock.SetColor("_EmissionColor",GetColorByBulletType(type));
         _meshRenderer.SetPropertyBlock(matblock);
     }
+    
     private void Awake()
     {
         var visualTrm = transform.Find("Visual");
@@ -62,7 +63,6 @@ public class Hammer : MonoBehaviour
     
     public void Shot(BulletType type, Vector3 dir)
     {
-        SetEmissionColor(type);
         var particle = PoolManager.Instance.Pop($"{type.ToString()}Flash") as PoolableParticle;
         particle.SetPositionAndRotation(_shotPoint.position, Quaternion.LookRotation(dir));
         particle.Play();

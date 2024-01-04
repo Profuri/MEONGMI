@@ -24,7 +24,7 @@ public class StartScene : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.Append(_cvCam.transform.DORotate(new Vector3(0, -20f, 0), 2f));
         seq.Join(DOTween.To(() => _cvCam.m_Lens.OrthographicSize, x => _cvCam.m_Lens.OrthographicSize = x, 3f, 2f));
-        seq.AppendCallback(() => _fadeOutPanel.LoadAsyncCor(0,null));
+        seq.AppendCallback(() => _fadeOutPanel.LoadAsyncCor(1,null));
         seq.Append(DOTween.To(() => _cvCam.m_Lens.OrthographicSize,x => _cvCam.m_Lens.OrthographicSize = x,1.5f,1.5f));
     }
         
