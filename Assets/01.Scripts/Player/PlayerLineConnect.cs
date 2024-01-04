@@ -38,6 +38,11 @@ public class PlayerLineConnect : MonoBehaviour
         _playerController.InputReader.OnLineConnectEvent += ConnectHandler;
     }
 
+    private void Start()
+    {
+        GameManager.Instance.Base.SetMiniMapLine(_lineLength);
+    }
+
     public void Init()
     {
         _line.SetStartHole(_baseConnectHole);
@@ -135,5 +140,6 @@ public class PlayerLineConnect : MonoBehaviour
     public void SetLenght(float lenght)
     {
         _lineLength = lenght;
+        GameManager.Instance.Base.SetMiniMapLine(_lineLength);
     }
 }
