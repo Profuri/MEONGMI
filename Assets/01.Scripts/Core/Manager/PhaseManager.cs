@@ -71,7 +71,11 @@ public class PhaseManager : MonoSingleton<PhaseManager>
             _restPhaseTime = _phaseInfoList[Phase].restPhaseTime;
             Phase++;
             EnemySpawner.Instance.StartPhase(Phase);
+            SoundManager.Instance.PlayBGM("PhaseBgm");
         }
+        else if(type == PhaseType.Rest)
+            SoundManager.Instance.PlayBGM("Rehearsal Decay");
+
         
         UIManager.Instance.ChangeUI("PhaseLogPanel", null);
     }

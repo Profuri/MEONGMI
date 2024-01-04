@@ -63,7 +63,7 @@ public class Bullet : PoolableMono
         var particle = PoolManager.Instance.Pop($"{_bulletType.ToString()}Hit") as PoolableParticle;
         particle.SetPositionAndRotation(transform.position);
         particle.Play();
-        
+        SoundManager.Instance.PlaySFX("EnemyHitEffect");
         PoolManager.Instance.Push(this);
     }
 
