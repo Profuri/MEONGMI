@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TestUIManager : MonoSingleton<TestUIManager>
 {
     [Header("Root")]
     [SerializeField] InGameHUD _IngameHUD;
-    public InGameHUD IngameUI => _IngameHUD;   
+    public InGameHUD IngameUI => _IngameHUD;
 
 
-    [SerializeField] GameObject UpgradeUIPanel;
+    [SerializeField] List<UpgradeSelectButton> _UpgradeSelectButton;
+    //[SerializeField] GameObject UpgradeUIPanel;
     [SerializeField] GameObject _PlayerAndTraitPanel;
 
     [Header("Container")]
@@ -56,7 +58,7 @@ public class TestUIManager : MonoSingleton<TestUIManager>
     public void SetPlayerCostTxt(int cost) => _playerCostTxt.text = cost.ToString();
     public void SetTraitCostTxt(int cost) => _traitCostTxt.text = cost.ToString();
 
-    public void UpgradeRootPanelOn() => UpgradeUIPanel.SetActive(true);
+    //public void UpgradeRootPanelOn() => UpgradeUIPanel.SetActive(true);
     
 
     public void BaseUpgradePanel()
@@ -87,6 +89,22 @@ public class TestUIManager : MonoSingleton<TestUIManager>
             case EUpgradeType.TRAIT:
                 //traitUpgradeContainer.SetUpgrade(traitCardTemplate, upgradeType, elem);
                 break;
+        }
+    }
+
+    public void ShowUpgradeUI()
+    {
+        foreach(var selectBtn in _UpgradeSelectButton)
+        {
+            selectBtn.Show();
+        }
+    }
+
+    public void HideUpgradeUI()
+    {
+        foreach (var selectBtn in _UpgradeSelectButton)
+        {
+            selectBtn.HIde();
         }
     }
 }

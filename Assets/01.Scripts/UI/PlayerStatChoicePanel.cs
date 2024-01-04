@@ -32,7 +32,7 @@ public class PlayerStatChoicePanel : ChoicePanel
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             RollImage();
         }
