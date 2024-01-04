@@ -5306,6 +5306,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _distanceInterval: 0.5
   _angleInterval: 25
+  _colorSO: {fileID: 11400000, guid: e11c06c6d646f5949821f4d801221208, type: 2}
+  _colorTypeList: []
 --- !u!1 &6613288523151181408
 GameObject:
   m_ObjectHideFlags: 0

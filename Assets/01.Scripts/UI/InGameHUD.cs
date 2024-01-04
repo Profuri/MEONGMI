@@ -20,17 +20,12 @@ public class InGameHUD : UIComponent
     [SerializeField] Slider playerHpSlider;
 
     [SerializeField] Ease sliderEase;
-    
+
+
     private void Awake()
     {
-        
+        SceneManagement.Instance.OnGameStartEvent += ReSet;
     }
-
-    private void Start()
-    {
-        ReSet();   
-    }
-
     public void Update()
     {
         UpdatePhaseTime();
@@ -64,6 +59,7 @@ public class InGameHUD : UIComponent
     public void UpdatePlayerHP()
     {
         int curHP = (int)GameManager.Instance.PlayerController.CurrentHP;
+        Debug.Log($"PlayerController: {GameManager.Instance.PlayerController}");
         int maxHP = (int)GameManager.Instance.PlayerController.GetMaxHP();
         UpdateSlider(playerHpSlider, curHP, maxHP);
         //playerResourceText.text = curRes.ToString();

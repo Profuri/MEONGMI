@@ -23,6 +23,7 @@ public class StartFadeOutPanel : MonoBehaviour
         asyncLoad.allowSceneActivation = false;
         
         float timer = 0f;
+        
         _fadeUI.rectTransform.localScale = Vector3.zero;
         Sequence seq = DOTween.Sequence();
         seq.Append(_fadeUI.rectTransform.DOScale(_maxOffset, _fadeTime).SetEase(Ease.InOutCubic));
