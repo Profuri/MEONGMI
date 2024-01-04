@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using InputControl;
 using UnityEngine;
 
 public class UIManager : MonoSingleton<UIManager>
 {
-    [SerializeField] private Canvas _mainCanvas;
+    [SerializeField] private InputReader _inputReader;
     
+    [SerializeField] private Canvas _mainCanvas;
     [SerializeField] private List<UpgradeSelectButton> _upgradeSelectButton;
+    [SerializeField] private PausePanel _pausePanel;
     
     public UIComponent CurrentComponent { get; private set; }
 
@@ -40,9 +43,22 @@ public class UIManager : MonoSingleton<UIManager>
         CurrentComponent = ui;
     }
 
+    private void Awake()
+    {
+        _inputReader.OnESCInputEvent += Pause;
+    }
+
     public override void Init()
     {
         ChangeUI("InGameHUD");
+    }
+
+    private void Pause()
+    {
+        if (!_pausePanel.gameObject.activeSelf)
+        {
+            _pausePanel.Generate();
+        }
     }
     
     public void ShowUpgradeUI()

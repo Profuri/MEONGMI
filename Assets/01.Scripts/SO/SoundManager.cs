@@ -13,6 +13,7 @@ public enum SoundEnum
 public class SoundManager : MonoSingleton<SoundManager>
 {
     [SerializeField] private AudioClipSO _audioClipSO;
+    [SerializeField] private AudioClipSO _bgmClipSO;
     private AudioSource _audioSource;
 
     [SerializeField] private AudioMixer _masterMixer;
@@ -22,7 +23,12 @@ public class SoundManager : MonoSingleton<SoundManager>
     public float soundFadeOnTime;
 
     private AudioSource[] _audioSources = new AudioSource[(int)SoundEnum.END];
-    
+
+    private void Awake()
+    {
+        Init();    
+    }
+
     public override void Init()
     {
         string[] soundNames = System.Enum.GetNames(typeof(SoundEnum));
@@ -36,8 +42,29 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
 
         _audioSources[(int)SoundEnum.BGM].loop = true;
+
+        PlayBGM("TitleBGM");
     }
-    
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            PlaySFX("Btn1");
+        }
+    }
+    public void PlaySFX(string clipName)
+    {
+        AudioClip clip = _audioClipSO.GetAudioClip(clipName);
+        Play(clip, SoundEnum.EFFECT);
+    }
+
+    public void PlayBGM(string clipName)
+    {
+        AudioClip clip = _bgmClipSO.GetAudioClip(clipName);
+        Play(clip, SoundEnum.BGM);
+    }
+
     public void Play(AudioClip audioClips, SoundEnum type = SoundEnum.EFFECT)
     {
         if (audioClips == null)

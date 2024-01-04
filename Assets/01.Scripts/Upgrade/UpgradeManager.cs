@@ -84,7 +84,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     }
 
-
     private void LoadUpdateInfos()
     {
         baseElemInfos = new();

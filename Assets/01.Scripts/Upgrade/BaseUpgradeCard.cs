@@ -50,9 +50,11 @@ public class BaseUpgradeCard : UpgradeCard
 
     public override void OnClick()
     {
-        UpdateUI();
-        UpgradeManager.Instance.ApplyUpgradeBase(info.Type);
-        Debug.Log(info.Type.ToString());
+        if (ResManager.Instance.UseResource(curCost))
+        {
+            UpdateUI();
+            UpgradeManager.Instance.ApplyUpgradeBase(info.Type);
+        }
     }
 
     private void UpdateUI()
