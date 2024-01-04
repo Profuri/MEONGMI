@@ -85,7 +85,6 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
                     enemy.SetPosition(unitPoint);
                     _currentEnemyList.Add(enemy);
                     
-
                     yield return null;
                 }
             }

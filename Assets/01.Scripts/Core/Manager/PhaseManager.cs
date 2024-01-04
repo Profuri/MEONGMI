@@ -56,7 +56,6 @@ public class PhaseManager : MonoSingleton<PhaseManager>
             
             if (_currentTime >= _restPhaseTime)
             {
-                _currentTime = 0f;
                 ChangePhase(PhaseType.Raid);
             }
         }
@@ -64,6 +63,7 @@ public class PhaseManager : MonoSingleton<PhaseManager>
 
     public void ChangePhase(PhaseType type)
     {
+        _currentTime = 0f;
         _phase = type;
         OnPhaseChange?.Invoke(type);
         if (type == PhaseType.Raid)
