@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class ResSpawner
 {
+    public static int currentRes = 0;
+    const int maxCnt = 8;
     private List<PhaseInfoSO> _phaseInfoList;
     private bool _isOn;
     
     public ResSpawner(List<PhaseInfoSO> phaseInfoList)
     {
+        currentRes = 0;
         this._phaseInfoList = phaseInfoList;
         _isOn = true;
         ResManager.Instance.StartCoroutine(SpawnResourceCor());
@@ -16,8 +18,10 @@ public class ResSpawner
 
     private IEnumerator SpawnResourceCor()
     {
-        while (true)
+        while (true )
         {
+            yield return new WaitUntil(()=> currentRes <= maxCnt && PhaseManager.Instance.PhaseType == PhaseType.Rest);
+
             int currentPhase = PhaseManager.Instance.Phase;
 
             int spawnCnt = _phaseInfoList[currentPhase].GetSpawnCnt();
@@ -47,6 +51,7 @@ public class ResSpawner
                 resource.SetScale(resCnt / 200f);
                 resource.SetResourceCnt(resCnt);
                 resource.transform.position = randomPos;
+                currentRes++;
                 yield return null;
             }
             yield return new WaitForSeconds(delaySpawnTime);
