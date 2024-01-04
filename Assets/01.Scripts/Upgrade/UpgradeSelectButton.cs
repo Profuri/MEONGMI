@@ -24,6 +24,10 @@ public class UpgradeSelectButton : MonoBehaviour
     private void Start()
     {
         button.onClick.AddListener(OnClick);
+        button.onClick.AddListener(() =>
+        {
+            SoundManager.Instance.PlaySFX("Btn1");
+        });
 
         for (int i = 0; i < images.Length; i++)
         {

@@ -13,6 +13,7 @@ public enum SoundEnum
 public class SoundManager : MonoSingleton<SoundManager>
 {
     [SerializeField] private AudioClipSO _audioClipSO;
+    [SerializeField] private AudioClipSO _bgmClipSO;
     private AudioSource _audioSource;
 
     [SerializeField] private AudioMixer _masterMixer;
@@ -38,6 +39,19 @@ public class SoundManager : MonoSingleton<SoundManager>
         _audioSources[(int)SoundEnum.BGM].loop = true;
     }
     
+
+    public void PlaySFX(string clipName)
+    {
+        AudioClip clip = _audioClipSO.GetAudioClip(clipName);
+        Play(clip, SoundEnum.EFFECT);
+    }
+
+    public void PlayBGM(string clipName)
+    {
+        AudioClip clip = _bgmClipSO.GetAudioClip(clipName);
+        Play(clip, SoundEnum.BGM);
+    }
+
     public void Play(AudioClip audioClips, SoundEnum type = SoundEnum.EFFECT)
     {
         if (audioClips == null)

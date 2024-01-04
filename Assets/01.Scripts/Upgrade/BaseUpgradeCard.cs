@@ -50,6 +50,7 @@ public class BaseUpgradeCard : UpgradeCard
 
     public override void OnClick()
     {
+        SoundManager.Instance.PlaySFX("Btn1");
         if (UpgradeManager.Instance.BaseUpgrade(info.Type, curCost))
         {
             UpdateUI();
