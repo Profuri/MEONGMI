@@ -111,7 +111,7 @@ public class InGameHUD : UIComponent
         UpdatePlayerHp();
         UpdatePlayerResource(ResManager.Instance.PlayerResCnt);
         UpdateBaseResource(ResManager.Instance.BaseResCnt);
-        UpdateEnemyCnt(EnemySpawner.Instance.RemainEnemyCnt);
+        UpdateEnemyCnt(EnemySpawner.Instance.RemainMonsterCnt);
         UpdatePhaseTime((int)(PhaseManager.Instance.RestPhaseTime - PhaseManager.Instance.GetCurTime()));
         UpdateUnitText();
     }

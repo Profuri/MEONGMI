@@ -45,9 +45,8 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         int appearMaxOnceEnemyCnt = phaseInfoList[phase].appearOnceMaxEnemyCnt;
         int appearMinOnceEnemyCnt = phaseInfoList[phase].appearOnceMinEnemyCnt;
         int randomAppearEnemyCnt;
-
-        RemainEnemyCnt = appearMaxEnemyCnt;
-        OnEnemyDead?.Invoke(RemainEnemyCnt);
+        
+        OnEnemyDead?.Invoke(RemainMonsterCnt);
         
         _currentEnemyList.Clear();
 
@@ -106,7 +105,6 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
             
         PoolManager.Instance.Push(enemy);
         _currentDeadCnt++;
-        RemainEnemyCnt--;
-        OnEnemyDead?.Invoke(RemainEnemyCnt);
+        OnEnemyDead?.Invoke(RemainMonsterCnt);
     }
 }
