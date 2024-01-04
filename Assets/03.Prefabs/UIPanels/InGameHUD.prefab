@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016232827edc1c1438f3a09df8d93c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputReader: {fileID: 11400000, guid: 0b2ddb7c40369994293d5e03cee5f8a1, type: 2}
   _upperUI: {fileID: 6193718524809764575}
   _downUI: {fileID: 6610508859924940284}
   baseResourceText: {fileID: 2271138566588848047}
