@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class UIManager : MonoSingleton<UIManager>
 {
-    [SerializeField] private InputReader _inputReader;
-    
     [SerializeField] private Canvas _mainCanvas;
     [SerializeField] private List<UpgradeSelectButton> _upgradeSelectButton;
     [SerializeField] private PausePanel _pausePanel;
@@ -43,17 +41,12 @@ public class UIManager : MonoSingleton<UIManager>
         CurrentComponent = ui;
     }
 
-    private void Awake()
-    {
-        _inputReader.OnESCInputEvent += Pause;
-    }
-
     public override void Init()
     {
         ChangeUI("InGameHUD");
     }
 
-    private void Pause()
+    public void Pause()
     {
         if (!_pausePanel.gameObject.activeSelf)
         {

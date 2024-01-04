@@ -749,14 +749,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016232827edc1c1438f3a09df8d93c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputReader: {fileID: 11400000, guid: 0b2ddb7c40369994293d5e03cee5f8a1, type: 2}
+  _upperUI: {fileID: 0}
+  _downUI: {fileID: 0}
   baseResourceText: {fileID: 1656470280617665495}
   UnitText: {fileID: 3299554854975252844}
   timeText: {fileID: 3845320201061289919}
-  traitImage: {fileID: 6328106664965223327}
+  enemyText: {fileID: 0}
+  timePanel: {fileID: 0}
+  enemyPanel: {fileID: 0}
   playerResSlider: {fileID: 2366420560744806978}
   baseResSlider: {fileID: 4753918308472733051}
   unitSlider: {fileID: 7788581831664556438}
   playerHpSlider: {fileID: 2039455440906178139}
+  _traitImage: {fileID: 0}
   sliderEase: 9
 --- !u!1 &2677475977498550705
 GameObject:
@@ -5129,7 +5135,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 09bc4c8968db34013af82f219bace12e,
         type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5809616678788788862, guid: 3a43c20cfc3df8e4d93fcb84692f6654, type: 3}
+    - {fileID: 9071571822999309656, guid: 3a43c20cfc3df8e4d93fcb84692f6654, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -5140,18 +5148,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 526381216172818913}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6328106664965223327 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5809616678788788862, guid: 3a43c20cfc3df8e4d93fcb84692f6654,
-    type: 3}
-  m_PrefabInstance: {fileID: 526381216172818913}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0ba63dddcdaec4c9964f85b1943928, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &715277814835926410
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,9 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using InputControl;
 
 public class InGameHUD : UIComponent
 {
+    [SerializeField] private InputReader _inputReader;
+    
     [SerializeField] private RectTransform _upperUI;
     [SerializeField] private RectTransform _downUI;
     
@@ -33,6 +36,8 @@ public class InGameHUD : UIComponent
     {
         base.GenerateUI(parent);
 
+        _inputReader.OnESCInputEvent += UIManager.Instance.Pause;
+
         PhaseManager.Instance.OnPhaseChange += ChangeTextPanel;
         
         ResManager.Instance.OnChangeBaseRes += UpdateBaseResource;
@@ -46,6 +51,8 @@ public class InGameHUD : UIComponent
     public override void RemoveUI(Action callback)
     {
         base.RemoveUI(callback);
+        
+        _inputReader.OnESCInputEvent -= UIManager.Instance.Pause;
         
         PhaseManager.Instance.OnPhaseChange -= ChangeTextPanel;
         
