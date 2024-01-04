@@ -18,9 +18,10 @@ public class ResourceChecker : MonoBehaviour
         {
             foreach (Collider col in cols)
             {
-                if (col.TryGetComponent(out IGatherable gatherable))
+                if (col.TryGetComponent(out DropResource gatherable))
                 {
-                    ResManager.Instance.AddResource(gatherable.GetGatheringAmount());
+                    //ResManager.Instance.AddResource(gatherable.GetGatheringAmount());
+                    PoolManager.Instance.Push(gatherable);
                 }
             }
         }

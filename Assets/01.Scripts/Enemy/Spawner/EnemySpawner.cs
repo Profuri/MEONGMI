@@ -14,6 +14,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
 
     public int RemainMonsterCnt => _appearMaxEnemyCnt - _currentDeadCnt;
     private int _appearMaxEnemyCnt;
+    
     public override void Init()
     {
         _currentEnemyList = new List<BaseEnemy>();
@@ -35,6 +36,11 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         _currentDeadCnt = 0;
         
         var phaseInfoList = PhaseManager.Instance.PhaseInfoList;
+
+        if (phase >= phaseInfoList.Count)
+        {
+            phase = phaseInfoList.Count - 1;
+        }
         
         EnemyListSO enemyList = phaseInfoList[phase].enemyListSO;
         _appearMaxEnemyCnt = phaseInfoList[phase].appearMaxEnemyCnt;

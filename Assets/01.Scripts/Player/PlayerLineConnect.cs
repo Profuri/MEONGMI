@@ -40,7 +40,10 @@ public class PlayerLineConnect : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.Base.SetMiniMapLine(_lineLength);
+        if (GameManager.Instance.Base != null)
+        {
+            GameManager.Instance.Base.SetMiniMapLine(_lineLength);
+        }
     }
 
     public void Init()
