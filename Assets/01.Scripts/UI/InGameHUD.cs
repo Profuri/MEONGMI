@@ -90,10 +90,10 @@ public class InGameHUD : UIComponent
         traitImage.TraitType = trait;
     }
 
-    public void UpdateSlider(Slider slider, float minValue, float maxValue)
+    public void UpdateSlider(Slider slider, float minValue, float maxValue, float time = 1f)
     {
         float start = slider.value;
-        DOTween.To(() => start, value => slider.value = value, minValue / maxValue, 0.3f).SetEase(sliderEase);
+        DOTween.To(() => start, value => slider.value = value, minValue / maxValue, time).SetEase(sliderEase);
     }
 
 }
