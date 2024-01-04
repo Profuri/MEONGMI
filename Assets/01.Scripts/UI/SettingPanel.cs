@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using InputControl;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class SettingPanel : MonoBehaviour
 {
+    [SerializeField] private InputReader _inputReader;
+    
     [SerializeField] private Sprite[] _sfxIcons;
     [SerializeField] private Sprite[] _bgmIcons;
 
@@ -17,6 +22,27 @@ public class SettingPanel : MonoBehaviour
 
     [SerializeField] private float _maxVolume = 20f;
     [SerializeField] private float _minVolume = -80f;
+
+    private void Awake()
+    {
+        _inputReader.OnESCInputEvent += Remove;
+    }
+
+    public void Generate()
+    {
+        gameObject.SetActive(true);
+        ((RectTransform)transform).DOKill();
+        ((RectTransform)transform).DOScaleY(1, 0.3f).SetUpdate(true);
+    }
+
+    private void Remove()
+    {
+        ((RectTransform)transform).DOKill();
+        ((RectTransform)transform).DOScaleY(0, 0.3f).SetUpdate(true).OnComplete(() =>
+        {
+            gameObject.SetActive(false);
+        });
+    }
 
     public void OnSfxSliderValueChanged(float value)
     {
