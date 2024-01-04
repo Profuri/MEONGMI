@@ -20,7 +20,7 @@ public class ResourceChecker : MonoBehaviour
             {
                 if (col.TryGetComponent(out DropResource gatherable))
                 {
-                    //ResManager.Instance.AddResource(gatherable.GetGatheringAmount());
+                    ResManager.Instance.AddResource(gatherable.GetGatheringAmount());
                     PoolManager.Instance.Push(gatherable);
                 }
             }

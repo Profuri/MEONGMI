@@ -37,7 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Awake()
     {
-        if (GameManager.Instance != null)
+        if (Instance != this)
         {
             Destroy(this.gameObject);
         }
