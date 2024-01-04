@@ -8,6 +8,8 @@ using TMPro;
 public class UpgradeSelectButton : MonoBehaviour
 {
     [SerializeField] EUpgradeType Type;
+    [SerializeField] Ease inEase;
+    [SerializeField] Ease Outease;
     private Button button;
     private Image[] images;
     private TextMeshProUGUI[] texts;
@@ -26,33 +28,36 @@ public class UpgradeSelectButton : MonoBehaviour
 
     public void Show()
     {
-        
+        for (int i = 0; i < images.Length; i++) images[i].DOKill();
+        for (int i = 0; i < texts.Length; i++) texts[i].DOKill();
+
         Sequence seq = DOTween.Sequence();
         for(int i = 0; i < images.Length; i++)
         {
-            images[i].DOKill();
-            seq.Insert(0, images[i].DOFade(1, 1f));
+            seq.Insert(0, images[i].DOFade(1, 0.6f).SetEase(inEase));
         }
         for(int i = 0; i < texts.Length; i++)
         {
-            texts[i].DOKill();
-            seq.Insert(0, texts[i].DOFade(1, 1f));
+            seq.Insert(0, texts[i].DOFade(1, 0.6f).SetEase(inEase));
         }
-        seq.Play();
+        seq.OnComplete(() => button.interactable = true);
     }
 
     public void HIde()
     {
+        button.interactable = false;
+        for (int i = 0; i < images.Length; i++) images[i].DOKill();
+        for (int i = 0; i < texts.Length; i++) texts[i].DOKill();
+           
+
         Sequence seq = DOTween.Sequence();
         for (int i = 0; i < images.Length; i++)
         {
-            images[i].DOKill();
-            seq.Insert(0, images[i].DOFade(0, 1f));
+            seq.Insert(0, images[i].DOFade(0, 0.6f).SetEase(Outease));
         }
         for (int i = 0; i < texts.Length; i++)
         {
-            texts[i].DOKill();
-            seq.Insert(0, texts[i].DOFade(0, 1f));
+            seq.Insert(0, texts[i].DOFade(0, 0.6f).SetEase(Outease));
         }
     }
 
