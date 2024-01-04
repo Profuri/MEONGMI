@@ -24,6 +24,7 @@ public class CursorManager : MonoSingleton<CursorManager>
 	private float curScale;
 	private float curAngle;
 	private float baseAngle;
+	private Color curColor;
 
 	public Vector2 pixelsHotSpot;
 
@@ -51,49 +52,51 @@ public class CursorManager : MonoSingleton<CursorManager>
 
     private void SetCursorIcon(Texture2D texture)
     {
-		//Texture2D copyTexture = new Texture2D(texture.width, texture.height);
-		//copyTexture.SetPixels(texture.GetPixels());
-		//copyTexture.Apply();
+        Texture2D copyTexture = new Texture2D(texture.width, texture.height);
+        copyTexture.SetPixels(texture.GetPixels());
+        copyTexture.Apply();
 
-		//cursorTexture = copyTexture;
+        cursorTexture = copyTexture;
 
-		//SetTextureColor(baseColor);
+        //SetTextureColor(baseColor);
 
-		pixelsHotSpot = Vector2.zero;
+        pixelsHotSpot = Vector2.zero;
 		//Cursor.SetCursor(_baseCursorTexture,
   //          new Vector2(_baseCursorTexture.width / 2f, _baseCursorTexture.height / 2f),
   //          CursorMode.Auto);	
-		Cursor.SetCursor(_baseCursorTexture,
+		Cursor.SetCursor(cursorTexture,
             new Vector2(pixelsHotSpot.x, pixelsHotSpot.y),
             CursorMode.ForceSoftware);
 
-		baseScale = curScale = baseScale;
+		curScale = baseScale;
+		curColor = baseColor;
+		
 	}
 
 	private void SetTextureColor(Color color)
     {
-		//var fillColor = color;
-		//var fillColorArray = cursorTexture.GetPixels();
+        var fillColor = color;
+        var fillColorArray = _baseCursorTexture.GetPixels();
 
-		//for (var i = 0; i < fillColorArray.Length; ++i)
+        for (var i = 0; i < fillColorArray.Length; ++i)
+        {
+            fillColorArray[i] = fillColor;
+        }
+
+		//      for (int y = 0; y < cursorTexture.height; y++)
 		//{
-		//	fillColorArray[i] = fillColor;
+		//	for (int x = 0; x < cursorTexture.width; x++)
+		//	{
+		//		cursorTexture.SetPixel(x, y, color);
+		//	}
 		//}
-
-		for (int y = 0; y < cursorTexture.height; y++)
-		{
-			for (int x = 0; x < cursorTexture.width; x++)
-			{
-				cursorTexture.SetPixel(x, y, color);
-			}
-		}
-
+		cursorTexture.SetPixels(fillColorArray);
 		cursorTexture.Apply();
 	}
 
 	void OnGUI()
 	{
-		//updateTexture();
+		updateTexture();
 
   //      Matrix4x4 back = GUI.matrix;
   //      GUIUtility.RotateAroundPivot(curAngle, pos);
