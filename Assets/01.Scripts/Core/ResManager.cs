@@ -28,7 +28,7 @@ public class ResManager : MonoSingleton<ResManager>
         PlayerResourceCnt = Mathf.Clamp(PlayerResourceCnt, 0, _baseStatSO.MaxResCnt);
         
         Debug.Log($"CurrentResourceCnt: {PlayerResourceCnt}");
-        TestUIManager.Instance.IngameUI.UpdatePlayerResource();
+        //TestUIManager.Instance.IngameUI.UpdatePlayerResource();
         return curCnt <= _baseStatSO.MaxResCnt;
     }
 
@@ -41,7 +41,7 @@ public class ResManager : MonoSingleton<ResManager>
             {
                 OnResourceToZero?.Invoke();
             }
-            TestUIManager.Instance.IngameUI.UpdateBaseResource();
+            //TestUIManager.Instance.IngameUI.UpdateBaseResource();
             return true;
         }
         return false;
@@ -61,8 +61,8 @@ public class ResManager : MonoSingleton<ResManager>
             BaseResourceCnt += PlayerResourceCnt;
             PlayerResourceCnt = 0;
         }
-        TestUIManager.Instance.IngameUI.UpdateBaseResource();
-        TestUIManager.Instance.IngameUI.UpdatePlayerResource();
+        //TestUIManager.Instance.IngameUI.UpdateBaseResource();
+        //TestUIManager.Instance.IngameUI.UpdatePlayerResource();
     }
 
     public void Update()
