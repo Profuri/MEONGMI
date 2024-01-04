@@ -11,6 +11,7 @@ public class CameraManager : MonoSingleton<CameraManager>
 
     private CinemachineImpulseSource _impulseSource;
     private Camera _mainCam;
+    public Camera MainCam => _mainCam;
 
     private Coroutine _runningRoutine = null;
     

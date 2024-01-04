@@ -38,7 +38,11 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Awake()
     {
-        SceneManagement.Instance.OnRestartGameEvent += () => Destroy(this.gameObject);
+        SceneManagement.Instance.OnRestartGameEvent += () =>
+        {
+            Destroy(this.gameObject);
+        };
+        
         if (Instance != this)
         {
             Destroy(this.gameObject);
