@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -12,14 +13,23 @@ public class PhaseLogPanel : UIComponent
     [SerializeField] private RectTransform _upperTextPanel;
     [SerializeField] private RectTransform _downTextPanel;
 
+    [SerializeField] private float _logTime = 2f;
+
     private TextMeshProUGUI _mainText;
     private TextMeshProUGUI _upperText;
     private TextMeshProUGUI _downText;
 
+    private void Awake()
+    {
+        _mainText = _mainTextPanel.GetComponentInChildren<TextMeshProUGUI>();
+        _upperText = _upperTextPanel.GetComponentInChildren<TextMeshProUGUI>();
+        _downText = _downTextPanel.GetComponentInChildren<TextMeshProUGUI>();
+    }
+
     public override void GenerateUI(Transform parent)
     {
-        base.GenerateUI(parent);
         Initialize();
+        base.GenerateUI(parent);
     }
 
     protected override void GenerateTransition()
@@ -30,6 +40,12 @@ public class PhaseLogPanel : UIComponent
         _mainTextPanel.DOScaleY(1, 0.25f);
         _upperTextPanel.DOScaleY(1, 0.25f);
         _downTextPanel.DOScaleY(1, 0.25f);
+    }
+
+    private IEnumerator LogRoutine()
+    {
+        yield return new WaitForSeconds(_logTime);
+        UIManager.Instance.ChangeUI("InGameHUD");
     }
 
     protected override void RemoveTransition(Action callback)
@@ -44,6 +60,18 @@ public class PhaseLogPanel : UIComponent
 
     private void Initialize()
     {
-        
+        if (PhaseManager.Instance.PhaseType == PhaseType.Raid)
+        {
+            _mainText.text = $"PHASE  {PhaseManager.Instance.Phase}";
+            _upperText.text = "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING";
+            _downText.text = "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING";
+        }
+        else
+        {
+            _mainText.text = "REST TIME";
+            _upperText.text = "SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE";
+            _downText.text = "SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE SAFE";
+        }
+        GameManager.Instance.StartCoroutine(LogRoutine());
     }
 }

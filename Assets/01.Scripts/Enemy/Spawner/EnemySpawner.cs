@@ -13,7 +13,6 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
 
     private Coroutine _phaseCoroutine;
     
-    public event Action<int> OnPhaseEnd;
     public event Action<int> OnEnemyDead; 
 
     public override void Init()
@@ -90,8 +89,6 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
             yield return new WaitForSeconds(appearDelay);
         }
         
-        OnPhaseEnd?.Invoke(phase);
-
         PhaseManager.Instance.ChangePhase(PhaseType.Rest);
     }
 

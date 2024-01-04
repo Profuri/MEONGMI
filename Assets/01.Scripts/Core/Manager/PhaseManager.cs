@@ -56,6 +56,7 @@ public class PhaseManager : MonoSingleton<PhaseManager>
             
             if (_currentTime >= _restPhaseTime)
             {
+                _currentTime = 0f;
                 ChangePhase(PhaseType.Raid);
             }
         }
@@ -65,16 +66,13 @@ public class PhaseManager : MonoSingleton<PhaseManager>
     {
         _phase = type;
         OnPhaseChange?.Invoke(type);
-
-        _currentTime = 0f;
         if (type == PhaseType.Raid)
         {
             Phase++;
-            UIManager.Instance.ChangeUI("PhaseLogPanel", () =>
-            {
-                EnemySpawner.Instance.StartPhase(Phase);
-            });
+            EnemySpawner.Instance.StartPhase(Phase);
         }
+        
+        UIManager.Instance.ChangeUI("PhaseLogPanel", null);
     }
 }
 
