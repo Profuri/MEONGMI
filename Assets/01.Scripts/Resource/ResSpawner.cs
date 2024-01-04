@@ -28,8 +28,7 @@ public class ResSpawner
             for (int i = 0; i < spawnCnt; i++)
             {
                 //멀어진거에 따라 개수가 다르게 증가
-                Vector3 randomPos = Random.insideUnitSphere * GameManager.Instance.PlayerController.LineConnect.LineLength;
-                randomPos = (baseTrmPos + randomPos.normalized * 10) + randomPos;
+                Vector3 randomPos = Random.insideUnitSphere * GameManager.Instance.PlayerController.LineConnect.LineLength + baseTrmPos;
                 randomPos.y = 100f;
                 bool result = Physics.Raycast(randomPos,Vector3.down,out RaycastHit info,Mathf.Infinity,1 << LayerMask.NameToLayer("Ground"));
                 if (result)

@@ -5060,7 +5060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damagableMask:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 1024
   _checkRadius: 1
   _bulletSpeed: 12
   _bulletDestroyDelay: 3
