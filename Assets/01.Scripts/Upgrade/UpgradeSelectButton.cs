@@ -10,6 +10,10 @@ public class UpgradeSelectButton : MonoBehaviour
     [SerializeField] EUpgradeType Type;
     [SerializeField] Ease inEase;
     [SerializeField] Ease Outease;
+
+    [SerializeField] private bool _payThis;
+    [SerializeField] private int _payment;
+    
     private Button button;
     private Image[] images;
     private TextMeshProUGUI[] texts;
@@ -79,17 +83,37 @@ public class UpgradeSelectButton : MonoBehaviour
         switch (Type)
         {
             case EUpgradeType.BASE:
+                if (_payThis)
+                {
+                    if (!ResManager.Instance.UseResource(_payment))
+                    {
+                        return;
+                    }
+                }
                 UIManager.Instance.ChangeUI("BaseUpgradePanel");
-                // TestUIManager.Instance.BaseUpgradePanel();
                 break;
             case EUpgradeType.PLAYER:
+                if (_payThis)
+                {
+                    if (!ResManager.Instance.UseResource(_payment))
+                    {
+                        return;
+                    }          
+                }
                 UIManager.Instance.ChangeUI("PlayerLevelUpPanel");
-                // TestUIManager.Instance.UpgradePlayer();
                 break;
             case EUpgradeType.TRAIT:
+                if (_payThis)
+                {
+                    if (!ResManager.Instance.UseResource(_payment))
+                    {
+                        return;
+                    }          
+                }
                 UIManager.Instance.ChangeUI("PlayerFeatureChoicePanel");
-                // TestUIManager.Instance.UpgradeTrait();
                 break;
         }
+
+        
     }
 }
