@@ -30,19 +30,6 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    private Camera _mainCam;
-    public Camera MainCam
-    {
-        get
-        {
-            if (_mainCam == null) ;
-            {
-                _mainCam = Camera.main;
-            }
-            return _mainCam;
-        }
-    }
-
     [SerializeField] private PoolingListSO _poolingList;
     [SerializeField] 
     private float _maxDistance;
@@ -51,7 +38,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        Init();
+        Instance.Init();
     }
 
     private void Update()
@@ -63,6 +50,7 @@ public class GameManager : MonoSingleton<GameManager>
             resParticle.ChaseLine(FindObjectOfType<LineRenderer>());
         }
     }
+    
     public override void Init()
     {
 
@@ -76,6 +64,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         SceneManagement.Instance.OnGameStartEvent += () =>
         {
+            Core.Define.ResetCamera();
             CameraManager.Instance.Init();
             PhaseManager.Instance.Init();
             EnemySpawner.Instance.Init();

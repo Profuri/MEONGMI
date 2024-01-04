@@ -79,7 +79,7 @@ public class ResourceMono : Orb
 
         StartDissolveCor(1f,0f,3f,() => _isOn = true);
     }
-
+        
     private void Gather()
     {
         var particle = PoolManager.Instance.Pop("GatheringParticle") as PoolableParticle;
@@ -96,6 +96,10 @@ public class ResourceMono : Orb
     
     public void StartDissolveCor(float startValue, float endValue, float time = 0.5f, Action Callback = null)
     {
+        if (_dissolveCoroutine != null)
+        {
+            StopCoroutine(_dissolveCoroutine);
+        }
         _dissolveCoroutine = StartCoroutine(DissolveCoroutine(startValue, endValue, time, Callback));
     }
     

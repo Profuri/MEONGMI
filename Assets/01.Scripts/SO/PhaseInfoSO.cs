@@ -13,11 +13,18 @@ public class PhaseInfoSO : ScriptableObject
     public int appearOnceMaxEnemyCnt;
     public int appearDelay;
 
+    public int enemyResMinCnt;
+    public int enemyResMaxCnt;
+
     public int resMinSpawnCnt;
     public int resMaxSpawnCnt;
+    
     public float resMinSpawnTime;
     public float resMaxSpawnTime;
 
+    public float restPhaseTime;
+
     public int GetSpawnCnt() => Random.Range(resMinSpawnCnt, resMaxSpawnCnt + 1);
+    public int GetEnemyRandomResCnt() => Random.Range(enemyResMinCnt, enemyResMaxCnt);
     public float GetSpawnTime() => Random.Range(resMinSpawnTime, resMaxSpawnTime);
 }

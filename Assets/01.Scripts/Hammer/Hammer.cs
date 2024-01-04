@@ -26,28 +26,15 @@ public class Hammer : MonoBehaviour
     private readonly int _gatheringTriggerHash = Animator.StringToHash("Gathering");
     private readonly int _chargingToggleHash = Animator.StringToHash("Charging");
 
-    [SerializeField] private List<ColorType> _colorTypeList = new List<ColorType>();
-    //private readonly int _emission = Shader.PropertyToID("_EmissionColor");
+    [SerializeField] private ColorSO _colorSO;
 
-    public Color GetColorByBulletType(BulletType type)
-    {
-        foreach (ColorType ct in _colorTypeList)
-        {
-            if (ct.type == type)
-            {
-                return ct.color;
-            }
-        }
-        Debug.LogError("Can't Find Color");
-        return Color.blue;
-    }
+
 
     public void SetEmissionColor(BulletType type)
     {
         MaterialPropertyBlock matblock = new MaterialPropertyBlock();
         _meshRenderer.GetPropertyBlock(matblock);
-        //matblock.SetColor();
-        matblock.SetColor("_EmissionColor",GetColorByBulletType(type));
+        matblock.SetColor("_EmissionColor",_colorSO.GetColorByBulletType(type));
         _meshRenderer.SetPropertyBlock(matblock);
     }
     
@@ -67,6 +54,7 @@ public class Hammer : MonoBehaviour
         particle.SetPositionAndRotation(_shotPoint.position, Quaternion.LookRotation(dir));
         particle.Play();
 
+        
         var cnt = _playerController.PlayerStat.shotCnt.GetValue();
         _shotPoint.localEulerAngles = Vector3.zero;
         _shotPoint.localPosition = new Vector3(0, 3, 0);

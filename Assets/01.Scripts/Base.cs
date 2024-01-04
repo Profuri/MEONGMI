@@ -73,7 +73,8 @@ public class Base : Interactable, IDamageable
     {
         entity.StateMachine.ChangeState(PlayerStateType.Idle);
         ResManager.Instance.MoveResource();
-        TestUIManager.Instance.UpgradeRootPanelOn();
+        
+        //TestUIManager.Instance.UpgradeRootPanelOn();
         
         PlayerController playerController = entity as PlayerController;
         if (playerController != null)

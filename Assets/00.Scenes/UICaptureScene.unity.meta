@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/99.Assets/GabrielAguiarProductions/VFXGraph_Hits_2020.3_HDRP_v1.unitypackage.meta
+guid: 67f0158192b37be4cb815e8643209ce4
+========
 guid: cbda95bf4a643b249a01e9ff3f5c96d0
+>>>>>>>> main:Assets/00.Scenes/UICaptureScene.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

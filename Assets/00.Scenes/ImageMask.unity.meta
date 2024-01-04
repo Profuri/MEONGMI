@@ -8,7 +8,12 @@ DefaultImporter:
   assetBundleVariant: 
 ========
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Layer Lab/GUI Pro-CasualGame/PSD.meta
+guid: b791a130cb8b54343a724375b3ca9c22
+folderAsset: yes
+========
 guid: 271c349d04ed6414a95b28f09eba5d53
+>>>>>>>> main:Assets/00.Scenes/ImageMask.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

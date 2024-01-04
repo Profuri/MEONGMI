@@ -72,7 +72,7 @@ public class PlayerChaseState : PlayerState
     private Transform GetClickObject()
     {
         var mouseScreenPos = _player.InputReader.mouseScreenPos;
-        var ray = GameManager.Instance.MainCam.ScreenPointToRay(mouseScreenPos);
+        var ray = Core.Define.MainCam.ScreenPointToRay(mouseScreenPos);
         var isHit = Physics.Raycast(ray, out var hit, Mathf.Infinity, _player.GroundMask | _player.InteractableMask);
         return isHit ? hit.transform : null;
     }

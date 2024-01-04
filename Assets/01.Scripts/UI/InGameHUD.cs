@@ -128,7 +128,7 @@ public class InGameHUD : UIComponent
 
     private void UpdateEnemyCnt()
     {
-        var remainEnemy = EnemySpawner.Instance.RemainEnemyCnt;
+        var remainEnemy = EnemySpawner.Instance.RemainMonsterCnt;
         enemyText.text = $"{remainEnemy:0}";
     }
 
