@@ -26,6 +26,7 @@ public class PlayerGatherState : PlayerState
     {
         CameraManager.Instance.ImpulseCam(0.25f, 0.15f, new Vector3(0, -1, 0));
         _player.OnHammerDownEvent?.Invoke();
+        SoundManager.Instance.PlaySFX("hitMetal");
         _stateMachine.ChangeState(PlayerStateType.Idle);
     }
 }

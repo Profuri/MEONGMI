@@ -54,6 +54,11 @@ public class BaseUpgradeCard : UpgradeCard
         {
             UpdateUI();
             UpgradeManager.Instance.ApplyUpgradeBase(info.Type);
+            SoundManager.Instance.PlaySFX("Btn1");
+        }
+        else
+        {
+            SoundManager.Instance.PlaySFX("Btn1");
         }
     }
 

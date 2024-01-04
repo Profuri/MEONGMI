@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 163609094}
   - component: {fileID: 163609093}
   - component: {fileID: 163609096}
+  - component: {fileID: 163609097}
   m_Layer: 5
   m_Name: ExitBtn
   m_TagString: Untagged
@@ -372,6 +373,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _plusFontSize: 7
+--- !u!114 &163609097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163609091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8ef6bf9848dff489e0740124348ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &199842718
 GameObject:
   m_ObjectHideFlags: 0
@@ -5445,6 +5458,7 @@ GameObject:
   - component: {fileID: 753587505}
   - component: {fileID: 753587504}
   - component: {fileID: 753587503}
+  - component: {fileID: 753587507}
   m_Layer: 5
   m_Name: TutorialBtn
   m_TagString: Untagged
@@ -5579,6 +5593,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753587501}
   m_CullTransparentMesh: 1
+--- !u!114 &753587507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753587501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8ef6bf9848dff489e0740124348ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &903121900
 GameObject:
   m_ObjectHideFlags: 0
@@ -6660,7 +6686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 235666
+  GUIID: 33682
 --- !u!1 &1652524242
 GameObject:
   m_ObjectHideFlags: 0
@@ -7060,6 +7086,7 @@ GameObject:
   - component: {fileID: 2015820707}
   - component: {fileID: 2015820706}
   - component: {fileID: 2015820709}
+  - component: {fileID: 2015820710}
   m_Layer: 5
   m_Name: StartBtn
   m_TagString: Untagged
@@ -7194,6 +7221,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _plusFontSize: 7
+--- !u!114 &2015820710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015820704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8ef6bf9848dff489e0740124348ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2027991360
 GameObject:
   m_ObjectHideFlags: 0
@@ -7579,7 +7618,8 @@ MonoBehaviour:
   animTime: 0.25
   TargetAngle: 720
   TargetScale: 1
-  TargetColor: {r: 0, g: 0, b: 1, a: 1}
+  AttackTargetColor: {r: 1, g: 0, b: 0, a: 1}
+  InteractTargetColor: {r: 0, g: 0, b: 1, a: 1}
   pixelsHotSpot: {x: 0, y: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

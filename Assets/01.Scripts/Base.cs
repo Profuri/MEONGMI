@@ -89,6 +89,7 @@ public class Base : Interactable, IDamageable
         
         entity.StateMachine.ChangeState(PlayerStateType.Idle);
         ResManager.Instance.MoveResource();
+        SoundManager.Instance.PlaySFX("ItemToBase");
         
         PlayerController playerController = entity as PlayerController;
         if (playerController != null)

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using System;
 
 public class UpgradeSelectButton : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class UpgradeSelectButton : MonoBehaviour
     private Image[] images;
     private TextMeshProUGUI[] texts;
 
+    private float targetAlpha;
+
     private void Awake()
     {
         button = GetComponent<Button>();
@@ -27,11 +30,9 @@ public class UpgradeSelectButton : MonoBehaviour
 
     private void Start()
     {
+        targetAlpha = 1;
+
         button.onClick.AddListener(OnClick);
-        button.onClick.AddListener(() =>
-        {
-            SoundManager.Instance.PlaySFX("Btn1");
-        });
 
         for (int i = 0; i < images.Length; i++)
         {
@@ -41,6 +42,27 @@ public class UpgradeSelectButton : MonoBehaviour
         {
             texts[i].DOFade(0, 0);
         }
+    }
+
+    private void PlaySound()
+    {
+        switch (this.Type)
+        {
+            case EUpgradeType.BASE:
+                SoundManager.Instance.PlaySFX("Btn1");
+                break;
+            case EUpgradeType.PLAYER:
+                SoundManager.Instance.PlaySFX("UseMoney");
+                break;
+            case EUpgradeType.TRAIT:
+                SoundManager.Instance.PlaySFX("UseMoney");
+                break;
+        }
+    }
+
+    private void PlayFailSound()
+    {
+        SoundManager.Instance.PlaySFX("Btn2");
     }
 
     public void Show()
@@ -88,6 +110,7 @@ public class UpgradeSelectButton : MonoBehaviour
                 {
                     if (!ResManager.Instance.UseResource(_payment))
                     {
+                        PlayFailSound();
                         return;
                     }
                 }
@@ -98,6 +121,7 @@ public class UpgradeSelectButton : MonoBehaviour
                 {
                     if (!ResManager.Instance.UseResource(_payment))
                     {
+                        PlayFailSound();
                         return;
                     }          
                 }
@@ -108,6 +132,7 @@ public class UpgradeSelectButton : MonoBehaviour
                 {
                     if (!ResManager.Instance.UseResource(_payment))
                     {
+                        PlayFailSound();
                         return;
                     }          
                 }
@@ -115,6 +140,7 @@ public class UpgradeSelectButton : MonoBehaviour
                 break;
         }
 
-        
+        PlaySound();
+
     }
 }
