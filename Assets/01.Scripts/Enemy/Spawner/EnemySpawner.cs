@@ -51,13 +51,13 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         
         _currentEnemyList.Clear();
 
-        while (_appearMaxEnemyCnt > _currentDeadCnt)
+        while (_appearMaxEnemyCnt > _currentEnemyList.Count)
         {
             int randomAppearEnemyCnt = Random.Range(appearMinOnceEnemyCnt,appearMaxOnceEnemyCnt);
 
-            if (randomAppearEnemyCnt > _appearMaxEnemyCnt - _currentDeadCnt)
+            if (randomAppearEnemyCnt > _appearMaxEnemyCnt - _currentEnemyList.Count)
             {
-                randomAppearEnemyCnt = _appearMaxEnemyCnt - _currentDeadCnt;
+                randomAppearEnemyCnt = _appearMaxEnemyCnt - _currentEnemyList.Count;
             }
             
             Vector3 randomPos;

@@ -46,7 +46,7 @@ public class ResSpawner
                     Debug.LogError("Can't check ground !!!");
                 }
                 
-                var resCnt = (int)(Vector3.Distance(randomPos,baseTrmPos) / 10f * 200f);
+                var resCnt = (int)(Vector3.Distance(randomPos,baseTrmPos) / 10f * 150f);
                 //제곱을 해
                 ResourceMono resource = PoolManager.Instance.Pop("ResourceMono") as ResourceMono;
                 resource.SetScale(resCnt / 200f);
