@@ -20,7 +20,7 @@ MonoBehaviour:
   enemyResMinCnt: 3500
   enemyResMaxCnt: 4500
   resMinSpawnCnt: 4
-  resMaxSpawnCnt: 7
-  resMinSpawnTime: 20
-  resMaxSpawnTime: 30
+  resMaxSpawnCnt: 5
+  resMinSpawnTime: 10
+  resMaxSpawnTime: 20
   restPhaseTime: 60

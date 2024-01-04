@@ -12,7 +12,7 @@ public class Base : Interactable, IDamageable
         get { return curUnitCount; }
         private set { Mathf.Clamp(curUnitCount, 0, StatManager.Instance.UnitMaxValue); }
     }
-
+        
     public Collider Collider { get; private set; }
     private Arc _arc;
 

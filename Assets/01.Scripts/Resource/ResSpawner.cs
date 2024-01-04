@@ -28,7 +28,7 @@ public class ResSpawner
             for (int i = 0; i < spawnCnt; i++)
             {
                 //멀어진거에 따라 개수가 다르게 증가
-                Vector3 randomPos = Random.insideUnitSphere * GameManager.Instance.MaxDistance + baseTrmPos;
+                Vector3 randomPos = Random.insideUnitSphere * GameManager.Instance.PlayerController.LineConnect.LineLength + baseTrmPos;
                 randomPos.y = 100f;
                 bool result = Physics.Raycast(randomPos,Vector3.down,out RaycastHit info,Mathf.Infinity,1 << LayerMask.NameToLayer("Ground"));
                 if (result)
@@ -40,10 +40,10 @@ public class ResSpawner
                     Debug.LogError("Can't check ground !!!");
                 }
                 
-                var resCnt = (int)(Vector3.Distance(randomPos,baseTrmPos) / 10f * 100f);
+                var resCnt = (int)(Vector3.Distance(randomPos,baseTrmPos) / 10f * 200f);
                 //제곱을 해
                 ResourceMono resource = PoolManager.Instance.Pop("ResourceMono") as ResourceMono;
-                resource.SetScale(resCnt / 100f);
+                resource.SetScale(resCnt / 200f);
                 resource.SetResourceCnt(resCnt);
                 resource.transform.position = randomPos;
                 yield return null;

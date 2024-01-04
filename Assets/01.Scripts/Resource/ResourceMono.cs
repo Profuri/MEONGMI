@@ -124,7 +124,7 @@ public class ResourceMono : Orb
     public void SetResourceCnt(int cnt)
     {
         _curResCnt = cnt;
-        _life = (int)(cnt / 100f);
+        _life = (int)(cnt / 200f);
     }
 
     public void SetScale(float scale)

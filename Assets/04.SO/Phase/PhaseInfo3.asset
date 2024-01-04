@@ -19,8 +19,8 @@ MonoBehaviour:
   appearDelay: 15
   enemyResMinCnt: 300
   enemyResMaxCnt: 400
-  resMinSpawnCnt: 3
+  resMinSpawnCnt: 4
   resMaxSpawnCnt: 5
-  resMinSpawnTime: 20
-  resMaxSpawnTime: 30
+  resMinSpawnTime: 10
+  resMaxSpawnTime: 20
   restPhaseTime: 50

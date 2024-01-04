@@ -140,7 +140,7 @@ public class PlayerLineConnect : MonoBehaviour
         _lastConnectPos = _playerConnectHole.position;
     }
 
-    public void SetLenght(float lenght)
+    public void SetLength(float lenght)
     {
         _lineLength = lenght;
         GameManager.Instance.Base.SetMiniMapLine(_lineLength);
