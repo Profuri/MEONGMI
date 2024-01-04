@@ -29,7 +29,19 @@ public class GameManager : MonoSingleton<GameManager>
             return _base;
         }
     }
-    public Camera MainCam { get; private set; }
+
+    private Camera _mainCam;
+    public Camera MainCam
+    {
+        get
+        {
+            if (_mainCam == null) ;
+            {
+                _mainCam = Camera.main;
+            }
+            return _mainCam;
+        }
+    }
 
     [SerializeField] private PoolingListSO _poolingList;
     [SerializeField] 
@@ -38,12 +50,21 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Awake()
     {
-        GameManager.Instance.Init();
+        DontDestroyOnLoad(this.gameObject);
+        Init();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            ResourceParticle resParticle = PoolManager.Instance.Pop("ResParticle") as ResourceParticle;
+            resParticle.Init();
+            resParticle.ChaseLine(FindObjectOfType<LineRenderer>());
+        }
+    }
     public override void Init()
     {
-        MainCam = Camera.main;
 
         SceneManagement.Instance.Init();
         PoolManager.Instance = new PoolManager(transform);
@@ -52,15 +73,17 @@ public class GameManager : MonoSingleton<GameManager>
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
         
-        CameraManager.Instance.Init();
-        
-        PhaseManager.Instance.Init();
-        EnemySpawner.Instance.Init();
 
-        PhaseManager.Instance.Init();
+        SceneManagement.Instance.OnGameStartEvent += () =>
+        {
+            CameraManager.Instance.Init();
+            PhaseManager.Instance.Init();
+            EnemySpawner.Instance.Init();
+
+            PhaseManager.Instance.Init();
         
-        
-        ResManager.Instance.Init();
+            ResManager.Instance.Init();
+        };
         //UIManager.Instance.Init();
     }
 }

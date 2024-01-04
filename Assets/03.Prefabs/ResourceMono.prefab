@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactRadius: 2
+  IsInteractive: 0
+  Invalid: 0
 --- !u!65 &3322329861653613251
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -140,7 +142,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 2871eea633ff0784594ef0ce80616fbc, type: 2}
+      objectReference: {fileID: 2100000, guid: 2ab6df6801e669340a594afe1868d5b5, type: 2}
     - target: {fileID: 919132149155446097, guid: 1aa6aceaedfb04f4da6f443633f18585,
         type: 3}
       propertyPath: m_Name

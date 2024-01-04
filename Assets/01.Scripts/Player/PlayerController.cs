@@ -1,10 +1,13 @@
 using System;
+using System.Collections;
 using InputControl;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : Entity, IDetectable
 {
     [Range(0.1f, 1f)][SerializeField] private float _rotateSpeed;
+    [SerializeField] private float _reviveTime = 2f;
     
     [SerializeField] private PlayerStat _playerStat;
     public PlayerStat PlayerStat => _playerStat;
@@ -19,7 +22,16 @@ public class PlayerController : Entity, IDetectable
     public LayerMask InteractableMask => _interactableMask;
 
     [SerializeField] private BulletType _bulletType;
-    public BulletType BulletType => _bulletType;
+    public event Action<BulletType> OnBulletTypeChanged;
+    public BulletType BulletType
+    {
+        get => _bulletType;
+        set
+        {
+            _bulletType = value;
+            OnBulletTypeChanged?.Invoke(_bulletType);
+        }
+    }
 
     private PlayerLineConnect _lineConnect;
     private ParticleSystem _walkParticle;
@@ -43,11 +55,24 @@ public class PlayerController : Entity, IDetectable
     
     private Transform _visualTrm;
 
+    private Renderer[] _renderers;
+
+    [SerializeField] private Vector3 _originPos;
+    
+    private static readonly int DissolveHash = Shader.PropertyToID("_Dissolve");
+
     public override void Awake()
     {
-        base.Awake();
+        _stateMachine = new StateMachine();
+        RegisterStates();
+        _maxHP = _playerStat.health.GetValue();
+        CurrentHP = _maxHP;
+        
         _lineConnect = GetComponent<PlayerLineConnect>();
         _visualTrm = transform.Find("Visual");
+
+        _renderers = _visualTrm.GetComponentsInChildren<Renderer>(); 
+        
         _walkParticle = _visualTrm.Find("WalkParticle").GetComponent<ParticleSystem>();
         PlayerHammer = _visualTrm.GetComponentInChildren<Hammer>();
         PlayerHammer.SetPlayerController(this);
@@ -59,6 +84,12 @@ public class PlayerController : Entity, IDetectable
     public void SetBullet(BulletType type)
     {
         _bulletType = type;
+    }
+
+    public override void Start()
+    {
+        _lineConnect.Init();
+        base.Start();
     }
 
     public void SetVelocity(Vector3 dir)
@@ -126,7 +157,58 @@ public class PlayerController : Entity, IDetectable
 
     private void OnDeadHandle()
     {
+        var particle = PoolManager.Instance.Pop("PlayerExplosionParticle") as PoolableParticle;
+        particle.SetPositionAndRotation(transform.position);
+        particle.Play();
+        
+        _walkParticle.Stop();
+        _stateMachine.CurrentState.ExitState();
+        
         // ResManager.Instance.
+        
+        CameraManager.Instance.ImpulseCam(3f, 0.1f, Random.insideUnitCircle.normalized);
+        
+        StartCoroutine(PlayerDissolveRoutine(false, 0.5f));
+        StartCoroutine(ReviveRoutine());
+    }
+
+    private IEnumerator ReviveRoutine()
+    {
+        yield return new WaitForSeconds(_reviveTime);
+        transform.position = _originPos;
+        yield return StartCoroutine(PlayerDissolveRoutine(true, 0.5f));
+        CurrentHP = _maxHP;
+        _lineConnect.Init();
+        SetInitState();
+    }
+
+    private IEnumerator PlayerDissolveRoutine(bool generate, float time)
+    {
+        var cur = 0f;
+        while (cur < time)
+        {
+            cur += Time.deltaTime;
+            var percent = cur / time;
+            percent = generate ? 1f - percent : percent;
+            
+            foreach (var renderer in _renderers)
+            {
+                var matPropBlocks = new MaterialPropertyBlock();
+                renderer.GetPropertyBlock(matPropBlocks);
+                matPropBlocks.SetFloat(DissolveHash, percent);
+                renderer.SetPropertyBlock(matPropBlocks);
+            }
+
+            yield return null;
+        }
+        
+        foreach (var renderer in _renderers)
+        {
+            var matPropBlocks = new MaterialPropertyBlock();
+            renderer.GetPropertyBlock(matPropBlocks);
+            matPropBlocks.SetFloat(DissolveHash, generate ? 0f : 1f);
+            renderer.SetPropertyBlock(matPropBlocks);
+        }
     }
 
     public override void Init()

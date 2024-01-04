@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/00.Scenes/Start.unity.meta
+guid: b84f77f5f9e6fbc45bbed484d440b1cf
+========
 guid: ca5f7a7201a678d4b898b5a42037201c
 folderAsset: yes
+>>>>>>>> main:Assets/00.Scenes/UnitTest.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

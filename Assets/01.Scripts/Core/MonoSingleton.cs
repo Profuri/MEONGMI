@@ -20,5 +20,6 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
+
     public abstract void Init();
 }
