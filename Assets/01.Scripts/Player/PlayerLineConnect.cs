@@ -17,6 +17,9 @@ public class PlayerLineConnect : MonoBehaviour
     [SerializeField] private float _lineConnectToggleTime;
     [SerializeField] private float _lineControlCancelTime;
 
+    [SerializeField] private float _detachableTime;
+    private float _lastDetachTime;
+
     private Vector3 _lastConnectPos;
     
     private float _toggleTimer;
@@ -34,11 +37,10 @@ public class PlayerLineConnect : MonoBehaviour
         _playerController.InputReader.OnLineConnectEvent += ConnectHandler;
     }
 
-    private void Start()
+    public void Init()
     {
         _line.SetStartHole(_baseConnectHole);
         _line.SetEndHole(_playerConnectHolder);
-        
         ConnectLine();
     }
 
@@ -72,6 +74,16 @@ public class PlayerLineConnect : MonoBehaviour
         {
             _lastConnectPos = _playerConnectHole.position;
             _line.LineUpdate();
+        }
+        else
+        {
+            if (!_playerController.Dead)
+            {
+                if (Time.time > _lastDetachTime + _detachableTime)
+                {
+                    _playerController.Damaged(1000f);
+                }
+            }
         }
         
         if (_toggleTimer >= 0f)
@@ -115,6 +127,7 @@ public class PlayerLineConnect : MonoBehaviour
     private void DetachLine()
     {
         _connect = false;
+        _lastDetachTime = Time.time;
         _lastConnectPos = _playerConnectHole.position;
     }
 

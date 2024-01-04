@@ -5379,8 +5379,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d8febcaed94296a4ea9311f17469d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityStatSO: {fileID: 11400000, guid: ddf6151547225d040be1aa1c5940de5f, type: 2}
+  _entityStatSO: {fileID: 0}
   _rotateSpeed: 0.3
+  _reviveTime: 2
   _playerStat: {fileID: 11400000, guid: a14962090fa7444fda860ff451706e81, type: 2}
   _inputReader: {fileID: 11400000, guid: 0b2ddb7c40369994293d5e03cee5f8a1, type: 2}
   _groundMask:
@@ -5407,9 +5408,10 @@ MonoBehaviour:
   _playerConnectHole: {fileID: 2349550073440298470}
   _baseConnectHole: {fileID: 0}
   _line: {fileID: 0}
-  _lineLength: 0
-  _lineConnectToggleTime: 0
-  _lineControlCancelTime: 0
+  _lineLength: 27
+  _lineConnectToggleTime: 0.5
+  _lineControlCancelTime: 0.5
+  _detachableTime: 2
 --- !u!1 &6854618610339611338
 GameObject:
   m_ObjectHideFlags: 0
