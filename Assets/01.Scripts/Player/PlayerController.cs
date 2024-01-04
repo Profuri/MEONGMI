@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using InputControl;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : Entity, IDetectable
 {
@@ -46,12 +47,13 @@ public class PlayerController : Entity, IDetectable
     private Transform _visualTrm;
 
     private Renderer[] _renderers;
+
+    [SerializeField] private Vector3 _originPos;
     
     private static readonly int DissolveHash = Shader.PropertyToID("_Dissolve");
 
     public override void Awake()
     {
-        
         _stateMachine = new StateMachine();
         RegisterStates();
         _maxHP = _playerStat.health.GetValue();
@@ -135,8 +137,17 @@ public class PlayerController : Entity, IDetectable
 
     private void OnDeadHandle()
     {
-        // particle
+        var particle = PoolManager.Instance.Pop("PlayerExplosionParticle") as PoolableParticle;
+        particle.SetPositionAndRotation(transform.position);
+        particle.Play();
+        
+        _walkParticle.Stop();
+        _stateMachine.CurrentState.ExitState();
+        
         // ResManager.Instance.
+        
+        CameraManager.Instance.ImpulseCam(3f, 0.1f, Random.insideUnitCircle.normalized);
+        
         StartCoroutine(PlayerDissolveRoutine(false, 0.5f));
         StartCoroutine(ReviveRoutine());
     }
@@ -144,6 +155,7 @@ public class PlayerController : Entity, IDetectable
     private IEnumerator ReviveRoutine()
     {
         yield return new WaitForSeconds(_reviveTime);
+        transform.position = _originPos;
         yield return StartCoroutine(PlayerDissolveRoutine(true, 0.5f));
         CurrentHP = _maxHP;
         _lineConnect.Init();
@@ -157,7 +169,6 @@ public class PlayerController : Entity, IDetectable
         {
             cur += Time.deltaTime;
             var percent = cur / time;
-            Debug.LogWarning(percent);
             percent = generate ? 1f - percent : percent;
             
             foreach (var renderer in _renderers)
