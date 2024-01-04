@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Audio")]
-public class AudioClipSO : MonoBehaviour
+public class AudioClipSO : ScriptableObject
 {
     public List<AudioClip> clipList = new List<AudioClip>();
 
