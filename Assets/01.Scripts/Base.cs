@@ -71,6 +71,11 @@ public class Base : Interactable, IDamageable
 
     public override void OnInteract(Entity entity)
     {
+        if (ResManager.Instance.PlayerResCnt <= 0)
+        {
+            return;
+        }
+        
         entity.StateMachine.ChangeState(PlayerStateType.Idle);
         ResManager.Instance.MoveResource();
         // TestUIManager.Instance.UpgradeRootPanelOn();
