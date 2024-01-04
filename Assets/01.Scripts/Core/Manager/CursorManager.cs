@@ -45,7 +45,7 @@ public class CursorManager : MonoSingleton<CursorManager>
 
     public override void Init()
     {
-		Cursor.visible = false;
+		//Cursor.visible = false;
         SetCursorIcon(_baseCursorTexture);
 	}
 
@@ -59,9 +59,13 @@ public class CursorManager : MonoSingleton<CursorManager>
 
 		//SetTextureColor(baseColor);
 
-		Cursor.SetCursor(texture,
-            new Vector2(texture.width / 2f, texture.height / 2f),
-            CursorMode.Auto);
+		pixelsHotSpot = Vector2.zero;
+		//Cursor.SetCursor(_baseCursorTexture,
+  //          new Vector2(_baseCursorTexture.width / 2f, _baseCursorTexture.height / 2f),
+  //          CursorMode.Auto);	
+		Cursor.SetCursor(_baseCursorTexture,
+            new Vector2(pixelsHotSpot.x, pixelsHotSpot.y),
+            CursorMode.ForceSoftware);
 
 		baseScale = curScale = baseScale;
 	}
