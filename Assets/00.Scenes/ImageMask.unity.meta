@@ -1,3 +1,12 @@
+<<<<<<<< HEAD:Assets/Tiny Giant Studio/Modular 3D Text/Documentation.PDF.meta
+fileFormatVersion: 2
+guid: fa75db8ca64bd4ff6a4295f4f2c5dd4b
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+========
 fileFormatVersion: 2
 guid: 271c349d04ed6414a95b28f09eba5d53
 DefaultImporter:
@@ -5,3 +14,4 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+>>>>>>>> main:Assets/00.Scenes/ImageMask.unity.meta

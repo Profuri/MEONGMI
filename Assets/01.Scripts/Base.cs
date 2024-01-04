@@ -26,11 +26,6 @@ public class Base : Interactable, IDamageable
 
         PhaseManager.Instance.OnPhaseChange += HandlePhaseChange;
     }
-
-    private void OnDestroy()
-    {
-        PhaseManager.Instance.OnPhaseChange -= HandlePhaseChange;
-    }
     
     public void Damaged(float damage)
     {

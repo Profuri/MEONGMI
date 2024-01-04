@@ -13,10 +13,6 @@ public class UnitManager : MonoSingleton<UnitManager>
     {
         UnitList = new List<BaseUnit>();
         UnitCountDictionary = new Dictionary<UnitType, int>();
-
-        //Delete this
-        UnitCountDictionary.Add(UnitType.Attacker, 1);
-        UnitCountDictionary.Add(UnitType.Miner, 1);
     }
 
     public BaseUnit CreateUnit(UnitType type, Vector3 position)
