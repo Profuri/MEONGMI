@@ -7,6 +7,7 @@ public class Line : PoolableMono
     [SerializeField] private float _interval;
 
     private LineRenderer _lineRenderer;
+    public LineRenderer LineRenderer => _lineRenderer;
 
     private Transform _startHole;
     private Transform _endHole;

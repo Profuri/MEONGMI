@@ -10,6 +10,7 @@ public class PlayerLineConnect : MonoBehaviour
     [SerializeField] private Transform _baseConnectHole;
 
     [SerializeField] private Line _line;
+    public Line Line => _line;
 
     [SerializeField] private float _lineLength;
     public float LineLength => _lineLength;
