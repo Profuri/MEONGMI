@@ -9,7 +9,7 @@ public class TestUIManager : MonoSingleton<TestUIManager>
 {
     [Header("Root")]
     [SerializeField] InGameHUD _IngameHUD;
-    public InGameHUD IngameHUD => _IngameHUD;   
+    public InGameHUD IngameUI => _IngameHUD;   
 
 
     [SerializeField] GameObject UpgradeUIPanel;
@@ -40,18 +40,18 @@ public class TestUIManager : MonoSingleton<TestUIManager>
     {
     }
 
-    //public void UpgradeBase()
-    //{
-    //    UpgradeManager.Instance.Upgrade(EUpgradeType.BASE);
-    //}
-    //public void UpgradePlayer()
-    //{
-    //    UpgradeManager.Instance.Upgrade(EUpgradeType.PLAYER);
-    //}
-    //public void UpgradeTrait()
-    //{
-    //    UpgradeManager.Instance.Upgrade(EUpgradeType.TRAIT);
-    //}
+    public void UpgradeBase()
+    {
+        UpgradeManager.Instance.Upgrade(EUpgradeType.BASE);
+    }
+    public void UpgradePlayer()
+    {
+        UpgradeManager.Instance.Upgrade(EUpgradeType.PLAYER);
+    }
+    public void UpgradeTrait()
+    {
+        UpgradeManager.Instance.Upgrade(EUpgradeType.TRAIT);
+    }
 
     public void SetPlayerCostTxt(int cost) => _playerCostTxt.text = cost.ToString();
     public void SetTraitCostTxt(int cost) => _traitCostTxt.text = cost.ToString();

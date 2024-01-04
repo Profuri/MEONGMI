@@ -34,6 +34,7 @@ public abstract class BaseUnit : Entity
         _lineConnect = GetComponent<UnitLineConnect>();
         transform.position = Vector3.zero;
         _navMesh.enabled = true;
+        _navMesh.speed = UnitStatSO.moveSpeed;
     }
 
     public override void Init()

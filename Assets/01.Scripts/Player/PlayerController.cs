@@ -65,6 +65,11 @@ public class PlayerController : Entity, IDetectable
         OnDead += OnDeadHandle;
     }
 
+    public void SetBullet(BulletType type)
+    {
+        _bulletType = type;
+    }
+
     public void SetVelocity(Vector3 dir)
     {
         if (!_walkParticle.isPlaying)
@@ -111,7 +116,13 @@ public class PlayerController : Entity, IDetectable
     {
         _stateMachine.Initialize(this, PlayerStateType.Idle);
     }
-    
+
+    public override void Damaged(float damage)
+    {
+        base.Damaged(damage);
+        TestUIManager.Instance.IngameUI.UpdatePlayerHP();
+    }
+
     public void SetAnimationSpeed(float speed)
     {
         AnimatorCompo.speed = speed;

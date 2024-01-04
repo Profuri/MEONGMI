@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MinerIdleState : MinerState
 {
@@ -29,6 +30,12 @@ public class MinerIdleState : MinerState
             if(FindResource(out ResourceMono res) && !res.IsInteractive && !res.Invalid)
             {
                 _minerUnit.SetTarget(res);
+                _minerUnit.NavMesh.SetDestination(res.transform.position);
+                if (_minerUnit.NavMesh.path.status == NavMeshPathStatus.PathInvalid)
+                {
+                    _minerUnit.TargetRes.Invalid = true;
+                    _minerUnit.SetTarget(null);
+                }
                 _stateMachine.ChangeState(MinerUnitStateType.Move);
                 return;
             }

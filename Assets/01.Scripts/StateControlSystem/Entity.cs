@@ -14,6 +14,7 @@ public abstract class Entity : PoolableMono, IDamageable
     protected readonly int _deadHash = Animator.StringToHash("DEAD");
 
     public float CurrentHP { get; protected set; }
+    public float GetMaxHP() => _entityStatSO.maxHp;
     public bool Dead => CurrentHP <= 0;
     public event Action OnDead;
     

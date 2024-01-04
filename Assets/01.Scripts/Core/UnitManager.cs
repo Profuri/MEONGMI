@@ -13,10 +13,11 @@ public class UnitManager : MonoSingleton<UnitManager>
         _unitList = new List<BaseUnit>();
     }
 
-    public BaseUnit CreateUnit(UnitType type)
+    public BaseUnit CreateUnit(UnitType type, Vector3 position)
     {
         BaseUnit unit = PoolManager.Instance.Pop($"{type.ToString()}Unit") as BaseUnit;
-        unit.transform.position = transform.position;
+        unit.transform.position = position;
+        unit.Init();
         return unit;
     }
 }

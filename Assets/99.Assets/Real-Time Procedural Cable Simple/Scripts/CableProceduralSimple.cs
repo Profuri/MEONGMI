@@ -115,5 +115,9 @@ public class CableProceduralSimple : MonoBehaviour
 			line.SetPosition(i, currentPointsPosition);
 			i++;
 		}
-	}
+    }
+    public void SetEndPoint(Transform transform)
+    {
+        endPointTransform = transform;
+    }
 }

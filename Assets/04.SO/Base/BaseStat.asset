@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183a5b72b9a4c664181ecc0fdadd2a17, type: 3}
   m_Name: BaseStat
   m_EditorClassIdentifier: 
-  MaxResCnt: 10
+  MaxResCnt: 1000
+  PlayerMaxResCnt: 5000
   UnitMaxCnt: 10
   MovementRange: 3

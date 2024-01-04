@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7f6552126bf8c43ac0a2079e1c3fb3, type: 3}
   m_Name: New Attacker Stat SO
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 5
   maxHp: 50
   holdRange: 20
-  attackDuration: 1.5
-  damage: 10000
-  findArea: 10
   targetLayer:
     serializedVersion: 2
     m_Bits: 1024
+  attackDuration: 1.5
+  damage: 10000
+  findArea: 10
   attackRange: 2

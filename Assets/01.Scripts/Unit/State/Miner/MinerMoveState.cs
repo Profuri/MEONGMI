@@ -30,6 +30,12 @@ public class MinerMoveState : MinerState
             if(FindResource(out ResourceMono res) && !res.IsInteractive && !res.Invalid)
             {
                 _minerUnit.SetTarget(res);
+                _minerUnit.NavMesh.SetDestination(res.transform.position);
+                if (_minerUnit.NavMesh.path.status == NavMeshPathStatus.PathInvalid)
+                {
+                    _minerUnit.TargetRes.Invalid = true;
+                    _minerUnit.SetTarget(null);
+                }
                 return;
             }
 
@@ -53,12 +59,6 @@ public class MinerMoveState : MinerState
             {
                 _stateMachine.ChangeState(MinerUnitStateType.Gather);
                 return;
-            }
-
-            _minerUnit.NavMesh.SetDestination(_minerUnit.TargetRes.transform.position);
-            if(_minerUnit.NavMesh.path.status == NavMeshPathStatus.PathInvalid)
-            {
-                _minerUnit.TargetRes.Invalid = true;
             }
         }
     }

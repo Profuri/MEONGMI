@@ -25,20 +25,28 @@ public class BaseTestMono : MonoBehaviour
 
     public void CreateUnit(UnitType type)
     {
-        BaseUnit unit = UnitManager.Instance.CreateUnit(type);
+        Vector3 playerPos = transform.position - GameManager.Instance.PlayerTrm.position;
+        playerPos.y = 0f;
+        BaseUnit unit = UnitManager.Instance.CreateUnit(type, playerPos);
         unit.transform.SetParent(transform);
-        Vector3 playerPos = GameManager.Instance.PlayerTrm.position;
-        unit.SetPosition(new Vector3(-playerPos.x, playerPos.y, -playerPos.z));
-        unit.HoldPosition = new Vector3(-playerPos.x, playerPos.y, -playerPos.z);
-        unit.LineConnect.SetLine(CreateLine());
+        unit.SetPosition(playerPos + transform.position);
+        unit.HoldPosition = playerPos + transform.position;
+        unit.LineConnect.SetLine(CreateLine(unit));
         unit.LineConnect.SetBaseConnectHole(transform.Find("Arc"));
         unit.LineConnect.SetLenght(unit.UnitStatSO.holdRange);
         unit.LineConnect.Connect();
     }
 
-    private Line CreateLine()
+    private Line CreateLine(BaseUnit unit)
     {
         Line line = PoolManager.Instance.Pop("Line") as Line;
+        line.transform.SetParent(transform.Find("Arc"));
+        line.transform.localPosition = Vector3.zero;
+
+        LaserHolder holder = PoolManager.Instance.Pop("LaserHolder") as LaserHolder;
+        holder.transform.SetParent(null);
+        line.GetComponent<CableProceduralSimple>().SetEndPoint(holder.transform);
+        unit.LineConnect.SetConnectHolder(holder);
         return line;
     }
 

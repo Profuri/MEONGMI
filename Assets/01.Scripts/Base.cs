@@ -5,6 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Base : Interactable, IDamageable
 {
+    private int curUnitCount;
+    public int CurUnitCount
+    {
+        get { return curUnitCount; }
+        private set { Mathf.Clamp(curUnitCount, 0, StatManager.Instance.UnitMaxValue); }
+    }
+
     public Collider Collider { get; private set; }
     private Arc _arc;
     
@@ -13,6 +20,7 @@ public class Base : Interactable, IDamageable
         Collider = GetComponent<Collider>();
         _arc = transform.Find("Arc").GetComponent<Arc>();
         ResManager.Instance.OnResourceToZero += () => Destroy(this.gameObject);
+        curUnitCount = 0;
     }
     
     public void Damaged(float damage)
@@ -30,6 +38,10 @@ public class Base : Interactable, IDamageable
 
     public override void OnInteract(Entity entity)
     {
+    }
         
+    public void AddUnit()
+    {
+        curUnitCount++;
     }
 }

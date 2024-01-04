@@ -75,11 +75,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitRoot: {fileID: 3436320731510947323}
-  _unitConnectHolder: {fileID: 2287939437400877788}
+  _unitConnectHolder: {fileID: 0}
   _unitConnectHole: {fileID: 2287939437400877788}
   _baseConnectHole: {fileID: 0}
   _line: {fileID: 0}
-  _lineLength: 0
+  _lineLength: 25
 --- !u!114 &387357907624620096
 MonoBehaviour:
   m_ObjectHideFlags: 0

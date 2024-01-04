@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f0c2fd882729d4583d53348a0a8345, type: 3}
   m_Name: New Miner Stat SO
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 5
   maxHp: 50
-  holdRange: 10
+  holdRange: 25
   targetLayer:
     serializedVersion: 2
     m_Bits: 512

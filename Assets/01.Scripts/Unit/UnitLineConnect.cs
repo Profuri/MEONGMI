@@ -95,4 +95,9 @@ public class UnitLineConnect : MonoBehaviour
         _line.SetEndHole(_unitConnectHolder);
         ConnectLine();
     }
+
+    public void SetConnectHolder(LaserHolder holder)
+    {
+        _unitConnectHolder = holder.transform;
+    }
 }
