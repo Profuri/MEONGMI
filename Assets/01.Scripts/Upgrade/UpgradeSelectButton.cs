@@ -24,6 +24,15 @@ public class UpgradeSelectButton : MonoBehaviour
     private void Start()
     {
         button.onClick.AddListener(OnClick);
+
+        for (int i = 0; i < images.Length; i++)
+        {
+            images[i].DOFade(0, 0);
+        }
+        for (int i = 0; i < texts.Length; i++)
+        {
+            texts[i].DOFade(0, 0);
+        }
     }
 
     public void Show()
