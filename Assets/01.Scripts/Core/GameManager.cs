@@ -31,12 +31,14 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
     [SerializeField] private PoolingListSO _poolingList;
+    
     [SerializeField] 
     private float _maxDistance;
     public float MaxDistance => _maxDistance;
 
     private void Awake()
     {
+        SceneManagement.Instance.OnRestartGameEvent += () => Destroy(this.gameObject);
         if (Instance != this)
         {
             Destroy(this.gameObject);

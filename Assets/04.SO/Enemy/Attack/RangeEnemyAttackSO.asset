@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   damage: 10
-  attackDelay: 0.8
+  attackDelay: 1.2
   detectRange: 10
   attackRange: 12

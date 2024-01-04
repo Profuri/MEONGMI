@@ -84,12 +84,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
 
     }
 
-    private void Start()
-    {
-        TestUIManager.Instance.SetPlayerCostTxt(PlayerUpgradeNeedResCnt);
-        TestUIManager.Instance.SetTraitCostTxt(TraitUpgradeNeedResCnt);
-    }
-
 
     private void LoadUpdateInfos()
     {

@@ -5306,7 +5306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _distanceInterval: 0.5
   _angleInterval: 25
-  _colorTypeList: []
+  _colorSO: {fileID: 11400000, guid: e11c06c6d646f5949821f4d801221208, type: 2}
 --- !u!1 &6613288523151181408
 GameObject:
   m_ObjectHideFlags: 0
@@ -5319,7 +5319,8 @@ GameObject:
   - component: {fileID: 843188869822887903}
   - component: {fileID: 1074865893921939187}
   - component: {fileID: 8907219923339110448}
-  m_Layer: 0
+  - component: {fileID: 2887524077278699425}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5415,6 +5416,22 @@ MonoBehaviour:
   _lineConnectToggleTime: 0.5
   _lineControlCancelTime: 0.5
   _detachableTime: 2
+--- !u!114 &2887524077278699425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6613288523151181408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0efef457b15bad946abe7b35a603063d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _detectRadius: 3
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!1 &6854618610339611338
 GameObject:
   m_ObjectHideFlags: 0

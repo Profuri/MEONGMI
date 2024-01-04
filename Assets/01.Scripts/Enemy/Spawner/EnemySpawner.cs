@@ -12,7 +12,6 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     public int RemainEnemyCnt { get; private set; }
 
     private Coroutine _phaseCoroutine;
-    private Coroutine _phaseCoroutine;
     public event Action<int> OnPhaseEnd;
 
     public int RemainMonsterCnt => _appearMaxEnemyCnt - _currentDeadCnt;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,10 +23,20 @@ public class Base : Interactable, IDamageable
     {
         Collider = GetComponent<Collider>();
         _arc = transform.Find("Arc").GetComponent<Arc>();
-        ResManager.Instance.OnResourceToZero += () => Destroy(this.gameObject);
+        ResManager.Instance.OnResourceToZero = ResourceToZeroHandler;
         curUnitCount = 0;
 
         PhaseManager.Instance.OnPhaseChange += HandlePhaseChange;
+    }
+    
+
+    private void ResourceToZeroHandler()
+    {
+        CameraManager.Instance.BaseTransitionMove(() =>
+        {
+            SceneManagement.Instance.LoadScene("Start");
+            SceneManagement.Instance.OnRestartGameEvent?.Invoke();
+        });
     }
     
     public void Damaged(float damage)
@@ -38,7 +49,7 @@ public class Base : Interactable, IDamageable
         _arc.ShakePosition();
         
         CameraManager.Instance.ImpulseCam(1, 0.1f, new Vector3(0, -1, 0));
-        ResManager.Instance.UseResource((int)damage);
+        ResManager.Instance.MinusResource((int)damage);
     }
     
     public void CreateUnit(UnitType type)
