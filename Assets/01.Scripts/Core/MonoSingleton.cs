@@ -14,7 +14,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 
             if (_instance == null)
             {
-                Debug.LogError($"Can't Find Instance!!");
+                    Debug.LogError($"Can't Find Instance!!");
             }
             return _instance;
         }
