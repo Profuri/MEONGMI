@@ -1,16 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitManager : MonoSingleton<UnitManager>
 {
-    private List<BaseUnit> _unitList;
-
-    public int UnitCount => _unitList.Count;
+    public List<BaseUnit> UnitList;
+    [SerializeField] private UnitType _currentUnit;
+    public Dictionary<UnitType, int> UnitCountDictionary;
 
     public override void Init()
     {
-        _unitList = new List<BaseUnit>();
+        UnitList = new List<BaseUnit>();
+        UnitCountDictionary = new Dictionary<UnitType, int>();
+
+        //Delete this
+        UnitCountDictionary.Add(UnitType.Attacker, 1);
+        UnitCountDictionary.Add(UnitType.Miner, 1);
     }
 
     public BaseUnit CreateUnit(UnitType type, Vector3 position)
@@ -19,5 +25,11 @@ public class UnitManager : MonoSingleton<UnitManager>
         unit.transform.position = position;
         unit.Init();
         return unit;
+    }
+
+    public void DeleteUnit(BaseUnit unit)
+    {
+        unit.LineConnect.Delete();
+        PoolManager.Instance.Push(unit);
     }
 }
