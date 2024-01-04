@@ -12,7 +12,7 @@ public class TutorialInGameUHD : UIComponent
     //[SerializeField] TextMeshProUGUI playerResourceText;
     [SerializeField] TextMeshProUGUI UnitText;
     [SerializeField] TextMeshProUGUI timeText;
-    //[SerializeField] FeatureInfoPanel traitImage;
+    // [SerializeField] FeatureInfoPanel traitImage;
 
     [SerializeField] Slider playerResSlider;
     [SerializeField] Slider baseResSlider;
