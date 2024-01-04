@@ -97,5 +97,6 @@ public class TutorialUI : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        SceneManagement.Instance.OnRestartGameEvent?.Invoke();
     }
 }

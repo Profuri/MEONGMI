@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyListSO: {fileID: 11400000, guid: b598df311c914e24a966087d0ff36834, type: 2}
   appearMaxEnemyCnt: 50
-  appearOnceMinEnemyCnt: 3
-  appearOnceMaxEnemyCnt: 5
+  appearOnceMinEnemyCnt: 13
+  appearOnceMaxEnemyCnt: 20
   appearDelay: 8
   enemyResMinCnt: 900
   enemyResMaxCnt: 1000
