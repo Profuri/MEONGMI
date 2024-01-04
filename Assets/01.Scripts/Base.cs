@@ -14,6 +14,8 @@ public class Base : Interactable, IDamageable
 
     public Collider Collider { get; private set; }
     private Arc _arc;
+
+    private UnitType _currentUnit;
     
     private void Awake()
     {
@@ -21,6 +23,13 @@ public class Base : Interactable, IDamageable
         _arc = transform.Find("Arc").GetComponent<Arc>();
         ResManager.Instance.OnResourceToZero += () => Destroy(this.gameObject);
         curUnitCount = 0;
+
+        PhaseManager.Instance.OnPhaseChange += HandlePhaseChange;
+    }
+
+    private void OnDestroy()
+    {
+        PhaseManager.Instance.OnPhaseChange -= HandlePhaseChange;
     }
     
     public void Damaged(float damage)
@@ -87,5 +96,33 @@ public class Base : Interactable, IDamageable
     public void AddUnit()
     {
         curUnitCount++;
+    }
+
+    private void HandlePhaseChange(PhaseType phase)
+    {
+        switch (phase)
+        {
+            case PhaseType.Rest:
+                ChangeUnit(UnitType.Miner, UnitManager.Instance.UnitCountDictionary[UnitType.Miner]);
+                break;
+            case PhaseType.Raid:
+                ChangeUnit(UnitType.Attacker, UnitManager.Instance.UnitCountDictionary[UnitType.Attacker]);
+                break;
+        }
+    }
+
+    private void ChangeUnit(UnitType type, int count)
+    {
+        foreach (var unit in UnitManager.Instance.UnitList)
+        {
+            UnitManager.Instance.DeleteUnit(unit);
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            CreateUnit(type);
+        }
+
+        _currentUnit = type;
     }
 }

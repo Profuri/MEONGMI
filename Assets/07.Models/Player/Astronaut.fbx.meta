@@ -209,17 +209,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Player_Grey
-    second: {fileID: 2100000, guid: bd5105e1f39844b4daded70961d0174f, type: 2}
+    second: {fileID: 2100000, guid: 8b8c24ad780204f57917b7700e49be8b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Player_Helm
-    second: {fileID: 2100000, guid: d2c8f925eb40c4748811efdd803f25c6, type: 2}
+    second: {fileID: 2100000, guid: 8e34816b7e16e49d6a58c6436b97927b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Player_White
-    second: {fileID: 2100000, guid: 06eb4e637b7ef614e9265f48c542664b, type: 2}
+    second: {fileID: 2100000, guid: d8af7d1cce03642038893a3862facf2a, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
