@@ -1,3 +1,12 @@
+<<<<<<<< HEAD:Assets/Tiny Giant Studio/Modular 3D Text/Sample Scenes/01 Text - M3DText.unity.meta
+fileFormatVersion: 2
+guid: 16cfa6ed3a5d04695a14d78280f53cb3
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+========
 fileFormatVersion: 2
 guid: 98c0687b33434424e8238a6a6e7043d0
 NativeFormatImporter:
@@ -6,3 +15,4 @@ NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+>>>>>>>> main:Assets/06.Textures/RenderTexture/New Render Texture.renderTexture.meta

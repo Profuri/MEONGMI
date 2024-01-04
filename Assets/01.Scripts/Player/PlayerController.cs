@@ -81,9 +81,15 @@ public class PlayerController : Entity, IDetectable
         OnDead += OnDeadHandle;
     }
 
+    public override float GetMaxHP()
+    {
+        return _playerStat.health.GetValue();
+    }
+
     public void SetBullet(BulletType type)
     {
         _bulletType = type;
+        PlayerHammer.SetEmissionColor(type);
     }
 
     public override void Start()

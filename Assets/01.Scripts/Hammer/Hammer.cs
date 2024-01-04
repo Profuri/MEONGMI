@@ -30,13 +30,14 @@ public class Hammer : MonoBehaviour
 
 
 
-    private void SetEmissionColor(BulletType type)
+    public void SetEmissionColor(BulletType type)
     {
         MaterialPropertyBlock matblock = new MaterialPropertyBlock();
         _meshRenderer.GetPropertyBlock(matblock);
         matblock.SetColor("_EmissionColor",_colorSO.GetColorByBulletType(type));
         _meshRenderer.SetPropertyBlock(matblock);
     }
+    
     private void Awake()
     {
         var visualTrm = transform.Find("Visual");

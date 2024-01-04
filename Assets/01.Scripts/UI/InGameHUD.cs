@@ -9,9 +9,16 @@ using DG.Tweening;
 public class InGameHUD : UIComponent
 {
     [SerializeField] TextMeshProUGUI baseResourceText;
+
     //[SerializeField] TextMeshProUGUI playerResourceText;
     [SerializeField] TextMeshProUGUI UnitText;
-    [SerializeField] TextMeshProUGUI timeText;
+
+    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI enemyText;
+
+    [SerializeField] private GameObject timePanel;
+    [SerializeField] private GameObject enemyPanel;
+
     [SerializeField] FeatureInfoPanel traitImage;
 
     [SerializeField] Slider playerResSlider;
@@ -20,31 +27,62 @@ public class InGameHUD : UIComponent
     [SerializeField] Slider playerHpSlider;
 
     [SerializeField] Ease sliderEase;
-    
 
-    private TextMeshProUGUI _phaseText;
-    
     private void Awake()
     {
-        if (SceneManagement.Instance != null)
-        {
-            SceneManagement.Instance.OnGameStartEvent += ReSet;
-        }
+        PhaseManager.Instance.OnPhaseChange += ChangeTextPanel;
     }
+
+    private void Start()
+    {
+        ReSet();
+    }
+
     public void Update()
     {
-        UpdatePhaseTime();
+        if (timePanel.activeSelf)
+        {
+            UpdatePhaseTime();
+        }
+
+        if (enemyPanel.activeSelf)
+        {
+            UpdateEnemyCnt();
+        }
+    }
+
+    private void ChangeTextPanel(PhaseType type)
+    {
+        if (type == PhaseType.Rest)
+        {
+            SetTimeText();
+        }
+        else
+        {
+            SetEnemyText();
+        }
+    }
+
+    private void SetTimeText()
+    {
+        enemyPanel.SetActive(false);
+        timePanel.SetActive(true);
+    }
+
+    private void SetEnemyText()
+    {
+        enemyPanel.SetActive(true);
+        timePanel.SetActive(false);
     }
 
     private void ReSet()
     {
+        ChangeTextPanel(PhaseType.Rest);
         UpdateTrait(ETraitUpgradeElement.NONE);
         UpdateBaseResource();
         UpdatePlayerResource();
         UpdatePlayerHP();
         UpdateUnitText();
-
-        _phaseText = timeText.transform.parent.Find("Text_Phase").GetComponent<TextMeshProUGUI>();
     }
 
     public void UpdateBaseResource()
@@ -66,7 +104,6 @@ public class InGameHUD : UIComponent
     public void UpdatePlayerHP()
     {
         int curHP = (int)GameManager.Instance.PlayerController.CurrentHP;
-        Debug.Log($"PlayerController: {GameManager.Instance.PlayerController}");
         int maxHP = (int)GameManager.Instance.PlayerController.GetMaxHP();
         UpdateSlider(playerHpSlider, curHP, maxHP);
         //playerResourceText.text = curRes.ToString();
@@ -79,20 +116,20 @@ public class InGameHUD : UIComponent
         UpdateSlider(unitSlider, curRes, maxRes);
         //UnitText.text = $"{curRes} / {maxRes}";
         UnitText.text = curRes.ToString();
+
+
     }
 
-    public void UpdatePhaseTime()
+    private void UpdatePhaseTime()
     {
-        if (PhaseManager.Instance.PhaseType == PhaseType.Raid)
-        {
-            _phaseText.text = " Remain Monster";
-            timeText.text = $"{EnemySpawner.Instance.RemainMonsterCnt}";
-        }
-        else
-        {
-            _phaseText.text = "Next Phase...";
-            timeText.text = $"{PhaseManager.Instance.GetCurTime().ToString("0")} / {PhaseManager.Instance.RestPhaseTime}";
-        }
+        var remainTime = PhaseManager.Instance.RestPhaseTime - PhaseManager.Instance.GetCurTime();
+        timeText.text = $"{remainTime:0}s";
+    }
+
+    private void UpdateEnemyCnt()
+    {
+        var remainEnemy = EnemySpawner.Instance.RemainEnemyCnt;
+        enemyText.text = $"{remainEnemy:0}";
     }
 
     public void UpdateTrait(ETraitUpgradeElement trait)

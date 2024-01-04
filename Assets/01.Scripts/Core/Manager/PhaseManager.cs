@@ -5,16 +5,15 @@ using UnityEngine.InputSystem.OnScreen;
 
 public class PhaseManager : MonoSingleton<PhaseManager>
 {
-    private float _restPhaseTime;
+    [SerializeField] private float _restPhaseTime;
     public float RestPhaseTime => _restPhaseTime;
-    
+
     [SerializeField] private List<PhaseInfoSO> _phaseInfoList = new List<PhaseInfoSO>();
     public List<PhaseInfoSO> PhaseInfoList => _phaseInfoList;
 
     public int Phase { get; private set; }
 
     private PhaseType _phase;
-    public PhaseType PhaseType => _phase;
     private bool _phaseStart;
 
     private float _currentTime;
@@ -27,8 +26,6 @@ public class PhaseManager : MonoSingleton<PhaseManager>
     {
         Phase = 0;
         PhaseStart();
-
-        _restPhaseTime = _phaseInfoList[Phase].restPhaseTime;
     }
     
     public void PhaseStart()
@@ -70,7 +67,6 @@ public class PhaseManager : MonoSingleton<PhaseManager>
         {
             EnemySpawner.Instance.StartPhase(Phase);
             Phase++;
-            _restPhaseTime = _phaseInfoList[Phase].restPhaseTime;
         }
     }
 }
