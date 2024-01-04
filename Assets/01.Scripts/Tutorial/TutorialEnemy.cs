@@ -18,6 +18,7 @@ public class TutorialEnemy : MonoBehaviour
         _informationText = Instantiate<InformationText>(_informationText);
         _informationText.gameObject.SetActive(false);
     }
+    
     private void Update()
     {
         Vector3 originPos = transform.position;
@@ -25,6 +26,13 @@ public class TutorialEnemy : MonoBehaviour
         
         if (cols.Length > 0  && _isOn == false)
         {
+            foreach (Collider col in cols)
+            {
+                if (col.TryGetComponent(out TutorialPlayer player))
+                {
+                    player.isOn = false;
+                }
+            }
             _isOn = true;
             _informationText.gameObject.SetActive(true);
             _informationText.transform.position = transform.position + _offset;
