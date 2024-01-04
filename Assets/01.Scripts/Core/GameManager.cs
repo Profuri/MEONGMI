@@ -83,6 +83,8 @@ public class GameManager : MonoSingleton<GameManager>
             PhaseManager.Instance.Init();
         
             ResManager.Instance.Init();
+            
+            UnitManager.Instance.Init();
         };
         //UIManager.Instance.Init();
     }

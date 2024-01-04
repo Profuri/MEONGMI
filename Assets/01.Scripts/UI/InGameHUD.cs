@@ -30,7 +30,7 @@ public class InGameHUD : UIComponent
 
     private void Awake()
     {
-
+        PhaseManager.Instance.OnPhaseChange += ChangeTextPanel;
     }
 
     private void Start()
@@ -77,6 +77,7 @@ public class InGameHUD : UIComponent
 
     private void ReSet()
     {
+        ChangeTextPanel(PhaseType.Rest);
         UpdateTrait(ETraitUpgradeElement.NONE);
         UpdateBaseResource();
         UpdatePlayerResource();
