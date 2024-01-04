@@ -21,10 +21,12 @@ public class ResSpawner
         while (true )
         {
             yield return new WaitUntil(()=> currentRes <= maxCnt && PhaseManager.Instance.PhaseType == PhaseType.Rest);
-
+           
             int currentPhase = PhaseManager.Instance.Phase;
 
-            int spawnCnt = _phaseInfoList[currentPhase].GetSpawnCnt();
+            int spawnCnt =_phaseInfoList[currentPhase].GetSpawnCnt();
+            if (spawnCnt + currentRes > maxCnt)
+                spawnCnt = maxCnt - currentRes;
             float delaySpawnTime = _phaseInfoList[currentPhase].GetSpawnTime();
 
             Vector3 baseTrmPos = GameManager.Instance.BaseTrm.position;
