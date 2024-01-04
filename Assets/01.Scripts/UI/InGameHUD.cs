@@ -12,7 +12,7 @@ public class InGameHUD : UIComponent
     //[SerializeField] TextMeshProUGUI playerResourceText;
     [SerializeField] TextMeshProUGUI UnitText;
     [SerializeField] TextMeshProUGUI timeText;
-    [SerializeField] RectTransform featureRoot;
+    [SerializeField] FeatureInfoPanel traitImage;
 
     [SerializeField] Slider playerResSlider;
     [SerializeField] Slider baseResSlider;
@@ -20,11 +20,10 @@ public class InGameHUD : UIComponent
     [SerializeField] Slider playerHpSlider;
 
     [SerializeField] Ease sliderEase;
-    private List<FeatureInfoPanel> features;
     
     private void Awake()
     {
-        features = featureRoot.GetComponentsInChildren<FeatureInfoPanel>().ToList();
+        
     }
 
     private void Start()
@@ -39,7 +38,7 @@ public class InGameHUD : UIComponent
 
     private void ReSet()
     {
-        features.ForEach(feature => feature.SetActive(false));
+        UpdateTrait(ETraitUpgradeElement.NONE);
         UpdateBaseResource();
         UpdatePlayerResource();
         UpdatePlayerHP();
@@ -51,7 +50,7 @@ public class InGameHUD : UIComponent
         int curRes = ResManager.Instance.BaseResourceCnt;
         int maxRes = StatManager.Instance.MaxBaseResValue;
         UpdateSlider(baseResSlider, curRes, maxRes);
-        baseResourceText.text = ResManager.Instance.BaseResourceCnt.ToString();
+        baseResourceText.text = $"{curRes} / {maxRes}";
     }
 
     public void UpdatePlayerResource()
@@ -75,7 +74,10 @@ public class InGameHUD : UIComponent
         int curRes = GameManager.Instance.Base.CurUnitCount;
         int maxRes = StatManager.Instance.UnitMaxValue;
         UpdateSlider(unitSlider, curRes, maxRes);
-        UnitText.text = $"{curRes} / {maxRes}";
+        //UnitText.text = $"{curRes} / {maxRes}";
+        UnitText.text = curRes.ToString();
+
+
     }
 
     public void UpdatePhaseTime()
@@ -83,15 +85,9 @@ public class InGameHUD : UIComponent
         timeText.text = PhaseManager.Instance.GetCurTime().ToString("0");
     }
 
-    public void TraitsBarUpdate(ETraitUpgradeElement trait)
+    public void UpdateTrait(ETraitUpgradeElement trait)
     {
-        features.ForEach((feature) =>
-        {
-            if (trait == feature.GetTraitType)
-                feature.SetActive(true);
-            else
-                feature.SetActive(false);
-        });
+        traitImage.TraitType = trait;
     }
 
     public void UpdateSlider(Slider slider, float minValue, float maxValue)

@@ -7,22 +7,33 @@ using UnityEngine.UI;
 
 public class FeatureInfoPanel : InfoPanel
 {
-    [SerializeField] ETraitUpgradeElement myType;
-    [SerializeField] private bool _isActive;
-
-    public ETraitUpgradeElement GetTraitType => myType;
-    public void SetActive(bool value)
-    {
-        _isActive = value;
-        _icon.DOFade(_isActive ? 1f : 0.3f, 0.2f);
+    //[SerializeField] private bool _isActive;
+    public Sprite emptySprite;
+    private ETraitUpgradeElement myType;
+    public ETraitUpgradeElement TraitType 
+    { 
+        get { return myType; } 
+        set 
+        {
+            if (myType != value)
+                ChangeSO(value);
+        }
     }
-    public bool GetActive() => _isActive;
 
-#if UNITY_EDITOR
-    protected override void OnValidate()
+    private void ChangeSO(ETraitUpgradeElement type)
     {
-        base.OnValidate();
-        _icon.DOFade(_isActive ? 1f : 0.3f, 0.2f);
+        if (type != ETraitUpgradeElement.NONE && type != ETraitUpgradeElement.END)
+        {
+            TraitUpgradeElemSO elem = UpgradeManager.Instance.TraitElemInfos.Find((trait) => trait.Type == type);
+            _tooltipText = elem.Description;
+            _iconSprite = elem.Image;
+            _icon.color = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            _tooltipText = "활성화된 특성이 없음";
+            _icon.color = new Color(1,1,1,0);
+        }
+        _icon.sprite = _iconSprite;
     }
-#endif
 }

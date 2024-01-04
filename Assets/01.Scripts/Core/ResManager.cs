@@ -92,6 +92,8 @@ public class ResManager : MonoSingleton<ResManager>
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
-            PlayerResourceCnt += 10000;
+            PlayerResourceCnt += 10;
+        if (Input.GetKeyDown(KeyCode.G))
+            BaseResourceCnt += 10;
     }
 }
