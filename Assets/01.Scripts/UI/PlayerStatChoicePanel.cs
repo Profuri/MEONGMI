@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class PlayerStatChoicePanel : UIComponent
+public class PlayerStatChoicePanel : ChoicePanel
 {
     [SerializeField] private RectTransform _imageListTrm;
     //[SerializeField] private UpgradeContainer _upgradeContainer;
@@ -16,20 +16,29 @@ public class PlayerStatChoicePanel : UIComponent
     [SerializeField] private TextMeshProUGUI _description;
     //[SerializeField] private EUpgradeType _upgradeType;
     [SerializeField] private GameObject _backglow;
+    [SerializeField] private Image Frame_Focus;
 
     [SerializeField] private Button _button;
 
-    private UpgradeCard _upgradeCard;
-    
+    [SerializeField] private UpgradeCard _upgradeCard;
     private bool _isRolling = false;
 
-    private void OnEnable()
+    private void Awake()
     {
-        Initialize();
-        RollImage();
+        _title.SetText(string.Empty);
+        _description.SetText(string.Empty);
+        Init();
     }
 
-    private void Initialize()
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            RollImage();
+        }
+    }
+
+    private void Init()
     {
         _upgradeCard = transform.GetComponent<UpgradeCard>();
         _backglow.SetActive(false);
