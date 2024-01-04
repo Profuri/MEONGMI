@@ -68,6 +68,7 @@ public class PhaseManager : MonoSingleton<PhaseManager>
         OnPhaseChange?.Invoke(type);
         if (type == PhaseType.Raid)
         {
+            _restPhaseTime = _phaseInfoList[Phase].restPhaseTime;
             Phase++;
             EnemySpawner.Instance.StartPhase(Phase);
         }

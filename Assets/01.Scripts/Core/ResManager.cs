@@ -45,6 +45,7 @@ public class ResManager : MonoSingleton<ResManager>
             {
                 OnResourceToZero?.Invoke();
             }
+
             OnChangeBaseRes?.Invoke(_baseResCnt);
             return true;
         }

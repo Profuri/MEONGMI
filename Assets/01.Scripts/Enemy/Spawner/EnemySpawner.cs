@@ -12,6 +12,11 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     public int RemainEnemyCnt { get; private set; }
 
     private Coroutine _phaseCoroutine;
+    private Coroutine _phaseCoroutine;
+    public event Action<int> OnPhaseEnd;
+
+    public int RemainMonsterCnt => _appearMaxEnemyCnt - _currentDeadCnt;
+    private int _appearMaxEnemyCnt;
     
     public event Action<int> OnEnemyDead; 
 
@@ -94,10 +99,17 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
 
     public void DeadEnemy(BaseEnemy enemy)
     {
+        int phase = PhaseManager.Instance.Phase;
+        int randomEnemyResCnt = PhaseManager.Instance.PhaseInfoList[phase].GetEnemyRandomResCnt();
+        
+        DropResource dropResource = PoolManager.Instance.Pop("DropResource") as DropResource;
+        dropResource.Init();
+        dropResource.SetResourceAmount(randomEnemyResCnt);
+        dropResource.transform.position = enemy.transform.position;
+            
         PoolManager.Instance.Push(enemy);
         _currentDeadCnt++;
         RemainEnemyCnt--;
         OnEnemyDead?.Invoke(RemainEnemyCnt);
     }
-    //_enemyListSO.GetRandomEnemy();
 }

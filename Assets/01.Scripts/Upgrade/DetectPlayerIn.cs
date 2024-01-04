@@ -8,7 +8,10 @@ public class DetectPlayerIn : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            UIManager.Instance.ShowUpgradeUI();
+            if (PhaseManager.Instance.PhaseType == PhaseType.Rest)
+            {
+                UIManager.Instance.ShowUpgradeUI();
+            }
         }
     }
 
