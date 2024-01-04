@@ -62,13 +62,13 @@ public class CursorManager : MonoSingleton<CursorManager>
         SetTextureColor(baseColor);
 
         pixelsHotSpot = Vector2.zero;
-        //Cursor.SetCursor(_baseCursorTexture,
-        //    new Vector2(_baseCursorTexture.width / 2f, _baseCursorTexture.height / 2f),
-        //    CursorMode.Auto);
+        Cursor.SetCursor(_baseCursorTexture,
+            new Vector2(_baseCursorTexture.width / 2f, _baseCursorTexture.height / 2f),
+            CursorMode.Auto);
 
-        Cursor.SetCursor(curCursorTexture,
-            new Vector2(pixelsHotSpot.x, pixelsHotSpot.y),
-            CursorMode.ForceSoftware);
+        //Cursor.SetCursor(curCursorTexture,
+        //    new Vector2(pixelsHotSpot.x, pixelsHotSpot.y),
+        //    CursorMode.ForceSoftware);
 
         curScale = baseScale;
 		curColor = baseColor;
@@ -95,20 +95,20 @@ public class CursorManager : MonoSingleton<CursorManager>
 		curCursorTexture.Apply();
 	}
 
-    public void Update()
-    {
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			SetAttackState(true);
-			SetInteract(false);
-		}
+  //  public void Update()
+  //  {
+		//if (Input.GetKeyDown(KeyCode.Space))
+		//{
+		//	SetAttackState(true);
+		//	SetInteract(false);
+		//}
 
-		if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-			SetAttackState(false);
-			SetInteract(true);
-		}
-    }
+		//if(Input.GetKeyDown(KeyCode.LeftShift))
+  //      {
+		//	SetAttackState(false);
+		//	SetInteract(true);
+		//}
+  //  }
 
     void OnGUI()
 	{
