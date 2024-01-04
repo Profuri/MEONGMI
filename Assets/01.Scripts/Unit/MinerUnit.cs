@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MinerUnit : BaseUnit
 {
-    public event Action<Entity> EndGather;
+    public event Action EndGather;
 
     public ResourceMono TargetRes;
 
@@ -32,7 +32,7 @@ public class MinerUnit : BaseUnit
 
     public void SendEndGather()
     {
-        EndGather?.Invoke(this);
+        EndGather?.Invoke();
     }
 
     public void SetTarget(ResourceMono res)

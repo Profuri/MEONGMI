@@ -7,6 +7,8 @@ using static UnityEngine.EventSystems.EventTrigger;
 [RequireComponent(typeof(Collider))]
 public class ResourceMono : Orb
 {
+    private int _life;
+    
     private int _curResCnt;
     private bool _isOn = false;
     public bool IsInteractive = false;
@@ -14,7 +16,12 @@ public class ResourceMono : Orb
     private MeshRenderer _meshRenderer;
 
     private Coroutine _dissolveCoroutine;
+    
+    private PlayerController _playerController;
+    private MinerUnit _miner;
+    
     private readonly int _dissolveHash = Shader.PropertyToID("_Dissolve");
+    
     public void GetResource()
     {
         if (_isOn == false) return;
@@ -27,34 +34,33 @@ public class ResourceMono : Orb
     public override void OnInteract(Entity entity)
     {
         base.OnInteract(entity);
-        IsInteractive = true;
-        PlayerController player = entity as PlayerController;
-        if(player != null)
-        {
-            player.OnHammerDownEvent += Remove;
-        }
 
-        MinerUnit miner = entity as MinerUnit;
-        if (miner != null)
+        if (entity is PlayerController controller)
         {
-            miner.EndGather += Remove;
+            _playerController = controller;
+            _playerController.OnHammerDownEvent += Gather;
+        }
+        else if (entity is MinerUnit miner)
+        {
+            _miner = miner;
+            _miner.EndGather += Gather;
         }
     }
 
-    private void Remove(Entity entity)
+    private void Remove()
     {
-        PlayerController player = entity as PlayerController;
-        if (player != null)
+        if (_playerController is not null)
         {
-            player.OnHammerDownEvent -= Remove;
+            _playerController.OnHammerDownEvent -= Gather;
         }
 
-        MinerUnit miner = entity as MinerUnit;
-        if (miner != null)
+        if (_miner is not null)
         {
-            miner.EndGather -= Remove;
+            _miner.EndGather -= Gather;
         }
-
+        
+        IsInteractive = true;
+        
         if (_isOn)
         {
             GetResource();
@@ -67,14 +73,32 @@ public class ResourceMono : Orb
         base.Init();
         IsInteractive = false;
         Invalid = false;
+        _playerController = null;
+        _miner = null;
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
 
         StartDissolveCor(1f,0f,3f,() => _isOn = true);
     }
+
+    private void Gather()
+    {
+        var particle = PoolManager.Instance.Pop("GatheringParticle") as PoolableParticle;
+        particle.SetPositionAndRotation(transform.position);
+        particle.Play();
+        
+        _life--;
+
+        if (_life <= 0)
+        {
+            Remove();
+        }
+    }
+    
     public void StartDissolveCor(float startValue, float endValue, float time = 0.5f, Action Callback = null)
     {
         _dissolveCoroutine = StartCoroutine(DissolveCoroutine(startValue, endValue, time, Callback));
     }
+    
     private IEnumerator DissolveCoroutine(float startValue, float endValue, float time , Action Callback)
     {
         float timer = 0f;
@@ -92,13 +116,20 @@ public class ResourceMono : Orb
         }
         Callback?.Invoke();
     }
+    
     public void SetResourceCnt(int cnt)
     {
         _curResCnt = cnt;
+        _life = (int)(cnt / 100f);
     }
 
     public void SetScale(float scale)
     {
+        if (scale < 1f)
+        {
+            scale = 1f;
+        }
+        
         transform.localScale = new Vector3(scale, scale, scale);
         _interactRadius = scale + 1f;
     }

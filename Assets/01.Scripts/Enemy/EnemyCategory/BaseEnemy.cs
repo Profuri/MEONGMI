@@ -94,9 +94,9 @@ public abstract class BaseEnemy : Entity
 
     public override void Damaged(float damage)
     {
-        base.Damaged(damage);
         EnemyAnimator.StartBlinkCoroutine(0f,1f,0.1f,null);
-        //StopImmediately(true);
+        StopImmediately(true);
+        base.Damaged(damage);
     }
 
     public void SetPosition(Vector3 pos)

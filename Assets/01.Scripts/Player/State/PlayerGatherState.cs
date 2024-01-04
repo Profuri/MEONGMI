@@ -24,8 +24,8 @@ public class PlayerGatherState : PlayerState
     
     private void GatheringFinishHandle()
     {
-        Debug.Log("!!");
-        _player.OnHammerDownEvent?.Invoke(_player);
+        CameraManager.Instance.ImpulseCam(0.25f, 0.15f, new Vector3(0, -1, 0));
+        _player.OnHammerDownEvent?.Invoke();
         _stateMachine.ChangeState(PlayerStateType.Idle);
     }
 }
