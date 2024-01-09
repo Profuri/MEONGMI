@@ -108,9 +108,13 @@ public abstract class BaseEnemy : Entity
     {
         _curHitBullet = type;
 
+        Debug.Log("set");
         if (_debuffCoroutine != null)
-            StopCoroutine(_debuffCoroutine);
-        ///StopAllCoroutines(); //poison이 두개의 코루틴을 사용하기에.
+        {
+            //StopCoroutine(_debuffCoroutine);
+            _debuffCoroutine = null;
+        }
+        //StopAllCoroutines(); //poison이 두개의 코루틴을 사용하기에.
         
         float duration;
         switch (type)
@@ -119,18 +123,17 @@ public abstract class BaseEnemy : Entity
                 duration = BulletDebuffManager.Instance.SlowDuration;
                 float slowPercent = BulletDebuffManager.Instance.SlowPercent;
                 NavMeshAgent.speed = _entityStatSO.moveSpeed * slowPercent;
-                
-                _debuffCoroutine = StartCoroutine(DelayCor(duration,
-                    Callback: () => 
-                    {
-                        NavMeshAgent.speed = _entityStatSO.moveSpeed;
-                    }));
+
+                //_debuffCoroutine = StartCoroutine(DelayCor(duration,
+                GameManager.Instance.StartCoroutine(DelayCor(duration, Callback: ReSetSpeed));
+                    
 
                 break;
             case BulletType.Poison:
 
                 duration = BulletDebuffManager.Instance.PoisonApplyDuration;
-                _debuffCoroutine = StartCoroutine(PoisonCor(duration,damage));
+                //_debuffCoroutine = StartCoroutine(PoisonCor(duration,damage));
+                GameManager.Instance.StartCoroutine(PoisonCor(duration,damage));
                   break;
            
             case BulletType.Pierce:
@@ -142,15 +145,24 @@ public abstract class BaseEnemy : Entity
         }
     }
 
+    void ReSetSpeed()
+    {
+        Debug.Log("Reset");
+        NavMeshAgent.speed = _entityStatSO.moveSpeed;
+    }
+
     IEnumerator PoisonCor(float duration, float damage)
     {
         int poisonTickCount = BulletDebuffManager.Instance.PoisonTickCount;
         float TickDamagePercent = BulletDebuffManager.Instance.TickDamagePercent;
+       // Debug.Log( "PoisonTIck : " + poisonTickCount);
+        
         for (int i = 0; i < poisonTickCount; i++)
         {
-            yield return
-                new WaitForSeconds((float)duration / (float)poisonTickCount);
-            Debug.Log("Poison");
+            float temp = (float)duration / (float)poisonTickCount;
+            //Debug.Log("temp: " + temp);
+            //Debug.Log($"{this.gameObject.name} : Poison {i}");
+            yield return new WaitForSeconds(0.5f);
             Damaged(DamageType.None, damage * TickDamagePercent);
         }
     }
@@ -188,7 +200,9 @@ public abstract class BaseEnemy : Entity
 
     IEnumerator DelayCor(float time, Action Callback)
     {
+        Debug.Log("Start");
         yield return new WaitForSeconds(time);
+        Debug.Log("end");
         Callback?.Invoke();
     }
 

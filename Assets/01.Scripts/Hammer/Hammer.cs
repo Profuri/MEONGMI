@@ -27,7 +27,7 @@ public class Hammer : MonoBehaviour
     private readonly int _chargingToggleHash = Animator.StringToHash("Charging");
 
     [SerializeField] private ColorSO _colorSO;
-    [SerializeField] private int _materialBulletCost;
+    [SerializeField] private int _materialBulletCost = 5;
 
 
 
@@ -48,8 +48,7 @@ public class Hammer : MonoBehaviour
         _eventTrigger = visualTrm.GetComponent<HammerAnimationEndEventTrigger>();
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
-    
-    
+
     public void Shot(BulletType type, Vector3 dir)
     {
         if(type == BulletType.Material)

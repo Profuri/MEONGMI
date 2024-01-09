@@ -43,6 +43,7 @@ public class ResManager : MonoSingleton<ResManager>
     {
         if (CanUsePlayerResource(resourceCnt))
         {
+            Debug.Log("Use");
             _playerResCnt -= resourceCnt;
             if (_playerResCnt <= 0)
             {

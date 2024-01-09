@@ -42,6 +42,7 @@ public class CursorManager : MonoSingleton<CursorManager>
 
     private void Awake()
     {
+		Cursor.visible = false;
 		Init();    
     }
 
@@ -53,23 +54,32 @@ public class CursorManager : MonoSingleton<CursorManager>
 
     private void SetCursorIcon(Texture2D texture)
     {
-        Texture2D copyTexture = new Texture2D(texture.width, texture.height);
+        Texture2D copyTexture = new Texture2D(
+			(int)((float)texture.width * baseScale),
+			(int)((float)(texture.height * baseScale)));
         copyTexture.SetPixels(texture.GetPixels());
         copyTexture.Apply();
 
         curCursorTexture = copyTexture;
 
-        SetTextureColor(baseColor);
+		pixelsHotSpot = new Vector2(
+			curCursorTexture.width * curScale / 2
+			, curCursorTexture.height * curScale / 2
+		);
+		// pixelsHotSpot = new Vector2(curCursorTexture.width / 2f, curCursorTexture.height / 2f);
+		//Cursor.SetCursor(_baseCursorTexture,
+		//    new Vector2(_baseCursorTexture.width / 2f, _baseCursorTexture.height / 2f),
+		//    CursorMode.Auto);
 
-        pixelsHotSpot = Vector2.zero;
-        Cursor.SetCursor(_baseCursorTexture,
-            new Vector2(_baseCursorTexture.width / 2f, _baseCursorTexture.height / 2f),
+		//Cursor.SetCursor(curCursorTexture,
+		//    new Vector2(pixelsHotSpot.x, pixelsHotSpot.y),
+		//    CursorMode.ForceSoftware);
+
+		Cursor.SetCursor(curCursorTexture,
+			pixelsHotSpot,
             CursorMode.Auto);
 
-        //Cursor.SetCursor(curCursorTexture,
-        //    new Vector2(pixelsHotSpot.x, pixelsHotSpot.y),
-        //    CursorMode.ForceSoftware);
-
+        SetTextureColor(baseColor);
         curScale = baseScale;
 		curColor = baseColor;
 	}
@@ -79,8 +89,20 @@ public class CursorManager : MonoSingleton<CursorManager>
         var fillColor = color;
         var fillColorArray = _baseCursorTexture.GetPixels();
 
+		Color initColor = Color.white;
+		Color initalphaColor = Color.white;
+		initalphaColor.a = 0;
+
+
         for (var i = 0; i < fillColorArray.Length; ++i)
         {
+            if (fillColorArray[i].a == 0)
+            {
+                fillColorArray[i] = initalphaColor;
+            }
+            else
+                fillColorArray[i] = initColor;
+
             fillColorArray[i] *= fillColor;
         }
 
@@ -95,55 +117,72 @@ public class CursorManager : MonoSingleton<CursorManager>
 		curCursorTexture.Apply();
 	}
 
-  //  public void Update()
-  //  {
-		//if (Input.GetKeyDown(KeyCode.Space))
-		//{
-		//	SetAttackState(true);
-		//	SetInteract(false);
-		//}
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+			OnAttack();
+		}
 
-		//if(Input.GetKeyDown(KeyCode.LeftShift))
-  //      {
-		//	SetAttackState(false);
-		//	SetInteract(true);
-		//}
-  //  }
+		if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+			OnInteract();
+		}
+
+		if(Input.GetKeyDown(KeyCode.RightShift))
+        {
+			OnBase();
+		}
+
+	}
+
+	public void OnBase()
+	{
+		DOTween.To(() => curColor, color =>
+		{
+			this.curColor = color;
+			SetTextureColor(this.curColor);
+		}, baseColor, animTime);
+	}
+
+	public void OnInteract()
+    {
+		DOTween.To(() => curColor, color =>
+		{
+			this.curColor = color;
+			SetTextureColor(this.curColor);
+		}, InteractTargetColor, animTime);
+	}
+
+	public void OnAttack()
+    {
+		DOTween.To(() => curColor, color =>
+		{
+			this.curColor = color;
+			SetTextureColor(this.curColor);
+		}, AttackTargetColor, animTime);
+	}
+
+	public void Shoot()
+    {
+
+    }
 
     void OnGUI()
 	{
-		//updateTexture();
+        updateTexture();
 
-        //Matrix4x4 back = GUI.matrix;
-        //GUIUtility.RotateAroundPivot(curAngle, pos);
-        //GUI.DrawTexture(rect, curCursorTexture);
-        //GUI.matrix = back;
+        Matrix4x4 back = GUI.matrix;
+        GUIUtility.RotateAroundPivot(curAngle, pos);
+        GUI.DrawTexture(rect, curCursorTexture);
+        GUI.matrix = back;
     }
 
 	void updateTexture()
 	{
 		pos = Input.mousePosition;
-		pos.y = Screen.height - pos.y;
-		
-		if (IsAttack && IsAttackAnimating == false)
-		{
-			IsAttackAnimating = true;
-
-			//DOTween.To(() => curAngle, angle => this.curAngle = angle, TargetAngle, animTime);
-			//DOTween.To(() => curScale, scale => this.curScale = scale, TargetScale, animTime);
-			DOTween.To(() => curColor, color => this.curColor = color, AttackTargetColor, animTime);
-		}
-		else
-        {
-			DOTween.To(() => curColor, color => this.curColor = color, AttackTargetColor, animTime);
-        }
-
-		if (!IsAttack && CursorIsOnInteract)
-		{
-				
-		}
-
-		SetTextureColor(curColor);
+		pos.y *= -1f;
+		//pos.y = Screen.height - pos.y;
 
 		//float last_angle = angle;
 		//	float new_angle = Mathf.Atan2(pos.y - prev_position.y, pos.x - prev_position.x) * Mathf.Rad2Deg;
@@ -155,6 +194,11 @@ public class CursorManager : MonoSingleton<CursorManager>
 		
 
 		//prev_position = pos;
+
+		pixelsHotSpot = new Vector2(
+			curCursorTexture.width * curScale / 2
+			,curCursorTexture.height * curScale / 2
+		);
 
 		rect = 
 			new Rect(pos.x - pixelsHotSpot.x, pos.y - pixelsHotSpot.y, curCursorTexture.width * curScale, curCursorTexture.height * curScale);

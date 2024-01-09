@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe1b5637e57d8a4d9c867c70b73db93, type: 3}
   m_Name: Debuff
   m_EditorClassIdentifier: 
-  SlowPercent: 0.5
+  SlowPercent: 0.1
   SlowDuration: 2
   PoisonTickCount: 3
   PoisonApplyDuration: 2.4

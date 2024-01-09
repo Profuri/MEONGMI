@@ -6686,7 +6686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 33682
+  GUIID: 101346
 --- !u!1 &1652524242
 GameObject:
   m_ObjectHideFlags: 0
@@ -7512,7 +7512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3a0af7973a4667bfc19e368f1d526e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _restPhaseTime: 60
+  _restPhaseTime: 10
   _phaseInfoList:
   - {fileID: 11400000, guid: 43b91bf0a3fdd9e44b9e886701f7408e, type: 2}
   - {fileID: 11400000, guid: ed831fe7ae628254fbfa65688c194aed, type: 2}
@@ -7614,7 +7614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseCursorTexture: {fileID: 2800000, guid: d489b3d4d10cefd428b22bfe516f99c4, type: 3}
   baseScale: 1
-  baseColor: {r: 1, g: 0, b: 0, a: 1}
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
   animTime: 0.25
   TargetAngle: 720
   TargetScale: 1

@@ -6,20 +6,14 @@ public class BulletDebuffManager : MonoSingleton<BulletDebuffManager>
 {
     [SerializeField] BulletDebuffSO debuffSO;
 
-    [HideInInspector] public float SlowPercent;
-    [HideInInspector] public float SlowDuration;
-    [HideInInspector] public int PoisonTickCount;
-    [HideInInspector] public float PoisonApplyDuration;
-    [HideInInspector] public float TickDamagePercent;
+    public float SlowPercent => debuffSO.SlowPercent;
+    public float SlowDuration => debuffSO.SlowDuration;
+    public int PoisonTickCount => debuffSO.PoisonTickCount;
+    public float PoisonApplyDuration => debuffSO.PoisonApplyDuration;
+    public float TickDamagePercent => debuffSO.TickDamagePercent;
+    
     public override void Init()
     {
-        if(debuffSO != null)
-        {
-            SlowPercent = debuffSO.SlowPercent;
-            SlowDuration = debuffSO.SlowDuration;
-            PoisonTickCount = debuffSO.PoisonTickCount;
-            PoisonApplyDuration = debuffSO.PoisonApplyDuration;
-            TickDamagePercent = debuffSO.TickDamagePercent;
-        }
+     
     }
 }

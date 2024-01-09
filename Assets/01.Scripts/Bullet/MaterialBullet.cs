@@ -37,7 +37,7 @@ public class MaterialBullet : Bullet
         base.ExplosionBullet();
 
         Collider[] cols = Physics.OverlapSphere(transform.position, bombRadius, _damagableMask);
-
+        Debug.Log("Mateiral Bullet : " + cols.Length);
         for (var i = 0; i < cols.Length; i++)
         {
             if (cols[i].TryGetComponent<Entity>(out var entity))
