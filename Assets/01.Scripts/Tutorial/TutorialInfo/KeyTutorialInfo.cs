@@ -6,7 +6,8 @@ using System.Linq;
 public class KeyTutorialInfo : TutorialInfo
 {
     [SerializeField] private List<KeyCode> _codeList = new List<KeyCode>();
-
+    [SerializeField] private KeyCode _addKeyCode = KeyCode.None;
+    
     private Dictionary<KeyCode, bool> _codeDictionary = new Dictionary<KeyCode,bool>();
     
     private int _codeCnt;
@@ -28,10 +29,17 @@ public class KeyTutorialInfo : TutorialInfo
         List<KeyCode> curCodeList = _codeDictionary.Keys.ToList();
         foreach (KeyCode code in curCodeList)
         {
-            if (_codeDictionary[code] == false && Input.GetKeyDown(code))
+            if (_codeDictionary[code] == false)
             {
-                _codeDictionary[code] = true;
-                _codeCnt++;
+                bool addKeyCode = false;
+                if (_addKeyCode == KeyCode.None) addKeyCode = true;
+                else addKeyCode = Input.GetKey(_addKeyCode);
+                
+                if(addKeyCode && Input.GetKeyDown(code))
+                {
+                    _codeDictionary[code] = true;
+                    _codeCnt++;
+                }
             }
         }
 
