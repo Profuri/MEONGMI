@@ -8,9 +8,9 @@ public class PlayerLevelUpPanel : UIComponent
     [SerializeField] private GameObject _cardTemplete;
     [SerializeField] private UpgradeContainer _upgradeContainer;
     
-    public override void GenerateUI(Transform parent)
+    public override void GenerateUI()
     {
-        base.GenerateUI(parent);
+        base.GenerateUI();
         UpgradeManager.Instance.Upgrade(EUpgradeType.PLAYER);
     }
 

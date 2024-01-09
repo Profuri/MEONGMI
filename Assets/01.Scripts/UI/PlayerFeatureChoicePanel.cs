@@ -34,9 +34,9 @@ public class PlayerFeatureChoicePanel : UIComponent
         _effectImage = _effectPanel.transform.Find("Image").GetComponent<Image>();
     }
 
-    public override void GenerateUI(Transform parent)
+    public override void GenerateUI()
     {
-        base.GenerateUI(parent);
+        base.GenerateUI();
         Initialize();
     }
 

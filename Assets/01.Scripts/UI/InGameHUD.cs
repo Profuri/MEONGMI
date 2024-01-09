@@ -32,9 +32,9 @@ public class InGameHUD : UIComponent
     
     [SerializeField] private Ease sliderEase;
 
-    public override void GenerateUI(Transform parent)
+    public override void GenerateUI()
     {
-        base.GenerateUI(parent);
+        base.GenerateUI();
 
         _inputReader.OnESCInputEvent += UIManager.Instance.Pause;
 

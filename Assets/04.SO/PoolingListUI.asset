@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae0f8b43c76af84786d3b924d031332, type: 3}
+  m_Name: PoolingListUI
+  m_EditorClassIdentifier: 
+  pairs:
+  - prefab: {fileID: 2020423066957984668, guid: b6ddd039982ac4e5b8c39880742855c0,
+      type: 3}
+    count: 1
+  - prefab: {fileID: 1174478867738497179, guid: 57ced27a130404f1b9f52fa2d39470da,
+      type: 3}
+    count: 1
+  - prefab: {fileID: 4667973474514430703, guid: c7aff651e807c44aa9c5fbea88422248,
+      type: 3}
+    count: 1
+  - prefab: {fileID: 8922849019902822337, guid: 287f5cdacff9c4baf8411c4eee1a24a7,
+      type: 3}
+    count: 1
+  - prefab: {fileID: 9215119188963937932, guid: 640fc17ee3c634a1793f6995a726b4b9,
+      type: 3}
+    count: 1
+  - prefab: {fileID: 5855564411041270431, guid: 414393df0367f0948999d847acda927d,
+      type: 3}
+    count: 1
+  - prefab: {fileID: 4488661864551697435, guid: 200cf59823078064a81317a66926ae9a,
+      type: 3}
+    count: 1

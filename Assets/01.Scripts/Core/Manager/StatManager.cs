@@ -55,7 +55,6 @@ public class StatManager : MonoSingleton<StatManager>
         TraitDicionary = new Dictionary<ETraitUpgradeElement, bool>();
         foreach (ETraitUpgradeElement type in Enum.GetValues(typeof(ETraitUpgradeElement)))
         {
-            Debug.Log(type.ToString());
             TraitDicionary.Add(type, false);
         }
         CurTrait = ETraitUpgradeElement.NONE;
