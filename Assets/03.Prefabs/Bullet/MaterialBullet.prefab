@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1728670112767907614}
   - component: {fileID: 2300086830541514976}
-  - component: {fileID: 5348043730827119182}
+  - component: {fileID: 7527350883799732189}
   m_Layer: 0
   m_Name: MaterialBullet
   m_TagString: Untagged
@@ -61,7 +61,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5348043730827119182
+--- !u!114 &7527350883799732189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,15 +70,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 996122124761157194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82e2f9d8fec24f1483326cd49115cd01, type: 3}
+  m_Script: {fileID: 11500000, guid: 507a684193eb8c5428d11581a5ca5c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _damagableMask:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 1024
   _checkRadius: 1
   _bulletSpeed: 10
   _bulletDestroyDelay: 3
+  damageUpPercent: 2
 --- !u!1001 &5050052297003634650
 PrefabInstance:
   m_ObjectHideFlags: 0

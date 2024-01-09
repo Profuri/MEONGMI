@@ -93,7 +93,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager>
     //���߿� �����丵
     public bool BaseUpgrade(EBaseUpgradeElement type, int curCost)
     {
-        if(ResManager.Instance.UseResource(curCost))
+        if(ResManager.Instance.UseBaseResource(curCost))
         {
             int addCost = baseElemInfos.Find((elem) => elem.Type == type).AddCost;
             SetBaseCost(type, addCost);

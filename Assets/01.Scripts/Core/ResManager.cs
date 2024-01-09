@@ -14,7 +14,8 @@ public class ResManager : MonoSingleton<ResManager>
     private int _baseResCnt;
     public int BaseResCnt => _baseResCnt;
     
-    public Action OnResourceToZero;
+    public Action OnBaseResourceToZero;
+    public Action OnPlayerResourceToZero;
 
     public event Action<int> OnChangePlayerRes;
     public event Action<int> OnChangeBaseRes;
@@ -24,7 +25,8 @@ public class ResManager : MonoSingleton<ResManager>
         _resSpawner = new ResSpawner(PhaseManager.Instance.PhaseInfoList);
     }
 
-    public bool CanUseResource(int resourceCnt) => _baseResCnt >= resourceCnt;
+    public bool CanUseBaseResource(int resourceCnt) => _baseResCnt >= resourceCnt;
+    public bool CanUsePlayerResource(int resourceCnt) => _playerResCnt >= resourceCnt;
 
     public bool AddResource(int plusResourceCnt)
     {
@@ -36,14 +38,30 @@ public class ResManager : MonoSingleton<ResManager>
         return curCnt <= _baseStatSO.MaxResCnt;
     }
 
-    public bool UseResource(int resourceCnt)
+    public bool UsePlayerResource(int resourceCnt)
     {
-        if (CanUseResource(resourceCnt))
+        if (CanUsePlayerResource(resourceCnt))
+        {
+            _playerResCnt -= resourceCnt;
+            if (_playerResCnt <= 0)
+            {
+                OnPlayerResourceToZero?.Invoke();
+            }
+
+            OnChangePlayerRes?.Invoke(_playerResCnt);
+            return true;
+        }
+        return false;
+    }
+
+    public bool UseBaseResource(int resourceCnt)
+    {
+        if (CanUseBaseResource(resourceCnt))
         {
             _baseResCnt -= resourceCnt;
-            if (_baseResCnt == 0)
+            if (_baseResCnt <= 0)
             {
-                OnResourceToZero?.Invoke();
+                OnBaseResourceToZero?.Invoke();
             }
 
             OnChangeBaseRes?.Invoke(_baseResCnt);
@@ -59,7 +77,7 @@ public class ResManager : MonoSingleton<ResManager>
         OnChangeBaseRes?.Invoke(_baseResCnt);
         if (_baseResCnt == 0)
         {
-            OnResourceToZero?.Invoke();
+            OnBaseResourceToZero?.Invoke();
         }
     }
 
