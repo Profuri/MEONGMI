@@ -15,16 +15,37 @@ public class Bullet : PoolableMono
 
     protected float _damage;
 
+    protected DamageType _damageType;
+
     public void Setting(BulletType type, float damage, Vector3 pos, Vector3 dir)
     {
         _bulletType = type;
+        _damageType = SetDamageType(_bulletType);
         _damage = damage;
         _dir = dir;
         transform.position = pos;
         transform.rotation = Quaternion.LookRotation(dir);
         _currentTime = 0f;
     }
-    
+
+    private DamageType SetDamageType(BulletType bulletType)
+    {
+        switch (bulletType)
+        {
+            case BulletType.Normal:
+            case BulletType.Missile:
+            case BulletType.Transition:
+            case BulletType.Material:
+            case BulletType.Pierce:
+            case BulletType.Enemy:
+                return DamageType.HandleByAttacker;
+            case BulletType.Slow:
+            case BulletType.Poison:
+                return DamageType.HandleByReciver;
+        }
+        return DamageType.None;
+    }
+
     public override void Init()
     {
         if (_rigidbody is null)
@@ -44,7 +65,13 @@ public class Bullet : PoolableMono
             {
                 if (cols[i].TryGetComponent<IDamageable>(out var entity))
                 {
-                    entity.Damaged(_damage);
+                    entity.Damaged(_damageType, _damage);
+                    if(_damageType == DamageType.HandleByReciver)
+                    {
+                        BaseEnemy enemy = entity as BaseEnemy;
+                        if (enemy != null)
+                            enemy.SetDebuff(_bulletType, _damage);
+                    }
                 }    
             }
 

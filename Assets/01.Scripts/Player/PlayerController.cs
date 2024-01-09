@@ -152,9 +152,9 @@ public class PlayerController : Entity, IDetectable
     }
 
 
-    public override void Damaged(float damage)
+    public override void Damaged(DamageType type, float damage)
     {
-        base.Damaged(damage);
+        base.Damaged(type, damage);
         SoundManager.Instance.PlaySFX("PlayerHit");
     }
 

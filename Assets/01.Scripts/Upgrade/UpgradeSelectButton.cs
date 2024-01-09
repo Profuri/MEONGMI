@@ -108,7 +108,7 @@ public class UpgradeSelectButton : MonoBehaviour
             case EUpgradeType.BASE:
                 if (_payThis)
                 {
-                    if (!ResManager.Instance.UseResource(_payment))
+                    if (!ResManager.Instance.UseBaseResource(_payment))
                     {
                         PlayFailSound();
                         return;
@@ -119,7 +119,7 @@ public class UpgradeSelectButton : MonoBehaviour
             case EUpgradeType.PLAYER:
                 if (_payThis)
                 {
-                    if (!ResManager.Instance.UseResource(_payment))
+                    if (!ResManager.Instance.UseBaseResource(_payment))
                     {
                         PlayFailSound();
                         return;
@@ -130,7 +130,7 @@ public class UpgradeSelectButton : MonoBehaviour
             case EUpgradeType.TRAIT:
                 if (_payThis)
                 {
-                    if (!ResManager.Instance.UseResource(_payment))
+                    if (!ResManager.Instance.UseBaseResource(_payment))
                     {
                         PlayFailSound();
                         return;

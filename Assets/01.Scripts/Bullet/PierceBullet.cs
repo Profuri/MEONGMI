@@ -25,7 +25,7 @@ public class PierceBullet : Bullet
                 {
                     if (!entity.Dead && !_damagedEntity.Find(x => x.GetHashCode() == entity.GetHashCode()))
                     {
-                        entity.Damaged(_damage);
+                        entity.Damaged(_damageType, _damage);
                         var particle = PoolManager.Instance.Pop($"{_bulletType.ToString()}Hit") as PoolableParticle;
                         particle.SetPositionAndRotation(entity.transform.position);
                         particle.Play();

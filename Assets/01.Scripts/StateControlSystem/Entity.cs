@@ -45,7 +45,7 @@ public abstract class Entity : PoolableMono, IDamageable
     protected abstract void RegisterStates();
     protected abstract void SetInitState();
     
-    public virtual void Damaged(float damage)
+    public virtual void Damaged(DamageType type, float damage)
     {
         if (Dead)
         {

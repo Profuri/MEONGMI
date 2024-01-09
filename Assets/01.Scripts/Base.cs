@@ -23,7 +23,7 @@ public class Base : Interactable, IDamageable
     {
         Collider = GetComponent<Collider>();
         _arc = transform.Find("Arc").GetComponent<Arc>();
-        ResManager.Instance.OnResourceToZero = ResourceToZeroHandler;
+        ResManager.Instance.OnBaseResourceToZero = ResourceToZeroHandler;
         curUnitCount = 0;
 
         PhaseManager.Instance.OnPhaseChange += HandlePhaseChange;
@@ -39,7 +39,7 @@ public class Base : Interactable, IDamageable
         });
     }
     
-    public void Damaged(float damage)
+    public void Damaged(DamageType type, float damage)
     {
         //이펙트 소환.
         VFXPlayer vfxPlayer = PoolManager.Instance.Pop("ResHitParticle") as VFXPlayer;

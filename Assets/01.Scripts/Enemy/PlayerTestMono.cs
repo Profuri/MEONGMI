@@ -18,7 +18,7 @@ public class PlayerTestMono : MonoBehaviour,IDetectable,IDamageable
         return this.transform;
     }
 
-    public void Damaged(float damage)
+    public void Damaged(DamageType type, float damage)
     {
         _hp -= damage;
         if (_hp <= 0)
