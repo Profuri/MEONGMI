@@ -21,6 +21,7 @@ public class TutorialTextPanel : MonoBehaviour
         _mainTextAnimator.SetText(text);
         if (text != string.Empty)
         {
+            _typeWriter.ShowText(text);
             _typeWriter.StartShowingText();
         }
     }

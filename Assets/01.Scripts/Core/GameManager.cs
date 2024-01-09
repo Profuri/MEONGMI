@@ -63,8 +63,12 @@ public class GameManager : MonoSingleton<GameManager>
         {
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
-        
 
+        SceneManagement.Instance.OnTutorialStartEvent += () =>
+        {
+            CameraManager.Instance.Init();
+        };
+        
         SceneManagement.Instance.OnGameStartEvent += () =>
         {
             CameraManager.Instance.Init();

@@ -10,19 +10,23 @@ public class KeyTutorialInfo : TutorialInfo
     private Dictionary<KeyCode, bool> _codeDictionary = new Dictionary<KeyCode,bool>();
     
     private int _codeCnt;
-    public void Init()
+    public override void Init()
     {
         _codeDictionary.Clear();
         foreach (KeyCode code in _codeList)
         {
             _codeDictionary.Add(code,false);
         }
+
+        _codeCnt = 0;
+        _isClear = false;
     }
     public override void TutorialUpdate()
     {
         if (_isClear) return;
-        
-        foreach (KeyCode code in _codeDictionary.Keys)
+
+        List<KeyCode> curCodeList = _codeDictionary.Keys.ToList();
+        foreach (KeyCode code in curCodeList)
         {
             if (_codeDictionary[code] == false && Input.GetKeyDown(code))
             {
@@ -31,8 +35,9 @@ public class KeyTutorialInfo : TutorialInfo
             }
         }
 
-        if (_codeCnt == _codeDictionary.Count)
+        if (_codeCnt >= _codeDictionary.Count)
         {
+            Debug.Log($"CodeCnt: {_codeCnt} DictionaryCnt: {_codeDictionary.Count}");
             _isClear = true;
             Debug.Log($"IsCleared: {this}");
         }

@@ -10,5 +10,6 @@ public abstract class TutorialInfo : ScriptableObject
         return _isClear;
     }
 
+    public abstract void Init();
     public abstract void TutorialUpdate();
 }
