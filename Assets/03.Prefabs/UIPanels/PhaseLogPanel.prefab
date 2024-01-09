@@ -881,6 +881,7 @@ MonoBehaviour:
   _mainTextPanel: {fileID: 4044434821130295923}
   _upperTextPanel: {fileID: 5389429573997123877}
   _downTextPanel: {fileID: 3643816145663001877}
+  _logTime: 2
 --- !u!1 &8832144596606496246
 GameObject:
   m_ObjectHideFlags: 0

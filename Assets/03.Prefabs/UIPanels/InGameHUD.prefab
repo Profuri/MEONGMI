@@ -118,7 +118,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2601833983324699263}
   m_FillRect: {fileID: 2488371454607980734}
   m_HandleRect: {fileID: 0}
@@ -1338,7 +1338,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 720925716612530827}
   m_FillRect: {fileID: 3600091046025658572}
   m_HandleRect: {fileID: 0}
@@ -3645,6 +3645,11 @@ PrefabInstance:
       propertyPath: m_Direction
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7926642256570843105, guid: d1cb20d39960849f5b550db89da76a72,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7926642256570843111, guid: d1cb20d39960849f5b550db89da76a72,
         type: 3}
       propertyPath: m_Name
@@ -4111,6 +4116,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 566391202600479890, guid: 742624a85539e494ebfbc4a3adb7c826,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 566391202600479901, guid: 742624a85539e494ebfbc4a3adb7c826,
         type: 3}
