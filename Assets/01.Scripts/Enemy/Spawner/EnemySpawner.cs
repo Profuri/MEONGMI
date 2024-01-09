@@ -17,6 +17,8 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
     
     public event Action<int> OnEnemyDead; 
 
+    [SerializeField] private LayerMask _obstacleLayer;
+
     public override void Init()
     {
         _currentEnemyList = new List<BaseEnemy>();
@@ -60,34 +62,45 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
                     randomAppearEnemyCnt = _appearMaxEnemyCnt - _currentEnemyList.Count;
                 }
                 
-                Vector3 randomPos;
                 float lineLength = GameManager.Instance.PlayerController.LineConnect.LineLength;
-                    
-                for (int i = 0; i < randomAppearEnemyCnt; i++)
+
+                Func<Vector3> getRandomPos = () =>
                 {
-                    var spherePoint = Random.insideUnitSphere;
+                    Vector3 spherePoint = Random.insideUnitSphere;
                     spherePoint.y = 0;
-                    var dir = spherePoint.normalized;
-                    var randomPoint = dir * Random.Range(lineLength, GameManager.Instance.MaxDistance);
-                    var unitPoint = randomPoint + GameManager.Instance.BaseTrm.position;
+                    Vector3 dir = spherePoint.normalized;
+                    Vector3 randomPoint = dir * Random.Range(lineLength, GameManager.Instance.MaxDistance);
+                    Vector3 unitPoint = randomPoint + GameManager.Instance.BaseTrm.position;
                     unitPoint.y = 100f;
-                    
-                    bool result = Physics.Raycast(unitPoint,Vector3.down,out RaycastHit hitInfo, Mathf.Infinity, 1 << LayerMask.NameToLayer("Ground"));
-                    
-                    if (result)
+                    return unitPoint;
+                };
+
+                int enemyCnt = 0;
+                while (enemyCnt < randomAppearEnemyCnt)
+                {
+                    Vector3 unitPoint = getRandomPos();
+                    bool result = Physics.Raycast(unitPoint, Vector3.down, out RaycastHit hitInfo, Mathf.Infinity, _obstacleLayer);
+
+                    if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground") && result)
                     {
                         unitPoint.y = hitInfo.point.y;
                     }
-                                        
+                    else
+                    {
+                        Debug.LogError($"Can't place this position: {unitPoint}");
+                        continue;
+                    }
+
                     var prefab = enemyList.GetRandomEnemy();
-                
+
                     BaseEnemy enemy = PoolManager.Instance.Pop(prefab.name) as BaseEnemy;
-                
+
                     enemy.Init();
                     enemy.gameObject.SetActive(true);
                     enemy.SetPosition(unitPoint);
                     _currentEnemyList.Add(enemy);
-                    
+
+                    enemyCnt++;
                     yield return null;
                 }
                 yield return new WaitForSeconds(appearDelay);
