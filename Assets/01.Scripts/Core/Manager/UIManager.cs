@@ -10,6 +10,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private PausePanel _pausePanel;
     
     public UIComponent CurrentComponent { get; private set; }
+    public bool IsTransitioning { get; private set; }
 
     public void ChangeUI(string componentName, Action callback = null, Transform parent = null)
     {
@@ -25,15 +26,19 @@ public class UIManager : MonoSingleton<UIManager>
             return;
         }
 
+        IsTransitioning = true;
+
         if (CurrentComponent is null)
         {
             ui.GenerateUI(parent);
+            IsTransitioning = false;
         }
         else
         {
             CurrentComponent.RemoveUI(() =>
             {
                 ui.GenerateUI(parent);
+                IsTransitioning = false;
                 callback?.Invoke();
             });
         }
