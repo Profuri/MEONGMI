@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 
-public class TutorialEnemy : MonoBehaviour,IDamageable
+public class TutorialEnemy : MonoBehaviour
 {
     private NavMeshAgent _navAgent;
     private Transform _target;

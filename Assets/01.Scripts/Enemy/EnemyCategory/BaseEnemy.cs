@@ -33,7 +33,7 @@ public abstract class BaseEnemy : Entity
 
     private Transform _target;
 
-    //³ªÁß¿¡ È®Àå¼º ÀÖ°Ô debuffManager¸¦ ¸¸µé¾î¼­ Ã³¸®ÇØÁÖ¸é ÁÁÀ»µí
+    //ë‚˜ì¤‘ì— í™•ì¥ì„± ìˆê²Œ debuffManagerë¥¼ ë§Œë“¤ì–´ì„œ ì²˜ë¦¬í•´ì£¼ë©´ ì¢‹ì„ë“¯
     [Header("Hit")]
     [SerializeField] private BulletType _curHitBullet;
 
@@ -103,7 +103,7 @@ public abstract class BaseEnemy : Entity
         base.Damaged(type, damage);
     }
 
-    // ÃÑ ÀüÈ¯ »ı±â¸é ½ºÅ©¸³Æ® ¹Ù²ã¾ß ÇÔ.
+    // ì´ ì „í™˜ ìƒê¸°ë©´ ìŠ¤í¬ë¦½íŠ¸ ë°”ê¿”ì•¼ í•¨.
     public void SetDebuff(BulletType type, float damage)
     {
         _curHitBullet = type;
@@ -114,7 +114,7 @@ public abstract class BaseEnemy : Entity
             //StopCoroutine(_debuffCoroutine);
             _debuffCoroutine = null;
         }
-        //StopAllCoroutines(); //poisonÀÌ µÎ°³ÀÇ ÄÚ·çÆ¾À» »ç¿ëÇÏ±â¿¡.
+        //StopAllCoroutines(); //poisonì´ ë‘ê°œì˜ ì½”ë£¨í‹´ì„ ì‚¬ìš©í•˜ê¸°ì—.
         
         float duration;
         switch (type)
