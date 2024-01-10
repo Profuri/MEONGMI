@@ -56,6 +56,9 @@ public class UIManager : MonoSingleton<UIManager>
         {
             PoolManager.Instance.CreatePool(pair.prefab, pair.count);
         }
+
+        _pausePanel = FindObjectOfType<PausePanel>();
+        _pausePanel.gameObject.SetActive(false);
         ChangeUI("InGameHUD");
     }
 

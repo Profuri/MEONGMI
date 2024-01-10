@@ -21,9 +21,12 @@ public class PoolManager{
         {
             parent = UIManager.Instance.MainCanvas.transform;
         }
-        
-        Pool<PoolableMono> pool = new Pool<PoolableMono>(prefab,parent,count);
-        _pools.Add(prefab.gameObject.name,pool);
+
+        if (!_pools.ContainsKey(prefab.gameObject.name))
+        {
+            Pool<PoolableMono> pool = new Pool<PoolableMono>(prefab,parent,count);
+            _pools.Add(prefab.gameObject.name,pool);
+        }
     }
 
     public PoolableMono Pop(string prefabName){

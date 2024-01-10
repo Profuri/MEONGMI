@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -18,6 +19,11 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             }
             return _instance;
         }
+    }
+
+    public virtual void OnDisable()
+    {
+        _instance = null;
     }
 
 
