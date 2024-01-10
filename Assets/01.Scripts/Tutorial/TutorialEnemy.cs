@@ -1,47 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Serialization;
 
-
-public class TutorialEnemy : MonoBehaviour
+public class TutorialEnemy : MonoBehaviour,IDamageable
 {
-    [SerializeField] private string _text;
-    [SerializeField] private InformationText _informationText;
-    [SerializeField] private Vector3 _offset = new Vector3(0, 1.5f, 0f);
-    private bool _isOn = false;
+    private NavMeshAgent _navAgent;
+    private Transform _target;
+    private Transform _cylinder;
+    private float _currentHP;
 
-    [SerializeField] private float _detectRadius = 5f;
+    [SerializeField] private EntityStatSO _statSO;
     
-    private void Awake()
-    {
-        _isOn = false;
-        _informationText = Instantiate<InformationText>(_informationText);
-        _informationText.gameObject.SetActive(false);
-    }
+
+    private TutorialEnemyAnimator _enemyAnimator;
     
-    private void Update()
+    public void Init()
     {
-        Vector3 originPos = transform.position;
-        Collider[] cols = Physics.OverlapSphere(originPos, _detectRadius, 1 << LayerMask.NameToLayer("Player"));
+        gameObject.SetActive(true);
+        _target = TutorialManager.Instance.PlayerTrm;
+        _cylinder = transform.Find("Cylinder");
+        _enemyAnimator = GetComponentInChildren<TutorialEnemyAnimator>();
+        _navAgent = GetComponent<NavMeshAgent>();
         
-        if (cols.Length > 0  && _isOn == false)
+        
+        _currentHP = _statSO.maxHp;
+        _navAgent.speed = _statSO.moveSpeed;
+
+    }
+
+    public void Damaged(float damage)
+    {
+        _currentHP -= damage;
+        _currentHP = Mathf.Clamp(_currentHP, 0, _statSO.maxHp);
+        _enemyAnimator.StartBlinkCoroutine(0f,1f,0.1f,null);
+        
+        if (_currentHP == 0)
         {
-            foreach (Collider col in cols)
-            {
-                if (col.TryGetComponent(out TutorialPlayer player))
-                {
-                    player.isOn = false;
-                }
-            }
-            _isOn = true;
-            _informationText.gameObject.SetActive(true);
-            _informationText.transform.position = transform.position + _offset;
-            _informationText.SetText(_text);
+
         }
-        else if(cols.Length == 0)
-        {
-            _isOn = false;
-            _informationText.gameObject.SetActive(false);
-        }
+    }
+
+    private void DeadProcess()
+    {
+        _cylinder.gameObject.SetActive(false);
+        _navAgent.speed = 0f;
+        _navAgent.enabled = false;
+        _enemyAnimator.OnDeadEvent += TempDissolve;
+    }
+
+    private void TempDissolve()
+    {
+        _enemyAnimator.StartDissolveCor(0f,1f,0.8f,() => Destroy(this.gameObject));
     }
 }

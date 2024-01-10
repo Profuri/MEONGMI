@@ -14,6 +14,7 @@ public enum ESceneName
 public class SceneManagement : MonoSingleton<SceneManagement>
 {
     public event Action OnGameStartEvent;
+    public event Action OnTutorialStartEvent;
     public Action OnRestartGameEvent;
     
     [SerializeField] private int _gameSceneIdx;
@@ -25,10 +26,16 @@ public class SceneManagement : MonoSingleton<SceneManagement>
 
     private void OnSceneLoaded(Scene scene,LoadSceneMode mode)
     {
-        if (scene.buildIndex ==_gameSceneIdx)
+        if (scene.buildIndex == _gameSceneIdx)
         {
             Debug.Log("OnGameStartEvent");
             OnGameStartEvent?.Invoke();
+        }
+
+        if (scene.name == "Tutorial")
+        {
+            Debug.Log("OnTutorialStartEvent");
+            OnTutorialStartEvent?.Invoke();
         }
     }
 
