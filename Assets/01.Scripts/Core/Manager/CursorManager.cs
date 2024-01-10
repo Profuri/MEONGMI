@@ -132,7 +132,7 @@ public class CursorManager : MonoSingleton<CursorManager>
         transform_cursor.position = mousePos;
     }
 
-	// ±âº» »óÅÂ
+	// ï¿½âº» ï¿½ï¿½ï¿½ï¿½
     public void OnBase()
 	{
 		_cursorImage.DOKill();
@@ -154,7 +154,7 @@ public class CursorManager : MonoSingleton<CursorManager>
 		}, baseAngle, animTime).SetEase(animEase);
 	}
 
-	// ±¤¼® À§¿¡ Ä¿¼­ ÀÖÀ»¶§
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void OnInteract()
     {
 		_cursorImage.DOKill();
@@ -176,11 +176,11 @@ public class CursorManager : MonoSingleton<CursorManager>
 		}, baseAngle, animTime).SetEase(animEase);
 	}
 
-	//Á¶ÁØ »óÅÂ
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void OnAttack()
     {
-		_cursorImage.DOKill();
-		_cursorImage.rectTransform.DOKill();
+		// _cursorImage.DOKill();
+		// _cursorImage.rectTransform.DOKill();
 		_cursorImage.DOColor(AttackTargetColor,animTime).SetEase(animEase);
 		_cursorImage.rectTransform.DOScale(TargetScale, animTime).SetEase(animEase);
 		//Vector3 rotateValue = new Vector3(0, 0, TargetAngle);
@@ -199,7 +199,6 @@ public class CursorManager : MonoSingleton<CursorManager>
 		}, TargetAngle, animTime).SetEase(animEase);
     }
 
-	// Á¶ÁØ »óÅÂ¿¡¼­ ½ò¶§
 	public void Shoot()
 	{
 		_cursorImage.DOKill();

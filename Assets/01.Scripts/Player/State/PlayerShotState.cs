@@ -17,6 +17,7 @@ public class PlayerShotState : PlayerState
             return;
         }
         
+        CursorManager.Instance.Shoot();
         _player.PlayerHammer.ShotTrigger();
         Shot();
         
