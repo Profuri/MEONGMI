@@ -223,16 +223,7 @@ public class PlayerController : Entity, IDetectable
             renderer.SetPropertyBlock(matPropBlocks);
         }
     }
-    public override void Update()
-    {
-        base.Update();
-        if (Input.GetKeyDown(KeyCode.T))
-            SetBullet(BulletType.Slow);
-        if (Input.GetKeyDown(KeyCode.Y))
-            SetBullet(BulletType.Poison);
-        if (Input.GetKeyDown(KeyCode.U))
-            SetBullet(BulletType.Material);
-    }
+   
     public override void Init()
     {
         
