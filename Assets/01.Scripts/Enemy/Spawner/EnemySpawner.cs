@@ -80,7 +80,7 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
                 {
                     Vector3 unitPoint = getRandomPos();
                     bool result = Physics.Raycast(unitPoint, Vector3.down, out RaycastHit hitInfo, Mathf.Infinity, _obstacleLayer);
-
+                    
                     if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground") && result)
                     {
                         unitPoint.y = hitInfo.point.y;
