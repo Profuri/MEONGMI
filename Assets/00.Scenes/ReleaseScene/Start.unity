@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6762,7 +6762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUIID: 33690
+  GUIID: 113220
 --- !u!1 &1652524242
 GameObject:
   m_ObjectHideFlags: 0
@@ -7588,7 +7588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3a0af7973a4667bfc19e368f1d526e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _restPhaseTime: 10
+  _restPhaseTime: 20
   _phaseInfoList:
   - {fileID: 11400000, guid: 43b91bf0a3fdd9e44b9e886701f7408e, type: 2}
   - {fileID: 11400000, guid: ed831fe7ae628254fbfa65688c194aed, type: 2}
@@ -7600,9 +7600,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f6b2a4a23f84b2242b9fafc053235cbf, type: 2}
   - {fileID: 11400000, guid: fa491b62f9bd4f343ba410a507b47f35, type: 2}
   - {fileID: 11400000, guid: 9acb2959d0338874f9723c8cf2492078, type: 2}
-  - {fileID: 11400000, guid: 078232fd2549fbc418a649ea05093479, type: 2}
-  - {fileID: 11400000, guid: 10e65ba0f2a2c18439abff9d27740907, type: 2}
-  - {fileID: 11400000, guid: dc2659aa555de044695cb17416ad28f0, type: 2}
 --- !u!114 &6055261211917678169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7615,6 +7612,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5589f4cb3263945bc3dff07c8cebd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!4 &7105802722797163935
 Transform:
   m_ObjectHideFlags: 0
@@ -7693,8 +7693,8 @@ MonoBehaviour:
   baseScale: 0.8
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   animTime: 0.25
-  TargetAngle: 360
-  TargetScale: 1.1
+  TargetAngle: 300
+  TargetScale: 0.8
   AttackTargetColor: {r: 1, g: 0, b: 0, a: 1}
   InteractTargetColor: {r: 0, g: 0, b: 1, a: 1}
   animEase: 22

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoleEnemyAttackSO
   m_EditorClassIdentifier: 
   enemyType: 1
-  damage: 5
+  damage: 1000
   attackDelay: 5
   detectRange: 10
   attackRange: 2

@@ -71,7 +71,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.6532815, y: 0.27059805, z: -0.27059805, w: 0.6532815}
   m_LocalPosition: {x: 0, y: 10, z: 0}
-  m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
+  m_LocalScale: {x: 9, y: 9, z: 9}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9031897830079507988}
@@ -184,6 +184,7 @@ MonoBehaviour:
   LayerMask:
     serializedVersion: 2
     m_Bits: 256
+  _curHitBullet: 0
   EnemyType: 1
 --- !u!195 &2963342999985656315
 NavMeshAgent:

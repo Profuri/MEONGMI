@@ -11,6 +11,8 @@ public class PlayerChargingState : PlayerState
     {
         base.EnterState();
         
+        CursorManager.Instance.OnAttack();
+        
         CameraManager.Instance.Zoom(9.5f, 0.2f);
         _player.InputReader.OnMouseLeftClickEvent += ShotHandle;
         _player.InputReader.OnMouseRightClickEvent += ChargingHandle;
@@ -42,7 +44,7 @@ public class PlayerChargingState : PlayerState
 
     public override void ExitState()
     {
-        base.ExitState();
+        _owner.AnimatorCompo.SetBool(_animToggleHash, false);
         _player.InputReader.OnMouseLeftClickEvent -= ShotHandle;
         _player.InputReader.OnMouseRightClickEvent -= ChargingHandle;
     }

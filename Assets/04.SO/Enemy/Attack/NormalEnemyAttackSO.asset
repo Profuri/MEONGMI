@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NormalEnemyAttackSO
   m_EditorClassIdentifier: 
   enemyType: 0
-  damage: 10
+  damage: 30
   attackDelay: 0.8
   detectRange: 10
   attackRange: 2.2

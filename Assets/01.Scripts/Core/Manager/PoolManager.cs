@@ -13,8 +13,16 @@ public class PoolManager{
         _trmParent = parent;
     }
 
-    public void CreatePool(PoolableMono prefab,int count = 10){
-        Pool<PoolableMono> pool = new Pool<PoolableMono>(prefab,_trmParent,count);
+    public void CreatePool(PoolableMono prefab,int count = 10)
+    {
+        var parent = _trmParent;
+
+        if (prefab is UIComponent)
+        {
+            parent = UIManager.Instance.MainCanvas.transform;
+        }
+        
+        Pool<PoolableMono> pool = new Pool<PoolableMono>(prefab,parent,count);
         _pools.Add(prefab.gameObject.name,pool);
     }
 

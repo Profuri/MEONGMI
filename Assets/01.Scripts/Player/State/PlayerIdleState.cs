@@ -11,6 +11,7 @@ public class PlayerIdleState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        CursorManager.Instance.OnBase();
         _player.InputReader.OnMouseLeftClickEvent += ClickHandle;
         _player.InputReader.OnMouseRightClickEvent += ChargingHandle;
         _player.StopImmediately();

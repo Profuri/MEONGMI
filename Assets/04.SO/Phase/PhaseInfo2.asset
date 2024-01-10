@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PhaseInfo2
   m_EditorClassIdentifier: 
   enemyListSO: {fileID: 11400000, guid: c4d7ac91df3a07341b799bfa1ad40080, type: 2}
-  appearMaxEnemyCnt: 7
-  appearOnceMinEnemyCnt: 3
-  appearOnceMaxEnemyCnt: 5
+  appearMaxEnemyCnt: 15
+  appearOnceMinEnemyCnt: 5
+  appearOnceMaxEnemyCnt: 6
   appearDelay: 15
   enemyResMinCnt: 200
   enemyResMaxCnt: 300
@@ -23,4 +23,4 @@ MonoBehaviour:
   resMaxSpawnCnt: 5
   resMinSpawnTime: 10
   resMaxSpawnTime: 20
-  restPhaseTime: 60
+  restPhaseTime: 30
