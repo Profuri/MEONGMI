@@ -2,9 +2,13 @@ using DG.Tweening;
 using System;
 using InputControl;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerLevelUpPanel : UIComponent
 {
+    [SerializeField] private Image _bg;
+    [SerializeField] private RectTransform _baseTrm;
+    
     [SerializeField] private GameObject _cardTemplete;
     [SerializeField] private UpgradeContainer _upgradeContainer;
     
@@ -21,14 +25,18 @@ public class PlayerLevelUpPanel : UIComponent
 
     protected override void GenerateTransition()
     {
-        ((RectTransform)transform).DOKill();
-        ((RectTransform)transform).DOScaleY(1, 0.5f);
+        _bg.DOKill();
+        _baseTrm.DOKill();
+        _bg.DOFade(0.5f, 0.5f);
+        _baseTrm.DOScaleY(1, 0.5f);
     }
 
     protected override void RemoveTransition(Action callback)
     {
-        ((RectTransform)transform).DOKill();
-        ((RectTransform)transform).DOScaleY(0, 0.5f).OnComplete(() =>
+        _bg.DOKill();
+        _baseTrm.DOKill();
+        _bg.DOFade(0, 0.5f);
+        _baseTrm.DOScaleY(0, 0.5f).OnComplete(() =>
         {
             callback?.Invoke();
         });

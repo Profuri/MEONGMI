@@ -11,7 +11,9 @@ using Random = UnityEngine.Random;
 
 public class PlayerFeatureChoicePanel : UIComponent
 {
-    [SerializeField] private GameObject _mainTrm;
+    [SerializeField] private Image _bg;
+    [SerializeField] private RectTransform _baseTrm;
+    
     [SerializeField] private RectTransform _roulettTrm;
     [SerializeField] private List<TraitUpgradeElemSO> _featureDataList;
     [SerializeField] private TextMeshProUGUI _title;
@@ -42,14 +44,18 @@ public class PlayerFeatureChoicePanel : UIComponent
 
     protected override void GenerateTransition()
     {
-        ((RectTransform)transform).DOKill();
-        ((RectTransform)transform).DOScaleY(1, 0.5f).OnComplete(OnRolling);
+        _bg.DOKill();
+        _baseTrm.DOKill();
+        _bg.DOFade(0.5f, 0.5f);
+        _baseTrm.DOScaleY(1, 0.5f).OnComplete(OnRolling);
     }
 
     protected override void RemoveTransition(Action callback)
     {
-        ((RectTransform)transform).DOKill();
-        ((RectTransform)transform).DOScaleY(0, 0.5f).OnComplete(() => callback?.Invoke());
+        _bg.DOKill();
+        _baseTrm.DOKill();
+        _bg.DOFade(0, 0.5f);
+        _baseTrm.DOScaleY(0, 0.5f).OnComplete(() => callback?.Invoke());
     }
 
     private void Initialize()
