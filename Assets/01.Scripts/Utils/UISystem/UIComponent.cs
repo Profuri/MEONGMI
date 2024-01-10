@@ -28,7 +28,7 @@ public class UIComponent : PoolableMono
     protected virtual void RemoveTransition(Action callback)
     {
     }
-    
+
     public override void Init()
     {
     }

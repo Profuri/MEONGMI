@@ -24,6 +24,11 @@ public class SceneManagement : MonoSingleton<SceneManagement>
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    public override void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void OnSceneLoaded(Scene scene,LoadSceneMode mode)
     {
         if (scene.buildIndex == _gameSceneIdx)

@@ -27,7 +27,7 @@ public class Hammer : MonoBehaviour
     private readonly int _chargingToggleHash = Animator.StringToHash("Charging");
 
     [SerializeField] private ColorSO _colorSO;
-    [SerializeField] private int _materialBulletCost = 5;
+    private int _materialBulletCost = 5;
 
 
 

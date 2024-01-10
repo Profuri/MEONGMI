@@ -56,7 +56,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public override void Init()
     {
-
         SceneManagement.Instance.Init();
         PoolManager.Instance = new PoolManager(transform);
         foreach (var pair in _poolingList.pairs)
@@ -82,7 +81,6 @@ public class GameManager : MonoSingleton<GameManager>
             UnitManager.Instance.Init();
 
             UIManager.Instance.Init();
-
 
             SoundManager.Instance.PlayBGM("Rehearsal Decay");
         };

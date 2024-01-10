@@ -21,6 +21,14 @@ namespace InputControl
         public Vector3 movementInput;
         public Vector2 mouseScreenPos;
 
+        public void ClearInputEvent()
+        {
+            OnMouseLeftClickEvent = null;
+            OnMouseRightClickEvent = null;
+            OnLineConnectEvent = null;
+            OnESCInputEvent = null;
+        }
+
         private void OnEnable()
         {
             if (_inputControls == null)
