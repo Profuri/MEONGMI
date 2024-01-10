@@ -30,18 +30,6 @@ public class TutorialEnemy : MonoBehaviour,IDamageable
 
     }
 
-    public void Damaged(float damage)
-    {
-        _currentHP -= damage;
-        _currentHP = Mathf.Clamp(_currentHP, 0, _statSO.maxHp);
-        _enemyAnimator.StartBlinkCoroutine(0f,1f,0.1f,null);
-        
-        if (_currentHP == 0)
-        {
-
-        }
-    }
-
     private void DeadProcess()
     {
         _cylinder.gameObject.SetActive(false);
@@ -53,5 +41,17 @@ public class TutorialEnemy : MonoBehaviour,IDamageable
     private void TempDissolve()
     {
         _enemyAnimator.StartDissolveCor(0f,1f,0.8f,() => Destroy(this.gameObject));
+    }
+
+    public void Damaged(DamageType type, float damage)
+    {
+        _currentHP -= damage;
+        _currentHP = Mathf.Clamp(_currentHP, 0, _statSO.maxHp);
+        _enemyAnimator.StartBlinkCoroutine(0f,1f,0.1f,null);
+        
+        if (_currentHP == 0)
+        {
+
+        }
     }
 }
