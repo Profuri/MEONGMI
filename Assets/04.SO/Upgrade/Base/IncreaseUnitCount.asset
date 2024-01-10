@@ -18,7 +18,7 @@ MonoBehaviour:
   Image: {fileID: 21300000, guid: b1d50cb49035c459c8272b17e4f772b7, type: 3}
   Type: 0
   NeedResource: {fileID: 21300000, guid: 33effd6735e414dc7b70ded5e8bb47f8, type: 3}
-  BaseNeedCost: 1000
-  AddCost: 1000
+  BaseNeedCost: 500
+  AddCost: 500
   BaseValue: 10
   AddValue: 1
