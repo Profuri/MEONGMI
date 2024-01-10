@@ -92,7 +92,7 @@ public class CursorManager : MonoSingleton<CursorManager>
     {
 		//transform_cursor.pivot = Vector2.up;
 		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
+		//Cursor.lockState = CursorLockMode.Locked;
 		if (transform_cursor.GetComponent<Graphic>())
 			transform_cursor.GetComponent<Graphic>().raycastTarget = false;
 
@@ -119,10 +119,11 @@ public class CursorManager : MonoSingleton<CursorManager>
 
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
-            OnBase();
-        }
+			Shoot(); 
+		}
 
-        UpdateCursorPosition();
+		Cursor.visible = false;
+		UpdateCursorPosition();
     }
 
     private void UpdateCursorPosition()
@@ -136,8 +137,8 @@ public class CursorManager : MonoSingleton<CursorManager>
 	{
 		_cursorImage.DOKill();
 		transform_cursor.DOKill();
-		_cursorImage.DOColor(baseColor, animTime).SetEase(animEase); ;
-		transform_cursor.DOScale(baseScale, animTime).SetEase(animEase); ;
+		_cursorImage.DOColor(baseColor, animTime).SetEase(animEase);
+		transform_cursor.DOScale(baseScale, animTime).SetEase(animEase);
 		//Vector3 rotateValue = new Vector3(0, 0, 0);
 		//Quaternion quaternion = Quaternion.Euler(0, 0, 0);
 		//transform_cursor.DORotateQuaternion(quaternion, animTime).SetEase(animEase);
@@ -158,8 +159,8 @@ public class CursorManager : MonoSingleton<CursorManager>
     {
 		_cursorImage.DOKill();
 		_cursorImage.rectTransform.DOKill();
-		_cursorImage.DOColor(InteractTargetColor, animTime).SetEase(animEase); ;
-		_cursorImage.rectTransform.DOScale(baseScale, animTime).SetEase(animEase); ;
+		_cursorImage.DOColor(InteractTargetColor, animTime).SetEase(animEase);
+		_cursorImage.rectTransform.DOScale(baseScale, animTime).SetEase(animEase);
 		//Vector3 rotateValue = new Vector3(0, 0, 0);
 		//Quaternion quaternion = Quaternion.Euler(0, 0, 0);
 		//transform_cursor.DORotateQuaternion(quaternion, animTime).SetEase(animEase);
@@ -180,8 +181,8 @@ public class CursorManager : MonoSingleton<CursorManager>
     {
 		_cursorImage.DOKill();
 		_cursorImage.rectTransform.DOKill();
-		_cursorImage.DOColor(AttackTargetColor,animTime).SetEase(animEase); ;
-		_cursorImage.rectTransform.DOScale(TargetScale, animTime).SetEase(animEase); ;
+		_cursorImage.DOColor(AttackTargetColor,animTime).SetEase(animEase);
+		_cursorImage.rectTransform.DOScale(TargetScale, animTime).SetEase(animEase);
 		//Vector3 rotateValue = new Vector3(0, 0, TargetAngle);
 		//Quaternion quaternion = Quaternion.Euler(0, 0, TargetAngle);
 		//transform_cursor.DORotate(quaternion, animTime).SetEase(animEase);
@@ -198,9 +199,12 @@ public class CursorManager : MonoSingleton<CursorManager>
 		}, TargetAngle, animTime).SetEase(animEase);
     }
 
+	// 조준 상태에서 쏠때
 	public void Shoot()
 	{
-
+		_cursorImage.DOKill();
+		_cursorImage.rectTransform.DOKill(true);
+		_cursorImage.rectTransform.DOPunchScale(new Vector3(TargetScale ,TargetScale , TargetScale), animTime).SetEase(animEase);
 	}
 
 	private void SetTextureColor(Color color)
@@ -228,15 +232,15 @@ public class CursorManager : MonoSingleton<CursorManager>
 		//curCursorTexture.SetPixels(fillColorArray);
 		//curCursorTexture.Apply();
 	}
-    void OnGUI()
-	{
+    //void OnGUI()
+	//{
         //updateTexture();
 
         //Matrix4x4 back = GUI.matrix;
         //GUIUtility.RotateAroundPivot(curAngle, pos);
         //GUI.DrawTexture(rect, curCursorTexture);
         //GUI.matrix = back;
-    }
+    //}
 
 	void updateTexture()
 	{
