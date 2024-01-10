@@ -39,6 +39,7 @@ public class PausePanel : MonoBehaviour
     public void Quit()
     {
         Time.timeScale = 1;
+        gameObject.SetActive(false);
         SceneManagement.Instance.LoadScene("Start");
         SceneManagement.Instance.OnRestartGameEvent?.Invoke();
     }
