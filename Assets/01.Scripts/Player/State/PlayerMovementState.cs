@@ -38,9 +38,12 @@ public class PlayerMovementState : PlayerState
         _player.ResetAnimationSpeed();
     }
 
-    private void ChargingHandle()
+    private void ChargingHandle(bool value)
     {
-        _stateMachine.ChangeState(PlayerStateType.Charging);    
+        if (value)
+        {
+            _stateMachine.ChangeState(PlayerStateType.Charging);
+        }
     }
 
     private void ClickHandle()

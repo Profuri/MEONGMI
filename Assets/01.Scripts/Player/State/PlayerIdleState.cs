@@ -38,9 +38,12 @@ public class PlayerIdleState : PlayerState
         _player.InputReader.OnMouseRightClickEvent -= ChargingHandle;
     }
     
-    private void ChargingHandle()
+    private void ChargingHandle(bool value)
     {
-        _stateMachine.ChangeState(PlayerStateType.Charging);    
+        if (value)
+        {
+            _stateMachine.ChangeState(PlayerStateType.Charging);
+        }
     }
     
     private void ClickHandle()

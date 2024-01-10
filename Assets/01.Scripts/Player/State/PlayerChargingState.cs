@@ -57,11 +57,14 @@ public class PlayerChargingState : PlayerState
         return isHit ? hit.point : -Vector3.one;
     }
 
-    private void ChargingHandle()
+    private void ChargingHandle(bool value)
     {
-        CameraManager.Instance.Zoom(10, 0.2f);
-        _stateMachine.ChangeState(PlayerStateType.Idle);
-        _player.PlayerHammer.ChargingToggle(false);
+        if (!value)
+        {
+            CameraManager.Instance.Zoom(10, 0.2f);
+            _stateMachine.ChangeState(PlayerStateType.Idle);
+            _player.PlayerHammer.ChargingToggle(false);
+        }
     }
 
     private void ShotHandle()

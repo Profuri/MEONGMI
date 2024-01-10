@@ -11,7 +11,7 @@ namespace InputControl
         public delegate void InputEventListener<in T>(T value);
         
         public event InputEventListener OnMouseLeftClickEvent = null;
-        public event InputEventListener OnMouseRightClickEvent = null;
+        public event InputEventListener<bool> OnMouseRightClickEvent = null;
         public event InputEventListener<bool> OnLineConnectEvent = null;
         public event InputEventListener OnESCInputEvent = null;
 
@@ -61,9 +61,13 @@ namespace InputControl
 
         public void OnCharging(InputAction.CallbackContext context)
         {
-            if (context.started || context.canceled)
+            if (context.started)
             {
-                OnMouseRightClickEvent?.Invoke();
+                OnMouseRightClickEvent?.Invoke(true);
+            }
+            else if (context.canceled)
+            {
+                OnMouseRightClickEvent?.Invoke(false);
             }
         }
 
