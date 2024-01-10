@@ -103,17 +103,14 @@ public class UpgradeSelectButton : MonoBehaviour
 
     public void OnClick()
     {
+        if (UIManager.Instance.CurrentComponent is not InGameHUD || UIManager.Instance.IsTransitioning)
+        {
+            return;
+        }
+        
         switch (Type)
         {
             case EUpgradeType.BASE:
-                if (_payThis)
-                {
-                    if (!ResManager.Instance.UseBaseResource(_payment))
-                    {
-                        PlayFailSound();
-                        return;
-                    }
-                }
                 UIManager.Instance.ChangeUI("BaseUpgradePanel");
                 break;
             case EUpgradeType.PLAYER:

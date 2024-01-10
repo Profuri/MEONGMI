@@ -26,10 +26,10 @@ public class PhaseLogPanel : UIComponent
         _downText = _downTextPanel.GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public override void GenerateUI(Transform parent)
+    public override void GenerateUI()
     {
         Initialize();
-        base.GenerateUI(parent);
+        base.GenerateUI();
     }
 
     protected override void GenerateTransition()

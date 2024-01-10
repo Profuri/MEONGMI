@@ -33,6 +33,11 @@ public class ResourceMono : Orb
 
     public override void OnInteract(Entity entity)
     {
+        if (IsInteractive)
+        {
+            return;
+        }
+        
         base.OnInteract(entity);
 
         if (entity is PlayerController controller)
