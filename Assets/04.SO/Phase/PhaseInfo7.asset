@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e2835878582dc4f8a45513b761c6c4, type: 3}
   m_Name: PhaseInfo7
   m_EditorClassIdentifier: 
-  enemyListSO: {fileID: 11400000, guid: b598df311c914e24a966087d0ff36834, type: 2}
-  appearMaxEnemyCnt: 18
-  appearOnceMinEnemyCnt: 5
-  appearOnceMaxEnemyCnt: 6
-  appearDelay: 10
+  enemyListSO: {fileID: 11400000, guid: 760d0fe3e23f057469bef8903cdbaa94, type: 2}
+  appearMaxEnemyCnt: 60
+  appearOnceMinEnemyCnt: 20
+  appearOnceMaxEnemyCnt: 22
+  appearDelay: 13
   enemyResMinCnt: 900
   enemyResMaxCnt: 1000
   resMinSpawnCnt: 4
   resMaxSpawnCnt: 5
   resMinSpawnTime: 10
   resMaxSpawnTime: 20
-  restPhaseTime: 60
+  restPhaseTime: 30

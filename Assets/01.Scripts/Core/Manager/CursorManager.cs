@@ -107,22 +107,7 @@ public class CursorManager : MonoSingleton<CursorManager>
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            OnAttack();
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            OnInteract();
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightShift))
-        {
-			Shoot(); 
-		}
-
-		Cursor.visible = false;
+	    Cursor.visible = false;
 		UpdateCursorPosition();
     }
 
