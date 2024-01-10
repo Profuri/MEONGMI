@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using InputControl;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class Base : Interactable, IDamageable
 {
+    [SerializeField] private InputReader _inputReader;
+    
     private int curUnitCount;
     public int CurUnitCount
     {
@@ -32,6 +35,7 @@ public class Base : Interactable, IDamageable
 
     private void ResourceToZeroHandler()
     {
+        _inputReader.ClearInputEvent();
         CameraManager.Instance.BaseTransitionMove(() =>
         {
             SceneManagement.Instance.LoadScene("Start");
