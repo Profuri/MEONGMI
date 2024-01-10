@@ -32,6 +32,7 @@ public class KeyTutorialInfo : TutorialInfo
             if (_codeDictionary[code] == false)
             {
                 bool addKeyCode = false;
+                
                 if (_addKeyCode == KeyCode.None) addKeyCode = true;
                 else addKeyCode = Input.GetKey(_addKeyCode);
                 

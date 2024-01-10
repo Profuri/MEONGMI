@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ShootTutorial
   m_EditorClassIdentifier: 
   infoText: "\uB9C8\uC6B0\uC2A4 \uC88C\uD074\uB9AD\uC744 \uC774\uC6A9\uD558\uC5EC
-    \uCD1D\uC54C\uC744 \uBC1C\uC0AC\uD574\uBCF4\uC138"
+    \uCD1D\uC54C\uC744 \uBC1C\uC0AC\uD574\uBCF4\uC138\uC694"
   _codeList: 43010000
   _addKeyCode: 324

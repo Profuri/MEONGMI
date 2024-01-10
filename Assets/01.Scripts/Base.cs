@@ -107,7 +107,10 @@ public class Base : Interactable, IDamageable
 
     public void SetMiniMapLine(float length)
     {
-        _miniMapLine.transform.localScale = Vector3.one * (length + 5f);
+        if (_miniMapLine != null)
+        {
+            _miniMapLine.transform.localScale = Vector3.one * (length + 5f);
+        }
     }
         
     public void AddUnit()

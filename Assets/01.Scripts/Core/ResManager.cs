@@ -12,7 +12,7 @@ public class ResManager : MonoSingleton<ResManager>
 
     private int _playerResCnt;
     public int PlayerResCnt => _playerResCnt;
-    private int _baseResCnt;
+    private int _baseResCnt = 10000;
     public int BaseResCnt => _baseResCnt;
     
     public Action OnResourceToZero;
@@ -23,6 +23,7 @@ public class ResManager : MonoSingleton<ResManager>
     public override void Init()
     {
         _resSpawner = new ResSpawner(PhaseManager.Instance.PhaseInfoList);
+        _baseResCnt = 0;
     }
 
     public bool CanUseResource(int resourceCnt) => _baseResCnt >= resourceCnt;

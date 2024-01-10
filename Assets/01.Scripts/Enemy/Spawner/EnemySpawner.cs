@@ -116,10 +116,10 @@ public class EnemySpawner : MonoSingleton<EnemySpawner>
         int phase = PhaseManager.Instance.Phase;
         int randomEnemyResCnt = PhaseManager.Instance.PhaseInfoList[phase].GetEnemyRandomResCnt();
         
-        DropResource dropResource = PoolManager.Instance.Pop("DropResource") as DropResource;
-        dropResource.Init();
-        dropResource.SetResourceAmount(randomEnemyResCnt);
-        dropResource.transform.position = enemy.transform.position;
+        //DropResource dropResource = PoolManager.Instance.Pop("DropResource") as DropResource;
+        //dropResource.Init();
+        //dropResource.SetResourceAmount(randomEnemyResCnt);
+        //dropResource.transform.position = enemy.transform.position;
         
         PoolManager.Instance.Push(enemy);
         _currentDeadCnt++;
