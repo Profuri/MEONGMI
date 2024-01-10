@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class UIManager : MonoSingleton<UIManager>
 {
+    [SerializeField] private PoolingListSO _uiPoolingList;
+    
     [SerializeField] private Canvas _mainCanvas;
+    public Canvas MainCanvas => _mainCanvas;
+    
     [SerializeField] private List<UpgradeSelectButton> _upgradeSelectButton;
     [SerializeField] private PausePanel _pausePanel;
     
     public UIComponent CurrentComponent { get; private set; }
+    public bool IsTransitioning { get; private set; }
 
     public void ChangeUI(string componentName, Action callback = null, Transform parent = null)
     {
@@ -25,15 +30,19 @@ public class UIManager : MonoSingleton<UIManager>
             return;
         }
 
+        IsTransitioning = true;
+
         if (CurrentComponent is null)
         {
-            ui.GenerateUI(parent);
+            ui.GenerateUI();
+            IsTransitioning = false;
         }
         else
         {
             CurrentComponent.RemoveUI(() =>
             {
-                ui.GenerateUI(parent);
+                ui.GenerateUI();
+                IsTransitioning = false;
                 callback?.Invoke();
             });
         }
@@ -43,6 +52,10 @@ public class UIManager : MonoSingleton<UIManager>
 
     public override void Init()
     {
+        foreach (var pair in _uiPoolingList.pairs)
+        {
+            PoolManager.Instance.CreatePool(pair.prefab, pair.count);
+        }
         ChangeUI("InGameHUD");
     }
 

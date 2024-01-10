@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/04.SO/Tutorial.meta
 guid: 795b2ca78864c904b8f61d944398b4bb
+========
+guid: 84c170c79cea052448d1d19f8df784b2
+>>>>>>>> main:Assets/01.Scripts/SO/Debuff.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

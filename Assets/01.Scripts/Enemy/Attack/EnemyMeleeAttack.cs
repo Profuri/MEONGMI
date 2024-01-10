@@ -26,7 +26,7 @@ public class EnemyMeleeAttack : EnemyAttack
             {
                 if (col.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.Damaged(_baseEnemy.EnemyAttackSO.damage);
+                    damageable.Damaged(DamageType.None, _baseEnemy.EnemyAttackSO.damage);
                     break;
                 }
             }

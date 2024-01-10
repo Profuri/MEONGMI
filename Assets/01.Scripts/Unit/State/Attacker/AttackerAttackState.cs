@@ -30,7 +30,7 @@ public class AttackerAttackState : AttackerState
             {
                 if(!enemy.Dead)
                 {
-                    enemy.Damaged(_attackerStat.damage);
+                    enemy.Damaged(DamageType.None, _attackerStat.damage);
                 }
                 _stateMachine.ChangeState(AttackerUnitStateType.Chase);
             }

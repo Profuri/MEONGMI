@@ -152,9 +152,9 @@ public class PlayerController : Entity, IDetectable
     }
 
 
-    public override void Damaged(float damage)
+    public override void Damaged(DamageType type, float damage)
     {
-        base.Damaged(damage);
+        base.Damaged(type, damage);
         SoundManager.Instance.PlaySFX("PlayerHit");
     }
 
@@ -223,7 +223,16 @@ public class PlayerController : Entity, IDetectable
             renderer.SetPropertyBlock(matPropBlocks);
         }
     }
-
+    public override void Update()
+    {
+        base.Update();
+        if (Input.GetKeyDown(KeyCode.T))
+            SetBullet(BulletType.Slow);
+        if (Input.GetKeyDown(KeyCode.Y))
+            SetBullet(BulletType.Poison);
+        if (Input.GetKeyDown(KeyCode.U))
+            SetBullet(BulletType.Material);
+    }
     public override void Init()
     {
         

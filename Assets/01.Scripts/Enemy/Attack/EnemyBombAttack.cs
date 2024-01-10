@@ -27,7 +27,7 @@ public class EnemyBombAttack : EnemyAttack
                     VFXPlayer bombEffect = PoolManager.Instance.Pop("BombEnemyParticle") as VFXPlayer;
                     bombEffect.transform.position = transform.position;
                     bombEffect.PlayEffect();
-                    damageable.Damaged(_baseEnemy.EnemyAttackSO.damage);
+                    damageable.Damaged(DamageType.HandleByAttacker, _baseEnemy.EnemyAttackSO.damage);
                 }
             }
         }

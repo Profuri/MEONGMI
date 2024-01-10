@@ -2,17 +2,21 @@ using System;
 using DG.Tweening;
 using InputControl;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseUpgradePanel : UIComponent
 {
+    [SerializeField] private Image _bg;
+    [SerializeField] private RectTransform _baseTrm;
+    
     [SerializeField] private InputReader _inputReader;
     
     [SerializeField] private GameObject _cardTemplete;
     [SerializeField] private UpgradeContainer _upgradeContainer;
     
-    public override void GenerateUI(Transform parent)
+    public override void GenerateUI()
     {
-        base.GenerateUI(parent);
+        base.GenerateUI();
         _inputReader.OnESCInputEvent += OnESCHandle;
         UpgradeManager.Instance.Upgrade(EUpgradeType.BASE);
     }
@@ -30,14 +34,18 @@ public class BaseUpgradePanel : UIComponent
 
     protected override void GenerateTransition()
     {
-        ((RectTransform)transform).DOKill();
-        ((RectTransform)transform).DOScaleY(1, 0.5f);
+        _bg.DOKill();
+        _baseTrm.DOKill();
+        _bg.DOFade(0.5f, 0.5f);
+        _baseTrm.DOScaleY(1, 0.5f);
     }
 
     protected override void RemoveTransition(Action callback)
     {
-        ((RectTransform)transform).DOKill();
-        ((RectTransform)transform).DOScaleY(0, 0.5f).OnComplete(() =>
+        _bg.DOKill();
+        _baseTrm.DOKill();
+        _bg.DOFade(0f, 0.5f);
+        _baseTrm.DOScaleY(0, 0.5f).OnComplete(() =>
         {
             callback?.Invoke();
         });

@@ -20,7 +20,7 @@ public class TransitionBullet : Bullet
         {
             if (cols[i].TryGetComponent<Entity>(out var entity))
             {
-                entity.Damaged(_damage);
+                entity.Damaged(_damageType, _damage);
 
                 var particle = PoolManager.Instance.Pop($"{_bulletType.ToString()}Hit") as PoolableParticle;
                 particle.SetPositionAndRotation(cols[i].transform.position);

@@ -90,7 +90,7 @@ public class PlayerLineConnect : MonoBehaviour
             {
                 if (Time.time > _lastDetachTime + _detachableTime)
                 {
-                    _playerController.Damaged(1000f);
+                    _playerController.Damaged(DamageType.None, 1000f);
                 }
             }
         }

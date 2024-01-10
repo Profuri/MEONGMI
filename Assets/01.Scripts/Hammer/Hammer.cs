@@ -27,6 +27,7 @@ public class Hammer : MonoBehaviour
     private readonly int _chargingToggleHash = Animator.StringToHash("Charging");
 
     [SerializeField] private ColorSO _colorSO;
+    [SerializeField] private int _materialBulletCost = 5;
 
 
 
@@ -47,10 +48,19 @@ public class Hammer : MonoBehaviour
         _eventTrigger = visualTrm.GetComponent<HammerAnimationEndEventTrigger>();
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
-    
-    
+
     public void Shot(BulletType type, Vector3 dir)
     {
+        if(type == BulletType.Material)
+        {
+            if(ResManager.Instance.UsePlayerResource(_materialBulletCost) == false)
+            {
+                // 이 부분 연결해주셈
+                Debug.Log("Player자원이~ 없어서~ 총알을 못써요~");
+                return;
+            }
+        }
+
         var particle = PoolManager.Instance.Pop($"{type.ToString()}Flash") as PoolableParticle;
         particle.SetPositionAndRotation(_shotPoint.position, Quaternion.LookRotation(dir));
         particle.Play();

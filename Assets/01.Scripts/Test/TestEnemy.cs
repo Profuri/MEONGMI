@@ -16,7 +16,7 @@ public class TestEnemy : Entity
     {
     }
 
-    public override void Damaged(float damage)
+    public override void Damaged(DamageType type, float damage)
     {
         Debug.Log("attacked");
     }
