@@ -7690,14 +7690,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseCursorTexture: {fileID: 2800000, guid: d489b3d4d10cefd428b22bfe516f99c4, type: 3}
   transform_cursor: {fileID: 1572994797}
-  baseScale: 1
+  baseScale: 0.8
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   animTime: 0.25
   TargetAngle: 360
-  TargetScale: 1.5
+  TargetScale: 1.1
   AttackTargetColor: {r: 1, g: 0, b: 0, a: 1}
   InteractTargetColor: {r: 0, g: 0, b: 1, a: 1}
-  animEase: 28
+  animEase: 22
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

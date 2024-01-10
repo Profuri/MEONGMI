@@ -38,25 +38,23 @@ public class CursorManager : MonoSingleton<CursorManager>
 	Vector2 pos;
 	Rect rect;
 
-	private bool IsAttack = false;
-	public void SetAttackState(bool value) => IsAttack = value;
+	//private bool IsAttack = false;
+	//public void SetAttackState(bool value) => IsAttack = value;
 
-	private bool CursorIsOnInteract = false;
-	public void SetInteract(bool value) => CursorIsOnInteract = value;
+	//private bool CursorIsOnInteract = false;
+	//public void SetInteract(bool value) => CursorIsOnInteract = value;
 
-	private bool IsAttackAnimating = false;
+	//private bool IsAttackAnimating = false;
 
     private void Awake()
     {
-		Cursor.visible = true;
-		//Cursor.lockState = CursorLockMode.Confined;
 		Init();    
     }
 
     public override void Init()
     {
 		SettingCursor();
-		SetCursorIcon(_baseCursorTexture);
+		//SetCursorIcon(_baseCursorTexture);
 	}
 
     private void SetCursorIcon(Texture2D texture)
@@ -92,15 +90,18 @@ public class CursorManager : MonoSingleton<CursorManager>
 
 	private void SettingCursor()
     {
-		Cursor.visible = false;
 		//transform_cursor.pivot = Vector2.up;
-
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 		if (transform_cursor.GetComponent<Graphic>())
 			transform_cursor.GetComponent<Graphic>().raycastTarget = false;
 
 		_cursorImage = transform_cursor.GetComponent<Image>();
+		
 		curScale = baseScale;
 		curColor = baseColor;
+		transform_cursor.transform.DOScale(baseScale, 0f);
+		_cursorImage.DOColor(baseColor, 0f);
 	}
 
 
@@ -130,6 +131,7 @@ public class CursorManager : MonoSingleton<CursorManager>
         transform_cursor.position = mousePos;
     }
 
+	// 기본 상태
     public void OnBase()
 	{
 		_cursorImage.DOKill();
@@ -151,6 +153,7 @@ public class CursorManager : MonoSingleton<CursorManager>
 		}, baseAngle, animTime).SetEase(animEase);
 	}
 
+	// 광석 위에 커서 있을때
 	public void OnInteract()
     {
 		_cursorImage.DOKill();
@@ -172,6 +175,7 @@ public class CursorManager : MonoSingleton<CursorManager>
 		}, baseAngle, animTime).SetEase(animEase);
 	}
 
+	//조준 상태
 	public void OnAttack()
     {
 		_cursorImage.DOKill();
